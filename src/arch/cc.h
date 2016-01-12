@@ -61,6 +61,8 @@
  * by your system, set this to 0 and include <sys/time.h> in cc.h */
 #define LWIP_TIMEVAL_PRIVATE 1
 
+#define BYTE_ORDER LITTLE_ENDIAN
+
 typedef unsigned   char    u8_t;
 typedef signed     char    s8_t;
 typedef unsigned   short   u16_t;
