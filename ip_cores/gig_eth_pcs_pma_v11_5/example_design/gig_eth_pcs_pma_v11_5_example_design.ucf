@@ -1,0 +1,149 @@
+# This value should be modified to match your device
+CONFIG PART = xc7v585t-ffg1761-1;
+
+
+#***********************************************************
+# The following constraints target the Transceiver Physical*
+# Interface which is instantiated in the Example Design.   *
+#***********************************************************
+
+#-----------------------------------------------------------
+# Clock source used for the IDELAY Controller (if present) -
+# and for the transceiver reset circuitry                  -
+#-----------------------------------------------------------
+
+NET "independent_clock" TNM_NET = "independent_clock";
+TIMESPEC "ts_independent_clock" = PERIOD "independent_clock" 5000 ps HIGH 50 %;
+
+
+#-----------------------------------------------------------
+# PCS/PMA Clock period Constraints: please do not relax    -
+#-----------------------------------------------------------
+
+NET "gtrefclk" TNM_NET = "gtrefclk";
+TIMESPEC "ts_gtrefclk" = PERIOD "gtrefclk" 8 ns HIGH 50 %;
+
+NET "txoutclk" TNM_NET = "txoutclk";
+TIMESPEC "TS_txoutclk" = PERIOD "txoutclk" 16 ns HIGH 50 %;
+
+
+#-----------------------------------------------------------
+# Transceiver I/O placement:                               -
+#-----------------------------------------------------------
+
+# Place the transceiver components, chosen for this example design
+# *** These values should be modified according to your specific design ***
+#INST "gtrefclk_p" LOC = "AK8";
+#INST "gtrefclk_n" LOC = "AK7";
+INST "core_wrapper?transceiver_inst?gtwizard_inst?gtwizard_i?gt0_gtwizard_i?gtxe2_i" LOC = "GTXE2_CHANNEL_X0Y1";
+
+#-----------------------------------------------------------
+# Setting TIG constraints for rx and tx sync sms           -
+#-----------------------------------------------------------
+INST "*/*/*/gt0_rxresetfsm_i/mmcm_lock_int*" TNM = rx_mmcm_lock_delay_grp;
+INST "*/*/*/gt0_rxresetfsm_i/*mmcm_lock_reclocke*" TNM = rx_mmcm_lock_reclocked_delay_grp;
+TIMESPEC TS_RX_MMCM_LOCK = FROM rx_mmcm_lock_delay_grp TO rx_mmcm_lock_reclocked_delay_grp TIG;
+
+INST "*/*/*/gt0_txresetfsm_i/mmcm_lock_int*" TNM = tx_mmcm_lock_delay_grp;
+INST "*/*/*/gt0_txresetfsm_i/*mmcm_lock_reclocke*" TNM = tx_mmcm_lock_reclocked_delay_grp;
+TIMESPEC TS_TX_MMCM_LOCK = FROM tx_mmcm_lock_delay_grp TO tx_mmcm_lock_reclocked_delay_grp TIG;
+
+
+INST "*/*/*/gt0_txresetfsm_i/time_out_wait_bypass" TNM = tx_time_out_wait_bypass_delay_grp;
+INST "*/*/*/gt0_txresetfsm_i/time_out_wait_bypass_*" TNM = tx_time_out_wait_bypass_delay_sync_grp;
+TIMESPEC TS_TX_TIME_OUT_WAIT_SYNC = FROM tx_time_out_wait_bypass_delay_grp TO tx_time_out_wait_bypass_delay_sync_grp TIG;
+
+INST "*/*/*/gt0_txresetfsm_i/*run_phase_alignment_int" TNM = tx_run_phase_alignment_grp;
+INST "*/*/*/gt0_txresetfsm_i/*run_phase_alignment_int_*" TNM = tx_phase_alignment_grp;
+TIMESPEC TS_TX_PHASE_ALIGNMENT = FROM tx_run_phase_alignment_grp TO tx_phase_alignment_grp TIG;
+
+INST "*/*/*/gt0_txresetfsm_i/*tx_fsm_reset_done_int" TNM = tx_fsm_reset_done_int_grp;
+INST "*/*/*/gt0_txresetfsm_i/*tx_fsm_reset_done_int_*" TNM = tx_fsm_reset_done_grp;
+TIMESPEC TS_TX_FSM_RESET_DONE = FROM tx_fsm_reset_done_int_grp TO tx_fsm_reset_done_grp TIG;
+
+
+INST "*/*/*/gt0_txresetfsm_i/TXRESETDONE*" TNM = tx_reset_done_int_grp;
+INST "*/*/*/gt0_txresetfsm_i/*txresetdone_*" TNM = tx_reset_done_grp;
+TIMESPEC TS_TX_RESET_DONE = FROM tx_reset_done_int_grp TO tx_reset_done_grp TIG;
+
+INST "*/*/*/gt0_rxresetfsm_i/time_out_wait_bypass" TNM = rx_time_out_wait_bypass_delay_grp;
+INST "*/*/*/gt0_rxresetfsm_i/time_out_wait_bypass_*" TNM = rx_time_out_wait_bypass_delay_sync_grp;
+TIMESPEC TS_RX_TIME_OUT_WAIT_SYNC = FROM rx_time_out_wait_bypass_delay_grp TO rx_time_out_wait_bypass_delay_sync_grp TIG;
+
+INST "*/*/*/gt0_rxresetfsm_i/*run_phase_alignment_int" TNM = rx_run_phase_alignment_grp;
+INST "*/*/*/gt0_rxresetfsm_i/*run_phase_alignment_int_*" TNM = rx_phase_alignment_grp;
+TIMESPEC TS_RX_PHASE_ALIGNMENT = FROM rx_run_phase_alignment_grp TO rx_phase_alignment_grp TIG;
+
+
+INST "*/*/*/gt0_rxresetfsm_i/*rx_fsm_reset_done_int" TNM = rx_fsm_reset_done_int_grp;
+INST "*/*/*/gt0_rxresetfsm_i/*rx_fsm_reset_done_int_*" TNM = rx_fsm_reset_done_grp;
+TIMESPEC TS_RX_FSM_RESET_DONE = FROM rx_fsm_reset_done_int_grp TO rx_fsm_reset_done_grp TIG;
+
+INST "*/*/*/gt0_rxresetfsm_i/RXRESETDONE*" TNM = rx_reset_done_int_grp;
+INST "*/*/*/gt0_rxresetfsm_i/*rxresetdone_*" TNM = rx_reset_done_grp;
+TIMESPEC TS_RX_RESET_DONE = FROM rx_reset_done_int_grp TO rx_reset_done_grp TIG;
+
+INST "*/*/sync_block_data_valid/data_sync" TNM = data_valid_reg_delay_grp;
+INST "*/*/*ata_valid*" TNM = data_valid_delay_grp_2;
+TIMESPEC TS_TX_DATA_VALID_opt = FROM data_valid_delay_grp_2 TO data_valid_reg_delay_grp TIG;
+
+
+#-----------------------------------------------------------
+# Fabric Rx Elastic Buffer Timing Constraints:             -
+#-----------------------------------------------------------
+
+# Clock period for the recovered Rx clock
+NET "core_wrapper/transceiver_inst/RXRECCLK" TNM_NET = "rxrecclk";
+TIMESPEC "ts_rxrecclk" = PERIOD "rxrecclk" 8 ns;
+
+# Identify clock domain crossing registers
+INST "core_wrapper/transceiver_inst/rx_elastic_buffer_inst/wr_addr_gray*" TNM = "wr_graycode";
+INST "core_wrapper/transceiver_inst/rx_elastic_buffer_inst/rd_addr_gray*" TNM = "rd_graycode";
+
+# Control Gray Code delay and skew across clock boundary
+TIMESPEC "ts_rx_skew_control1" = FROM "wr_graycode" TO "FFS" 14 ns DATAPATHONLY;
+TIMESPEC "ts_rx_skew_control2" = FROM "rd_graycode" TO "FFS" 14 ns DATAPATHONLY;
+
+# Constrain between Distributed Memory (output data) and the 1st set of flip-flops
+INST "core_wrapper/transceiver_inst/rx_elastic_buffer_inst/*rd_data*"  TNM = "fifo_read";
+TIMESPEC "ts_ram_read_false_path" = FROM "RAMS" TO "fifo_read"  6 ns DATAPATHONLY;
+
+
+#***********************************************************
+# The following constraints target the GMII implemented in *
+# the Example Design.                                      *
+#***********************************************************
+# The GMII is intended to be an internal interface.        *
+# The GMII signals should be connected directly to user    *
+# logic and all of the following constraints in this file  *
+# should be removed.                                       *
+#***********************************************************
+
+
+#-----------------------------------------------------------
+# Fast Skew maximises output setup and hold timing         -
+#-----------------------------------------------------------
+INST "gmii_rxd<?>"      SLEW = FAST;
+INST "gmii_rx_dv"       SLEW = FAST;
+INST "gmii_rx_er"       SLEW = FAST;
+
+
+#-----------------------------------------------------------
+# GMII Transmitter Constraints:  place flip-flops in IOB   -
+#-----------------------------------------------------------
+INST "gmii_txd_int*"  IOB = true;
+INST "gmii_tx_en_int" IOB = true;
+INST "gmii_tx_er_int" IOB = true;
+
+
+#-----------------------------------------------------------
+# GMII Receiver Constraints:  place flip-flops in IOB      -
+#-----------------------------------------------------------
+INST "gmii_rxd*"  IOB = true;
+INST "gmii_rx_dv" IOB = true;
+INST "gmii_rx_er" IOB = true;
+
+
+
+
+

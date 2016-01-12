@@ -1,0 +1,17 @@
+vhdl work ../example_design/gig_eth_pcs_pma_v11_5_sync_block.vhd
+vhdl work ../example_design/gig_eth_pcs_pma_v11_5_reset_sync.vhd
+vhdl work ../example_design/transceiver/gig_eth_pcs_pma_v11_5_gtwizard_gt.vhd
+vhdl work ../example_design/transceiver/gig_eth_pcs_pma_v11_5_gtwizard.vhd
+vhdl work ../example_design/transceiver/gig_eth_pcs_pma_v11_5_tx_startup_fsm.vhd
+vhdl work ../example_design/transceiver/gig_eth_pcs_pma_v11_5_rx_startup_fsm.vhd
+vhdl work ../example_design/transceiver/gig_eth_pcs_pma_v11_5_gtwizard_init.vhd
+vhdl work ../example_design/transceiver/gig_eth_pcs_pma_v11_5_transceiver.vhd
+vhdl work ../example_design/sgmii_adapt/gig_eth_pcs_pma_v11_5_johnson_cntr.vhd
+vhdl work ../example_design/sgmii_adapt/gig_eth_pcs_pma_v11_5_clk_gen.vhd
+vhdl work ../example_design/sgmii_adapt/gig_eth_pcs_pma_v11_5_rx_rate_adapt.vhd
+vhdl work ../example_design/sgmii_adapt/gig_eth_pcs_pma_v11_5_tx_rate_adapt.vhd
+vhdl work ../example_design/sgmii_adapt/gig_eth_pcs_pma_v11_5_sgmii_adapt.vhd
+vhdl work ../example_design/transceiver/gig_eth_pcs_pma_v11_5_rx_elastic_buffer.vhd
+vhdl work ../example_design/gig_eth_pcs_pma_v11_5_block.vhd
+vhdl work ../example_design/gig_eth_pcs_pma_v11_5_example_design.vhd
+
