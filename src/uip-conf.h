@@ -156,6 +156,7 @@ typedef unsigned short uip_stats_t;
 
 u8_t tcpip_output(void)
 {
+	// TODO: Implement output to mac layer
 }
 
 #endif /* __UIP_CONF_H__ */
