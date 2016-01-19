@@ -1,0 +1,3 @@
+[submodule "uip"]
+path = uip
+url = https://github.com/adamdunkels/uip.git
