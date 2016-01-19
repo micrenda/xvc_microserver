@@ -35,6 +35,7 @@
  */
 #include "microserver.h"
 #include "uip.h"
+#include "uip_arp.h"
 #include <string.h>
 
 /*
@@ -109,3 +110,51 @@ handle_connection(struct hello_world_state *s)
   PSOCK_END(&s->p);
 }
 /*---------------------------------------------------------------------------*/
+
+
+void main(
+	unsigned char* 	gmii_txd,           
+    unsigned char*  gmii_tx_en,  
+    unsigned char*  gmii_tx_er,     
+    unsigned char*	gmii_rxd,      
+    unsigned char*  gmii_rx_dv,     
+    unsigned char*  gmii_rx_er, 
+    unsigned short*	gmii_status
+) {
+	
+	// Input
+	#define BUF ((struct uip_eth_hdr *)&uip_buf[0])
+	//uip_len = ethernet_devicedrver_poll();
+	uip_len = 10;
+	if(uip_len > 0)
+	{
+		if(BUF->type == HTONS(UIP_ETHTYPE_IP))
+		{
+			uip_arp_ipin();
+			uip_input();
+			if(uip_len > 0)
+			{
+				uip_arp_out();
+				//ethernet_devicedriver_send();
+			}
+		} 
+		else if(BUF->type == HTONS(UIP_ETHTYPE_ARP))
+		{
+			uip_arp_arpin();
+			if(uip_len > 0)
+			{
+				//ethernet_devicedriver_send();
+			}
+		}
+	}
+    
+	
+	for(unsigned int i = 0; i < UIP_CONNS; ++i)
+	{
+		uip_periodic(i);
+		if(uip_len > 0) {
+			uip_arp_out();
+			//ethernet_devicedriver_send();
+		}
+	}
+}
