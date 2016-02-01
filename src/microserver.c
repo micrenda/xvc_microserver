@@ -1,14 +1,3 @@
-
-//void microserver(
-	//unsigned char* 	gmii_txd,           
-    //unsigned char*  gmii_tx_en,  
-    //unsigned char*  gmii_tx_er,     
-    //unsigned char*	gmii_rxd,      
-    //unsigned char*  gmii_rx_dv,     
-    //unsigned char*  gmii_rx_er, 
-    //unsigned short*	gmii_status)
-//{}
-
 /**
  * \addtogroup helloworld
  * @{
@@ -157,4 +146,9 @@ void main(
 			//ethernet_devicedriver_send();
 		}
 	}
+}
+
+void uip_log(char *m)
+{
+  printf("uIP log message: %s\n", m);
 }

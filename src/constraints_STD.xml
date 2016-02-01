@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<constraints>
+   <HLS_constraints>
+      <tech_constraints fu_name="gig_eth_pcs_pma" fu_library="STD_FU" n="1"/>
+   </HLS_constraints>
+</constraints>
