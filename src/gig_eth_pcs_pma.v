@@ -6,6 +6,13 @@ module gig_eth_pcs_pma (
     input start_port,
     input done_port,
 
+    input[7:0]	gmii_txd;           
+    input   	gmii_tx_en;  
+    input   	gmii_tx_er;     
+    output[7:0]	gmii_rxd ;       
+    output   	gmii_rx_dv;     
+    output   	gmii_rx_er; 
+
 	output	sgmii_tx_p,
 	output	sgmii_tx_n,
 	input	sgmii_rx_p,
@@ -70,7 +77,7 @@ module gig_eth_pcs_pma (
 		.speed_is_10_100(1'b0),
 		.speed_is_100(1'b0),
 
-		.status_vector(gmii_status)
+		.status_vector(gmii_status),
 		.reset(reset),
 		.signal_detect(1'b1)
 	);

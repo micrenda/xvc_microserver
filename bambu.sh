@@ -22,6 +22,7 @@ bambu -O3 -v4 --std=c11 --device-name=$DEVICE   --top-fname=main	\
 	${BASE}/src/IPs.xml					\
 	${BASE}/src/microserver.c			\
 	${UCIP}/uip/uip_arp.c				\
+	${UCIP}/uip/tab_dev.c				\
 	${UCIP}/uip/timer.c					\
 	${UCIP}/uip/uip.c					\
 	${UCIP}/uip/uiplib.c				\
