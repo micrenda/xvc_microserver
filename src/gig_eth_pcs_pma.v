@@ -3,19 +3,19 @@ module gig_eth_pcs_pma (
 
     input clk, 
     input reset,
+    input start_port,
+    input done_port,
 
-	output	sgmii_tx_p;
-	output	sgmii_tx_n;
-	input	sgmii_rx_p;
-	input	sgmii_rx_n;
-	input	sgmii_clk_p;
-	input	sgmii_clk_n;
+	output	sgmii_tx_p,
+	output	sgmii_tx_n,
+	input	sgmii_rx_p,
+	input	sgmii_rx_n,
+	input	sgmii_clk_p,
+	input	sgmii_clk_n,
 	
-	inout	eth_mdio;
-	output 	eth_mdc;
-	output	eth_reset_n;
-	);
-    
+	inout	eth_mdio,
+	output 	eth_mdc,
+	output	eth_reset_n);
     
     wire		mac_clk; 
     wire[7:0]	gmii_txd;           

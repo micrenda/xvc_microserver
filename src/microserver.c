@@ -150,5 +150,5 @@ void main(
 
 void uip_log(char *m)
 {
-  printf("uIP log message: %s\n", m);
+	printf("uIP log message: %s\n", m);
 }

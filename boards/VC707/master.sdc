@@ -1,7 +1,7 @@
 
 # config setup --------------------------------------------------------------
 
-create_clock -name sys_clk_pin -period "1.0" [get_ports "CLK_P"]
+create_clock -name sys_clk_pin -period "5.0" [get_ports "CLK_P"]
 
 set_property IOSTANDARD "LVDS" [get_ports "CLK_P"]
 set_property LOC "E19" [get_ports "CLK_P"]
