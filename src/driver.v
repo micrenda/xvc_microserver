@@ -1,36 +1,43 @@
 `timescale 1ns / 1ps
 
-`DEFINE BUFFER_SIZE_WR   32
-`DEFINE BUFFER_SIZE_RD   32
-`DEFINE PACKET_SIZE  	402
+`define BUFFER_SIZE_WR   32
+`define BUFFER_SIZE_RD   32
+`define PACKET_SIZE  	402
 
-reg [$size(PACKET_SIZE)-1:0]	wr_buf_len [0:BUFFER_SIZE_WR-1];
-reg [7:0]  						wr_buf     [0:BUFFER_SIZE_WR-1][0:PACKET_SIZE-1];
+`define READY	   0
+`define PREAMBLE_0 1
+`define PREAMBLE_1 2
+`define PREAMBLE_2 3
+`define PREAMBLE_3 4
+`define PREAMBLE_4 5
+`define PREAMBLE_5 6
+`define PREAMBLE_6 7
+`define SDF		   8
+`define DATA	   9
+`define SEND_CRC_3 10
+`define SEND_CRC_2 11
+`define SEND_CRC_1 12
+`define SEND_CRC_0 13
+`define INTERGAP   14
 
-reg [$size(BUFFER_SIZE_WR)-1:0] buf_last_sent;
-reg [$size(BUFFER_SIZE_WR)-1:0] buf_last_wrote;
-reg [$size(BUFFER_SIZE_RD)-1:0] buf_last_recv;
-reg [$size(BUFFER_SIZE_RD)-1:0] buf_last_read;
 
-reg [$size(PACKET_SIZE)-1:0] 	pkt_last_wrote;
-reg [$size(PACKET_SIZE)-1:0] 	pkt_last_read;
+module glb();
+
+	reg [$size(PACKET_SIZE)-1:0]	wr_buf_len [0:BUFFER_SIZE_WR-1];
+	reg [7:0]  						wr_buf     [0:BUFFER_SIZE_WR-1][0:PACKET_SIZE-1];
+
+	reg [$size(BUFFER_SIZE_WR)-1:0] buf_last_sent;
+	reg [$size(BUFFER_SIZE_WR)-1:0] buf_last_wrote;
+	reg [$size(BUFFER_SIZE_RD)-1:0] buf_last_recv;
+	reg [$size(BUFFER_SIZE_RD)-1:0] buf_last_read;
+
+	reg [$size(PACKET_SIZE)-1:0] 	pkt_last_wrote;
+	reg [$size(PACKET_SIZE)-1:0] 	pkt_last_read;
+
+end module;
 
 
-`DEFINE READY	   0
-`DEFINE PREAMBLE_0 1
-`DEFINE PREAMBLE_1 2
-`DEFINE PREAMBLE_2 3
-`DEFINE PREAMBLE_3 4
-`DEFINE PREAMBLE_4 5
-`DEFINE PREAMBLE_5 6
-`DEFINE PREAMBLE_6 7
-`DEFINE SDF		   8
-`DEFINE DATA	   9
-`DEFINE SEND_CRC_3 10
-`DEFINE SEND_CRC_2 11
-`DEFINE SEND_CRC_1 12
-`DEFINE SEND_CRC_0 13
-`DEFINE INTERGAP   14
+
 
 module write_buffer (
     input clk, 
@@ -38,7 +45,7 @@ module write_buffer (
     input start_port,
     input done_port,
     input[7:0]	value,
-    output return_port)
+    output return_port);
 
 	always @(posedge clk or posedge reset)
     if (reset)
@@ -66,7 +73,7 @@ module write_buffer_next (
     input reset,
     input start_port,
     input done_port,
-    output return_port)
+    output return_port);
 
 	always @(posedge clk or posedge reset)
     if (reset)
