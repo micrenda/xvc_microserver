@@ -1,4 +1,6 @@
+#include <inttypes.h>
 #include "driver.h"
+#include "uip.h"
 
 /*---------------------------------------------------------------------------*/
 void driver_send(void)
@@ -10,7 +12,7 @@ void driver_send(void)
 
 		if (write_buffer_next() != 0)
 		{
-			UIP_LOG(m); //TODO
+			//UIP_LOG(m); //TODO
 		}
 	}
 }
@@ -21,7 +23,7 @@ void driver_read(void)
 	if (read_buffer_next() != 0)
 		return;
 		
-	u8_t    data = 0;
+	uint8_t    data = 0;
 	uip_len = 0;
 	while (read_buffer(&data) != 0)
 	{
