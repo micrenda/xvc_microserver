@@ -1,10 +1,16 @@
 `timescale 1ns / 1ps
-`include "../ip_cores/gig_eth_pcs_pma_v11_5/example_design/gig_eth_pcs_pma_v11_5_example_design.vhd"
-
 
 `define BUFFER_SIZE_WR   32
 `define BUFFER_SIZE_RD   32
 `define PACKET_SIZE     402
+
+// If you change the values above, then you have to check that the sizes defined below are still valid
+// Unfortunately Verilog has not the $size operator.
+
+`define SIZE_BUFFER_SIZE_WR   5
+`define SIZE_BUFFER_SIZE_RD   5
+`define SIZE_PACKET_SIZE 	 16
+
 
 `define READY      0
 `define PREAMBLE_0 1
@@ -20,21 +26,22 @@
 `define SEND_CRC_2 11
 `define SEND_CRC_1 12
 `define SEND_CRC_0 13
-`define INTERGAP   14
+`define DONE       14
+`define INTERGAP   15
 
 
-module glb();
 
-    reg [$size(PACKET_SIZE)-1:0]    wr_buf_len [0:BUFFER_SIZE_WR-1];
-    reg [7:0]                       wr_buf     [0:BUFFER_SIZE_WR-1][0:PACKET_SIZE-1];
 
-    reg [$size(BUFFER_SIZE_WR)-1:0] buf_last_sent;
-    reg [$size(BUFFER_SIZE_WR)-1:0] buf_last_wrote;
-    reg [$size(BUFFER_SIZE_RD)-1:0] buf_last_recv;
-    reg [$size(BUFFER_SIZE_RD)-1:0] buf_last_read;
+    reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1];
+    reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
 
-    reg [$size(PACKET_SIZE)-1:0]    pkt_last_wrote;
-    reg [$size(PACKET_SIZE)-1:0]    pkt_last_read;
+    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent;
+    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote;
+    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv;
+    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read;
+
+    reg [`SIZE_PACKET_SIZE-1:0]    pkt_last_wrote;
+    reg [`SIZE_PACKET_SIZE-1:0]    pkt_last_read;
     
     
     
@@ -85,7 +92,7 @@ module glb();
     endfunction
 
 
-    function[7:0] reverse;
+    function[7:0] reverse_byte;
         input[7:0] data;
     begin
         reverse_byte[0] = data[7];
@@ -100,29 +107,29 @@ module glb();
     endfunction
 
 
-endmodule
+
 
 
 
 
 module write_buffer (
-    input clk, 
+    input clock, 
     input reset,
     input start_port,
-    input done_port,
+    output reg done_port,
     input[7:0]  value,
-    output return_port);
+    output reg return_port);
 
-    always @(posedge clk or posedge reset)
+    always @(posedge clock or posedge reset)
     if (reset)
     begin
-        pkt_last_wrote <= 0;
+        glb.pkt_last_wrote <= 0;
     end else begin
         if (start_port)
         begin
-            if (pkt_last_wrote < PACKET_SIZE_WR - 1) begin
-                wr_buf[pkt_last_wrote] <= value;
-                pkt_last_wrote         <= pkt_last_wrote + 1;
+            if (glb.pkt_last_wrote < `PACKET_SIZE - 1) begin
+                glb.wr_buf[glb.pkt_last_wrote] <= value;
+                glb.pkt_last_wrote         <= glb.pkt_last_wrote + 1;
                 return_port <= 0;
             end else begin
                 return_port <= 1; // The packet is full
@@ -135,26 +142,26 @@ endmodule
 
 
 module write_buffer_next (
-    input clk, 
+    input clock, 
     input reset,
     input start_port,
-    input done_port,
-    output return_port);
+    output reg done_port,
+    output reg return_port);
 
-    always @(posedge clk or posedge reset)
+    always @(posedge clock or posedge reset)
     if (reset)
     begin
-        pkt_last_wrote <= 0;
-        buf_last_wrote <= 0;
+        glb.pkt_last_wrote <= 0;
+        glb.buf_last_wrote <= 0;
     end else begin
     
         if (start_port) begin
         
-            if (buf_last_wrote != buff_last_sent - 1) begin
-                wr_buf_len[buf_last_wrote]   <= pkt_last_wrote;
+            if (glb.buf_last_wrote != gbl.buff_last_sent - 1) begin
+                glb.wr_buf_len[glb.buf_last_wrote]   <= glb.pkt_last_wrote;
                 
-                pkt_last_wrote <= 0;
-                buf_last_wrote <= (buf_last_wrote + 1) % BUFFER_SIZE_WR;
+                glb.pkt_last_wrote <= 0;
+                glb.buf_last_wrote <= (glb.buf_last_wrote + 1) % `BUFFER_SIZE_WR;
             
                 return_port <= 0; 
             end else begin
@@ -167,40 +174,56 @@ module write_buffer_next (
 endmodule
 
 module read_buffer (
-    input clk, 
+    input clock, 
     input reset,
     input start_port,
-    input done_port,
-    output[7:0] value,
-    output return_port);
+    output reg done_port,
+    output reg[7:0] return_port);
 
-    always @(posedge clk or posedge reset)
+    always @(posedge clock or posedge reset)
     if (reset)
     begin
-        pkt_last_read <= 0;
+        glb.pkt_last_read <= 0;
     end else begin
         if (start_port)
         begin
-            if (pkt_last_read < wr_buf_len[buf_last_read]) begin
-                value <= rd_buf[pkt_last_read];
-                pkt_last_read <= pkt_last_read + 1;
-                return_port <= 0;
-            end else begin
-                return_port <= 1; // No more bytes to read
+            if (glb.pkt_last_read < glb.wr_buf_len[glb.buf_last_read]) begin
+                return_port <= gbl.rd_buf[glb.pkt_last_read];
+                glb.pkt_last_read <= glb.pkt_last_read + 1;
             end
             done_port <= 1;
         end
     end
 endmodule
 
-module read_buffer_next (
-    input clk, 
+module read_buffer_len (
+    input clock, 
     input reset,
     input start_port,
-    input done_port,
-    output return_port);
+    output reg done_port,
+    output reg[`SIZE_PACKET_SIZE-1:0] return_port);
 
-    always @(posedge clk or posedge reset)
+    always @(posedge clock or posedge reset)
+    if (reset)
+    begin
+        // Nothing to do
+    end else begin
+        if (start_port)
+        begin
+            return_port <= glb.wr_buf_len[glb.buf_last_read];
+            done_port <= 1;
+        end
+    end
+endmodule
+
+module read_buffer_next (
+    input clock, 
+    input reset,
+    input start_port,
+    output reg done_port,
+    output reg return_port);
+
+    always @(posedge clock or posedge reset)
     if (reset)
     begin
         pkt_last_read <= 0;
@@ -208,9 +231,9 @@ module read_buffer_next (
     end else begin
         if (start_port)
         begin
-            if (buf_last_read != buff_last_rcvd) begin
-                pkt_last_read <= 0;
-                buf_last_read <= (buf_last_read + 1) % BUFFER_SIZE_RD;
+            if (glb.buf_last_read != gbl.buf_last_recv) begin
+                glb.pkt_last_read <= 0;
+                glb.buf_last_read <= (glb.buf_last_read + 1) % `BUFFER_SIZE_RD;
                 
                 return_port <= 0;
             end else begin
@@ -225,116 +248,116 @@ endmodule
 
 
 
-module handle_tx(input mac_clk, input reset, output [7:0] tx_data, output tx_en, output tx_er);
+module handle_tx(input mac_clk, input reset, output reg[7:0] tx_data, output reg tx_en, output reg tx_er);
     reg [3:0]   state_tx;
     reg [31:0]  crc32_tx;
     reg [3:0]   tx_intergap;
     
-    reg [$size(BUFFER_SIZE_WR)-1:0] buf_current;
-    reg [$size(PACKET_SIZE)-1:0]    pkg_current;
+    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_current;
+    reg [`SIZE_PACKET_SIZE-1:0]    pkg_current;
     
     
 	always @(posedge mac_clk or posedge reset)
 	if (reset)
 	begin
-		state_tx <= READY;
+		state_tx <= `READY;
 		tx_en         <= 0;
 		tx_er         <= 0;
 	end else begin
 		
 		case (state_tx)
-			READY:
-				if (buf_last_sent != buf_last_wrote)
+			`READY:
+				if (glb.buf_last_sent != glb.buf_last_wrote)
 				begin
 					pkg_current     <= 0;
-					buf_current     <= buf_last_sent + 1;
+					buf_current     <= glb.buf_last_sent + 1;
 					crc32_tx        <= 0;
 					tx_intergap     <= 0;
 					tx_en           <= 0;
-					state_tx        <= PREAMBLE_0;
+					state_tx        <= `PREAMBLE_0;
 				end
 				
-			PREAMBLE_0:
+			`PREAMBLE_0:
 				begin
 					tx_en <= 1;
 					tx_data <= 8'h55;
-					state_tx <= PREAMBLE_1;
+					state_tx <= `PREAMBLE_1;
 				end
 			
-			PREAMBLE_1:
-				state_tx <= PREAMBLE_2;
+			`PREAMBLE_1:
+				state_tx <= `PREAMBLE_2;
 			
-			PREAMBLE_2:
-				state_tx <= PREAMBLE_3;
+			`PREAMBLE_2:
+				state_tx <= `PREAMBLE_3;
 			
-			PREAMBLE_3:
-				state_tx <= PREAMBLE_4;
+			`PREAMBLE_3:
+				state_tx <= `PREAMBLE_4;
 			
-			PREAMBLE_4:
-				state_tx <= PREAMBLE_5;
+			`PREAMBLE_4:
+				state_tx <= `PREAMBLE_5;
 			
-			PREAMBLE_5:
-				state_tx <= PREAMBLE_6;
+			`PREAMBLE_5:
+				state_tx <= `PREAMBLE_6;
 			
-			PREAMBLE_6:
-				state_tx <= SDF;
+			`PREAMBLE_6:
+				state_tx <= `SDF;
 			
-			SDF:
+			`SDF:
 				begin
 					tx_data <= 8'hd5;
-					state_tx <= DATA;
+					state_tx <= `DATA;
 				end
 				
-			DATA:
-				if (pkg_current < wr_buf_len[buf_current])
+			`DATA:
+				if (pkg_current < glb.wr_buf_len[buf_current])
 				begin
-					tx_data       <= wr_buf[buf_current];
-					crc32_tx      <= next_crc32_d8(wr_buf[buf_current][pkg_current], crc32_tx);
+					tx_data       <= glb.wr_buf[buf_current];
+					crc32_tx      <= next_crc32_d8(glb.wr_buf[buf_current][pkg_current], crc32_tx);
 					pkg_current   <= pkg_current + 1;
 				end else begin
-					state_tx      <= SEND_CRC_3;
+					state_tx      <= `SEND_CRC_3;
 				end
 				
-			SEND_CRC_3:
+			`SEND_CRC_3:
 				begin
 					tx_data  <= ~reverse(crc32_tx[31:24]);
-					state_tx <= SEND_CRC_2;
+					state_tx <= `SEND_CRC_2;
 				end
 				
-			SEND_CRC_2:
+			`SEND_CRC_2:
 				begin
 					tx_data  <= ~reverse(crc32_tx[23:16]);
-					state_tx <= SEND_CRC_1;
+					state_tx <= `SEND_CRC_1;
 				end
 				
-			SEND_CRC_1:
+			`SEND_CRC_1:
 				begin
 					tx_data  <= ~reverse(crc32_tx[15:8]);
-					state_tx <= SEND_CRC_0;
+					state_tx <= `SEND_CRC_0;
 				end
 				
-			SEND_CRC_0:
+			`SEND_CRC_0:
 				begin
 					tx_data  <= ~reverse(crc32_tx[7:0]);
-					state_tx <= DONE;
+					state_tx <= `DONE;
 				end
 				
-			DONE:
+			`DONE:
 				begin
-					buf_last_sent = buf_current;
-					state_tx <= INTERGAP;
+					glb.buf_last_sent = buf_current;
+					state_tx <= `INTERGAP;
 				end
 				
-			INTERGAP:
+			`INTERGAP:
 				if (tx_intergap < 12)
 				begin
 					tx_intergap <= tx_intergap + 1;
 				end else begin
-					state_tx <= READY;
+					state_tx <= `READY;
 				end
 			
 			default:
-				state_tx <= READY;
+				state_tx <= `READY;
 		endcase 
 	end
 endmodule
@@ -345,113 +368,112 @@ module handle_rx( input mac_clk, input reset, input [7:0] rx_data, input rx_er, 
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
     
-    reg [$size(BUFFER_SIZE_RD)-1:0] buf_current;
-    reg [$size(PACKET_SIZE)-1:0]    pkg_current;
+    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_current;
+    reg [`SIZE_PACKET_SIZE-1:0]    pkg_current;
 
     always @(posedge mac_clk or posedge reset)
     if (reset)
     begin
-        state_rx <= READY;
+        state_rx <= `READY;
     end else begin
         
         if (!rx_dv | rx_er) begin
         
-            state_rx    <= READY;
+            state_rx    <= `READY;
             
         end else begin
         
             case (state_rx)
-                READY:
+                `READY:
                     if (rx_data == 8'h55) begin
-                        pkg_last_rcvd   <= 0;
-                        buf_current     <= buf_last_rcvd + 1;
+                        buf_current     <= glb.buf_last_recv + 1;
                         crc32_rx        <= 0;
-                        state_rx        <= PREAMBLE_0;
+                        state_rx        <= `PREAMBLE_0;
                     end
                     
                     
-                PREAMBLE_0:
+                `PREAMBLE_0:
                     if (rx_data == 8'h55) begin
-                        state_rx <= PREAMBLE_1;
+                        state_rx <= `PREAMBLE_1;
                     end else begin
-                        state_rx <= READY;
+                        state_rx <= `READY;
                     end
                 
-                PREAMBLE_1:
+                `PREAMBLE_1:
                     if (rx_data == 8'h55) begin
-                        state_rx <= PREAMBLE_2;
+                        state_rx <= `PREAMBLE_2;
                     end else begin
-                        state_rx <= READY;
+                        state_rx <= `READY;
                     end
                 
-                PREAMBLE_2:
+                `PREAMBLE_2:
                     if (rx_data == 8'h55) begin
-                        state_rx <= PREAMBLE_3;
+                        state_rx <= `PREAMBLE_3;
                     end else begin
-                        state_rx <= READY;
+                        state_rx <= `READY;
                     end
                 
-                PREAMBLE_3:
+                `PREAMBLE_3:
                     if (rx_data == 8'h55) begin
-                        state_rx <= PREAMBLE_4;
+                        state_rx <= `PREAMBLE_4;
                     end else begin
-                        state_rx <= READY;
+                        state_rx <= `READY;
                     end
                 
-                PREAMBLE_4:
+                `PREAMBLE_4:
                     if (rx_data == 8'h55) begin
-                        state_rx <= PREAMBLE_5;
+                        state_rx <= `PREAMBLE_5;
                     end else begin
-                        state_rx <= READY;
+                        state_rx <= `READY;
                     end
                 
-                PREAMBLE_5:
+                `PREAMBLE_5:
                     if (rx_data == 8'h55) begin
-                        state_rx <= PREAMBLE_6;
+                        state_rx <= `PREAMBLE_6;
                     end else begin
-                        state_rx <= READY;
+                        state_rx <= `READY;
                     end
                 
-                PREAMBLE_6:
+                `PREAMBLE_6:
                     if (rx_data == 8'h55) begin
-                        state_rx <= PREAMBLE_7;
+                        state_rx <= `SDF;
                     end else begin
-                        state_rx <= SDF;
+                        state_rx <= `READY;
                     end
                 
-                SDF:
+                `SDF:
                     if (rx_data == 8'hd5) begin
-                        state_rx <= DATA;
+                        state_rx <= `DATA;
                     end else begin
-                        state_rx <= READY;
+                        state_rx <= `READY;
                     end
                     
-                DATA:
-                    if (pkg_current < PACKET_SIZE)
+                `DATA:
+                    if (pkg_current < `PACKET_SIZE)
                     begin
                         
                         if (crc32_rx != 32'hC704DD7B) begin
                         
-                            rd_buf[buf_current] <= rx_data;
+                            gbl.rd_buf[buf_current] <= rx_data;
                             crc32_rx      <= next_crc32_d8(rx_data, crc32_rx);
                             pkg_current   <= pkg_current + 1;
                             
                         end else begin
-                            state_rx <= DONE;
+                            state_rx <= `DONE;
                         end;
                     end else begin
-                        state_rx <= READY;
+                        state_rx <= `READY;
                     end
                     
-                DONE:
+                `DONE:
 					begin
-						buf_last_recv           <= buf_current;
-						rd_buf_len[pkg_current] <= pkg_current - 4;
-						state_rx                <= READY;
+						glb.buf_last_recv           <= buf_current;
+						gbl.rd_buf_len[pkg_current] <= pkg_current - 4;
+						state_rx                <= `READY;
                     end
                     
                 default:
-                    state_rx      <= READY;
+                    state_rx      <= `READY;
             endcase 
         end
     end
@@ -462,7 +484,7 @@ endmodule
 
 module gig_eth_pcs_pma (
 
-    input clk, 
+    input clock, 
     input reset,
     
     input[7:0]  gmii_txd,          
@@ -484,12 +506,6 @@ module gig_eth_pcs_pma (
     output  eth_reset_n);
     
     wire        mac_clk; 
-    wire[7:0]   gmii_txd;           
-    wire        gmii_tx_en;  
-    wire        gmii_tx_er;     
-    wire[7:0]   gmii_rxd ;       
-    wire        gmii_rx_dv;     
-    wire        gmii_rx_er; 
     wire[15:0]  gmii_status;     
     
     wire        eth_mdio_o;
@@ -499,7 +515,7 @@ module gig_eth_pcs_pma (
 
     gig_eth_pcs_pma_v11_5_example_design U3 
     (
-        .independent_clock (clk),
+        .independent_clock (clock),
 
         .gtrefclk_p (sgmii_clk_p),
         .gtrefclk_n (sgmii_clk_n),

@@ -38,13 +38,17 @@ extern uint8_t write_buffer(uint8_t value);
 extern uint8_t write_buffer_next();
 
 /*
+ * Return the number of bytes of the current packet
+ * 
+ */
+extern uint16_t read_buffer_len();
+
+
+/*
  * Fetch a byte from the current packet.
  * 
- * Returns:
- * 	0:	Success
- *  1:	No more data: no more bytes to read from current packet.
  */
-extern uint8_t read_buffer(uint8_t* value);
+extern uint8_t read_buffer();
 
 /*
  * Fetch a new packet in the receiving queue.
