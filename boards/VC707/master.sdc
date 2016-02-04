@@ -1,6 +1,9 @@
 
 # config setup --------------------------------------------------------------
 
+set_property CFGBVS         VCCO [current_design]
+set_property CONFIG_VOLTAGE  3.3 [current_design]
+
 create_clock -name sys_clk_pin -period "5.0" [get_ports "CLK_P"]
 
 set_property IOSTANDARD "LVDS" [get_ports "CLK_P"]
