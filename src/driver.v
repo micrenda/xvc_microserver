@@ -32,6 +32,9 @@
 
 
 
+    reg [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1];
+    reg [7:0]                      rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
+    
     reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1];
     reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
 
@@ -123,13 +126,13 @@ module write_buffer (
     always @(posedge clock or posedge reset)
     if (reset)
     begin
-        glb.pkt_last_wrote <= 0;
+        pkt_last_wrote <= 0;
     end else begin
         if (start_port)
         begin
-            if (glb.pkt_last_wrote < `PACKET_SIZE - 1) begin
-                glb.wr_buf[glb.pkt_last_wrote] <= value;
-                glb.pkt_last_wrote         <= glb.pkt_last_wrote + 1;
+            if (pkt_last_wrote < `PACKET_SIZE - 1) begin
+                wr_buf[buf_last_wrote][pkt_last_wrote] <= value;
+                pkt_last_wrote         <= pkt_last_wrote + 1;
                 return_port <= 0;
             end else begin
                 return_port <= 1; // The packet is full
@@ -151,17 +154,17 @@ module write_buffer_next (
     always @(posedge clock or posedge reset)
     if (reset)
     begin
-        glb.pkt_last_wrote <= 0;
-        glb.buf_last_wrote <= 0;
+        pkt_last_wrote <= 0;
+        buf_last_wrote <= 0;
     end else begin
     
         if (start_port) begin
         
-            if (glb.buf_last_wrote != gbl.buff_last_sent - 1) begin
-                glb.wr_buf_len[glb.buf_last_wrote]   <= glb.pkt_last_wrote;
+            if (buf_last_wrote != buf_last_sent - 1) begin
+                wr_buf_len[buf_last_wrote]   <= pkt_last_wrote;
                 
-                glb.pkt_last_wrote <= 0;
-                glb.buf_last_wrote <= (glb.buf_last_wrote + 1) % `BUFFER_SIZE_WR;
+                pkt_last_wrote <= 0;
+                buf_last_wrote <= (buf_last_wrote + 1) % `BUFFER_SIZE_WR;
             
                 return_port <= 0; 
             end else begin
@@ -183,13 +186,13 @@ module read_buffer (
     always @(posedge clock or posedge reset)
     if (reset)
     begin
-        glb.pkt_last_read <= 0;
+        pkt_last_read <= 0;
     end else begin
         if (start_port)
         begin
-            if (glb.pkt_last_read < glb.wr_buf_len[glb.buf_last_read]) begin
-                return_port <= gbl.rd_buf[glb.pkt_last_read];
-                glb.pkt_last_read <= glb.pkt_last_read + 1;
+            if (pkt_last_read < wr_buf_len[buf_last_read]) begin
+                return_port <= rd_buf[buf_last_read][pkt_last_read];
+                pkt_last_read <= pkt_last_read + 1;
             end
             done_port <= 1;
         end
@@ -210,7 +213,7 @@ module read_buffer_len (
     end else begin
         if (start_port)
         begin
-            return_port <= glb.wr_buf_len[glb.buf_last_read];
+            return_port <= wr_buf_len[buf_last_read];
             done_port <= 1;
         end
     end
@@ -231,9 +234,9 @@ module read_buffer_next (
     end else begin
         if (start_port)
         begin
-            if (glb.buf_last_read != gbl.buf_last_recv) begin
-                glb.pkt_last_read <= 0;
-                glb.buf_last_read <= (glb.buf_last_read + 1) % `BUFFER_SIZE_RD;
+            if (buf_last_read != buf_last_recv) begin
+                pkt_last_read <= 0;
+                buf_last_read <= (buf_last_read + 1) % `BUFFER_SIZE_RD;
                 
                 return_port <= 0;
             end else begin
@@ -267,10 +270,10 @@ module handle_tx(input mac_clk, input reset, output reg[7:0] tx_data, output reg
 		
 		case (state_tx)
 			`READY:
-				if (glb.buf_last_sent != glb.buf_last_wrote)
+				if (buf_last_sent != buf_last_wrote)
 				begin
 					pkg_current     <= 0;
-					buf_current     <= glb.buf_last_sent + 1;
+					buf_current     <= buf_last_sent + 1;
 					crc32_tx        <= 0;
 					tx_intergap     <= 0;
 					tx_en           <= 0;
@@ -309,10 +312,10 @@ module handle_tx(input mac_clk, input reset, output reg[7:0] tx_data, output reg
 				end
 				
 			`DATA:
-				if (pkg_current < glb.wr_buf_len[buf_current])
+				if (pkg_current < wr_buf_len[buf_current])
 				begin
-					tx_data       <= glb.wr_buf[buf_current];
-					crc32_tx      <= next_crc32_d8(glb.wr_buf[buf_current][pkg_current], crc32_tx);
+					tx_data       <= wr_buf[buf_current][pkg_current];
+					crc32_tx      <= next_crc32_d8(wr_buf[buf_current][pkg_current], crc32_tx);
 					pkg_current   <= pkg_current + 1;
 				end else begin
 					state_tx      <= `SEND_CRC_3;
@@ -344,7 +347,7 @@ module handle_tx(input mac_clk, input reset, output reg[7:0] tx_data, output reg
 				
 			`DONE:
 				begin
-					glb.buf_last_sent = buf_current;
+					buf_last_sent = buf_current;
 					state_tx <= `INTERGAP;
 				end
 				
@@ -386,7 +389,7 @@ module handle_rx( input mac_clk, input reset, input [7:0] rx_data, input rx_er, 
             case (state_rx)
                 `READY:
                     if (rx_data == 8'h55) begin
-                        buf_current     <= glb.buf_last_recv + 1;
+                        buf_current     <= buf_last_recv + 1;
                         crc32_rx        <= 0;
                         state_rx        <= `PREAMBLE_0;
                     end
@@ -454,7 +457,7 @@ module handle_rx( input mac_clk, input reset, input [7:0] rx_data, input rx_er, 
                         
                         if (crc32_rx != 32'hC704DD7B) begin
                         
-                            gbl.rd_buf[buf_current] <= rx_data;
+                            rd_buf[buf_current][pkg_current] <= rx_data;
                             crc32_rx      <= next_crc32_d8(rx_data, crc32_rx);
                             pkg_current   <= pkg_current + 1;
                             
@@ -467,8 +470,8 @@ module handle_rx( input mac_clk, input reset, input [7:0] rx_data, input rx_er, 
                     
                 `DONE:
 					begin
-						glb.buf_last_recv           <= buf_current;
-						gbl.rd_buf_len[pkg_current] <= pkg_current - 4;
+						buf_last_recv           <= buf_current;
+						rd_buf_len[pkg_current] <= pkg_current - 4;
 						state_rx                <= `READY;
                     end
                     
