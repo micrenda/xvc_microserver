@@ -1,7 +1,7 @@
 #!/bin/sh
 
-rm -rf build
-mkdir -p build
+rm -rf synth
+mkdir -p synth
 
 BASE=`pwd`
 UCIP=${BASE}/uip
@@ -12,7 +12,7 @@ BOARD=${BASE}/boards/VC707
 
 GIG_ETH_PCS_PMA=ip_cores/gig_eth_pcs_pma_v11_5/example_design/gig_eth_pcs_pma_v11_5_example_design.vhd
 
-cd build
+cd synth
 
 echo "#synthesis of micorserver and uIP"
 bambu -O3 -v4 --std=c11 --device-name=$DEVICE   --top-fname=main	\
