@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
 <constraints>
    <HLS_constraints>
+	   
+      <tech_constraints fu_name="clock_time" 		fu_library="STD_FU" n="1"/>
+      
       <tech_constraints fu_name="write_buffer" 		fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="write_buffer_next" fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="read_buffer" 		fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="read_buffer_next" 	fu_library="STD_FU" n="1"/>
+      
    </HLS_constraints>
 </constraints>

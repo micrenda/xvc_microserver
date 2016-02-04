@@ -4,6 +4,40 @@
     <name>STD_FU</name>
     
     <cell>
+      <name>clock_time</name>
+      <operation operation_name="clock_time" bounded="1" cycles="1" />
+      <circuit>
+        <component_o id="clock_time">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="clock_time"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="UINT" size="32"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="clock-arch " VERILOG_FILE_PROVIDED="clock-arch.v"/>
+        </component_o>
+      </circuit>
+    </cell>
+    
+    <cell>
       <name>write_buffer</name>
       <operation operation_name="write_buffer" bounded="1" cycles="1" execution_time="1.2"/>
       <circuit>
@@ -43,14 +77,14 @@
     
     <cell>
       <name>write_buffer_next</name>
-      <operation operation_name="write_buffer" bounded="1" cycles="1" execution_time="1.2"/>
+      <operation operation_name="write_buffer_next" bounded="1" cycles="1" execution_time="1.2"/>
       <circuit>
-        <component_o id="write_buffer">
+        <component_o id="write_buffer_next">
           <description>This component is part of the XVC Microsever</description>
           <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
           <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
           <license>GPLv3</license>
-          <structural_type_descriptor id_type="write_buffer"/>
+          <structural_type_descriptor id_type="write_buffer_next"/>
           
           <port_o id="clock" dir="IN" is_clock="1">
             <structural_type_descriptor type="BOOL" size="1"/>
@@ -77,14 +111,14 @@
     
     <cell>
       <name>read_buffer</name>
-      <operation operation_name="write_buffer" bounded="1" cycles="1" execution_time="1.2"/>
+      <operation operation_name="read_buffer" bounded="1" cycles="1" execution_time="1.2"/>
       <circuit>
-        <component_o id="write_buffer">
+        <component_o id="read_buffer">
           <description>This component is part of the XVC Microsever</description>
           <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
           <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
           <license>GPLv3</license>
-          <structural_type_descriptor id_type="write_buffer"/>
+          <structural_type_descriptor id_type="read_buffer"/>
           
           <port_o id="clock" dir="IN" is_clock="1">
             <structural_type_descriptor type="BOOL" size="1"/>
@@ -105,7 +139,7 @@
             <connected_objects/>
           </port_o>
           <port_o id="value" dir="OUT">
-            <structural_type_descriptor type="UINT" size="8"/>
+            <structural_type_descriptor type="UINT" size="8" />
             <connected_objects/>
           </port_o>
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
@@ -115,14 +149,14 @@
     
     <cell>
       <name>read_buffer_next</name>
-      <operation operation_name="write_buffer" bounded="1" cycles="1" execution_time="1.2"/>
+      <operation operation_name="read_buffer_next" bounded="1" cycles="1" execution_time="1.2"/>
       <circuit>
-        <component_o id="write_buffer">
+        <component_o id="read_buffer_next">
           <description>This component is part of the XVC Microsever</description>
           <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
           <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
           <license>GPLv3</license>
-          <structural_type_descriptor id_type="write_buffer"/>
+          <structural_type_descriptor id_type="read_buffer_next"/>
           
           <port_o id="clock" dir="IN" is_clock="1">
             <structural_type_descriptor type="BOOL" size="1"/>
