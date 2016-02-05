@@ -211,5 +211,73 @@
       </circuit>
     </cell>
     
+    <cell>
+      <name>gig_eth_pcs_pma</name>
+      <operation operation_name="gig_eth_pcs_pma" bounded="1" cycles="1" execution_time="1.2"/>
+      <circuit>
+        <component_o id="gig_eth_pcs_pma">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="gig_eth_pcs_pma"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="gmii_txd" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="UINT" size="8"/>
+          </port_o>
+		  <port_o id="gmii_tx_en" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="gmii_tx_er" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="gmii_rxd" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="UINT" size="8"/>
+          </port_o>
+		  <port_o id="gmii_rx_dv" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="gmii_rx_er" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          
+          <port_o id="sgmii_tx_p" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_tx_n" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_rx_p" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_rx_n" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_clk_p" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_clk_n" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="eth_mdio" dir="IO" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="eth_mdc" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="eth_reset_n" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
+        </component_o>
+      </circuit>
+    </cell>
+    
   </library>
 </technology>
