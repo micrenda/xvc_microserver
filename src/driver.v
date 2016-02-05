@@ -51,7 +51,7 @@
     // polynomial: (0 1 2 4 5 7 8 10 11 12 16 22 23 26 32)
     // data width: 8
     // convention: the first serial bit is d[0]
-    function [7:0] next_crc32_d8;
+    function [31:0] next_crc32_d8;
         input[7:0]  data;
         input[31:0] crc;
         reg[7:0]  d;
@@ -323,25 +323,25 @@ module handle_tx(input mac_clk, input reset, output reg[7:0] tx_data, output reg
 				
 			`SEND_CRC_3:
 				begin
-					tx_data  <= ~reverse(crc32_tx[31:24]);
+					tx_data  <= ~reverse_byte(crc32_tx[31:24]);
 					state_tx <= `SEND_CRC_2;
 				end
 				
 			`SEND_CRC_2:
 				begin
-					tx_data  <= ~reverse(crc32_tx[23:16]);
+					tx_data  <= ~reverse_byte(crc32_tx[23:16]);
 					state_tx <= `SEND_CRC_1;
 				end
 				
 			`SEND_CRC_1:
 				begin
-					tx_data  <= ~reverse(crc32_tx[15:8]);
+					tx_data  <= ~reverse_byte(crc32_tx[15:8]);
 					state_tx <= `SEND_CRC_0;
 				end
 				
 			`SEND_CRC_0:
 				begin
-					tx_data  <= ~reverse(crc32_tx[7:0]);
+					tx_data  <= ~reverse_byte(crc32_tx[7:0]);
 					state_tx <= `DONE;
 				end
 				
@@ -569,7 +569,7 @@ module gig_eth_pcs_pma (
         .tx_er(gmii_tx_er)
     );
     
-    handle_en U5
+    handle_rx U5
     (
         .mac_clk(mac_clk), 
         .reset(reset),

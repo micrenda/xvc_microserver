@@ -4,12 +4,12 @@ module entry_point (
     input clk_n, 
     input reset,
 
-	input [7:0]	gpio_switches;
-	output[7:0]	gpio_leds;
-	input [4:0]	gpio_buttons;
+	input [7:0]	gpio_switches,
+	output[7:0]	gpio_leds,
+	input [4:0]	gpio_buttons,
 
-	output	rs232_tx;
-	input	rs232_rx;
+	output	rs232_tx,
+	input	rs232_rx,
 	
 	input[7:0]  gmii_txd,          
     input       gmii_tx_en,  
@@ -40,7 +40,7 @@ module entry_point (
 	IOBUF U4 (.O(phy_mdio_o), .IO(phy_mdio), .I(phy_mdio_i), .T(phy_mdio_t));
 	
 	
-	gig_eth_pcs_pma U1
+	gig_eth_pcs_pma U0
 	(
 		.clock(clock), 
 		.reset(reset),
