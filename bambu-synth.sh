@@ -23,7 +23,9 @@ echo "#synthesis of micorserver and uIP"
 
 bambu -O3 -v5 --std=c11                                                 \
     --device-name=$DEVICE                                               \
-    --top-fname=entry_point                                             \
+    --top-fname=main	                                                \
+    --top-rtldesign-name=main	                                                \
+    --do-not-expose-globals
     --backend-sdc-extensions=$BOARD/master.sdc                          \
     --backend-script-extensions=script/gig_eth_pcs_pma_v11.inc          \
     --clock-period=$CLK_PERIOD                                          \
