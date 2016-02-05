@@ -10,24 +10,58 @@ module main(
 
 	output	rs232_tx;
 	input	rs232_rx;
+	
+	input[7:0]  gmii_txd,          
+    input       gmii_tx_en,  
+    input       gmii_tx_er,     
+    output[7:0] gmii_rxd ,       
+    output      gmii_rx_dv,     
+    output      gmii_rx_er, 
+
+    output  sgmii_tx_p,
+    output  sgmii_tx_n,
+    input   sgmii_rx_p,
+    input   sgmii_rx_n,
+    input   sgmii_clk_p,
+    input   sgmii_clk_n,
+    
+    inout   eth_mdio,
+    output  eth_mdc,
+    output  eth_reset_n
 	);
     
     
-    wire clk;
+    wire clock;
     
    
-	IBUFGDS U1 (clk, clk_p, clk_n);
+	IBUFGDS U1 (clock, clk_p, clk_n);
 
 
 	IOBUF U4 (.O(phy_mdio_o), .IO(phy_mdio), .I(phy_mdio_i), .T(phy_mdio_t));
 	
-    
-    always @(posedge clk or posedge reset)
-    if (reset)
-    begin
+	
+	gig_eth_pcs_pma U1
+	(
+		.clock(clock), 
+		.reset(reset),
         
-    end else begin
+		.gmii_txd(gmii_txd),          
+		.gmii_tx_en(gmii_tx_en),  
+		.gmii_tx_er(gmii_tx_er),     
+		.gmii_rxd (gmii_rxd),       
+		.gmii_rx_dv(gmii_rx_dv),     
+		.gmii_rx_er(gmii_rx_er), 
         
-    end
+		.sgmii_tx_p(sgmii_tx_p),
+		.sgmii_tx_n(sgmii_tx_n),
+		.sgmii_rx_p(sgmii_rx_p),
+		.sgmii_rx_n(sgmii_rx_n),
+		.sgmii_clk_p(sgmii_clk_p),
+		.sgmii_clk_n(sgmii_clk_n),
+        
+		.eth_mdio(eth_mdio),
+		.eth_mdc(eth_mdc),
+		.eth_reset_n(eth_reset_n)
+	);
     
 endmodule
