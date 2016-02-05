@@ -1,6 +1,11 @@
 #!/bin/sh
 
-rm -rf synth
+if [ -d synth ]
+then
+    echo "A previous synthesis was found. To continue delete the directory 'synth'"
+    exit 1
+fi
+
 mkdir -p synth
 
 BASE=`pwd`
