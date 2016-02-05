@@ -63,5 +63,14 @@ module entry_point (
 		.eth_mdc(eth_mdc),
 		.eth_reset_n(eth_reset_n)
 	);
+	
+	
+	main_minimal_interface U2
+	(
+		.clock(clock), 
+		.reset(reset), 
+		.start_port(1)
+	);
+
     
 endmodule
