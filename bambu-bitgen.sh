@@ -17,6 +17,11 @@ then
 	exit 1;
 fi
 
+if [ -z "$BOARD"]
+then
+	BOARD="VC707"
+fi
+
 . ${VIVADO_DIR}/settings64.sh
 
-vivado -mode batch -nojournal -nolog -source boards/VC707/master.tcl -source script/bitgen.tcl 2>&1 | tee bitgen.log
+vivado -mode batch -nojournal -nolog -source boards/${BOARD}/bitgen.tcl 2>&1 | tee bitgen.log
