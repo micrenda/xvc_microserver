@@ -19,4 +19,4 @@ fi
 
 . ${VIVADO_DIR}/settings64.sh
 
-vivado -mode batch -nojournal -nolog -source bitgen.tcl 2>&1 | tee bitgen.log
+vivado -mode batch -nojournal -nolog -source script/bitgen.tcl 2>&1 | tee bitgen.log

@@ -25,7 +25,7 @@ bambu -O3 -v5 --std=c11                                                 \
     --device-name=$DEVICE                                               \
     --top-fname=main                                                    \
     --backend-sdc-extensions=$BOARD/master.sdc                          \
-    --backend-script-extensions=gig_eth_pcs_pma_v11.inc                 \
+    --backend-script-extensions=script/gig_eth_pcs_pma_v11.inc                 \
     --clock-period=$CLK_PERIOD                                          \
     --file-input-data=${BASE}/src/microserver.v,${BASE}/src/driver.v,${BASE}/src/clock-arch.v \
     --evaluation                                                        \
