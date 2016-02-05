@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-module main(
+module entry_point (
     input clk_p, 
     input clk_n, 
     input reset,
