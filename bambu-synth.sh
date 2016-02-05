@@ -37,7 +37,7 @@ bambu -O3 -v5 --std=c11 --device-name=$DEVICE   --top-fname=main	\
 	${UCIP}/uip/uip.c					\
 	${UCIP}/uip/uiplib.c				\
 	${UCIP}/uip/psock.c					\
- 2>&1 | tee build.log
+ 2>&1 | tee synth.log
 
 
 # 	${UCIP}/uip/uip-fw.c				\
