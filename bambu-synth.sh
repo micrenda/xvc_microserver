@@ -42,5 +42,5 @@ bambu -O3 -v5 --std=c11                                                 \
     ${UCIP}/uip/uip.c                                                   \
     ${UCIP}/uip/uiplib.c                                                \
     ${UCIP}/uip/psock.c                                                 \
- 2>&1 | tee synth.log
+ 2>&1 | tee ../synth.log
 
