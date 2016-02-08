@@ -229,25 +229,6 @@
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
           
-		  <port_o id="gmii_txd" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="UINT" size="8"/>
-          </port_o>
-		  <port_o id="gmii_tx_en" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-		  <port_o id="gmii_tx_er" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="gmii_rxd" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="UINT" size="8"/>
-          </port_o>
-		  <port_o id="gmii_rx_dv" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-		  <port_o id="gmii_rx_er" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          
           <port_o id="sgmii_tx_p" dir="OUT" is_global="1" is_extern="1">
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>

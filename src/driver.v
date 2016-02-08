@@ -491,14 +491,7 @@ module gig_eth_pcs_pma (
     input reset,
     
     input  start_port,
-    output reg done_port,
-    
-    input[7:0]  gmii_txd,          
-    input       gmii_tx_en,  
-    input       gmii_tx_er,     
-    output[7:0] gmii_rxd ,       
-    output      gmii_rx_dv,     
-    output      gmii_rx_er, 
+    output reg done_port, 
 
     output  sgmii_tx_p,
     output  sgmii_tx_n,
@@ -517,6 +510,13 @@ module gig_eth_pcs_pma (
     wire        eth_mdio_o;
     wire        eth_mdio_i;
     wire        eth_mdio_t;
+    
+    wire[7:0]  gmii_txd;          
+    wire       gmii_tx_en;  
+    wire       gmii_tx_er;    
+    wire[7:0] gmii_rxd;       
+    wire      gmii_rx_dv;    
+    wire      gmii_rx_er;
    
     
     always @(posedge clock or posedge reset)
@@ -526,6 +526,9 @@ module gig_eth_pcs_pma (
     end else begin
 		done_port <= 1;
     end
+    
+    IOBUF U10 (.I(eth_mdio_i), .O(eth_mdio_o), .T(eth_mdio_t), .IO(eth_mdio));
+    
 
     gig_eth_pcs_pma_v11_5_example_design U3 
     (
