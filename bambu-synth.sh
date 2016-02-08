@@ -27,7 +27,7 @@ bambu -O3 -v5 --std=c11                                                 \
     --top-rtldesign-name=main                                           \
     --do-not-expose-globals                                             \
     --backend-sdc-extensions=$BOARD/master.sdc                          \
-    --backend-script-extensions=script/gig_eth_pcs_pma_v11.inc          \
+    --backend-script-extensions=script/custom_cores.inc          	\
     --clock-period=$CLK_PERIOD                                          \
     --file-input-data=${BASE}/src/microserver.v,${BASE}/src/driver.v,${BASE}/src/clock-arch.v \
     --evaluation                                                        \

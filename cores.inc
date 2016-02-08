@@ -1,0 +1,2 @@
+import_ip cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci
+read_verilog cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_example_design.v
