@@ -58,3 +58,6 @@ extern uint8_t read_buffer();
  *  1:	No more data:  no more packets are waiting to be read from the receiving queue.
  */
 extern uint8_t read_buffer_next();
+
+
+extern void gig_eth_pcs_pma();

@@ -490,6 +490,9 @@ module gig_eth_pcs_pma (
     input clock, 
     input reset,
     
+    input  start_port,
+    output reg done_port,
+    
     input[7:0]  gmii_txd,          
     input       gmii_tx_en,  
     input       gmii_tx_er,     
@@ -515,6 +518,14 @@ module gig_eth_pcs_pma (
     wire        eth_mdio_i;
     wire        eth_mdio_t;
    
+    
+    always @(posedge clock or posedge reset)
+    if (reset)
+    begin
+        done_port <= 0;
+    end else begin
+		done_port <= 1;
+    end
 
     gig_eth_pcs_pma_v11_5_example_design U3 
     (
