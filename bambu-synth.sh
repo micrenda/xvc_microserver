@@ -19,6 +19,11 @@ GIG_ETH_PCS_PMA=ip_cores/gig_eth_pcs_pma_v11_5/example_design/gig_eth_pcs_pma_v1
 
 cd synth
 
+# Workaround - Copying some files that will be needed during syntetis
+cp ../cores/    . -r
+cp ../cores.inc .
+# After first build the synth will fail. Add to the generated vivado.tcl the command "source cores.inc"
+
 echo "#synthesis of micorserver and uIP"
 
 bambu -O3 -v5 --std=c11                                                 \
