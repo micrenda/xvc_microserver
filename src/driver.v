@@ -504,7 +504,7 @@ module gig_eth_pcs_pma (
     output  eth_mdc,
     output  eth_reset_n);
     
-    wire        clock_mac; 
+    //wire        clock_mac; 
     wire[15:0]  gmii_status;     
     
     wire        eth_mdio_o;
@@ -538,7 +538,7 @@ module gig_eth_pcs_pma (
 	  .rxp(sgmii_rx_p),                                 // input wire rxp
 	  
 	  .independent_clock(clock),  				        // input wire independent_clock_bufg
-	  .sgmii_clk(clock_mac),							// Clock for client MAC 
+	  //.sgmii_clk(clock_mac),							// Clock for client MAC 
 	  
 	  .gmii_txd(gmii_txd),                              // input wire [7 : 0] gmii_txd
 	  .gmii_tx_en(gmii_tx_en),                          // input wire gmii_tx_en
@@ -569,7 +569,7 @@ module gig_eth_pcs_pma (
     
     handle_tx U4
     (
-        .clock(clock_mac), 
+        .clock(clock), 
         .reset(reset),
         .tx_data(gmii_txd),
         .tx_en(gmii_tx_en),
@@ -578,7 +578,7 @@ module gig_eth_pcs_pma (
     
     handle_rx U5
     (
-        .clock(clock_mac), 
+        .clock(clock), 
         .reset(reset),
         .rx_data(gmii_rxd),
         .rx_dv(gmii_rx_dv),
