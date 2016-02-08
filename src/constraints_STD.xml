@@ -9,6 +9,7 @@
       <tech_constraints fu_name="read_buffer_len" 	fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="read_buffer" 		fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="read_buffer_next" 	fu_library="STD_FU" n="1"/>
+      <tech_constraints fu_name="gig_eth_pcs_pma" 	fu_library="STD_FU" n="1"/>
       
    </HLS_constraints>
 </constraints>

@@ -228,6 +228,7 @@
 		  <port_o id="reset" dir="IN">
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
+          
 		  <port_o id="gmii_txd" dir="IN" is_global="1" is_extern="1">
             <structural_type_descriptor type="UINT" size="8"/>
           </port_o>
@@ -265,6 +266,7 @@
           <port_o id="sgmii_clk_n" dir="IN" is_global="1" is_extern="1">
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
+          
           <port_o id="eth_mdio" dir="IO" is_global="1" is_extern="1">
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
