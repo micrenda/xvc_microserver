@@ -31,9 +31,9 @@ module entry_point (
     always @(posedge clock or posedge reset)
     if (reset)
     begin
-        eth_reset_n <= 1;
+        eth_reset_n <= 0;
     end else begin
-	eth_reset_n <= 0;
+		eth_reset_n <= 1;
     end
 
 
