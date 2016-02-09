@@ -4,10 +4,10 @@
 set_property CFGBVS         VCCO [current_design]
 set_property CONFIG_VOLTAGE  3.3 [current_design]
 
-create_clock -name clock -period "5.0"              [get_ports "clock"]
+#create_clock -name sys_clk_pin -period "5.0"        [get_ports "clk_p"]
 
-set_property PACKAGE_PIN "E19"                      [get_ports "clock"]
-set_property IOSTANDARD "LVDS"                      [get_ports "clock"]
+set_property PACKAGE_PIN "E19"                      [get_ports "clk_p"]
+set_property IOSTANDARD "LVDS"                      [get_ports "clk_p"]
 
 #set_property PACKAGE_PIN "E18"                     [get_ports "clk_n"]
 #set_property IOSTANDARD "LVDS"                     [get_ports "clk_n"]
