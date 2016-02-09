@@ -62,8 +62,3 @@ set_property PACKAGE_PIN "AJ33"                     [get_ports "eth_reset_n"]
 set_property PACKAGE_PIN "AK33"                     [get_ports "eth_mdio"] 
 set_property PACKAGE_PIN "AH31"                     [get_ports "eth_mdc"] 
 set_property IOSTANDARD "LVCMOS18"                  [get_ports "eth_*"]
-
-
-# Tap off an unused net and direct it to gpio_leds[0]
-set_property PACKAGE_PIN "AM39"                    [get_ports "done_port"]
-set_property IOSTANDARD "LVCMOS18"                 [get_ports "done_port"]

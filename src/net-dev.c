@@ -5,7 +5,7 @@
 
 void network_device_init(void)
 {
-	gig_eth_pcs_pma();
+	//gig_eth_pcs_pma();
 }
 
 /*---------------------------------------------------------------------------*/

@@ -211,6 +211,7 @@
       </circuit>
     </cell>
     
+    <!--
     <cell>
       <name>gig_eth_pcs_pma</name>
       <operation operation_name="gig_eth_pcs_pma" bounded="1" cycles="1" execution_time="1.2"/>
@@ -226,12 +227,6 @@
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
 		  <port_o id="reset" dir="IN">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-		  <port_o id="start_port" dir="IN">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-		  <port_o id="done_port" dir="OUT">
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
           
@@ -266,7 +261,7 @@
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
         </component_o>
       </circuit>
-    </cell>
+    </cell> -->
     
   </library>
 </technology>

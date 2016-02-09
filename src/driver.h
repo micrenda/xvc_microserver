@@ -60,4 +60,4 @@ extern uint8_t read_buffer();
 extern uint8_t read_buffer_next();
 
 
-extern void gig_eth_pcs_pma();
+//extern void gig_eth_pcs_pma();
