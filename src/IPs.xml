@@ -32,7 +32,7 @@
             <structural_type_descriptor type="UINT" size="32"/>
             <connected_objects/>
           </port_o>
-          <NP_functionality LIBRARY="clock-arch " VERILOG_FILE_PROVIDED="clock-arch.v"/>
+          <NP_functionality LIBRARY="clock-arch " VERILOG_FILE_PROVIDED="clock-arch.sv"/>
         </component_o>
       </circuit>
     </cell>
@@ -70,7 +70,7 @@
             <structural_type_descriptor type="UINT" size="8"/>
             <connected_objects/>
           </port_o>
-          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
     </cell>
@@ -104,7 +104,7 @@
             <structural_type_descriptor type="BOOL" size="1"/>
             <connected_objects/>
           </port_o>
-          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
     </cell>
@@ -138,7 +138,7 @@
             <structural_type_descriptor type="UINT" size="16"/>
             <connected_objects/>
           </port_o>
-          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
     </cell>
@@ -172,7 +172,7 @@
             <structural_type_descriptor type="UINT" size="8"/>
             <connected_objects/>
           </port_o>
-          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
     </cell>
@@ -206,7 +206,7 @@
             <structural_type_descriptor type="BOOL" size="1"/>
             <connected_objects/>
           </port_o>
-          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
     </cell>
@@ -258,7 +258,7 @@
           <port_o id="eth_reset_n" dir="OUT" is_global="1" is_extern="1">
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
-          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.v"/>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
     </cell> -->

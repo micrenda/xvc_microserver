@@ -22,12 +22,21 @@ module entry_point (
     
     inout   eth_mdio,
     output  eth_mdc,
-    output  eth_reset_n
+    output reg  eth_reset_n
 	);
     
     
     wire clock;
-    
+
+    always @(posedge clock or posedge reset)
+    if (reset)
+    begin
+        eth_reset_n <= 1;
+    end else begin
+	eth_reset_n <= 0;
+    end
+
+
 	IBUFGDS U1 (clock, clk_p, clk_n);
 
 	gig_eth_pcs_pma U0

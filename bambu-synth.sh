@@ -34,7 +34,7 @@ bambu -O3 -v5 --std=c11                                                 \
     --backend-sdc-extensions=$BOARD/master.sdc                          \
     --backend-script-extensions=script/custom_cores.inc          	\
     --clock-period=$CLK_PERIOD                                          \
-    --file-input-data=${BASE}/src/microserver.v,${BASE}/src/driver.v,${BASE}/src/clock-arch.v \
+    --file-input-data=${BASE}/src/microserver.sv,${BASE}/src/driver.sv,${BASE}/src/clock-arch.sv \
     --evaluation                                                        \
     --objective=PERIOD,AREA,FREQUENCY,CLOCK_SLACK,REGISTERS,DSPS,BRAMS  \
     -I${BASE}/src/                                                      \
