@@ -55,8 +55,7 @@ module entry_point (
 		.sgmii_clk_n(sgmii_clk_n),
         
 		.eth_mdio(eth_mdio),
-		.eth_mdc(eth_mdc),
-		.eth_reset_n(eth_reset_n)
+		.eth_mdc(eth_mdc)
 	);
 	
 	

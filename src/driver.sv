@@ -498,8 +498,7 @@ module gig_eth_pcs_pma (
     input   sgmii_clk_n,
     
     inout   eth_mdio,
-    output  eth_mdc,
-    output  eth_reset_n);
+    output  eth_mdc);
     
     //wire        clock_mac; 
     wire[15:0]  gmii_status;     
