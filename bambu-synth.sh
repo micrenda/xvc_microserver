@@ -21,20 +21,19 @@ cd synth
 
 # Workaround - Copying some files that will be needed during syntetis
 cp ../cores/    . -r
-cp ../cores.inc .
-# After first build the synth will fail. Add to the generated vivado.tcl the command "source cores.inc"
+# End workaround
 
 echo "#synthesis of micorserver and uIP"
 
 bambu -O3 -v5 --std=c11                                                 \
-    --device-name=$DEVICE                                               \
+    --device-name=${DEVICE}                                             \
     --top-fname=main                                                    \
-    --top-rtldesign-name=main                                           \
+    --top-rtldesign-name=entry_point                                    \
     --do-not-expose-globals                                             \
-    --backend-sdc-extensions=$BOARD/master.sdc                          \
-    --backend-script-extensions=script/custom_cores.inc          	\
-    --clock-period=$CLK_PERIOD                                          \
-    --file-input-data=${BASE}/src/microserver.sv,${BASE}/src/driver.sv,${BASE}/src/clock-arch.sv \
+    --backend-sdc-extensions=${BOARD}/master.sdc                        \
+    --clock-period=${CLK_PERIOD}  										\
+    --backend-script-extensions=${BASE}/cores/import-cores.tcl          \
+    --file-input-data=${BASE}/src/microserver.sv,${BASE}/src/driver.sv,${BASE}/src/clock-arch.sv,${BASE}/cores/import-cores.tcl \
     --evaluation                                                        \
     --objective=PERIOD,AREA,FREQUENCY,CLOCK_SLACK,REGISTERS,DSPS,BRAMS  \
     -I${BASE}/src/                                                      \

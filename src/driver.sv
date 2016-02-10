@@ -123,8 +123,8 @@ module write_buffer (
     input[7:0]  value,
     output reg return_port);
 
-    always @(posedge clock or posedge reset)
-    if (reset)
+    always @(posedge clock)
+    if (!reset)
     begin
         pkt_last_wrote <= 0;
     end else begin
@@ -151,8 +151,8 @@ module write_buffer_next (
     output reg done_port,
     output reg return_port);
 
-    always @(posedge clock or posedge reset)
-    if (reset)
+    always @(posedge clock)
+    if (!reset)
     begin
         pkt_last_wrote <= 0;
         buf_last_wrote <= 0;
@@ -183,8 +183,8 @@ module read_buffer (
     output reg done_port,
     output reg[7:0] return_port);
 
-    always @(posedge clock or posedge reset)
-    if (reset)
+    always @(posedge clock)
+    if (!reset)
     begin
         pkt_last_read <= 0;
     end else begin
@@ -206,8 +206,8 @@ module read_buffer_len (
     output reg done_port,
     output reg[`SIZE_PACKET_SIZE-1:0] return_port);
 
-    always @(posedge clock or posedge reset)
-    if (reset)
+    always @(posedge clock)
+    if (!reset)
     begin
         // Nothing to do
     end else begin
@@ -226,8 +226,8 @@ module read_buffer_next (
     output reg done_port,
     output reg return_port);
 
-    always @(posedge clock or posedge reset)
-    if (reset)
+    always @(posedge clock)
+    if (!reset)
     begin
         pkt_last_read <= 0;
         buf_last_read <= 0;
@@ -260,8 +260,8 @@ module handle_tx(input clock, input reset, output reg[7:0] tx_data, output reg t
     reg [`SIZE_PACKET_SIZE-1:0]    pkg_current;
     
     
-	always @(posedge clock or posedge reset)
-	if (reset)
+	always @(posedge clock)
+	if (!reset)
 	begin
 		state_tx <= `READY;
 		tx_en         <= 0;
@@ -374,8 +374,8 @@ module handle_rx( input clock, input reset, input [7:0] rx_data, input rx_er, in
     reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_current;
     reg [`SIZE_PACKET_SIZE-1:0]    pkg_current;
 
-    always @(posedge clock or posedge reset)
-    if (reset)
+    always @(posedge clock)
+    if (!reset)
     begin
         state_rx <= `READY;
     end else begin

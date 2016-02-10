@@ -27,13 +27,16 @@ module entry_point (
     
     
     wire clock;
+    reg  reset_n;
 
-    always @(posedge clock or posedge reset)
+    always @(posedge clock)
     if (reset)
     begin
         eth_reset_n <= 0;
+        reset_n     <= 0;
     end else begin
 		eth_reset_n <= 1;
+		reset_n     <= 1;
     end
 
 
@@ -42,7 +45,7 @@ module entry_point (
 	gig_eth_pcs_pma U0
 	(
 		.clock(clock), 
-		.reset(reset),
+		.reset(reset_n),
         
 		.sgmii_tx_p(sgmii_tx_p),
 		.sgmii_tx_n(sgmii_tx_n),
@@ -60,8 +63,9 @@ module entry_point (
 	main_minimal_interface U2
 	(
 		.clock(clock), 
-		.reset(reset), 
-		.start_port(1)
+		.reset(reset_n), 
+		.start_port(1),
+		.done_port()
 	);
 
 endmodule
