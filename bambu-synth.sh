@@ -31,7 +31,8 @@ bambu -O3 -v5 --std=c11                                                 \
     --top-rtldesign-name=entry_point                                    \
     --do-not-expose-globals                                             \
     --backend-sdc-extensions=${BOARD}/master.sdc                        \
-    --clock-period=${CLK_PERIOD}  					\
+    --clock-period=${CLK_PERIOD}  										\
+    --reset-level=high													\
     --backend-script-extensions=${BASE}/cores/import_cores.tcl          \
     --file-input-data=${BASE}/src/microserver.sv,${BASE}/src/driver.sv,${BASE}/src/clock-arch.sv,${BASE}/cores/import_cores.tcl \
     --evaluation                                                        \

@@ -18,7 +18,7 @@ reg[31:0]	counter_milliseconds;
 
 always @(posedge clock)
 	
-	if (!reset) begin
+	if (reset) begin
 		counter_clocks 		 <= 32'b0;
 		counter_milliseconds <= 32'b0;
 	end else begin

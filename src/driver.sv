@@ -124,7 +124,7 @@ module write_buffer (
     output reg return_port);
 
     always @(posedge clock)
-    if (!reset)
+    if (reset)
     begin
         pkt_last_wrote <= 0;
     end else begin
@@ -152,7 +152,7 @@ module write_buffer_next (
     output reg return_port);
 
     always @(posedge clock)
-    if (!reset)
+    if (reset)
     begin
         pkt_last_wrote <= 0;
         buf_last_wrote <= 0;
@@ -184,7 +184,7 @@ module read_buffer (
     output reg[7:0] return_port);
 
     always @(posedge clock)
-    if (!reset)
+    if (reset)
     begin
         pkt_last_read <= 0;
     end else begin
@@ -207,7 +207,7 @@ module read_buffer_len (
     output reg[`SIZE_PACKET_SIZE-1:0] return_port);
 
     always @(posedge clock)
-    if (!reset)
+    if (reset)
     begin
         // Nothing to do
     end else begin
@@ -227,7 +227,7 @@ module read_buffer_next (
     output reg return_port);
 
     always @(posedge clock)
-    if (!reset)
+    if (reset)
     begin
         pkt_last_read <= 0;
         buf_last_read <= 0;
@@ -261,7 +261,7 @@ module handle_tx(input clock, input reset, output reg[7:0] tx_data, output reg t
     
     
 	always @(posedge clock)
-	if (!reset)
+	if (reset)
 	begin
 		state_tx <= `READY;
 		tx_en         <= 0;
@@ -375,7 +375,7 @@ module handle_rx( input clock, input reset, input [7:0] rx_data, input rx_er, in
     reg [`SIZE_PACKET_SIZE-1:0]    pkg_current;
 
     always @(posedge clock)
-    if (!reset)
+    if (reset)
     begin
         state_rx <= `READY;
     end else begin
@@ -520,6 +520,7 @@ module gig_eth_pcs_pma (
 	gig_ethernet_pcs_pma_0_example_design U3 (
 	  .gtrefclk_p(sgmii_clk_p),                         // input wire gtrefclk_p
 	  .gtrefclk_n(sgmii_clk_n),                         // input wire gtrefclk_n
+	  .rxuserclk2(),
 	  .txn(sgmii_tx_n),                                 // output wire txn
 	  .txp(sgmii_tx_p),                                 // output wire txp
 	  .rxn(sgmii_rx_n),                                 // input wire rxn
