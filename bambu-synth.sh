@@ -10,7 +10,7 @@ mkdir -p synth
 
 BASE=`pwd`
 UCIP=${BASE}/uip
-DEVICE=xc7vx485t-2ffg1761-VVD
+DEVICE=xc7vx485t,-2,ffg1761
 CLK_PERIOD=5
 BOARD=${BASE}/boards/VC707
 
