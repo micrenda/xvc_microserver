@@ -515,9 +515,10 @@ module gig_eth_pcs_pma (
     wire      gmii_rx_er;
    
     
-    IOBUF U10 (.I(eth_mdio_i), .O(eth_mdio_o), .T(eth_mdio_t), .IO(eth_mdio));
+    IOBUF U10 (.I(eth_mdio_o), .O(eth_mdio_i), .T(eth_mdio_t), .IO(eth_mdio));
     
 	gig_ethernet_pcs_pma_0_example_design U3 (
+	  .independent_clock(clock),  				        // input wire independent_clock_bufg
 	  .gtrefclk_p(sgmii_clk_p),                         // input wire gtrefclk_p
 	  .gtrefclk_n(sgmii_clk_n),                         // input wire gtrefclk_n
 	  .rxuserclk2(),
@@ -526,8 +527,7 @@ module gig_eth_pcs_pma (
 	  .rxn(sgmii_rx_n),                                 // input wire rxn
 	  .rxp(sgmii_rx_p),                                 // input wire rxp
 	  
-	  .independent_clock(clock),  				        // input wire independent_clock_bufg
-	  //.sgmii_clk(clock_mac),							// Clock for client MAC 
+	  .sgmii_clk(),										// Clock for client MAC 
 	  
 	  .gmii_txd(gmii_txd),                              // input wire [7 : 0] gmii_txd
 	  .gmii_tx_en(gmii_tx_en),                          // input wire gmii_tx_en
@@ -546,6 +546,7 @@ module gig_eth_pcs_pma (
 	  .an_adv_config_vector(16'h4001),      			// input wire [15 : 0] an_adv_config_vector
 	  .an_adv_config_val(1),            				// input wire an_adv_config_val
 	  .an_restart_config(0),            				// input wire an_restart_config
+	  .an_interrupt(),									// Interrupt to processor to signal that Auto-Negotiation has completed
 	  .speed_is_10_100(0),                				// input wire speed_is_10_100
 	  .speed_is_100(0),                      			// input wire speed_is_100
 	  .status_vector(gmii_status),                    	// output wire [15 : 0] status_vector
