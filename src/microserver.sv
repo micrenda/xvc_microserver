@@ -65,7 +65,8 @@ module entry_point (
 		.clock(clock), 
 		.reset(reset), 
 		.start_port(1),
-		.done_port()
+		.done_port(),
+		.return_port()
 	);
 
 endmodule
