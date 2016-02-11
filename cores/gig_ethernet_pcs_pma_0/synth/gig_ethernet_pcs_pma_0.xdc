@@ -60,7 +60,7 @@ set_false_path -to [get_pins -hier -filter {name =~ *pcs_pma_block_i/transceiver
 set_false_path -to [get_pins -hier -filter {name =~ *sync_block_tx_reset_done/data_sync*/D }]
 set_false_path -to [get_pins -hier -filter {name =~ *sync_block_rx_reset_done/data_sync*/D }]
 
-#set_false_path -to [get_pins -hier -filter {name =~ */*sync_speed_10*/data_sync*/D }]
+set_false_path -to [get_pins -hier -filter {name =~ */*sync_speed_10*/data_sync*/D }]
 set_false_path -to [get_pins -hier -filter {name =~ */*gen_sync_reset/reset_sync*/PRE }]
 
 
@@ -69,3 +69,4 @@ set_false_path -to [get_pins -hier -filter {name =~ *reset_sync*/PRE }]
 ## timing for MDIO interface
 set_max_delay 6.000 -datapath_only -from [get_pins -hier -filter { name =~ */MDIO_INTERFACE_*/MDIO_OUT_reg/C } ]
 set_max_delay 6.000 -datapath_only -from [get_pins -hier -filter { name =~ */MDIO_INTERFACE_*/MDIO_TRI_reg/C } ]
+
