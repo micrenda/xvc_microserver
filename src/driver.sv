@@ -15,12 +15,11 @@ typedef logic [`SIZE_PACKET_SIZE-1:0]    TypePacketAddr;
 typedef logic [`SIZE_BUFFER_SIZE_RD-1:0] TypeBufferRdAddr;
 typedef logic [`SIZE_BUFFER_SIZE_WR-1:0] TypeBufferWrAddr;
 
-
 typedef TypePacketAddr   TypeRdBufLen [0:`BUFFER_SIZE_RD-1];
-typedef [7:0]            TypeRdBuf    [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
+typedef byte             TypeRdBuf    [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
     
 typedef TypePacketAddr   TypeWrBufLen [0:`BUFFER_SIZE_WR-1];
-typedef [7:0]            TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
+typedef byte             TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
 
 
 `define READY      0
@@ -45,11 +44,11 @@ typedef [7:0]            TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
     // polynomial: (0 1 2 4 5 7 8 10 11 12 16 22 23 26 32)
     // data width: 8
     // convention: the first serial bit is d[0]
-    function [31:0] next_crc32_d8;
-        input[7:0]  data;
-        input[31:0] crc;
-        reg[7:0]  d;
-        reg[31:0] c;
+    function int next_crc32_d8;
+        input byte  data;
+        input int crc;
+        reg byte  d;
+        reg int   c;
     begin
         d = data;
         c = crc;
@@ -89,8 +88,8 @@ typedef [7:0]            TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
     endfunction
 
 
-    function[7:0] reverse_byte;
-        input[7:0] data;
+    function byte reverse_byte;
+        input byte data;
     begin
         reverse_byte[0] = data[7];
         reverse_byte[1] = data[6];
@@ -115,7 +114,7 @@ module write_buffer (
     input start_port,
     output reg done_port,
     input TypePacketAddr address,
-    input[7:0]  value,
+    input byte  value,
     output reg return_port,
     
     ref TypeBufferWrAddr buf_last_wrote,
@@ -207,7 +206,7 @@ module read_buffer (
     input start_port,
     input TypePacketAddr address,
     output reg done_port,
-    output reg[7:0] return_port,
+    output reg byte return_port,
     
     ref TypeBufferRdAddr buf_last_read,
     ref TypeRdBufLen     rd_buf_len,
@@ -307,9 +306,9 @@ module driver_operation(
     input start_port,
     output reg done_port,
     output reg[16:0] return_port,
-    input[7:0] operation,
+    input [7:0] operation,
     input TypePacketAddr address,
-    input [7:0] value);
+    input byte value);
 
 
 
@@ -555,7 +554,7 @@ endmodule
 module handle_tx(
     input clock,
     input reset,
-    output reg[7:0] tx_data, 
+    output reg byte tx_data, 
     output reg tx_en, 
     output reg tx_er,
     
@@ -683,7 +682,7 @@ endmodule
 module handle_rx(
     input clock,
     input reset,
-    input [7:0] rx_data,
+    input byte rx_data,
     input rx_er,
     input rx_dv,
     
@@ -694,7 +693,7 @@ module handle_rx(
     ref TypeBufferRdAddr buf_last_read);
     
     reg [3:0]   state_rx;
-    reg [31:0]  crc32_rx;
+    reg int  crc32_rx;
     
     reg TypeBufferRdAddr   buf_current;
     reg TypePacketAddr  pkg_current;
@@ -843,10 +842,10 @@ module gig_eth_pcs_pma (
     wire        eth_mdio_i;
     wire        eth_mdio_t;
     
-    wire[7:0]  gmii_txd;          
+    wire byte  gmii_txd;          
     wire       gmii_tx_en;  
     wire       gmii_tx_er;    
-    wire[7:0] gmii_rxd;       
+    wire byte gmii_rxd;       
     wire      gmii_rx_dv;    
     wire      gmii_rx_er;
    
