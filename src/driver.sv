@@ -352,6 +352,7 @@ module driver_operation(
 			case (operation)
 							
 			`OP_READ:
+			begin
 				d1_start_port <= start_port;
 				d2_start_port <= 0;
 				d3_start_port <= 0;
@@ -361,8 +362,10 @@ module driver_operation(
 
 				done_port   <= d1_done_port;
 				return_port <= d1_return_port;
+			end
     
 			`OP_READ_LEN:
+			begin
 				d1_start_port <= 0;
 				d2_start_port <= start_port;
 				d3_start_port <= 0;
@@ -372,8 +375,10 @@ module driver_operation(
 
 				done_port   <= d2_done_port;
 				return_port <= d2_return_port;
+			end
 			
 			`OP_READ_NEXT:
+			begin
 				d1_start_port <= 0;
 				d2_start_port <= 0;
 				d3_start_port <= start_port;
@@ -383,8 +388,10 @@ module driver_operation(
 
 				done_port   <= d3_done_port;
 				return_port <= d3_return_port;
+			end
 				
 			`OP_WRITE:
+			begin
 				d1_start_port <= 0;
 				d2_start_port <= 0;
 				d3_start_port <= 0;
@@ -394,8 +401,10 @@ module driver_operation(
 
 				done_port   <= d4_done_port;
 				return_port <= d4_return_port;
+			end
 				
 			`OP_WRITE_LEN:
+			begin
 				d1_start_port <= 0;
 				d2_start_port <= 0;
 				d3_start_port <= 0;
@@ -405,8 +414,10 @@ module driver_operation(
 
 				done_port   <= d5_done_port;
 				return_port <= d5_return_port;
+			end
 			
 			`OP_WRITE_NEXT:
+			begin
 				d1_start_port <= 0;
 				d2_start_port <= 0;
 				d3_start_port <= 0;
@@ -416,6 +427,7 @@ module driver_operation(
 
 				done_port   <= d6_done_port;
 				return_port <= d6_return_port;
+			end
 				
 			endcase
 		end
