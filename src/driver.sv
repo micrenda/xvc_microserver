@@ -109,7 +109,7 @@ module write_buffer (
     
     input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
     inout [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    inout [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1]));
+    inout [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1]);
 
     always @(posedge clock)
     if (reset)
@@ -299,8 +299,8 @@ module driver_operation(
     output reg[16:0] return_port,
     input[7:0] operation,
     input[PACKET_SIZE-1:0] address,
-    input[7:0] value)
-{
+    input[7:0] value);
+
 
 
 
@@ -428,7 +428,7 @@ module driver_operation(
 	
 	
 
-}
+endmodule
 
 
 
@@ -565,7 +565,7 @@ module handle_rx(
 	input reset,
 	input [7:0] rx_data,
 	input rx_er,
-	input rx_dv
+	input rx_dv,
 	
     inout rd_buf_len [0:`BUFFER_SIZE_RD-1],
     inout rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
