@@ -9,7 +9,18 @@
 
 `define SIZE_BUFFER_SIZE_WR   5
 `define SIZE_BUFFER_SIZE_RD   5
-`define SIZE_PACKET_SIZE 	 16
+`define SIZE_PACKET_SIZE     16
+
+typedef logic [`SIZE_PACKET_SIZE-1:0]    TypePacketAddr;
+typedef logic [`SIZE_BUFFER_SIZE_RD-1:0] TypeBufferRdAddr;
+typedef logic [`SIZE_BUFFER_SIZE_WR-1:0] TypeBufferWrAddr;
+
+
+typedef TypePacketAddr   TypeRdBufLen [0:`BUFFER_SIZE_RD-1];
+typedef [7:0]            TypeRdBuf    [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
+    
+typedef TypePacketAddr   TypeWrBufLen [0:`BUFFER_SIZE_WR-1];
+typedef [7:0]            TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
 
 
 `define READY      0
@@ -28,8 +39,8 @@
 `define SEND_CRC_0 13
 `define DONE       14
 `define INTERGAP   15
-	
-	
+    
+    
     
     // polynomial: (0 1 2 4 5 7 8 10 11 12 16 22 23 26 32)
     // data width: 8
@@ -103,18 +114,18 @@ module write_buffer (
     input reset,
     input start_port,
     output reg done_port,
-    input [`SIZE_PACKET_SIZE-1:0] address,
+    input TypePacketAddr address,
     input[7:0]  value,
     output reg return_port,
     
-    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
-    ref [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    ref [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1]);
+    ref TypeBufferWrAddr buf_last_wrote,
+    ref TypeWrBufLen     wr_buf_len,
+    ref TypeWrBuf        wr_buf);
 
     always @(posedge clock)
     if (reset)
     begin
-		// nothing to do
+        // nothing to do
     end else begin
         if (start_port)
         begin
@@ -122,8 +133,8 @@ module write_buffer (
                 wr_buf[buf_last_wrote][address] <= value;
                 
                 if (address > wr_buf_len[buf_last_wrote])
-					wr_buf_len[buf_last_wrote] <= address;
-					
+                    wr_buf_len[buf_last_wrote] <= address;
+                    
                 return_port <= 0;
             end else begin
                 return_port <= 1; // The packet is full
@@ -139,10 +150,10 @@ module write_buffer_len (
     input reset,
     input start_port,
     output reg done_port,
-    output reg[`SIZE_PACKET_SIZE-1:0] return_port,
+    output TypePacketAddr return_port,
     
-    ref [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
+    ref TypeWrBufLen wr_buf_len,
+    ref TypeBufferWrAddr buf_last_wrote);
 
     always @(posedge clock)
     if (reset)
@@ -165,9 +176,9 @@ module write_buffer_next (
     output reg done_port,
     output reg return_port,
     
-    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
-    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
-    ref [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1]);
+    ref TypeBufferWrAddr buf_last_wrote,
+    ref TypeBufferWrAddr buf_last_sent,
+    ref TypeWrBufLen     wr_buf_len);
 
     always @(posedge clock)
     if (reset)
@@ -179,7 +190,7 @@ module write_buffer_next (
         
             if (buf_last_wrote != buf_last_sent - 1) begin
                 buf_last_wrote <= (buf_last_wrote + 1) % `BUFFER_SIZE_WR;  
-				wr_buf_len[buf_last_wrote] <= 0;
+                wr_buf_len[buf_last_wrote] <= 0;
                 return_port <= 0; 
             end else begin
                 return_port <= 1; // The buffer overflowed 
@@ -194,13 +205,13 @@ module read_buffer (
     input clock, 
     input reset,
     input start_port,
-    input [`SIZE_PACKET_SIZE-1:0] address,
+    input TypePacketAddr address,
     output reg done_port,
     output reg[7:0] return_port,
     
-    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
-    ref [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    ref [7:0]                      rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1]);
+    ref TypeBufferRdAddr buf_last_read,
+    ref TypeRdBufLen     rd_buf_len,
+    ref TypeRdBuf        rd_buf);
 
     always @(posedge clock)
     if (reset)
@@ -222,10 +233,10 @@ module read_buffer_len (
     input reset,
     input start_port,
     output reg done_port,
-    output reg[`SIZE_PACKET_SIZE-1:0] return_port,
+    output TypePacketAddr return_port,
     
-    ref [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
+    ref TypeRdBufLen     rd_buf_len,
+    ref TypeBufferRdAddr buf_last_read);
 
     always @(posedge clock)
     if (reset)
@@ -247,8 +258,8 @@ module read_buffer_next (
     output reg done_port,
     output reg return_port,
     
-    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
-    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv);
+    ref TypeBufferRdAddr buf_last_read,
+    ref TypeBufferRdAddr buf_last_recv);
 
     always @(posedge clock)
     if (reset)
@@ -280,413 +291,413 @@ endmodule
 /*
  * The operation parameter says which operation must be performed
  * 
- * OP_READ: 		give in return port the byte pointed by address
- * OP_READ_LEN: 	give in return port the length of the current packet
- * OP_READ_NEXT:	move to the next packet. return port is 1 if there are no more packet to read
+ * OP_READ:         give in return port the byte pointed by address
+ * OP_READ_LEN:     give in return port the length of the current packet
+ * OP_READ_NEXT:    move to the next packet. return port is 1 if there are no more packet to read
  * 
- * OP_WRITE: 		write the value to the given address
- * OP_WRITE_LEN: 	give in return port the length of the written packet
- * OP_WRITE_NEXT:	move to the next packet. return port is 1 if there is an overflow
+ * OP_WRITE:        write the value to the given address
+ * OP_WRITE_LEN:    give in return port the length of the written packet
+ * OP_WRITE_NEXT:   move to the next packet. return port is 1 if there is an overflow
  * 
  */
 
 module driver_operation(
-	input clock,
-	input reset,
-	input start_port,
-	output reg done_port,
+    input clock,
+    input reset,
+    input start_port,
+    output reg done_port,
     output reg[16:0] return_port,
     input[7:0] operation,
-    input[`PACKET_SIZE-1:0] address,
-    input[7:0] value);
+    input TypePacketAddr address,
+    input [7:0] value);
 
 
 
 
-    reg [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1];
-    reg [7:0]                      rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
+    reg TypeRdBufLen rd_buf_len;
+    reg TypeRdBuf    rd_buf];
     
-    reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1];
-    reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
+    reg TypeWrBufLen wr_buf_len;
+    reg TypeWrBuf    wr_buf;
 
-    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent;
-    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote;
-    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv;
-    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read;
+    reg TypeBufferWrAddr buf_last_sent;
+    reg TypeBufferWrAddr buf_last_wrote;
+    reg TypeBufferRdAddr buf_last_recv;
+    reg TypeBufferRdAddr buf_last_read;
     
     
     reg       d1_start_port;
-	reg       d1_done_port;
-	reg[16:0] d1_return_port;
+    reg       d1_done_port;
+    reg[16:0] d1_return_port;
     
     reg       d2_start_port;
-	reg       d2_done_port;
-	reg[16:0] d2_return_port;
+    reg       d2_done_port;
+    reg[16:0] d2_return_port;
     
     reg       d3_start_port;
-	reg       d3_done_port;
-	reg[16:0] d3_return_port;
+    reg       d3_done_port;
+    reg[16:0] d3_return_port;
     
     reg       d4_start_port;
-	reg       d4_done_port;
-	reg[16:0] d4_return_port;
+    reg       d4_done_port;
+    reg[16:0] d4_return_port;
     
     reg       d5_start_port;
-	reg       d5_done_port;
-	reg[16:0] d5_return_port;
+    reg       d5_done_port;
+    reg[16:0] d5_return_port;
     
     reg       d6_start_port;
-	reg       d6_done_port;
-	reg[16:0] d6_return_port;
+    reg       d6_done_port;
+    reg[16:0] d6_return_port;
     
     
 
-	always @(posedge clock)
-	if (reset)
-	begin
-		return_port <= 0;
-	end else begin
-	
-		if (start_port)
-		begin
-			case (operation)
-							
-			`OP_READ:
-			begin
-				d1_start_port <= start_port;
-				d2_start_port <= 0;
-				d3_start_port <= 0;
-				d4_start_port <= 0;
-				d5_start_port <= 0;
-				d6_start_port <= 0;
-
-				done_port   <= d1_done_port;
-				return_port <= d1_return_port;
-			end
+    always @(posedge clock)
+    if (reset)
+    begin
+        return_port <= 0;
+    end else begin
     
-			`OP_READ_LEN:
-			begin
-				d1_start_port <= 0;
-				d2_start_port <= start_port;
-				d3_start_port <= 0;
-				d4_start_port <= 0;
-				d5_start_port <= 0;
-				d6_start_port <= 0;
+        if (start_port)
+        begin
+            case (operation)
+                            
+            `OP_READ:
+            begin
+                d1_start_port <= start_port;
+                d2_start_port <= 0;
+                d3_start_port <= 0;
+                d4_start_port <= 0;
+                d5_start_port <= 0;
+                d6_start_port <= 0;
 
-				done_port   <= d2_done_port;
-				return_port <= d2_return_port;
-			end
-			
-			`OP_READ_NEXT:
-			begin
-				d1_start_port <= 0;
-				d2_start_port <= 0;
-				d3_start_port <= start_port;
-				d4_start_port <= 0;
-				d5_start_port <= 0;
-				d6_start_port <= 0;
+                done_port   <= d1_done_port;
+                return_port <= d1_return_port;
+            end
+    
+            `OP_READ_LEN:
+            begin
+                d1_start_port <= 0;
+                d2_start_port <= start_port;
+                d3_start_port <= 0;
+                d4_start_port <= 0;
+                d5_start_port <= 0;
+                d6_start_port <= 0;
 
-				done_port   <= d3_done_port;
-				return_port <= d3_return_port;
-			end
-				
-			`OP_WRITE:
-			begin
-				d1_start_port <= 0;
-				d2_start_port <= 0;
-				d3_start_port <= 0;
-				d4_start_port <= start_port;
-				d5_start_port <= 0;
-				d6_start_port <= 0;
+                done_port   <= d2_done_port;
+                return_port <= d2_return_port;
+            end
+            
+            `OP_READ_NEXT:
+            begin
+                d1_start_port <= 0;
+                d2_start_port <= 0;
+                d3_start_port <= start_port;
+                d4_start_port <= 0;
+                d5_start_port <= 0;
+                d6_start_port <= 0;
 
-				done_port   <= d4_done_port;
-				return_port <= d4_return_port;
-			end
-				
-			`OP_WRITE_LEN:
-			begin
-				d1_start_port <= 0;
-				d2_start_port <= 0;
-				d3_start_port <= 0;
-				d4_start_port <= 0;
-				d5_start_port <= start_port;
-				d6_start_port <= 0;
+                done_port   <= d3_done_port;
+                return_port <= d3_return_port;
+            end
+                
+            `OP_WRITE:
+            begin
+                d1_start_port <= 0;
+                d2_start_port <= 0;
+                d3_start_port <= 0;
+                d4_start_port <= start_port;
+                d5_start_port <= 0;
+                d6_start_port <= 0;
 
-				done_port   <= d5_done_port;
-				return_port <= d5_return_port;
-			end
-			
-			`OP_WRITE_NEXT:
-			begin
-				d1_start_port <= 0;
-				d2_start_port <= 0;
-				d3_start_port <= 0;
-				d4_start_port <= 0;
-				d5_start_port <= 0;
-				d6_start_port <= start_port;
+                done_port   <= d4_done_port;
+                return_port <= d4_return_port;
+            end
+                
+            `OP_WRITE_LEN:
+            begin
+                d1_start_port <= 0;
+                d2_start_port <= 0;
+                d3_start_port <= 0;
+                d4_start_port <= 0;
+                d5_start_port <= start_port;
+                d6_start_port <= 0;
 
-				done_port   <= d6_done_port;
-				return_port <= d6_return_port;
-			end
-				
-			endcase
-		end
-	
-	end
-	
-	
-	
+                done_port   <= d5_done_port;
+                return_port <= d5_return_port;
+            end
+            
+            `OP_WRITE_NEXT:
+            begin
+                d1_start_port <= 0;
+                d2_start_port <= 0;
+                d3_start_port <= 0;
+                d4_start_port <= 0;
+                d5_start_port <= 0;
+                d6_start_port <= start_port;
 
-	read_buffer 		D1 (
-		.clock(clock),
-		.reset(reset), 
-		
-		.start_port  (d1_start_port), 
-		.done_port   (d1_done_port), 
-		.return_port (d1_return_port),
-		.address(address),
-		
-		.buf_last_read(buf_last_read),
-		.rd_buf_len(rd_buf_len),
-		.rd_buf(rd_buf));
+                done_port   <= d6_done_port;
+                return_port <= d6_return_port;
+            end
+                
+            endcase
+        end
+    
+    end
+    
+    
+    
 
-
-	read_buffer_len 	D2	(
-		.clock(clock), 
-		.reset(reset), 
-		
-		.start_port  (d2_start_port),
-		.done_port   (d2_done_port),
-		.return_port (d2_return_port),
-		
-		.rd_buf_len(rd_buf_len),
-		.buf_last_read(buf_last_read)
-		);
-
-
-	read_buffer_next 	D3	(
-		.clock(clock),
-		.reset(reset),
-		.start_port  (d3_start_port),
-		.done_port   (d3_done_port),
-		.return_port (d3_return_port),
-		
-		.buf_last_read(buf_last_read),
-		.buf_last_recv(buf_last_recv));
-	
-
-	write_buffer 		D4	(
-		.clock(clock),
-		.reset(reset),
-		
-		.start_port  (d4_start_port),
-		.done_port   (d4_done_port),
-		.return_port (d4_return_port),
-		
-		.address(address),
-		
-		.buf_last_wrote(buf_last_wrote),
-		.wr_buf_len(wr_buf_len),
-		.wr_buf(wr_buf)
-		);
-	
-
-	write_buffer_len 	D5	(
-		.clock(clock), 
-		.reset(reset),
-		 
-		.start_port  (d5_start_port),
-		.done_port   (d5_done_port),
-		.return_port (d5_return_port),
-		
-		.wr_buf_len(wr_buf_len),
-		.buf_last_wrote(buf_last_wrote));
+    read_buffer         D1 (
+        .clock(clock),
+        .reset(reset), 
+        
+        .start_port  (d1_start_port), 
+        .done_port   (d1_done_port), 
+        .return_port (d1_return_port),
+        .address(address),
+        
+        .buf_last_read(buf_last_read),
+        .rd_buf_len(rd_buf_len),
+        .rd_buf(rd_buf));
 
 
-	write_buffer_next 	D6	(
-		.clock(clock),
-		.reset(reset),
-		
-		.start_port  (d6_start_port),
-		.done_port   (d6_done_port),
-		.return_port (d6_return_port),
-		
-		.buf_last_wrote(buf_last_wrote),
-		.buf_last_sent(buf_last_sent),
-		.wr_buf_len(wr_buf_len));
-
-	
-	
-	
-	gig_eth_pcs_pma U0
-	(
-		.clock(clock), 
-		.reset(reset),
+    read_buffer_len     D2  (
+        .clock(clock), 
+        .reset(reset), 
+        
+        .start_port  (d2_start_port),
+        .done_port   (d2_done_port),
+        .return_port (d2_return_port),
         
         .rd_buf_len(rd_buf_len),
-		.rd_buf(rd_buf),
-		
-		.wr_buf_len(wr_buf_len),
-		.wr_buf(wr_buf),
+        .buf_last_read(buf_last_read)
+        );
 
-		.buf_last_sent(buf_last_sent),
-		.buf_last_wrote(buf_last_wrote),
-		.buf_last_recv(buf_last_recv),
-		.buf_last_read(buf_last_read)
-	);
-	
-	
+
+    read_buffer_next    D3  (
+        .clock(clock),
+        .reset(reset),
+        .start_port  (d3_start_port),
+        .done_port   (d3_done_port),
+        .return_port (d3_return_port),
+        
+        .buf_last_read(buf_last_read),
+        .buf_last_recv(buf_last_recv));
+    
+
+    write_buffer        D4  (
+        .clock(clock),
+        .reset(reset),
+        
+        .start_port  (d4_start_port),
+        .done_port   (d4_done_port),
+        .return_port (d4_return_port),
+        
+        .address(address),
+        
+        .buf_last_wrote(buf_last_wrote),
+        .wr_buf_len(wr_buf_len),
+        .wr_buf(wr_buf)
+        );
+    
+
+    write_buffer_len    D5  (
+        .clock(clock), 
+        .reset(reset),
+         
+        .start_port  (d5_start_port),
+        .done_port   (d5_done_port),
+        .return_port (d5_return_port),
+        
+        .wr_buf_len(wr_buf_len),
+        .buf_last_wrote(buf_last_wrote));
+
+
+    write_buffer_next   D6  (
+        .clock(clock),
+        .reset(reset),
+        
+        .start_port  (d6_start_port),
+        .done_port   (d6_done_port),
+        .return_port (d6_return_port),
+        
+        .buf_last_wrote(buf_last_wrote),
+        .buf_last_sent(buf_last_sent),
+        .wr_buf_len(wr_buf_len));
+
+    
+    
+    
+    gig_eth_pcs_pma U0
+    (
+        .clock(clock), 
+        .reset(reset),
+        
+        .rd_buf_len(rd_buf_len),
+        .rd_buf(rd_buf),
+        
+        .wr_buf_len(wr_buf_len),
+        .wr_buf(wr_buf),
+
+        .buf_last_sent(buf_last_sent),
+        .buf_last_wrote(buf_last_wrote),
+        .buf_last_recv(buf_last_recv),
+        .buf_last_read(buf_last_read)
+    );
+    
+    
 
 endmodule
 
 
 
 module handle_tx(
-	input clock,
-	input reset,
-	output reg[7:0] tx_data, 
-	output reg tx_en, 
-	output reg tx_er,
-	
-    ref [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    ref [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
-    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
-    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
-	
-	
+    input clock,
+    input reset,
+    output reg[7:0] tx_data, 
+    output reg tx_en, 
+    output reg tx_er,
+    
+    ref TypeWrBufLen   wr_buf_len,
+    ref TypeWrBuf      wr_buf,
+    ref TypeBufferWrAddr buf_last_sent,
+    ref TypeBufferWrAddr buf_last_wrote);
+    
+    
     reg [3:0]   state_tx;
     reg [31:0]  crc32_tx;
     reg [3:0]   tx_intergap;
     
-    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_current;
-    reg [`SIZE_PACKET_SIZE-1:0]    pkg_current;
+    reg TypeBufferWrAddr     buf_current;
+    reg TypePacketAddr    pkg_current;
     
     
-	always @(posedge clock)
-	if (reset)
-	begin
-		state_tx <= `READY;
-		tx_en         <= 0;
-		tx_er         <= 0;
-	end else begin
-		
-		case (state_tx)
-			`READY:
-				if (buf_last_sent != buf_last_wrote)
-				begin
-					pkg_current     <= 0;
-					buf_current     <= buf_last_sent + 1;
-					crc32_tx        <= 0;
-					tx_intergap     <= 0;
-					tx_en           <= 0;
-					state_tx        <= `PREAMBLE_0;
-				end
-				
-			`PREAMBLE_0:
-				begin
-					tx_en <= 1;
-					tx_data <= 8'h55;
-					state_tx <= `PREAMBLE_1;
-				end
-			
-			`PREAMBLE_1:
-				state_tx <= `PREAMBLE_2;
-			
-			`PREAMBLE_2:
-				state_tx <= `PREAMBLE_3;
-			
-			`PREAMBLE_3:
-				state_tx <= `PREAMBLE_4;
-			
-			`PREAMBLE_4:
-				state_tx <= `PREAMBLE_5;
-			
-			`PREAMBLE_5:
-				state_tx <= `PREAMBLE_6;
-			
-			`PREAMBLE_6:
-				state_tx <= `SDF;
-			
-			`SDF:
-				begin
-					tx_data <= 8'hd5;
-					state_tx <= `DATA;
-				end
-				
-			`DATA:
-				if (pkg_current < wr_buf_len[buf_current])
-				begin
-					tx_data       <= wr_buf[buf_current][pkg_current];
-					crc32_tx      <= next_crc32_d8(wr_buf[buf_current][pkg_current], crc32_tx);
-					pkg_current   <= pkg_current + 1;
-				end else begin
-					state_tx      <= `SEND_CRC_3;
-				end
-				
-			`SEND_CRC_3:
-				begin
-					tx_data  <= ~reverse_byte(crc32_tx[31:24]);
-					state_tx <= `SEND_CRC_2;
-				end
-				
-			`SEND_CRC_2:
-				begin
-					tx_data  <= ~reverse_byte(crc32_tx[23:16]);
-					state_tx <= `SEND_CRC_1;
-				end
-				
-			`SEND_CRC_1:
-				begin
-					tx_data  <= ~reverse_byte(crc32_tx[15:8]);
-					state_tx <= `SEND_CRC_0;
-				end
-				
-			`SEND_CRC_0:
-				begin
-					tx_data  <= ~reverse_byte(crc32_tx[7:0]);
-					state_tx <= `DONE;
-				end
-				
-			`DONE:
-				begin
-					buf_last_sent <= buf_current;
-					state_tx <= `INTERGAP;
-				end
-				
-			`INTERGAP:
-				if (tx_intergap < 12)
-				begin
-					tx_intergap <= tx_intergap + 1;
-				end else begin
-					state_tx <= `READY;
-				end
-			
-			default:
-				state_tx <= `READY;
-		endcase 
-	end
+    always @(posedge clock)
+    if (reset)
+    begin
+        state_tx <= `READY;
+        tx_en         <= 0;
+        tx_er         <= 0;
+    end else begin
+        
+        case (state_tx)
+            `READY:
+                if (buf_last_sent != buf_last_wrote)
+                begin
+                    pkg_current     <= 0;
+                    buf_current     <= buf_last_sent + 1;
+                    crc32_tx        <= 0;
+                    tx_intergap     <= 0;
+                    tx_en           <= 0;
+                    state_tx        <= `PREAMBLE_0;
+                end
+                
+            `PREAMBLE_0:
+                begin
+                    tx_en <= 1;
+                    tx_data <= 8'h55;
+                    state_tx <= `PREAMBLE_1;
+                end
+            
+            `PREAMBLE_1:
+                state_tx <= `PREAMBLE_2;
+            
+            `PREAMBLE_2:
+                state_tx <= `PREAMBLE_3;
+            
+            `PREAMBLE_3:
+                state_tx <= `PREAMBLE_4;
+            
+            `PREAMBLE_4:
+                state_tx <= `PREAMBLE_5;
+            
+            `PREAMBLE_5:
+                state_tx <= `PREAMBLE_6;
+            
+            `PREAMBLE_6:
+                state_tx <= `SDF;
+            
+            `SDF:
+                begin
+                    tx_data <= 8'hd5;
+                    state_tx <= `DATA;
+                end
+                
+            `DATA:
+                if (pkg_current < wr_buf_len[buf_current])
+                begin
+                    tx_data       <= wr_buf[buf_current][pkg_current];
+                    crc32_tx      <= next_crc32_d8(wr_buf[buf_current][pkg_current], crc32_tx);
+                    pkg_current   <= pkg_current + 1;
+                end else begin
+                    state_tx      <= `SEND_CRC_3;
+                end
+                
+            `SEND_CRC_3:
+                begin
+                    tx_data  <= ~reverse_byte(crc32_tx[31:24]);
+                    state_tx <= `SEND_CRC_2;
+                end
+                
+            `SEND_CRC_2:
+                begin
+                    tx_data  <= ~reverse_byte(crc32_tx[23:16]);
+                    state_tx <= `SEND_CRC_1;
+                end
+                
+            `SEND_CRC_1:
+                begin
+                    tx_data  <= ~reverse_byte(crc32_tx[15:8]);
+                    state_tx <= `SEND_CRC_0;
+                end
+                
+            `SEND_CRC_0:
+                begin
+                    tx_data  <= ~reverse_byte(crc32_tx[7:0]);
+                    state_tx <= `DONE;
+                end
+                
+            `DONE:
+                begin
+                    buf_last_sent <= buf_current;
+                    state_tx <= `INTERGAP;
+                end
+                
+            `INTERGAP:
+                if (tx_intergap < 12)
+                begin
+                    tx_intergap <= tx_intergap + 1;
+                end else begin
+                    state_tx <= `READY;
+                end
+            
+            default:
+                state_tx <= `READY;
+        endcase 
+    end
 endmodule
 
 
 
 module handle_rx(
-	input clock,
-	input reset,
-	input [7:0] rx_data,
-	input rx_er,
-	input rx_dv,
-	
-    ref rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    ref rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
+    input clock,
+    input reset,
+    input [7:0] rx_data,
+    input rx_er,
+    input rx_dv,
+    
+    ref TypeRdBufLen rd_buf_len,
+    ref TypeRdBuf    rd_buf,
 
-    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
-    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
-	
+    ref TypeBufferRdAddr buf_last_recv,
+    ref TypeBufferRdAddr buf_last_read);
+    
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
     
-    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_current;
-    reg [`SIZE_PACKET_SIZE-1:0]    pkg_current;
+    reg TypeBufferRdAddr   buf_current;
+    reg TypePacketAddr  pkg_current;
 
     always @(posedge clock)
     if (reset)
@@ -783,10 +794,10 @@ module handle_rx(
                     end
                     
                 `DONE:
-					begin
-						buf_last_recv           <= buf_current;
-						rd_buf_len[pkg_current] <= pkg_current - 4;
-						state_rx                <= `READY;
+                    begin
+                        buf_last_recv           <= buf_current;
+                        rd_buf_len[pkg_current] <= pkg_current - 4;
+                        state_rx                <= `READY;
                     end
                     
                 default:
@@ -814,16 +825,16 @@ module gig_eth_pcs_pma (
     inout   eth_mdio,
     output  eth_mdc,
     
-    inout reg rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    inout reg rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
+    ref TypeRdBufLen    rd_buf_len,
+    ref TypeRdBuf       rd_buf,
     
-    input     [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    inout reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
+    ref TypeWrBufLen    wr_buf_len,
+    ref TypeWrBuf       wr_buf,
 
-    inout reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
-    input     [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
-    inout reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
-    input     [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
+    ref TypeBufferWrAddr buf_last_sent,
+    ref TypeBufferWrAddr buf_last_wrote,
+    ref TypeBufferRdAddr buf_last_recv,
+    ref TypeBufferRdAddr buf_last_read);
     
     //wire        clock_mac; 
     wire[15:0]  gmii_status;     
@@ -842,42 +853,42 @@ module gig_eth_pcs_pma (
     
     IOBUF U10 (.I(eth_mdio_o), .O(eth_mdio_i), .T(eth_mdio_t), .IO(eth_mdio));
     
-	gig_ethernet_pcs_pma_0_example_design U3 (
-	  .independent_clock(clock),  				        // input wire independent_clock_bufg
-	  .gtrefclk_p(sgmii_clk_p),                         // input wire gtrefclk_p
-	  .gtrefclk_n(sgmii_clk_n),                         // input wire gtrefclk_n
-	  .rxuserclk2(),
-	  .txn(sgmii_tx_n),                                 // output wire txn
-	  .txp(sgmii_tx_p),                                 // output wire txp
-	  .rxn(sgmii_rx_n),                                 // input wire rxn
-	  .rxp(sgmii_rx_p),                                 // input wire rxp
-	  
-	  .sgmii_clk(),										// Clock for client MAC 
-	  
-	  .gmii_txd(gmii_txd),                              // input wire [7 : 0] gmii_txd
-	  .gmii_tx_en(gmii_tx_en),                          // input wire gmii_tx_en
-	  .gmii_tx_er(gmii_tx_er),                          // input wire gmii_tx_er
-	  .gmii_rxd(gmii_rxd),                              // output wire [7 : 0] gmii_rxd
-	  .gmii_rx_dv(gmii_rx_dv),                          // output wire gmii_rx_dv
-	  .gmii_rx_er(gmii_rx_er),                          // output wire gmii_rx_er
-	  
-	  .mdc(eth_mdc),                                    // input wire mdc
-	  .mdio_i(eth_mdio_i),                              // input wire mdio_i
-	  .mdio_o(eth_mdio_o),                              // output wire mdio_o
-	  .mdio_t(eth_mdio_t),                              // output wire mdio_t
-	  
-	  .configuration_vector(5'b10000),      			// input wire [4 : 0] configuration_vector
-	  .configuration_valid(1),       					// input wire configuration_valid
-	  .an_adv_config_vector(16'h4001),      			// input wire [15 : 0] an_adv_config_vector
-	  .an_adv_config_val(1),            				// input wire an_adv_config_val
-	  .an_restart_config(0),            				// input wire an_restart_config
-	  .an_interrupt(),									// Interrupt to processor to signal that Auto-Negotiation has completed
-	  .speed_is_10_100(0),                				// input wire speed_is_10_100
-	  .speed_is_100(0),                      			// input wire speed_is_100
-	  .status_vector(gmii_status),                    	// output wire [15 : 0] status_vector
-	  .reset(reset),                                    // input wire reset
-	  .signal_detect(1)                     			// input wire signal_detect
-	);
+    gig_ethernet_pcs_pma_0_example_design U3 (
+      .independent_clock(clock),                        // input wire independent_clock_bufg
+      .gtrefclk_p(sgmii_clk_p),                         // input wire gtrefclk_p
+      .gtrefclk_n(sgmii_clk_n),                         // input wire gtrefclk_n
+      .rxuserclk2(),
+      .txn(sgmii_tx_n),                                 // output wire txn
+      .txp(sgmii_tx_p),                                 // output wire txp
+      .rxn(sgmii_rx_n),                                 // input wire rxn
+      .rxp(sgmii_rx_p),                                 // input wire rxp
+      
+      .sgmii_clk(),                                     // Clock for client MAC 
+      
+      .gmii_txd(gmii_txd),                              // input wire [7 : 0] gmii_txd
+      .gmii_tx_en(gmii_tx_en),                          // input wire gmii_tx_en
+      .gmii_tx_er(gmii_tx_er),                          // input wire gmii_tx_er
+      .gmii_rxd(gmii_rxd),                              // output wire [7 : 0] gmii_rxd
+      .gmii_rx_dv(gmii_rx_dv),                          // output wire gmii_rx_dv
+      .gmii_rx_er(gmii_rx_er),                          // output wire gmii_rx_er
+      
+      .mdc(eth_mdc),                                    // input wire mdc
+      .mdio_i(eth_mdio_i),                              // input wire mdio_i
+      .mdio_o(eth_mdio_o),                              // output wire mdio_o
+      .mdio_t(eth_mdio_t),                              // output wire mdio_t
+      
+      .configuration_vector(5'b10000),                  // input wire [4 : 0] configuration_vector
+      .configuration_valid(1),                          // input wire configuration_valid
+      .an_adv_config_vector(16'h4001),                  // input wire [15 : 0] an_adv_config_vector
+      .an_adv_config_val(1),                            // input wire an_adv_config_val
+      .an_restart_config(0),                            // input wire an_restart_config
+      .an_interrupt(),                                  // Interrupt to processor to signal that Auto-Negotiation has completed
+      .speed_is_10_100(0),                              // input wire speed_is_10_100
+      .speed_is_100(0),                                 // input wire speed_is_100
+      .status_vector(gmii_status),                      // output wire [15 : 0] status_vector
+      .reset(reset),                                    // input wire reset
+      .signal_detect(1)                                 // input wire signal_detect
+    );
     
 
    
@@ -891,9 +902,9 @@ module gig_eth_pcs_pma (
         .tx_er(gmii_tx_er),
         
         .wr_buf_len(wr_buf_len),
-		.wr_buf(wr_buf),
-		.buf_last_sent(buf_last_sent),
-		.buf_last_wrote(buf_last_wrote)
+        .wr_buf(wr_buf),
+        .buf_last_sent(buf_last_sent),
+        .buf_last_wrote(buf_last_wrote)
     );
     
     handle_rx U5
@@ -905,9 +916,9 @@ module gig_eth_pcs_pma (
         .rx_er(gmii_rx_er),
         
         .rd_buf_len(rd_buf_len),
-		.rd_buf(rd_buf),
-		.buf_last_recv(buf_last_recv),
-		.buf_last_read(buf_last_read)
+        .rd_buf(rd_buf),
+        .buf_last_recv(buf_last_recv),
+        .buf_last_read(buf_last_read)
     );
     
 endmodule
