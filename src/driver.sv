@@ -107,9 +107,9 @@ module write_buffer (
     input[7:0]  value,
     output reg return_port,
     
-    input 	  [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
-    inout reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    inout reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1]);
+    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
+    ref [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    ref [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1]);
 
     always @(posedge clock)
     if (reset)
@@ -141,8 +141,8 @@ module write_buffer_len (
     output reg done_port,
     output reg[`SIZE_PACKET_SIZE-1:0] return_port,
     
-    input [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
+    ref [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
 
     always @(posedge clock)
     if (reset)
@@ -165,9 +165,9 @@ module write_buffer_next (
     output reg done_port,
     output reg return_port,
     
-    inout reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
-    input     [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
-    inout reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1]);
+    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
+    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
+    ref [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1]);
 
     always @(posedge clock)
     if (reset)
@@ -198,9 +198,9 @@ module read_buffer (
     output reg done_port,
     output reg[7:0] return_port,
     
-    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
-    input [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    input [7:0]                      rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1]);
+    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
+    ref [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    ref [7:0]                      rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1]);
 
     always @(posedge clock)
     if (reset)
@@ -224,9 +224,8 @@ module read_buffer_len (
     output reg done_port,
     output reg[`SIZE_PACKET_SIZE-1:0] return_port,
     
-    input [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read
-    );
+    ref [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
 
     always @(posedge clock)
     if (reset)
@@ -248,8 +247,8 @@ module read_buffer_next (
     output reg done_port,
     output reg return_port,
     
-    inout reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
-    input     [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv);
+    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
+    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv);
 
     always @(posedge clock)
     if (reset)
