@@ -117,10 +117,10 @@ module write_buffer (
     output reg done_port,
     input TypePacketAddr address,
     input TypeByte       value,
-    output reg return_port/*,
+    output reg return_port,
     input TypeBufferWrAddr buf_last_wrote,
     output TypeWrBufLen     wr_buf_len,
-    output TypeWrBuf        wr_buf*/);
+    output TypeWrBuf        wr_buf);
 
     always @(posedge clock)
     if (reset)
@@ -150,10 +150,10 @@ module write_buffer_len (
     input reset,
     input start_port,
     output reg done_port,
-    output TypePacketAddr return_port/*,
+    output TypePacketAddr return_port,
     
-    ref TypeWrBufLen wr_buf_len,
-    ref TypeBufferWrAddr buf_last_wrote*/);
+    input TypeWrBufLen wr_buf_len,
+    input TypeBufferWrAddr buf_last_wrote);
 
     always @(posedge clock)
     if (reset)
@@ -174,11 +174,11 @@ module write_buffer_next (
     input reset,
     input start_port,
     output reg done_port,
-    output reg return_port/*,
+    output reg return_port,
     
-    ref TypeBufferWrAddr buf_last_wrote,
-    ref TypeBufferWrAddr buf_last_sent,
-    ref TypeWrBufLen     wr_buf_len*/);
+    inout TypeBufferWrAddr buf_last_wrote,
+    input TypeBufferWrAddr buf_last_sent,
+    inout TypeWrBufLen     wr_buf_len);
 
     always @(posedge clock)
     if (reset)
@@ -207,11 +207,11 @@ module read_buffer (
     input start_port,
     input TypePacketAddr address,
     output reg done_port,
-    output TypeByte return_port/*,
+    output TypeByte return_port,
     
     input TypeBufferRdAddr buf_last_read,
     input TypeRdBufLen     rd_buf_len,
-    input TypeRdBuf        rd_buf*/);
+    input TypeRdBuf        rd_buf);
 
     always @(posedge clock)
     if (reset)
@@ -233,10 +233,10 @@ module read_buffer_len (
     input reset,
     input start_port,
     output reg done_port,
-    output TypePacketAddr return_port/*,
+    output TypePacketAddr return_port,
     
-    ref TypeRdBufLen     rd_buf_len,
-    ref TypeBufferRdAddr buf_last_read*/);
+    input TypeRdBufLen     rd_buf_len,
+    input TypeBufferRdAddr buf_last_read);
 
     always @(posedge clock)
     if (reset)
@@ -256,10 +256,10 @@ module read_buffer_next (
     input reset,
     input start_port,
     output reg done_port,
-    output reg return_port/*,
+    output reg return_port,
     
-    ref TypeBufferRdAddr buf_last_read,
-    ref TypeBufferRdAddr buf_last_recv*/);
+    inout TypeBufferRdAddr buf_last_read,
+    input TypeBufferRdAddr buf_last_recv);
 
     always @(posedge clock)
     if (reset)
@@ -456,11 +456,11 @@ module driver_operation(
         .start_port  (d1_start_port), 
         .done_port   (d1_done_port), 
         .return_port (d1_return_port),
-        .address(address)/*,
+        .address(address),
         
         .buf_last_read(buf_last_read),
         .rd_buf_len(rd_buf_len),
-        .rd_buf(rd_buf)*/);
+        .rd_buf(rd_buf));
 
 
     read_buffer_len     D2  (
@@ -469,10 +469,10 @@ module driver_operation(
         
         .start_port  (d2_start_port),
         .done_port   (d2_done_port),
-        .return_port (d2_return_port)/*,
+        .return_port (d2_return_port),
         
         .rd_buf_len(rd_buf_len),
-        .buf_last_read(buf_last_read)*/);
+        .buf_last_read(buf_last_read));
 
 
     read_buffer_next    D3  (
@@ -480,10 +480,10 @@ module driver_operation(
         .reset(reset),
         .start_port  (d3_start_port),
         .done_port   (d3_done_port),
-        .return_port (d3_return_port)/*,
+        .return_port (d3_return_port),
         
         .buf_last_read(buf_last_read),
-        .buf_last_recv(buf_last_recv)*/);
+        .buf_last_recv(buf_last_recv));
     
 
     write_buffer        D4  (
@@ -494,11 +494,11 @@ module driver_operation(
         .done_port   (d4_done_port),
         .return_port (d4_return_port),
         
-        .address(address)/*,
+        .address(address),
         
         .buf_last_wrote(buf_last_wrote),
         .wr_buf_len(wr_buf_len),
-        .wr_buf(wr_buf)*/);
+        .wr_buf(wr_buf));
     
 
     write_buffer_len    D5  (
@@ -507,10 +507,10 @@ module driver_operation(
          
         .start_port  (d5_start_port),
         .done_port   (d5_done_port),
-        .return_port (d5_return_port)/*,
+        .return_port (d5_return_port),
         
         .wr_buf_len(wr_buf_len),
-        .buf_last_wrote(buf_last_wrote)*/);
+        .buf_last_wrote(buf_last_wrote));
 
 
     write_buffer_next   D6  (
@@ -519,11 +519,11 @@ module driver_operation(
         
         .start_port  (d6_start_port),
         .done_port   (d6_done_port),
-        .return_port (d6_return_port)/*,
+        .return_port (d6_return_port),
         
         .buf_last_wrote(buf_last_wrote),
         .buf_last_sent(buf_last_sent),
-        .wr_buf_len(wr_buf_len)*/);
+        .wr_buf_len(wr_buf_len));
 
     
     
@@ -531,7 +531,7 @@ module driver_operation(
     gig_eth_pcs_pma U0
     (
         .clock(clock), 
-        .reset(reset)/*,
+        .reset(reset),
         
         .rd_buf_len(rd_buf_len),
         .rd_buf(rd_buf),
@@ -542,7 +542,7 @@ module driver_operation(
         .buf_last_sent(buf_last_sent),
         .buf_last_wrote(buf_last_wrote),
         .buf_last_recv(buf_last_recv),
-        .buf_last_read(buf_last_read)*/);
+        .buf_last_read(buf_last_read));
     
     
 
@@ -555,12 +555,12 @@ module handle_tx(
     input reset,
     output reg TypeByte tx_data, 
     output reg tx_en, 
-    output reg tx_er/*,
+    output reg tx_er,
     
-    ref TypeWrBufLen   wr_buf_len,
-    ref TypeWrBuf      wr_buf,
-    ref TypeBufferWrAddr buf_last_sent,
-    ref TypeBufferWrAddr buf_last_wrote*/);
+    input TypeWrBufLen   wr_buf_len,
+    input TypeWrBuf      wr_buf,
+    inout TypeBufferWrAddr buf_last_sent,
+    input TypeBufferWrAddr buf_last_wrote);
     
     
     reg [3:0]   state_tx;
@@ -683,13 +683,13 @@ module handle_rx(
     input reset,
     input TypeByte rx_data,
     input rx_er,
-    input rx_dv/*,
+    input rx_dv,
     
-    ref TypeRdBufLen rd_buf_len,
-    ref TypeRdBuf    rd_buf,
+    inout TypeRdBufLen rd_buf_len,
+    inout TypeRdBuf    rd_buf,
 
-    ref TypeBufferRdAddr buf_last_recv,
-    ref TypeBufferRdAddr buf_last_read*/);
+    inout TypeBufferRdAddr buf_last_recv,
+    input TypeBufferRdAddr buf_last_read);
     
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
@@ -821,18 +821,18 @@ module gig_eth_pcs_pma (
     input   sgmii_clk_n,
     
     inout   eth_mdio,
-    output  eth_mdc/*,
+    output  eth_mdc,
     
-    ref TypeRdBufLen    rd_buf_len,
-    ref TypeRdBuf       rd_buf,
+    inout TypeRdBufLen    rd_buf_len,
+    inout TypeRdBuf       rd_buf,
     
-    ref TypeWrBufLen    wr_buf_len,
-    ref TypeWrBuf       wr_buf,
+    input TypeWrBufLen    wr_buf_len,
+    input TypeWrBuf       wr_buf,
 
     ref TypeBufferWrAddr buf_last_sent,
     ref TypeBufferWrAddr buf_last_wrote,
     ref TypeBufferRdAddr buf_last_recv,
-    ref TypeBufferRdAddr buf_last_read*/);
+    ref TypeBufferRdAddr buf_last_read);
     
     //wire        clock_mac; 
     wire[15:0]  gmii_status;     
@@ -897,12 +897,12 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .tx_data(gmii_txd),
         .tx_en(gmii_tx_en),
-        .tx_er(gmii_tx_er)/*,
+        .tx_er(gmii_tx_er),
         
         .wr_buf_len(wr_buf_len),
         .wr_buf(wr_buf),
         .buf_last_sent(buf_last_sent),
-        .buf_last_wrote(buf_last_wrote)*/);
+        .buf_last_wrote(buf_last_wrote));
     
     handle_rx U5
     (
@@ -910,11 +910,11 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .rx_data(gmii_rxd),
         .rx_dv(gmii_rx_dv),
-        .rx_er(gmii_rx_er)/*,
+        .rx_er(gmii_rx_er),
         
         .rd_buf_len(rd_buf_len),
         .rd_buf(rd_buf),
         .buf_last_recv(buf_last_recv),
-        .buf_last_read(buf_last_read)*/);
+        .buf_last_read(buf_last_read));
     
 endmodule
