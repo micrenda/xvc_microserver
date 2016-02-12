@@ -107,9 +107,9 @@ module write_buffer (
     input[7:0]  value,
     output reg return_port,
     
-    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
-    inout [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    inout [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1]);
+    input 	  [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
+    inout reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    inout reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1]);
 
     always @(posedge clock)
     if (reset)
@@ -165,9 +165,9 @@ module write_buffer_next (
     output reg done_port,
     output reg return_port,
     
-    inout [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
-    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
-    inout [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1]);
+    inout reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
+    input     [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
+    inout reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1]);
 
     always @(posedge clock)
     if (reset)
@@ -248,8 +248,8 @@ module read_buffer_next (
     output reg done_port,
     output reg return_port,
     
-    inout [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
-    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv);
+    inout reg reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
+    input     [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv);
 
     always @(posedge clock)
     if (reset)
@@ -439,10 +439,10 @@ module handle_tx(
 	output reg tx_en, 
 	output reg tx_er,
 	
-    input [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    input [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
-    inout [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
-    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
+    input     [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    input     [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
+    inout reg reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
+    input     [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
 	
 	
     reg [3:0]   state_tx;
@@ -567,11 +567,11 @@ module handle_rx(
 	input rx_er,
 	input rx_dv,
 	
-    inout rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    inout rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
+    inout reg reg rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    inout reg reg rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
 
-    inout [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
-    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
+    inout reg reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
+    input     [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
 	
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
@@ -705,16 +705,16 @@ module gig_eth_pcs_pma (
     inout   eth_mdio,
     output  eth_mdc,
     
-    inout rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    inout rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
+    inout reg reg rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    inout reg reg rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
     
-    input [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    inout [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
+    input     [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    inout reg reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
 
-    inout [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
-    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
-    inout [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
-    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
+    inout reg reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
+    input     [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
+    inout reg reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
+    input     [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
     
     //wire        clock_mac; 
     wire[15:0]  gmii_status;     
