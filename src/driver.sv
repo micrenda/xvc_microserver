@@ -15,13 +15,13 @@ typedef logic [`SIZE_PACKET_SIZE-1:0]    TypePacketAddr;
 typedef logic [`SIZE_BUFFER_SIZE_RD-1:0] TypeBufferRdAddr;
 typedef logic [`SIZE_BUFFER_SIZE_WR-1:0] TypeBufferWrAddr;
 
-typeDef [7:0]logic       TypeByte;
+typedef  logic[7:0]      TypeByte;
 
 typedef TypePacketAddr   TypeRdBufLen [0:`BUFFER_SIZE_RD-1];
-typedef TypeByte             TypeRdBuf    [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
+typedef TypeByte         TypeRdBuf    [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
     
 typedef TypePacketAddr   TypeWrBufLen [0:`BUFFER_SIZE_WR-1];
-typedef TypeByte             TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
+typedef TypeByte         TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
 
 
 `define READY      0
@@ -119,9 +119,9 @@ module write_buffer (
     input TypeByte       value,
     output reg return_port,
     
-    ref TypeBufferWrAddr buf_last_wrote,
-    ref TypeWrBufLen     wr_buf_len,
-    ref TypeWrBuf        wr_buf);
+    input TypeBufferWrAddr buf_last_wrote,
+    inout var TypeWrBufLen     wr_buf_len,
+    inout var TypeWrBuf        wr_buf);
 
     always @(posedge clock)
     if (reset)
@@ -130,7 +130,7 @@ module write_buffer (
     end else begin
         if (start_port)
         begin
-            if (address < `PACKET_SIZE - 1) begin
+            if (address < `PACKET_SIZE) begin
                 wr_buf[buf_last_wrote][address] <= value;
                 
                 if (address > wr_buf_len[buf_last_wrote])
@@ -210,9 +210,9 @@ module read_buffer (
     output reg done_port,
     output TypeByte return_port,
     
-    ref TypeBufferRdAddr buf_last_read,
-    ref TypeRdBufLen     rd_buf_len,
-    ref TypeRdBuf        rd_buf);
+    input TypeBufferRdAddr buf_last_read,
+    input TypeRdBufLen     rd_buf_len,
+    input TypeRdBuf        rd_buf);
 
     always @(posedge clock)
     if (reset)
@@ -315,16 +315,16 @@ module driver_operation(
 
 
 
-    reg TypeRdBufLen rd_buf_len;
-    reg TypeRdBuf    rd_buf];
+    var TypeRdBufLen rd_buf_len;
+    var TypeRdBuf    rd_buf;
     
-    reg TypeWrBufLen wr_buf_len;
-    reg TypeWrBuf    wr_buf;
+    var TypeWrBufLen wr_buf_len;
+    var TypeWrBuf    wr_buf;
 
-    reg TypeBufferWrAddr buf_last_sent;
-    reg TypeBufferWrAddr buf_last_wrote;
-    reg TypeBufferRdAddr buf_last_recv;
-    reg TypeBufferRdAddr buf_last_read;
+    var TypeBufferWrAddr buf_last_sent;
+    var TypeBufferWrAddr buf_last_wrote;
+    var TypeBufferRdAddr buf_last_recv;
+    var TypeBufferRdAddr buf_last_read;
     
     
     reg       d1_start_port;
@@ -570,8 +570,8 @@ module handle_tx(
     reg [31:0]  crc32_tx;
     reg [3:0]   tx_intergap;
     
-    reg TypeBufferWrAddr     buf_current;
-    reg TypePacketAddr    pkg_current;
+    var TypeBufferWrAddr  buf_current;
+    var TypePacketAddr    pkg_current;
     
     
     always @(posedge clock)
@@ -695,10 +695,10 @@ module handle_rx(
     ref TypeBufferRdAddr buf_last_read);
     
     reg [3:0]   state_rx;
-    reg int  crc32_rx;
+    reg [31:0]  crc32_rx;
     
-    reg TypeBufferRdAddr   buf_current;
-    reg TypePacketAddr  pkg_current;
+    var TypeBufferRdAddr   buf_current;
+    var TypePacketAddr  pkg_current;
 
     always @(posedge clock)
     if (reset)
