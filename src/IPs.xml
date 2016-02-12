@@ -293,6 +293,10 @@
             <structural_type_descriptor type="BOOL" size="16"/>
             <connected_objects/>
           </port_o>
+          <port_o id="operation" dir="IN">
+            <structural_type_descriptor type="UINT" size="8"/>
+            <connected_objects/>
+          </port_o>
           <port_o id="address" dir="IN">
             <structural_type_descriptor type="UINT" size="16"/>
             <connected_objects/>

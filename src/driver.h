@@ -64,5 +64,5 @@ uint16_t drv_read_buffer_len();
  * 	0:	Success
  *  1:	No more data:  no more packets are waiting to be read from the receiving queue.
  */
-uint8_t read_buffer_next();
+uint8_t drv_read_buffer_next();
 
