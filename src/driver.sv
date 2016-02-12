@@ -180,17 +180,24 @@ module write_buffer_next (
     input TypeBufferWrAddr buf_last_sent,
     inout TypeWrBufLen     wr_buf_len);
 
+
+    var TypeBufferWrAddr o_buf_last_wrote;
+    var TypeWrBufLen     o_wr_buf_len;
+    
+    assign buf_last_wrote = o_buf_last_wrote;
+    assign wr_buf_len     = o_wr_buf_len;
+    
     always @(posedge clock)
     if (reset)
     begin
-        buf_last_wrote <= 0;
+        o_buf_last_wrote <= 0;
     end else begin
     
         if (start_port) begin
         
             if (buf_last_wrote != buf_last_sent - 1) begin
-                buf_last_wrote <= (buf_last_wrote + 1) % `BUFFER_SIZE_WR;  
-                wr_buf_len[buf_last_wrote] <= 0;
+                o_buf_last_wrote <= (buf_last_wrote + 1) % `BUFFER_SIZE_WR;  
+                o_wr_buf_len[buf_last_wrote] <= 0;
                 return_port <= 0; 
             end else begin
                 return_port <= 1; // The buffer overflowed 
@@ -261,15 +268,19 @@ module read_buffer_next (
     inout TypeBufferRdAddr buf_last_read,
     input TypeBufferRdAddr buf_last_recv);
 
+    var TypeBufferRdAddr o_buf_last_read;
+    
+    assign buf_last_read = o_buf_last_read;
+    
     always @(posedge clock)
     if (reset)
     begin
-        buf_last_read <= 0;
+        o_buf_last_read <= 0;
     end else begin
         if (start_port)
         begin
             if (buf_last_read != buf_last_recv) begin
-                buf_last_read <= (buf_last_read + 1) % `BUFFER_SIZE_RD;
+                o_buf_last_read <= (buf_last_read + 1) % `BUFFER_SIZE_RD;
                 
                 return_port <= 0;
             end else begin
@@ -562,6 +573,8 @@ module handle_tx(
     inout TypeBufferWrAddr buf_last_sent,
     input TypeBufferWrAddr buf_last_wrote);
     
+    var TypeBufferWrAddr o_buf_last_sent;
+    assign buf_last_sent = o_buf_last_sent;
     
     reg [3:0]   state_tx;
     reg [31:0]  crc32_tx;
@@ -658,7 +671,7 @@ module handle_tx(
                 
             `STATUS_DONE:
                 begin
-                    buf_last_sent <= buf_current;
+                    o_buf_last_sent <= buf_current;
                     state_tx <= `STATUS_INTERGAP;
                 end
                 
@@ -690,6 +703,16 @@ module handle_rx(
 
     inout TypeBufferRdAddr buf_last_recv,
     input TypeBufferRdAddr buf_last_read);
+    
+    
+    var TypeRdBufLen        o_rd_buf_len;
+    var TypeRdBuf           o_rd_buf;
+    var TypeBufferRdAddr    o_buf_last_recv;
+    
+    assign rd_buf_len       = o_rd_buf_len;
+    assign rd_buf           = o_rd_buf;
+    assign buf_last_recv    = o_buf_last_recv;
+    
     
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
@@ -780,7 +803,7 @@ module handle_rx(
                         
                         if (crc32_rx != 32'hC704DD7B) begin
                         
-                            rd_buf[buf_current][pkg_current] <= rx_data;
+                            o_rd_buf[buf_current][pkg_current] <= rx_data;
                             crc32_rx      <= next_crc32_d8(rx_data, crc32_rx);
                             pkg_current   <= pkg_current + 1;
                             
@@ -793,8 +816,8 @@ module handle_rx(
                     
                 `STATUS_DONE:
                     begin
-                        buf_last_recv           <= buf_current;
-                        rd_buf_len[pkg_current] <= pkg_current - 4;
+                        o_buf_last_recv           <= buf_current;
+                        o_rd_buf_len[pkg_current] <= pkg_current - 4;
                         state_rx                <= `STATUS_READY;
                     end
                     
