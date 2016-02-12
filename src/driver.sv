@@ -548,10 +548,10 @@ module handle_tx(
 	output reg tx_en, 
 	output reg tx_er,
 	
-    input     [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
-    input     [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
-    inout reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
-    input     [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
+    ref [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    ref [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
+    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
+    ref [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
 	
 	
     reg [3:0]   state_tx;
@@ -676,11 +676,11 @@ module handle_rx(
 	input rx_er,
 	input rx_dv,
 	
-    inout reg rd_buf_len [0:`BUFFER_SIZE_RD-1],
-    inout reg rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
+    ref rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    ref rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
 
-    inout reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
-    input     [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
+    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
+    ref [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
 	
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
