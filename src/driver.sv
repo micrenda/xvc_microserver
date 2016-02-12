@@ -458,11 +458,11 @@ module driver_operation(
         .start_port  (d1_start_port), 
         .done_port   (d1_done_port), 
         .return_port (d1_return_port),
-        .address(address),
+        .address(address)/*,
         
         .buf_last_read(buf_last_read),
         .rd_buf_len(rd_buf_len),
-        .rd_buf(rd_buf));
+        .rd_buf(rd_buf)*/);
 
 
     read_buffer_len     D2  (
@@ -471,11 +471,10 @@ module driver_operation(
         
         .start_port  (d2_start_port),
         .done_port   (d2_done_port),
-        .return_port (d2_return_port),
+        .return_port (d2_return_port)/*,
         
         .rd_buf_len(rd_buf_len),
-        .buf_last_read(buf_last_read)
-        );
+        .buf_last_read(buf_last_read)*/);
 
 
     read_buffer_next    D3  (
@@ -483,10 +482,10 @@ module driver_operation(
         .reset(reset),
         .start_port  (d3_start_port),
         .done_port   (d3_done_port),
-        .return_port (d3_return_port),
+        .return_port (d3_return_port)/*,
         
         .buf_last_read(buf_last_read),
-        .buf_last_recv(buf_last_recv));
+        .buf_last_recv(buf_last_recv)*/);
     
 
     write_buffer        D4  (
@@ -497,12 +496,11 @@ module driver_operation(
         .done_port   (d4_done_port),
         .return_port (d4_return_port),
         
-        .address(address),
+        .address(address)/*,
         
         .buf_last_wrote(buf_last_wrote),
         .wr_buf_len(wr_buf_len),
-        .wr_buf(wr_buf)
-        );
+        .wr_buf(wr_buf)*/);
     
 
     write_buffer_len    D5  (
@@ -511,10 +509,10 @@ module driver_operation(
          
         .start_port  (d5_start_port),
         .done_port   (d5_done_port),
-        .return_port (d5_return_port),
+        .return_port (d5_return_port)/*,
         
         .wr_buf_len(wr_buf_len),
-        .buf_last_wrote(buf_last_wrote));
+        .buf_last_wrote(buf_last_wrote)*/);
 
 
     write_buffer_next   D6  (
@@ -523,11 +521,11 @@ module driver_operation(
         
         .start_port  (d6_start_port),
         .done_port   (d6_done_port),
-        .return_port (d6_return_port),
+        .return_port (d6_return_port)/*,
         
         .buf_last_wrote(buf_last_wrote),
         .buf_last_sent(buf_last_sent),
-        .wr_buf_len(wr_buf_len));
+        .wr_buf_len(wr_buf_len)*/);
 
     
     
@@ -535,7 +533,7 @@ module driver_operation(
     gig_eth_pcs_pma U0
     (
         .clock(clock), 
-        .reset(reset),
+        .reset(reset)/*,
         
         .rd_buf_len(rd_buf_len),
         .rd_buf(rd_buf),
@@ -546,8 +544,7 @@ module driver_operation(
         .buf_last_sent(buf_last_sent),
         .buf_last_wrote(buf_last_wrote),
         .buf_last_recv(buf_last_recv),
-        .buf_last_read(buf_last_read)
-    );
+        .buf_last_read(buf_last_read)*/);
     
     
 
@@ -560,12 +557,12 @@ module handle_tx(
     input reset,
     output reg TypeByte tx_data, 
     output reg tx_en, 
-    output reg tx_er,
+    output reg tx_er/*,
     
     ref TypeWrBufLen   wr_buf_len,
     ref TypeWrBuf      wr_buf,
     ref TypeBufferWrAddr buf_last_sent,
-    ref TypeBufferWrAddr buf_last_wrote);
+    ref TypeBufferWrAddr buf_last_wrote*/);
     
     
     reg [3:0]   state_tx;
@@ -688,13 +685,13 @@ module handle_rx(
     input reset,
     input TypeByte rx_data,
     input rx_er,
-    input rx_dv,
+    input rx_dv/*,
     
     ref TypeRdBufLen rd_buf_len,
     ref TypeRdBuf    rd_buf,
 
     ref TypeBufferRdAddr buf_last_recv,
-    ref TypeBufferRdAddr buf_last_read);
+    ref TypeBufferRdAddr buf_last_read*/);
     
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
@@ -902,13 +899,12 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .tx_data(gmii_txd),
         .tx_en(gmii_tx_en),
-        .tx_er(gmii_tx_er),
+        .tx_er(gmii_tx_er)/*,
         
         .wr_buf_len(wr_buf_len),
         .wr_buf(wr_buf),
         .buf_last_sent(buf_last_sent),
-        .buf_last_wrote(buf_last_wrote)
-    );
+        .buf_last_wrote(buf_last_wrote)*/);
     
     handle_rx U5
     (
@@ -916,12 +912,11 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .rx_data(gmii_rxd),
         .rx_dv(gmii_rx_dv),
-        .rx_er(gmii_rx_er),
+        .rx_er(gmii_rx_er)/*,
         
         .rd_buf_len(rd_buf_len),
         .rd_buf(rd_buf),
         .buf_last_recv(buf_last_recv),
-        .buf_last_read(buf_last_read)
-    );
+        .buf_last_read(buf_last_read)*/);
     
 endmodule
