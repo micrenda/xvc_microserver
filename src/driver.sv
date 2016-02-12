@@ -297,7 +297,7 @@ module driver_operation(
 	output reg done_port,
     output reg[16:0] return_port,
     input[7:0] operation,
-    input[PACKET_SIZE-1:0] address,
+    input[`PACKET_SIZE-1:0] address,
     input[7:0] value);
 
 
@@ -315,6 +315,30 @@ module driver_operation(
     reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read;
     
     
+    reg       d1_start_port;
+	reg       d1_done_port;
+	reg[16:0] d1_return_port;
+    
+    reg       d2_start_port;
+	reg       d2_done_port;
+	reg[16:0] d2_return_port;
+    
+    reg       d3_start_port;
+	reg       d3_done_port;
+	reg[16:0] d3_return_port;
+    
+    reg       d4_start_port;
+	reg       d4_done_port;
+	reg[16:0] d4_return_port;
+    
+    reg       d5_start_port;
+	reg       d5_done_port;
+	reg[16:0] d5_return_port;
+    
+    reg       d6_start_port;
+	reg       d6_done_port;
+	reg[16:0] d6_return_port;
+    
     
 
 	always @(posedge clock)
@@ -328,83 +352,157 @@ module driver_operation(
 			case (operation)
 							
 			`OP_READ:
-				read_buffer 		D1 (
-					.clock(clock),
-					.reset(reset), 
-					.start_port(start_port), 
-					.address(address),	
-					.done_port(done_port), 
-					.return_port(return_port),
-					
-					.buf_last_read(buf_last_read),
-					.rd_buf_len(rd_buf_len),
-					.rd_buf(rd_buf));
+				d1_start_port <= start_port;
+				d2_start_port <= 0;
+				d3_start_port <= 0;
+				d4_start_port <= 0;
+				d5_start_port <= 0;
+				d6_start_port <= 0;
+
+				done_port   <= d1_done_port;
+				return_port <= d1_return_port;
     
 			`OP_READ_LEN:
-				read_buffer_len 	D2	(
-					.clock(clock), 
-					.reset(reset), 
-					.start_port(start_port),
-					.done_port(done_port),
-					.return_port(return_port),
-					
-					.rd_buf_len(rd_buf_len),
-					.buf_last_read(buf_last_read)
-					);
+				d1_start_port <= 0;
+				d2_start_port <= start_port;
+				d3_start_port <= 0;
+				d4_start_port <= 0;
+				d5_start_port <= 0;
+				d6_start_port <= 0;
+
+				done_port   <= d2_done_port;
+				return_port <= d2_return_port;
 			
 			`OP_READ_NEXT:
-				read_buffer_next 	D3	(
-					.clock(clock),
-					.reset(reset),
-					.start_port(start_port),
-					.done_port(done_port),
-					.return_port(return_port),
-					
-					.buf_last_read(buf_last_read),
-					.buf_last_recv(buf_last_recv));
+				d1_start_port <= 0;
+				d2_start_port <= 0;
+				d3_start_port <= start_port;
+				d4_start_port <= 0;
+				d5_start_port <= 0;
+				d6_start_port <= 0;
+
+				done_port   <= d3_done_port;
+				return_port <= d3_return_port;
 				
 			`OP_WRITE:
-				write_buffer 		D4	(
-					.clock(clock),
-					.reset(reset),
-					.start_port(start_port),
-					.address(address),
-					.done_port(done_port),
-					.return_port(return_port),
-					
-					.buf_last_wrote(buf_last_wrote),
-					.wr_buf_len(wr_buf_len),
-					.wr_buf(wr_buf)
-					);
+				d1_start_port <= 0;
+				d2_start_port <= 0;
+				d3_start_port <= 0;
+				d4_start_port <= start_port;
+				d5_start_port <= 0;
+				d6_start_port <= 0;
+
+				done_port   <= d4_done_port;
+				return_port <= d4_return_port;
 				
 			`OP_WRITE_LEN:
-				write_buffer_len 	D5	(
-					.clock(clock), 
-					.reset(reset), 
-					.start_port(start_port),
-					.done_port(done_port),
-					.return_port(return_port),
-					
-					.wr_buf_len(wr_buf_len),
-					.buf_last_wrote(buf_last_wrote));
+				d1_start_port <= 0;
+				d2_start_port <= 0;
+				d3_start_port <= 0;
+				d4_start_port <= 0;
+				d5_start_port <= start_port;
+				d6_start_port <= 0;
+
+				done_port   <= d5_done_port;
+				return_port <= d5_return_port;
 			
 			`OP_WRITE_NEXT:
-				write_buffer_next 	D6	(
-					.clock(clock),
-					.reset(reset),
-					.start_port(start_port),
-					.done_port(done_port),
-					.return_port(return_port),
-					
-					.buf_last_wrote(buf_last_wrote),
-					.buf_last_sent(buf_last_sent),
-					.wr_buf_len(wr_buf_len));
+				d1_start_port <= 0;
+				d2_start_port <= 0;
+				d3_start_port <= 0;
+				d4_start_port <= 0;
+				d5_start_port <= 0;
+				d6_start_port <= start_port;
+
+				done_port   <= d6_done_port;
+				return_port <= d6_return_port;
 				
 			endcase
 		end
 	
 	end
 	
+	
+	
+
+	read_buffer 		D1 (
+		.clock(clock),
+		.reset(reset), 
+		
+		.start_port  (d1_start_port), 
+		.done_port   (d1_done_port), 
+		.return_port (d1_return_port),
+		.address(address),
+		
+		.buf_last_read(buf_last_read),
+		.rd_buf_len(rd_buf_len),
+		.rd_buf(rd_buf));
+
+
+	read_buffer_len 	D2	(
+		.clock(clock), 
+		.reset(reset), 
+		
+		.start_port  (d2_start_port),
+		.done_port   (d2_done_port),
+		.return_port (d2_return_port),
+		
+		.rd_buf_len(rd_buf_len),
+		.buf_last_read(buf_last_read)
+		);
+
+
+	read_buffer_next 	D3	(
+		.clock(clock),
+		.reset(reset),
+		.start_port  (d3_start_port),
+		.done_port   (d3_done_port),
+		.return_port (d3_return_port),
+		
+		.buf_last_read(buf_last_read),
+		.buf_last_recv(buf_last_recv));
+	
+
+	write_buffer 		D4	(
+		.clock(clock),
+		.reset(reset),
+		
+		.start_port  (d4_start_port),
+		.done_port   (d4_done_port),
+		.return_port (d4_return_port),
+		
+		.address(address),
+		
+		.buf_last_wrote(buf_last_wrote),
+		.wr_buf_len(wr_buf_len),
+		.wr_buf(wr_buf)
+		);
+	
+
+	write_buffer_len 	D5	(
+		.clock(clock), 
+		.reset(reset),
+		 
+		.start_port  (d5_start_port),
+		.done_port   (d5_done_port),
+		.return_port (d5_return_port),
+		
+		.wr_buf_len(wr_buf_len),
+		.buf_last_wrote(buf_last_wrote));
+
+
+	write_buffer_next 	D6	(
+		.clock(clock),
+		.reset(reset),
+		
+		.start_port  (d6_start_port),
+		.done_port   (d6_done_port),
+		.return_port (d6_return_port),
+		
+		.buf_last_wrote(buf_last_wrote),
+		.buf_last_sent(buf_last_sent),
+		.wr_buf_len(wr_buf_len));
+
 	
 	
 	
