@@ -42,22 +42,6 @@ module entry_point (
 		.I(clk_p),
 		.IB(clk_n)
 	);
-
-	gig_eth_pcs_pma U0
-	(
-		.clock(clock), 
-		.reset(reset),
-        
-		.sgmii_tx_p(sgmii_tx_p),
-		.sgmii_tx_n(sgmii_tx_n),
-		.sgmii_rx_p(sgmii_rx_p),
-		.sgmii_rx_n(sgmii_rx_n),
-		.sgmii_clk_p(sgmii_clk_p),
-		.sgmii_clk_n(sgmii_clk_n),
-        
-		.eth_mdio(eth_mdio),
-		.eth_mdc(eth_mdc)
-	);
 	
 	
 	main_minimal_interface U2

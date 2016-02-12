@@ -28,25 +28,8 @@
 `define SEND_CRC_0 13
 `define DONE       14
 `define INTERGAP   15
-
-
-
-
-    reg [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1];
-    reg [7:0]                      rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
-    
-    reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1];
-    reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
-
-    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent;
-    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote;
-    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv;
-    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read;
-
-    reg [`SIZE_PACKET_SIZE-1:0]    pkt_last_wrote;
-    reg [`SIZE_PACKET_SIZE-1:0]    pkt_last_read;
-    
-    
+	
+	
     
     // polynomial: (0 1 2 4 5 7 8 10 11 12 16 22 23 26 32)
     // data width: 8
@@ -120,24 +103,55 @@ module write_buffer (
     input reset,
     input start_port,
     output reg done_port,
+    input [`SIZE_PACKET_SIZE-1:0] address,
     input[7:0]  value,
-    output reg return_port);
+    output reg return_port,
+    
+    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
+    inout [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    inout [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1]));
 
     always @(posedge clock)
     if (reset)
     begin
-        pkt_last_wrote <= 0;
+		// nothing to do
     end else begin
         if (start_port)
         begin
-            if (pkt_last_wrote < `PACKET_SIZE - 1) begin
-                wr_buf[buf_last_wrote][pkt_last_wrote] <= value;
-                pkt_last_wrote         <= pkt_last_wrote + 1;
+            if (address < `PACKET_SIZE - 1) begin
+                wr_buf[buf_last_wrote][address] <= value;
+                
+                if (address > wr_buf_len[buf_last_wrote])
+					wr_buf_len[buf_last_wrote] <= address;
+					
                 return_port <= 0;
             end else begin
                 return_port <= 1; // The packet is full
             end
             
+            done_port <= 1;
+        end
+    end
+endmodule
+
+module write_buffer_len (
+    input clock, 
+    input reset,
+    input start_port,
+    output reg done_port,
+    output reg[`SIZE_PACKET_SIZE-1:0] return_port,
+    
+    input [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
+
+    always @(posedge clock)
+    if (reset)
+    begin
+        // Nothing to do
+    end else begin
+        if (start_port)
+        begin
+            return_port <= wr_buf_len[buf_last_wrote];
             done_port <= 1;
         end
     end
@@ -149,23 +163,23 @@ module write_buffer_next (
     input reset,
     input start_port,
     output reg done_port,
-    output reg return_port);
+    output reg return_port,
+    
+    inout [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
+    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
+    inout [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1]);
 
     always @(posedge clock)
     if (reset)
     begin
-        pkt_last_wrote <= 0;
         buf_last_wrote <= 0;
     end else begin
     
         if (start_port) begin
         
             if (buf_last_wrote != buf_last_sent - 1) begin
-                wr_buf_len[buf_last_wrote]   <= pkt_last_wrote;
-                
-                pkt_last_wrote <= 0;
-                buf_last_wrote <= (buf_last_wrote + 1) % `BUFFER_SIZE_WR;
-            
+                buf_last_wrote <= (buf_last_wrote + 1) % `BUFFER_SIZE_WR;  
+				wr_buf_len[buf_last_wrote] <= 0;
                 return_port <= 0; 
             end else begin
                 return_port <= 1; // The buffer overflowed 
@@ -180,19 +194,23 @@ module read_buffer (
     input clock, 
     input reset,
     input start_port,
+    input [`SIZE_PACKET_SIZE-1:0] address,
     output reg done_port,
-    output reg[7:0] return_port);
+    output reg[7:0] return_port,
+    
+    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
+    input [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    input [7:0]                      rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1]);
 
     always @(posedge clock)
     if (reset)
     begin
-        pkt_last_read <= 0;
+        // nothing to do
     end else begin
         if (start_port)
         begin
-            if (pkt_last_read < wr_buf_len[buf_last_read]) begin
-                return_port <= rd_buf[buf_last_read][pkt_last_read];
-                pkt_last_read <= pkt_last_read + 1;
+            if (address < rd_buf_len[buf_last_read]) begin
+                return_port <= rd_buf[buf_last_read][address];
             end
             done_port <= 1;
         end
@@ -204,7 +222,11 @@ module read_buffer_len (
     input reset,
     input start_port,
     output reg done_port,
-    output reg[`SIZE_PACKET_SIZE-1:0] return_port);
+    output reg[`SIZE_PACKET_SIZE-1:0] return_port,
+    
+    input [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read
+    );
 
     always @(posedge clock)
     if (reset)
@@ -213,7 +235,7 @@ module read_buffer_len (
     end else begin
         if (start_port)
         begin
-            return_port <= wr_buf_len[buf_last_read];
+            return_port <= rd_buf_len[buf_last_read];
             done_port <= 1;
         end
     end
@@ -224,18 +246,19 @@ module read_buffer_next (
     input reset,
     input start_port,
     output reg done_port,
-    output reg return_port);
+    output reg return_port,
+    
+    inout [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read,
+    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv);
 
     always @(posedge clock)
     if (reset)
     begin
-        pkt_last_read <= 0;
         buf_last_read <= 0;
     end else begin
         if (start_port)
         begin
             if (buf_last_read != buf_last_recv) begin
-                pkt_last_read <= 0;
                 buf_last_read <= (buf_last_read + 1) % `BUFFER_SIZE_RD;
                 
                 return_port <= 0;
@@ -248,10 +271,180 @@ module read_buffer_next (
 endmodule
 
 
+`define OP_READ        0
+`define OP_READ_LEN    1
+`define OP_READ_NEXT   2
+`define OP_WRITE       3
+`define OP_WRITE_LEN   4 
+`define OP_WRITE_NEXT  5 
+
+/*
+ * The operation parameter says which operation must be performed
+ * 
+ * OP_READ: 		give in return port the byte pointed by address
+ * OP_READ_LEN: 	give in return port the length of the current packet
+ * OP_READ_NEXT:	move to the next packet. return port is 1 if there are no more packet to read
+ * 
+ * OP_WRITE: 		write the value to the given address
+ * OP_WRITE_LEN: 	give in return port the length of the written packet
+ * OP_WRITE_NEXT:	move to the next packet. return port is 1 if there is an overflow
+ * 
+ */
+
+module driver_operation(
+	input clock,
+	input reset,
+	input start_port,
+	output reg done_port,
+    output reg[16:0] return_port,
+    input[7:0] operation,
+    input[PACKET_SIZE-1:0] address,
+    input[7:0] value)
+{
 
 
 
-module handle_tx(input clock, input reset, output reg[7:0] tx_data, output reg tx_en, output reg tx_er);
+    reg [`SIZE_PACKET_SIZE-1:0]    rd_buf_len [0:`BUFFER_SIZE_RD-1];
+    reg [7:0]                      rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
+    
+    reg [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1];
+    reg [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
+
+    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent;
+    reg [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote;
+    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv;
+    reg [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read;
+    
+    
+    
+
+	always @(posedge clock)
+	if (reset)
+	begin
+		return_port <= 0;
+	end else begin
+	
+		if (start_port)
+		begin
+			case (operation)
+							
+			`OP_READ:
+				read_buffer 		D1 (
+					.clock(clock),
+					.reset(reset), 
+					.start_port(start_port), 
+					.address(address),	
+					.done_port(done_port), 
+					.return_port(return_port),
+					
+					.buf_last_read(buf_last_read),
+					.rd_buf_len(rd_buf_len),
+					.rd_buf(rd_buf));
+    
+			`OP_READ_LEN:
+				read_buffer_len 	D2	(
+					.clock(clock), 
+					.reset(reset), 
+					.start_port(start_port),
+					.done_port(done_port),
+					.return_port(return_port),
+					
+					.rd_buf_len(rd_buf_len),
+					.buf_last_read(buf_last_read)
+					);
+			
+			`OP_READ_NEXT:
+				read_buffer_next 	D3	(
+					.clock(clock),
+					.reset(reset),
+					.start_port(start_port),
+					.done_port(done_port),
+					.return_port(return_port),
+					
+					.buf_last_read(buf_last_read),
+					.buf_last_recv(buf_last_recv));
+				
+			`OP_WRITE:
+				write_buffer 		D4	(
+					.clock(clock),
+					.reset(reset),
+					.start_port(start_port),
+					.address(address),
+					.done_port(done_port),
+					.return_port(return_port),
+					
+					.buf_last_wrote(buf_last_wrote),
+					.wr_buf_len(wr_buf_len),
+					.wr_buf(wr_buf)
+					);
+				
+			`OP_WRITE_LEN:
+				write_buffer_len 	D5	(
+					.clock(clock), 
+					.reset(reset), 
+					.start_port(start_port),
+					.done_port(done_port),
+					.return_port(return_port),
+					
+					.wr_buf_len(wr_buf_len),
+					.buf_last_wrote(buf_last_wrote));
+			
+			`OP_WRITE_NEXT:
+				write_buffer_next 	D6	(
+					.clock(clock),
+					.reset(reset),
+					.start_port(start_port),
+					.done_port(done_port),
+					.return_port(return_port),
+					
+					.buf_last_wrote(buf_last_wrote),
+					.buf_last_sent(buf_last_sent),
+					.wr_buf_len(wr_buf_len));
+				
+			endcase
+		end
+	
+	end
+	
+	
+	
+	
+	gig_eth_pcs_pma U0
+	(
+		.clock(clock), 
+		.reset(reset),
+        
+        .rd_buf_len(rd_buf_len),
+		.rd_buf(rd_buf),
+		
+		.wr_buf_len(wr_buf_len),
+		.wr_buf(wr_buf),
+
+		.buf_last_sent(buf_last_sent),
+		.buf_last_wrote(buf_last_wrote),
+		.buf_last_recv(buf_last_recv),
+		.buf_last_read(buf_last_read)
+	);
+	
+	
+
+}
+
+
+
+module handle_tx(
+	input clock,
+	input reset,
+	output reg[7:0] tx_data, 
+	output reg tx_en, 
+	output reg tx_er,
+	
+    input [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    input [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
+    inout [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
+    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote);
+	
+	
     reg [3:0]   state_tx;
     reg [31:0]  crc32_tx;
     reg [3:0]   tx_intergap;
@@ -347,7 +540,7 @@ module handle_tx(input clock, input reset, output reg[7:0] tx_data, output reg t
 				
 			`DONE:
 				begin
-					buf_last_sent = buf_current;
+					buf_last_sent <= buf_current;
 					state_tx <= `INTERGAP;
 				end
 				
@@ -367,7 +560,19 @@ endmodule
 
 
 
-module handle_rx( input clock, input reset, input [7:0] rx_data, input rx_er, input rx_dv);
+module handle_rx(
+	input clock,
+	input reset,
+	input [7:0] rx_data,
+	input rx_er,
+	input rx_dv
+	
+    inout rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    inout rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
+
+    inout [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
+    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
+	
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
     
@@ -498,7 +703,18 @@ module gig_eth_pcs_pma (
     input   sgmii_clk_n,
     
     inout   eth_mdio,
-    output  eth_mdc);
+    output  eth_mdc,
+    
+    inout rd_buf_len [0:`BUFFER_SIZE_RD-1],
+    inout rd_buf     [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1],
+    
+    input [`SIZE_PACKET_SIZE-1:0]    wr_buf_len [0:`BUFFER_SIZE_WR-1],
+    inout [7:0]                      wr_buf     [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1],
+
+    inout [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_sent,
+    input [`SIZE_BUFFER_SIZE_WR-1:0] buf_last_wrote,
+    inout [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_recv,
+    input [`SIZE_BUFFER_SIZE_RD-1:0] buf_last_read);
     
     //wire        clock_mac; 
     wire[15:0]  gmii_status;     
@@ -563,7 +779,12 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .tx_data(gmii_txd),
         .tx_en(gmii_tx_en),
-        .tx_er(gmii_tx_er)
+        .tx_er(gmii_tx_er),
+        
+        .wr_buf_len(wr_buf_len),
+		.wr_buf(wr_buf),
+		.buf_last_sent(buf_last_sent),
+		.buf_last_wrote(buf_last_wrote)
     );
     
     handle_rx U5
@@ -572,7 +793,12 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .rx_data(gmii_rxd),
         .rx_dv(gmii_rx_dv),
-        .rx_er(gmii_rx_er)
+        .rx_er(gmii_rx_er),
+        
+        .rd_buf_len(rd_buf_len),
+		.rd_buf(rd_buf),
+		.buf_last_recv(buf_last_recv),
+		.buf_last_read(buf_last_read)
     );
     
 endmodule
