@@ -852,10 +852,10 @@ module gig_eth_pcs_pma (
     input TypeWrBufLen    wr_buf_len,
     input TypeWrBuf       wr_buf,
 
-    ref TypeBufferWrAddr buf_last_sent,
-    ref TypeBufferWrAddr buf_last_wrote,
-    ref TypeBufferRdAddr buf_last_recv,
-    ref TypeBufferRdAddr buf_last_read);
+    inout TypeBufferWrAddr buf_last_sent,
+    input TypeBufferWrAddr buf_last_wrote,
+    inout TypeBufferRdAddr buf_last_recv,
+    input TypeBufferRdAddr buf_last_read);
     
     //wire        clock_mac; 
     wire[15:0]  gmii_status;     
