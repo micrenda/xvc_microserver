@@ -31,12 +31,12 @@ extern uint16_t driver_operation(uint8_t operation, uint16_t address, uint8_t va
  * 	0:	Success
  *  1:	Failure: the packet size is bigger than PACKET_SIZE bytes.
  */
-uint8_t write_buffer(uint16_t address, uint8_t value);
+uint8_t drv_write_buffer(uint16_t address, uint8_t value);
 
 /*
  * Return the number of bytes of the current written packet
  */
-uint16_t write_buffer_len();
+uint16_t drv_write_buffer_len();
 
 /*
  * Append a new packet in the sending queue.
@@ -45,17 +45,17 @@ uint16_t write_buffer_len();
  * 	0:	Success
  *  1:	Failure: the driver was unable to send all the queued packets and the circular queue had an overflow.
  */
-uint8_t write_buffer_next();
+uint8_t drv_write_buffer_next();
 
 /*
  * Fetch a byte from the current packet.
  */
-uint8_t read_buffer(uint16_t address);
+uint8_t drv_read_buffer(uint16_t address);
 
 /*
  * Return the number of bytes of the current read packet
  */
-uint16_t read_buffer_len();
+uint16_t drv_read_buffer_len();
 
 /*
  * Fetch a new packet in the receiving queue.

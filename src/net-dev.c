@@ -14,9 +14,9 @@ void network_device_send(void)
 	if (uip_len > 0)
 	{
 		for (uint16_t i = 0; i < uip_len; i++)
-			write_buffer(i, uip_buf[i]);
+			drv_write_buffer(i, uip_buf[i]);
 
-		if (write_buffer_next() != 0)
+		if (drv_write_buffer_next() != 0)
 		{
 			//UIP_LOG(m); //TODO
 		}
@@ -26,14 +26,14 @@ void network_device_send(void)
 uint16_t network_device_read(void)
 {
 
-	if (read_buffer_next() != 0)
+	if (drv_read_buffer_next() != 0)
 		return 0;
 		
-	uip_len = read_buffer_len();
+	uip_len = drv_read_buffer_len();
 	
 	for (uint16_t i = 0; i < uip_len; i++)
 	{
-		uip_buf[i] = read_buffer(i);
+		uip_buf[i] = drv_read_buffer(i);
 	}
 	
 	return uip_len;
