@@ -15,18 +15,28 @@
  * The access to the queue is possible thanks to the following functions.
  */
 
+#define OP_READ        0
+#define OP_READ_LEN    1
+#define OP_READ_NEXT   2
+#define OP_WRITE       3
+#define OP_WRITE_LEN   4 
+#define OP_WRITE_NEXT  5 
 
-
-
+extern uint16_t driver_operation(uint8_t operation, uint16_t address, uint8_t value);
 
 /*
- * Append a byte to the current packet.
+ * Write a byte into current packet at address specified.
  * 
  * Returns:
  * 	0:	Success
  *  1:	Failure: the packet size is bigger than PACKET_SIZE bytes.
  */
-extern uint8_t write_buffer(uint8_t value);
+uint8_t write_buffer(uint16_t address, uint8_t value);
+
+/*
+ * Return the number of bytes of the current written packet
+ */
+uint16_t write_buffer_len();
 
 /*
  * Append a new packet in the sending queue.
@@ -35,20 +45,17 @@ extern uint8_t write_buffer(uint8_t value);
  * 	0:	Success
  *  1:	Failure: the driver was unable to send all the queued packets and the circular queue had an overflow.
  */
-extern uint8_t write_buffer_next();
-
-/*
- * Return the number of bytes of the current packet
- * 
- */
-extern uint16_t read_buffer_len();
-
+uint8_t write_buffer_next();
 
 /*
  * Fetch a byte from the current packet.
- * 
  */
-extern uint8_t read_buffer();
+uint8_t read_buffer(uint16_t address);
+
+/*
+ * Return the number of bytes of the current read packet
+ */
+uint16_t read_buffer_len();
 
 /*
  * Fetch a new packet in the receiving queue.
@@ -57,7 +64,5 @@ extern uint8_t read_buffer();
  * 	0:	Success
  *  1:	No more data:  no more packets are waiting to be read from the receiving queue.
  */
-extern uint8_t read_buffer_next();
+uint8_t read_buffer_next();
 
-
-//extern void gig_eth_pcs_pma();
