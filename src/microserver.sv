@@ -27,14 +27,6 @@ module entry_point (
     
     wire clock;
 
-    always @(posedge clock)
-    if (reset)
-    begin
-        eth_reset_n <= 0;
-    end else begin
-		eth_reset_n <= 1;
-    end
-
 
 	IBUFGDS U1 (
 		.O(clock),

@@ -845,6 +845,7 @@ module gig_eth_pcs_pma (
     
     inout   eth_mdio,
     output  eth_mdc,
+    output reg eth_reset_n,
     
     inout TypeRdBufLen    rd_buf_len,
     inout TypeRdBuf       rd_buf,
@@ -873,6 +874,15 @@ module gig_eth_pcs_pma (
    
     
     IOBUF U10 (.I(eth_mdio_o), .O(eth_mdio_i), .T(eth_mdio_t), .IO(eth_mdio));
+    
+    
+    always @(posedge clock)
+    if (reset)
+    begin
+        eth_reset_n <= 0;
+    end else begin
+		eth_reset_n <= 1;
+    end
     
     gig_ethernet_pcs_pma_0_example_design U3 (
       .independent_clock(clock),                        // input wire independent_clock_bufg
