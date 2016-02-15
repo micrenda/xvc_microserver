@@ -449,7 +449,19 @@ module driver_operation(
     output reg[16:0] return_port,
     input [7:0] operation,
     input TypePacketAddr address,
-    input TypeByte value);
+    input TypeByte value,
+    
+    output  sgmii_tx_p,
+    output  sgmii_tx_n,
+    input   sgmii_rx_p,
+    input   sgmii_rx_n,
+    input   sgmii_clk_p,
+    input   sgmii_clk_n,
+    
+    inout   eth_mdio,
+    output  eth_mdc,
+    output reg eth_reset_n
+    );
 
 
     
@@ -659,8 +671,20 @@ module driver_operation(
     gig_eth_pcs_pma U0
     (
         .clock(clock), 
-        .reset(reset)/*,
+        .reset(reset),
+            
+		.sgmii_tx_p(sgmii_tx_p),
+		.sgmii_tx_n(sgmii_tx_n),
+		.sgmii_rx_p(sgmii_rx_p),
+		.sgmii_rx_n(sgmii_rx_n),
+		.sgmii_clk_p(sgmii_clk_p),
+		.sgmii_clk_n(sgmii_clk_n),
+		
+		.eth_mdio(eth_mdio),
+		.eth_mdc(eth_mdc),
+		.eth_reset_n(eth_reset_n)
         
+        /*
         .rd_buf_len(rd_buf_len),
         .rd_buf(rd_buf),
         

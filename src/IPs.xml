@@ -230,34 +230,6 @@
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
           
-          <port_o id="sgmii_tx_p" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="sgmii_tx_n" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="sgmii_rx_p" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="sgmii_rx_n" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="sgmii_clk_p" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="sgmii_clk_n" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          
-          <port_o id="eth_mdio" dir="IO" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="eth_mdc" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="eth_reset_n" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
@@ -305,6 +277,36 @@
             <structural_type_descriptor type="UINT" size="8"/>
             <connected_objects/>
           </port_o>
+          
+          <port_o id="sgmii_tx_p" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_tx_n" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_rx_p" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_rx_n" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_clk_p" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="sgmii_clk_n" dir="IN" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          
+          <port_o id="eth_mdio" dir="IO" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="eth_mdc" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="eth_reset_n" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
