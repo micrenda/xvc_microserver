@@ -211,7 +211,7 @@
         </component_o>
       </circuit>
     </cell>-->
-    
+    <!--
     <cell>
       <name>gig_eth_pcs_pma</name>
       <operation operation_name="gig_eth_pcs_pma" bounded="1" cycles="1" />
@@ -233,7 +233,7 @@
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
-    </cell>
+    </cell>-->
     
     
     <cell>
@@ -277,7 +277,7 @@
             <structural_type_descriptor type="UINT" size="8"/>
             <connected_objects/>
           </port_o>
-          
+          <!--
           <port_o id="sgmii_tx_p" dir="OUT" is_global="1" is_extern="1">
             <structural_type_descriptor type="BOOL" size="1"/>
           </port_o>
@@ -305,7 +305,7 @@
           </port_o>
           <port_o id="eth_reset_n" dir="OUT" is_global="1" is_extern="1">
             <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
+          </port_o>-->
           
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
