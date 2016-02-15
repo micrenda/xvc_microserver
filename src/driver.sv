@@ -679,9 +679,9 @@ endmodule
 module handle_tx(
     input clock,
     input reset,
-    output reg TypeByte tx_data, 
-    output reg tx_en, 
-    output reg tx_er/*,
+    output var TypeByte tx_data, 
+    output var tx_en, 
+    output var tx_er/*,
     
     input TypeWrBufLen   wr_buf_len,
     input TypeWrBuf      wr_buf,
@@ -691,9 +691,9 @@ module handle_tx(
     var TypeBufferWrAddr o_buf_last_sent;
     assign buf_last_sent = o_buf_last_sent;
     */
-    reg [3:0]   state_tx;
-    reg [31:0]  crc32_tx;
-    reg [3:0]   tx_intergap;
+    var [3:0]   state_tx;
+    var [31:0]  crc32_tx;
+    var [3:0]   tx_intergap;
     
     var TypeBufferWrAddr  buf_current;
     var TypePacketAddr    pkg_current;
