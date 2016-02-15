@@ -22,6 +22,8 @@
 #define OP_WRITE_LEN   4 
 #define OP_WRITE_NEXT  5 
 
+extern void gig_eth_pcs_pma();
+
 extern uint16_t driver_operation(uint8_t operation, uint16_t address, uint8_t value);
 
 /*
