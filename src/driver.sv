@@ -110,6 +110,109 @@ endfunction
 
 
 
+//----------------------------------------------------------------------
+
+function TypePacketAddr fun_rd_buf_len(input logic op, input TypeBufferRdAddr packet, input TypePacketAddr value = 0);
+	static var TypeRdBufLen rd_buf_len;
+	
+	if (op == `VAR_WRITE)
+	begin
+		rd_buf_len[packet] = value;
+		return value;
+	end
+	else
+		return rd_buf_len[packet];
+endfunction
+
+function TypeByte fun_rd_buf(input logic op, input TypeBufferRdAddr packet, input TypePacketAddr address, input logic[7:0] value = 0);
+	static var TypeRdBuf    rd_buf;
+	
+	if (op == `VAR_WRITE)
+	begin
+		rd_buf[packet][address] = value;
+		return value;
+	end
+	else
+		return rd_buf[packet][address];
+endfunction
+
+function TypePacketAddr fun_wr_buf_len(input logic op, input TypeBufferWrAddr packet, input logic[7:0] value = 0);
+	static var TypeWrBufLen wr_buf_len;
+	
+	if (op == `VAR_WRITE)
+	begin
+		wr_buf_len[packet] = value;
+		return value;
+	end
+	else
+		return wr_buf_len[packet];
+endfunction
+
+function TypeByte fun_wr_buf(input logic op, input TypeBufferWrAddr packet, input TypePacketAddr address, logic[7:0] value = 0);
+	static var TypeWrBuf    wr_buf;
+	
+	if (op == `VAR_WRITE)
+	begin
+		wr_buf[packet][address] = value;
+		return value;
+	end
+	else
+		return wr_buf[packet][address];
+endfunction
+
+//----------------------------------------------------------------------
+
+function TypeBufferWrAddr fun_buf_last_sent(input logic op = `VAR_READ, input TypeBufferWrAddr value = 0);
+	static var TypeBufferWrAddr buf_last_sent;
+	
+	if (op == `VAR_WRITE)
+	begin
+		buf_last_sent = value;
+		return value;
+	end
+	else
+		return buf_last_sent;
+endfunction
+
+function TypeBufferWrAddr fun_buf_last_wrote(input logic op = `VAR_READ, input TypeBufferWrAddr value = 0);
+	static var TypeBufferWrAddr buf_last_wrote;
+	
+	if (op == `VAR_WRITE)
+	begin
+		buf_last_wrote = value;
+		return value;
+	end
+	else
+		return buf_last_wrote;
+endfunction
+
+function TypeBufferRdAddr fun_buf_last_recv(input logic op = `VAR_READ, input TypeBufferRdAddr value = 0);
+	static var TypeBufferRdAddr buf_last_recv;
+	
+	if (op == `VAR_WRITE)
+	begin
+		buf_last_recv = value;
+		return value;
+	end
+	else
+		return buf_last_recv;
+endfunction
+
+function TypeBufferRdAddr fun_buf_last_read(input logic op = `VAR_READ, input TypeBufferRdAddr value = 0);
+	static var TypeBufferRdAddr buf_last_read;
+	
+	if (op == `VAR_WRITE)
+	begin
+		buf_last_read = value;
+		return value;
+	end
+	else
+		return buf_last_read;
+endfunction
+
+//----------------------------------------------------------------------
+
+
 
 
 
@@ -202,7 +305,7 @@ module write_buffer_next (
     always @(posedge clock)
     if (reset)
     begin
-        o_buf_last_wrote <= 0;
+        fun_buf_last_wrote(`VAR_WRITE, 0);
     end else begin
     
         if (start_port) begin
@@ -249,8 +352,8 @@ module read_buffer (
             /*if (address < rd_buf_len[buf_last_read]) begin
                 return_port <= rd_buf[buf_last_read][address];
             end*/
-            if (address < fun_rd_buf_len(`VAR_READ, buf_last_read)) begin
-                return_port <= fun_rd_buf(`VAR_READ, buf_last_read, address);
+            if (address < fun_rd_buf_len(`VAR_READ, fun_buf_last_read())) begin
+                return_port <= fun_rd_buf(`VAR_READ, fun_buf_last_read(), address);
             end
             done_port <= 1;
         end
@@ -275,7 +378,7 @@ module read_buffer_len (
         if (start_port)
         begin
             /*return_port <= rd_buf_len[buf_last_read];*/
-            return_port <= fun_rd_buf_len(`VAR_READ, buf_last_read);
+            return_port <= fun_rd_buf_len(`VAR_READ, fun_buf_last_read());
             
             done_port <= 1;
         end
@@ -298,11 +401,11 @@ module read_buffer_next (
     always @(posedge clock)
     if (reset)
     begin
-        o_buf_last_read <= 0;
+        fun_buf_last_read(`VAR_WRITE, 0);
     end else begin
         if (start_port)
         begin
-            if (buf_last_read != buf_last_recv) begin
+            if (fun_buf_last_read() != fun_buf_last_recv()) begin
                 /*o_buf_last_read <= (buf_last_read + 1) % `BUFFER_SIZE_RD;*/
                 fun_buf_last_read(`VAR_WRITE, (fun_buf_last_read() + 1) % `BUFFER_SIZE_RD);
                 
@@ -553,10 +656,10 @@ module driver_operation(
     gig_eth_pcs_pma U0
     (
         .clock(clock), 
-        .reset(reset),
+        .reset(reset)/*,
         
         .rd_buf_len(rd_buf_len),
-        .rd_buf(rd_buf)/*,
+        .rd_buf(rd_buf),
         
         .wr_buf_len(wr_buf_len),
         .wr_buf(wr_buf),
@@ -605,7 +708,9 @@ module handle_tx(
         
         case (state_tx)
             `STATUS_READY:
-                if (buf_last_sent != fun_buf_last_wrote())
+
+                if (fun_buf_last_sent() != fun_buf_last_wrote())
+                if (fun_buf_last_sent() != fun_buf_last_wrote())
                 begin
                     pkg_current     <= 0;
                     buf_current     <= /*buf_last_sent*/ fun_buf_last_sent() + 1;
@@ -647,7 +752,7 @@ module handle_tx(
                 end
                 
             `STATUS_DATA:
-                if (pkg_current < wr_buf_len[buf_current])
+                if (pkg_current < fun_wr_buf_len(`VAR_READ, buf_current))
                 begin
                     /*tx_data       <= wr_buf[buf_current][pkg_current];*/
                     tx_data       <= fun_wr_buf(`VAR_READ, buf_current, pkg_current);
@@ -684,7 +789,7 @@ module handle_tx(
                 
             `STATUS_DONE:
                 begin
-                    o_buf_last_sent <= buf_current;
+                    fun_buf_last_sent(`VAR_WRITE, buf_current);
                     state_tx <= `STATUS_INTERGAP;
                 end
                 
@@ -968,104 +1073,3 @@ module gig_eth_pcs_pma (
     
 endmodule
 
-//----------------------------------------------------------------------
-
-function TypePacketAddr fun_rd_buf_len(input logic op, input TypeBufferRdAddr packet, input TypePacketAddr value = 0);
-	static var TypeRdBufLen rd_buf_len;
-	
-	if (op == `VAR_WRITE)
-	begin
-		rd_buf_len[packet] = value;
-		return value;
-	end
-	else
-		return rd_buf_len[packet];
-endfunction
-
-function TypeByte fun_rd_buf(input logic op, input TypeBufferRdAddr packet, input TypePacketAddr address, input logic[7:0] value = 0);
-	static var TypeRdBuf    rd_buf;
-	
-	if (op == `VAR_WRITE)
-	begin
-		rd_buf[packet][address] = value;
-		return value;
-	end
-	else
-		return rd_buf[packet][address];
-endfunction
-
-function TypePacketAddr fun_wr_buf_len(input logic op, input TypeBufferWrAddr packet, input logic[7:0] value = 0);
-	static var TypeWrBufLen wr_buf_len;
-	
-	if (op == `VAR_WRITE)
-	begin
-		wr_buf_len[packet] = value;
-		return value;
-	end
-	else
-		return wr_buf_len[packet];
-endfunction
-
-function TypeByte fun_wr_buf(input logic op, input TypeBufferWrAddr packet, input TypePacketAddr address, logic[7:0] value = 0);
-	static var TypeWrBuf    wr_buf;
-	
-	if (op == `VAR_WRITE)
-	begin
-		wr_buf[packet][address] = value;
-		return value;
-	end
-	else
-		return wr_buf[packet][address];
-endfunction
-
-//----------------------------------------------------------------------
-
-function TypeBufferWrAddr fun_buf_last_sent(input logic op = `VAR_READ, input TypeBufferWrAddr value = 0);
-	static var TypeBufferWrAddr buf_last_sent;
-	
-	if (op == `VAR_WRITE)
-	begin
-		buf_last_sent = value;
-		return value;
-	end
-	else
-		return buf_last_sent;
-endfunction
-
-function TypeBufferWrAddr fun_buf_last_wrote(input logic op = `VAR_READ, input TypeBufferWrAddr value = 0);
-	static var TypeBufferWrAddr buf_last_wrote;
-	
-	if (op == `VAR_WRITE)
-	begin
-		buf_last_wrote = value;
-		return value;
-	end
-	else
-		return buf_last_wrote;
-endfunction
-
-function TypeBufferRdAddr fun_buf_last_recv(input logic op = `VAR_READ, input TypeBufferRdAddr value = 0);
-	static var TypeBufferRdAddr buf_last_recv;
-	
-	if (op == `VAR_WRITE)
-	begin
-		buf_last_recv = value;
-		return value;
-	end
-	else
-		return buf_last_recv;
-endfunction
-
-function TypeBufferRdAddr fun_buf_last_read(input logic op = `VAR_READ, input TypeBufferRdAddr value = 0);
-	static var TypeBufferRdAddr buf_last_read;
-	
-	if (op == `VAR_WRITE)
-	begin
-		buf_last_read = value;
-		return value;
-	end
-	else
-		return buf_last_read;
-endfunction
-
-//----------------------------------------------------------------------
