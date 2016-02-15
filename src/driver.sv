@@ -621,7 +621,8 @@ module driver_operation(
         .done_port   (d4_done_port),
         .return_port (d4_return_port),
         
-        .address(address)/*,
+        .address(address),
+        .value(value)/*,
         
         .buf_last_wrote(buf_last_wrote),
         .wr_buf_len(wr_buf_len),
