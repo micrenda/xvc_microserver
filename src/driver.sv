@@ -352,9 +352,11 @@ module read_buffer (
             /*if (address < rd_buf_len[buf_last_read]) begin
                 return_port <= rd_buf[buf_last_read][address];
             end*/
-            if (address < fun_rd_buf_len(`VAR_READ, fun_buf_last_read())) begin
+            if (address < fun_rd_buf_len(`VAR_READ, fun_buf_last_read()))
                 return_port <= fun_rd_buf(`VAR_READ, fun_buf_last_read(), address);
-            end
+			else
+				return_port <= 0;
+				
             done_port <= 1;
         end
     end
