@@ -708,8 +708,6 @@ module handle_tx(
         
         case (state_tx)
             `STATUS_READY:
-
-                if (fun_buf_last_sent() != fun_buf_last_wrote())
                 if (fun_buf_last_sent() != fun_buf_last_wrote())
                 begin
                     pkg_current     <= 0;
