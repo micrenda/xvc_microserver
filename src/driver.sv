@@ -139,12 +139,12 @@ module write_buffer (
                 if (address > wr_buf_len[buf_last_wrote])
                     wr_buf_len[buf_last_wrote] <= address;*/
                     
-                fun_wr_buf(`VAR_WRITE, buf_last_wrote, address, value);
+                fun_wr_buf(`VAR_WRITE, fun_buf_last_wrote(), address, value);
                 
                 /*if (address > wr_buf_len[buf_last_wrote])
                     wr_buf_len[buf_last_wrote] <= address;*/
-                if (address > fun_wr_buf_len(`VAR_READ, buf_last_wrote))
-                    fun_wr_buf_len(`VAR_WRITE, buf_last_wrote, address);
+                if (address > fun_wr_buf_len(`VAR_READ, fun_buf_last_wrote()))
+                    fun_wr_buf_len(`VAR_WRITE, fun_buf_last_wrote(), address);
                     
                 return_port <= 0;
             end else begin
@@ -174,7 +174,7 @@ module write_buffer_len (
         if (start_port)
         begin
             /*return_port <= wr_buf_len[buf_last_wrote];*/
-            return_port <= fun_wr_buf_len(`VAR_READ, buf_last_wrote);
+            return_port <= fun_wr_buf_len(`VAR_READ, fun_buf_last_wrote());
             done_port <= 1;
         end
     end
@@ -216,7 +216,7 @@ module write_buffer_next (
             end*/
             if (fun_buf_last_wrote() != fun_buf_last_sent() - 1) begin
                 fun_buf_last_wrote(`VAR_WRITE, (fun_buf_last_wrote() + 1) % `BUFFER_SIZE_WR);  
-                fun_wr_buf_len(`VAR_WRITE, wr_buf_len, buf_last_wrote, 0);
+                fun_wr_buf_len(`VAR_WRITE, fun_buf_last_wrote(), 0);
                 return_port <= 0; 
             end else begin
                 return_port <= 1; // The buffer overflowed 
@@ -605,7 +605,7 @@ module handle_tx(
         
         case (state_tx)
             `STATUS_READY:
-                if (buf_last_sent != buf_last_wrote)
+                if (buf_last_sent != fun_buf_last_wrote())
                 begin
                     pkg_current     <= 0;
                     buf_current     <= /*buf_last_sent*/ fun_buf_last_sent() + 1;
