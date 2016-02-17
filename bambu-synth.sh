@@ -34,7 +34,7 @@ bambu -O3 -v5 --std=c11                                                 \
     --clock-period=${CLK_PERIOD}  										\
     --reset-level=high													\
     --backend-script-extensions=${BASE}/vivado_custom.tcl 				\
-    --file-input-data=${BASE}/src/microserver.sv,${BASE}/src/driver.sv,${BASE}/src/clock-arch.sv,${BASE}/vivado_custom.tcl,${BASE}/cores/import_cores.tcl \
+    --file-input-data=${BASE}/src/microserver.sv,${BASE}/src/driver.sv,${BASE}/src/clock-arch.sv,${BASE}/vivado_custom.tcl,${BASE}/cores/import_cores.tcl,${BASE}/test/testbench.sv,${BASE}/test/test_arp_1.hex \
     --evaluation                                                        \
     --objective=PERIOD,AREA,FREQUENCY,CLOCK_SLACK,REGISTERS,DSPS,BRAMS  \
     -I${BASE}/src/                                                      \
