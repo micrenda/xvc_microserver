@@ -46,7 +46,7 @@ module testbench();
             
         reset = 1;  
           
-        $readmemh("/home/mrenda/xvc_microserver/test/arp_text.txt", ram);
+        $readmemh("test_arp_1.hex", ram);
         
         #20 reset = 0;  
             
