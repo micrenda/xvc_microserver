@@ -24,28 +24,85 @@ typedef TypePacketAddr   TypeWrBufLen [0:`BUFFER_SIZE_WR-1];
 typedef TypeByte         TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
 
 
-`define STATUS_READY      0
-`define STATUS_PREAMBLE_0 1
-`define STATUS_PREAMBLE_1 2
-`define STATUS_PREAMBLE_2 3
-`define STATUS_PREAMBLE_3 4
-`define STATUS_PREAMBLE_4 5
-`define STATUS_PREAMBLE_5 6
-`define STATUS_PREAMBLE_6 7
-`define STATUS_SDF        8
-`define STATUS_DATA       9
-`define STATUS_SEND_CRC_3 10
-`define STATUS_SEND_CRC_2 11
-`define STATUS_SEND_CRC_1 12
-`define STATUS_SEND_CRC_0 13
-`define STATUS_DONE       14
-`define STATUS_INTERGAP   15
+typedef enum {
+	STATUS_READY,
+	STATUS_PREAMBLE_0,
+	STATUS_PREAMBLE_1,
+	STATUS_PREAMBLE_2,
+	STATUS_PREAMBLE_3,
+	STATUS_PREAMBLE_4,
+	STATUS_PREAMBLE_5,
+	STATUS_PREAMBLE_6,
+	STATUS_SDF,
+	STATUS_DATA,
+	STATUS_SEND_CRC_3,
+	STATUS_SEND_CRC_2,
+	STATUS_SEND_CRC_1,
+	STATUS_SEND_CRC_0,
+	STATUS_DONE,
+	STATUS_INTERGAP
+} TypeStatus;
 
-`define VAR_READ   0
-`define VAR_WRITE  1
+typedef enum {
+	OP_READ        = 0,
+	OP_READ_LEN    = 1,
+	OP_READ_NEXT   = 2,
+	OP_WRITE       = 3,
+	OP_WRITE_LEN   = 4, 
+	OP_WRITE_NEXT  = 5 
+} TypeOp;
 
-    
-    
+typedef enum {
+	READ,
+	WRITE,
+} TypeAction;
+
+typedef enum {
+	RD_BUF_LEN,
+	RD_BUF,
+	WR_BUF_LEN,
+	WR_BUF,
+	LAST_SENT,
+	LAST_WROTE,
+	LAST_RECV,
+	LAST_READ
+} TypeArea;
+
+
+interface buffer_bus();
+	TypeArea		 area;
+	TypeAction	     action;
+	TypeBufferWrAddr packet_wr;
+	TypeBufferRdAddr packet_rd;
+	TypePacketAddr   address;
+	TypeByte         value_wr;
+	TypeByte         value_rd;
+	logic			 start_port;
+	logic			 done_port;
+	
+	modport slave (
+	input  	   area,
+    input  	   action,
+    input 	   packet_wr,
+    input 	   packet_rd,
+    input      address,
+    input      value_wr,
+    output var value_rd,
+    input      start_port,
+    output var done_port);
+	
+	modport master (
+	output var   area,
+    output var   action,
+    output var 	 packet_wr,
+    output var 	 packet_rd,
+    output var   address,
+    output var   value_wr,
+    input        value_rd,
+    output var   start_port,
+    input        done_port);
+endinterface
+
     
 // polynomial: (0 1 2 4 5 7 8 10 11 12 16 22 23 26 32)
 // data width: 8
@@ -112,102 +169,175 @@ endfunction
 
 //----------------------------------------------------------------------
 
-function TypePacketAddr fun_rd_buf_len(input logic op, input TypeBufferRdAddr packet, input TypePacketAddr value = 0);
-	static var TypeRdBufLen rd_buf_len;
+module buffer_cntr(
+	input clock, 
+    input reset,
+    buffer_bus.slave bus);
+    
+	var TypeRdBufLen rd_buf_len;
+	var TypeRdBuf    rd_buf;
+	var TypeWrBufLen wr_buf_len;
+	var TypeWrBuf    wr_buf;
 	
-	if (op == `VAR_WRITE)
-	begin
-		rd_buf_len[packet] = value;
-		return value;
-	end
-	else
-		return rd_buf_len[packet];
+	var TypeBufferWrAddr buf_last_sent;
+	var TypeBufferWrAddr buf_last_wrote;
+	var TypeBufferRdAddr buf_last_recv;
+	var TypeBufferRdAddr buf_last_read;
+	
+	
+	always @(posedge clock)
+    if (reset)
+    begin
+    
+        rd_buf_len <= 0;
+        rd_buf     <= 0;
+        wr_buf_len <= 0;
+        wr_buf	   <= 0;
+        
+        buf_last_sent  <= 0;
+        buf_last_wrote <= 0;
+        buf_last_recv  <= 0;
+        buf_last_read  <= 0;
+        
+    end else begin
+    
+		if (bus.start_port)
+        begin
+            case (bus.area)
+            
+				RD_BUF_LEN:
+				if (bus.action == WRITE)
+					rd_buf_len[bus.packet_wr] <= bus.value_wr;
+				else
+					bus.value_rd <= rd_buf_len[bus.packet_rd];
+					
+				RD_BUF:
+				if (bus.action == WRITE)
+					rd_buf[bus.packet_wr][bus.address] <= bus.value_wr;
+				else
+					bus.value_rd <= rd_buf_len[bus.packet_rd][bus.address];
+					
+				WR_BUF_LEN:
+				if (bus.action == WRITE)
+					wr_buf_len[bus.packet_wr] <= bus.value_wr;
+				else
+					bus.value_rd <= wr_buf_len[bus.packet_rd];
+					
+				WR_BUF:
+				if (bus.action == WRITE)
+					wr_buf[bus.packet_wr][bus.address] <= bus.value_wr;
+				else
+					bus.value_rd <= wr_buf_len[bus.packet_rd][bus.address];
+					
+				LAST_SENT:
+				if (bus.action == WRITE)
+					buf_last_sent <= bus.value_wr;
+				else
+					bus.value_rd <= buf_last_sent;
+					
+				LAST_WROTE:
+				if (bus.action == WRITE)
+					buf_last_wrote <= bus.value_wr;
+				else
+					bus.value_rd <= buf_last_wrote;
+				
+				LAST_RECV:
+				if (bus.action == WRITE)
+					buf_last_recv <= bus.value_wr;
+				else
+					bus.value_rd <= buf_last_recv;
+				
+				LAST_READ:
+				if (bus.action == WRITE)
+					buf_last_read <= bus.value_wr;
+				else
+					bus.value_rd <= buf_last_read;
+					
+            endcase
+            
+            bus.done_port <= 1;
+        else
+			bus.done_port <= 0;
+        end
+            
+    end
+endmodule
+
+//----------------------------------------------------------------------
+
+// RdBufLen
+function TypePacketAddr	get_rd_buf_len(buffer_bus.master bus, input TypeBufferRdAddr packet);
+	bus.area 		= RD_BUF_LEN;
+    bus.action		= READ;
+    bus.packet_rd	= packet;
+    bus.start_port	= 1;
+    
+    return bus.value_rd;
 endfunction
 
-function TypeByte fun_rd_buf(input logic op, input TypeBufferRdAddr packet, input TypePacketAddr address, input logic[7:0] value = 0);
-	static var TypeRdBuf    rd_buf;
-	
-	if (op == `VAR_WRITE)
-	begin
-		rd_buf[packet][address] = value;
-		return value;
-	end
-	else
-		return rd_buf[packet][address];
+function void 			set_rd_buf_len(buffer_bus.master bus, input TypeBufferRdAddr packet, input TypePacketAddr value);
+	area,
+    action,
+    packet_wr,
+    packet_rd,
+	value_wr		= value;
+    start_port		= 1;
 endfunction
 
-function TypePacketAddr fun_wr_buf_len(input logic op, input TypeBufferWrAddr packet, input logic[7:0] value = 0);
-	static var TypeWrBufLen wr_buf_len;
-	
-	if (op == `VAR_WRITE)
-	begin
-		wr_buf_len[packet] = value;
-		return value;
-	end
-	else
-		return wr_buf_len[packet];
+// RdBuf
+function TypeByte 		get_rd_buf(buffer_bus.master bus, input TypeBufferRdAddr packet, input TypePacketAddr address);
+
 endfunction
 
-function TypeByte fun_wr_buf(input logic op, input TypeBufferWrAddr packet, input TypePacketAddr address, logic[7:0] value = 0);
-	static var TypeWrBuf    wr_buf;
-	
-	if (op == `VAR_WRITE)
-	begin
-		wr_buf[packet][address] = value;
-		return value;
-	end
-	else
-		return wr_buf[packet][address];
+function void 			set_rd_buf(buffer_bus.master bus, input TypeBufferRdAddr packet, input TypePacketAddr address, input TypeByte value);
+
+endfunction
+
+// WrBufLen
+function TypePacketAddr	get_wr_buf_len(buffer_bus.master bus, input TypeBufferWrAddr packet);
+
+endfunction
+
+function void 			set_wr_buf(buffer_bus.master bus, input TypeBufferWrAddr packet, input TypePacketAddr address, logic[7:0] value);
+
 endfunction
 
 //----------------------------------------------------------------------
 
-function TypeBufferWrAddr fun_buf_last_sent(input logic op = `VAR_READ, input TypeBufferWrAddr value = 0);
-	static var TypeBufferWrAddr buf_last_sent;
-	
-	if (op == `VAR_WRITE)
-	begin
-		buf_last_sent = value;
-		return value;
-	end
-	else
-		return buf_last_sent;
+// Sent
+function TypeBufferWrAddr get_buf_last_sent(buffer_bus.master bus);
+
 endfunction
 
-function TypeBufferWrAddr fun_buf_last_wrote(input logic op = `VAR_READ, input TypeBufferWrAddr value = 0);
-	static var TypeBufferWrAddr buf_last_wrote;
-	
-	if (op == `VAR_WRITE)
-	begin
-		buf_last_wrote = value;
-		return value;
-	end
-	else
-		return buf_last_wrote;
+function TypeBufferWrAddr set_buf_last_sent(buffer_bus.master bus, input TypeBufferWrAddr value);
+
 endfunction
 
-function TypeBufferRdAddr fun_buf_last_recv(input logic op = `VAR_READ, input TypeBufferRdAddr value = 0);
-	static var TypeBufferRdAddr buf_last_recv;
-	
-	if (op == `VAR_WRITE)
-	begin
-		buf_last_recv = value;
-		return value;
-	end
-	else
-		return buf_last_recv;
+// Wrote
+function TypeBufferWrAddr get_buf_last_wrote(buffer_bus.master bus);
+
 endfunction
 
-function TypeBufferRdAddr fun_buf_last_read(input logic op = `VAR_READ, input TypeBufferRdAddr value = 0);
-	static var TypeBufferRdAddr buf_last_read;
-	
-	if (op == `VAR_WRITE)
-	begin
-		buf_last_read = value;
-		return value;
-	end
-	else
-		return buf_last_read;
+function TypeBufferWrAddr set_buf_last_wrote(buffer_bus.master bus, input TypeBufferWrAddr value);
+
+endfunction
+
+// Recv
+function TypeBufferRdAddr get_buf_last_recv(buffer_bus.master bus);
+
+endfunction
+
+function TypeBufferRdAddr set_buf_last_recv(buffer_bus.master bus, input TypeBufferRdAddr value);
+
+endfunction
+
+// Read
+function TypeBufferRdAddr get_buf_last_read(buffer_bus.master bus);
+
+endfunction
+
+function TypeBufferRdAddr set_buf_last_read(buffer_bus.master bus, input TypeBufferRdAddr value = 0);
+
 endfunction
 
 //----------------------------------------------------------------------
@@ -224,10 +354,8 @@ module write_buffer (
     output reg done_port,
     input TypePacketAddr address,
     input TypeByte       value,
-    output reg return_port/*,
-    input TypeBufferWrAddr buf_last_wrote,
-    output TypeWrBufLen     wr_buf_len,
-    output TypeWrBuf        wr_buf*/);
+    output reg return_port,
+    buffer_bus.master bus);
 
     always @(posedge clock)
     if (reset)
@@ -264,10 +392,8 @@ module write_buffer_len (
     input reset,
     input start_port,
     output reg done_port,
-    output TypePacketAddr return_port/*,
-    
-    input TypeWrBufLen wr_buf_len,
-    input TypeBufferWrAddr buf_last_wrote*/);
+    output TypePacketAddr return_port,
+    buffer_bus.master bus);
 
     always @(posedge clock)
     if (reset)
@@ -289,18 +415,10 @@ module write_buffer_next (
     input reset,
     input start_port,
     output reg done_port,
-    output reg return_port/*,
-    
-    inout TypeBufferWrAddr buf_last_wrote,
-    input TypeBufferWrAddr buf_last_sent,
-    inout TypeWrBufLen     wr_buf_len*/);
+    output reg return_port,
+    buffer_bus.master bus);
 
-	/*
-    var TypeBufferWrAddr o_buf_last_wrote;
-    var TypeWrBufLen     o_wr_buf_len;
-    
-    assign buf_last_wrote = o_buf_last_wrote;
-    assign wr_buf_len     = o_wr_buf_len;*/
+
     
     always @(posedge clock)
     if (reset)
@@ -336,11 +454,8 @@ module read_buffer (
     input start_port,
     input TypePacketAddr address,
     output reg done_port,
-    output TypeByte return_port/*,
-    
-    input TypeBufferRdAddr buf_last_read,
-    input TypeRdBufLen     rd_buf_len,
-    input TypeRdBuf        rd_buf*/);
+    output TypeByte return_port,
+    buffer_bus.master bus);
 
     always @(posedge clock)
     if (reset)
@@ -367,10 +482,8 @@ module read_buffer_len (
     input reset,
     input start_port,
     output reg done_port,
-    output TypePacketAddr return_port/*,
-    
-    input TypeRdBufLen     rd_buf_len,
-    input TypeBufferRdAddr buf_last_read*/);
+    output TypePacketAddr return_port,
+    buffer_bus.master bus);
 
     always @(posedge clock)
     if (reset)
@@ -392,13 +505,9 @@ module read_buffer_next (
     input reset,
     input start_port,
     output reg done_port,
-    output reg return_port/*,
-    
-    inout TypeBufferRdAddr buf_last_read,
-    input TypeBufferRdAddr buf_last_recv*/);
+    output reg return_port,
+    buffer_bus.master bus);
 
-    /*var TypeBufferRdAddr o_buf_last_read;
-    assign buf_last_read = o_buf_last_read;*/
     
     always @(posedge clock)
     if (reset)
@@ -421,12 +530,7 @@ module read_buffer_next (
 endmodule
 
 
-`define OP_READ        0
-`define OP_READ_LEN    1
-`define OP_READ_NEXT   2
-`define OP_WRITE       3
-`define OP_WRITE_LEN   4 
-`define OP_WRITE_NEXT  5 
+
 
 /*
  * The operation parameter says which operation must be performed
@@ -449,19 +553,17 @@ module driver_operation(
     output reg[16:0] return_port,
     input [7:0] operation,
     input TypePacketAddr address,
-    input TypeByte value/*,
+    input TypeByte value,
     
-    output  sgmii_tx_p,
-    output  sgmii_tx_n,
-    input   sgmii_rx_p,
-    input   sgmii_rx_n,
-    input   sgmii_clk_p,
-    input   sgmii_clk_n,
-    
-    inout   eth_mdio,
-    output  eth_mdc,
-    output reg eth_reset_n*/
-    );
+    output  	sgmii_tx_p,
+    output  	sgmii_tx_n,
+    input   	sgmii_rx_p,
+    input   	sgmii_rx_n,
+    input   	sgmii_clk_p,
+    input   	sgmii_clk_n,
+    inout      	eth_mdio,
+    output     	eth_mdc,
+    output reg 	eth_reset_n);
 
 
     
@@ -586,46 +688,64 @@ module driver_operation(
     end
     
     
+    buffer_cntr 		buffer_cntr_inst (
+		.clock, 
+		.reset,
+		.bus(???));
+		
+		
+	gig_eth_pcs_pma		gig_eth_pcs_pma_inst (
+        .clock(clock), 
+        .reset(reset),
+            
+		.sgmii_tx_p(sgmii_tx_p),
+		.sgmii_tx_n(sgmii_tx_n),
+		.sgmii_rx_p(sgmii_rx_p),
+		.sgmii_rx_n(sgmii_rx_n),
+		.sgmii_clk_p(sgmii_clk_p),
+		.sgmii_clk_n(sgmii_clk_n),
+		
+		.eth_mdio(eth_mdio),
+		.eth_mdc(eth_mdc),
+		.eth_reset_n(eth_reset_n),
+		
+		.bus(bus));
     
 
-    read_buffer         D1 (
+    read_buffer         read_buffer_inst (
         .clock(clock),
         .reset(reset), 
         
         .start_port  (d1_start_port), 
         .done_port   (d1_done_port), 
         .return_port (d1_return_port),
-        .address(address)/*,
-        
-        .buf_last_read(buf_last_read),
-        .rd_buf_len(rd_buf_len),
-        .rd_buf(rd_buf)*/);
+        .address(address),
+		
+		.bus(bus));
 
 
-    read_buffer_len     D2  (
+    read_buffer_len		read_buffer_len_inst (
         .clock(clock), 
         .reset(reset), 
         
         .start_port  (d2_start_port),
         .done_port   (d2_done_port),
-        .return_port (d2_return_port)/*,
-        
-        .rd_buf_len(rd_buf_len),
-        .buf_last_read(buf_last_read)*/);
+        .return_port (d2_return_port),
+		
+		.bus(bus));
 
 
-    read_buffer_next    D3  (
+    read_buffer_next    read_buffer_next_inst  (
         .clock(clock),
         .reset(reset),
         .start_port  (d3_start_port),
         .done_port   (d3_done_port),
-        .return_port (d3_return_port)/*,
-        
-        .buf_last_read(buf_last_read),
-        .buf_last_recv(buf_last_recv)*/);
+        .return_port (d3_return_port),
+		
+		.bus(bus));
     
 
-    write_buffer        D4  (
+    write_buffer        write_buffer_inst  (
         .clock(clock),
         .reset(reset),
         
@@ -634,42 +754,32 @@ module driver_operation(
         .return_port (d4_return_port),
         
         .address(address),
-        .value(value)/*,
-        
-        .buf_last_wrote(buf_last_wrote),
-        .wr_buf_len(wr_buf_len),
-        .wr_buf(wr_buf)*/);
+        .value(value),
+		
+		.bus(bus));
     
 
-    write_buffer_len    D5  (
+    write_buffer_len	write_buffer_len_inst (
         .clock(clock), 
         .reset(reset),
          
         .start_port  (d5_start_port),
         .done_port   (d5_done_port),
-        .return_port (d5_return_port)/*,
-        
-        .wr_buf_len(wr_buf_len),
-        .buf_last_wrote(buf_last_wrote)*/);
+        .return_port (d5_return_port),
+		
+		.bus(bus));
 
 
-    write_buffer_next   D6  (
+    write_buffer_next	write_buffer_next_inst  (
         .clock(clock),
         .reset(reset),
         
         .start_port  (d6_start_port),
         .done_port   (d6_done_port),
-        .return_port (d6_return_port)/*,
-        
-        .buf_last_wrote(buf_last_wrote),
-        .buf_last_sent(buf_last_sent),
-        .wr_buf_len(wr_buf_len)*/);
+        .return_port (d6_return_port),
+		
+		.bus(bus));
 
-    
-    
-    
-
-    
     
 
 endmodule
@@ -681,16 +791,9 @@ module handle_tx(
     input reset,
     output var TypeByte tx_data, 
     output var tx_en, 
-    output var tx_er/*,
-    
-    input TypeWrBufLen   wr_buf_len,
-    input TypeWrBuf      wr_buf,
-    inout TypeBufferWrAddr buf_last_sent,
-    input TypeBufferWrAddr buf_last_wrote*/);
-    /*
-    var TypeBufferWrAddr o_buf_last_sent;
-    assign buf_last_sent = o_buf_last_sent;
-    */
+    output var tx_er,
+    buffer_bus.master bus);
+
     var [3:0]   state_tx;
     var [31:0]  crc32_tx;
     var [3:0]   tx_intergap;
@@ -813,22 +916,9 @@ module handle_rx(
     input reset,
     input TypeByte rx_data,
     input rx_er,
-    input rx_dv/*,
-    
-    inout TypeRdBufLen rd_buf_len,
-    inout TypeRdBuf    rd_buf,
+    input rx_dv,
+    buffer_bus.master bus);
 
-    inout TypeBufferRdAddr buf_last_recv,
-    input TypeBufferRdAddr buf_last_read*/);
-    
-    /*
-    var TypeRdBufLen        o_rd_buf_len;
-    var TypeRdBuf           o_rd_buf;
-    var TypeBufferRdAddr    o_buf_last_recv;
-    
-    assign rd_buf_len       = o_rd_buf_len;
-    assign rd_buf           = o_rd_buf;
-    assign buf_last_recv    = o_buf_last_recv;*/
     
     
     reg [3:0]   state_rx;
@@ -965,18 +1055,9 @@ module gig_eth_pcs_pma (
     
     inout   eth_mdio,
     output  eth_mdc,
-    output reg eth_reset_n/*,
+    output reg eth_reset_n,
     
-    inout TypeRdBufLen    rd_buf_len,
-    inout TypeRdBuf       rd_buf,
-    
-    input TypeWrBufLen    wr_buf_len,
-    input TypeWrBuf       wr_buf,
-
-    inout TypeBufferWrAddr buf_last_sent,
-    input TypeBufferWrAddr buf_last_wrote,
-    inout TypeBufferRdAddr buf_last_recv,
-    input TypeBufferRdAddr buf_last_read*/);
+    buffer_bus.master bus);
     
     //wire        clock_mac; 
     wire[15:0]  gmii_status;     
@@ -1050,12 +1131,8 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .tx_data(gmii_txd),
         .tx_en(gmii_tx_en),
-        .tx_er(gmii_tx_er)/*,
-        
-        .wr_buf_len(wr_buf_len),
-        .wr_buf(wr_buf),
-        .buf_last_sent(buf_last_sent),
-        .buf_last_wrote(buf_last_wrote)*/);
+        .tx_er(gmii_tx_er),
+        .bus(bus));
     
     handle_rx U5
     (
@@ -1063,12 +1140,8 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .rx_data(gmii_rxd),
         .rx_dv(gmii_rx_dv),
-        .rx_er(gmii_rx_er)/*,
-        
-        .rd_buf_len(rd_buf_len),
-        .rd_buf(rd_buf),
-        .buf_last_recv(buf_last_recv),
-        .buf_last_read(buf_last_read)*/);
+        .rx_er(gmii_rx_er),
+        .bus(bus));
     
 endmodule
 
