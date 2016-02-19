@@ -193,11 +193,6 @@ module buffer_cntr(
     if (reset)
     begin
     
-        rd_buf_len <= 0;
-        rd_buf     <= 0;
-        wr_buf_len <= 0;
-        wr_buf	   <= 0;
-        
         buf_last_sent  <= 0;
         buf_last_wrote <= 0;
         buf_last_recv  <= 0;
@@ -314,7 +309,7 @@ function TypePacketAddr	get_wr_buf_len(buffer_bus.master bus, input TypeBufferWr
     return bus.value_out;
 endfunction
 
-function void 			set_wr_buf_len(buffer_bus.master bus, input TypeBufferWrAddr packet, input TypePacketAddr address, logic[7:0] value);
+function void 	set_wr_buf_len(buffer_bus.master bus, input TypeBufferWrAddr packet, logic[7:0] value);
 	bus.area		= WR_BUF_LEN;
     bus.action		= STORE;
     bus.packet_wr	= packet;
@@ -344,7 +339,8 @@ endfunction
 //----------------------------------------------------------------------
 
 // Sent
-function TypeBufferWrAddr get_buf_last_sent(buffer_bus.master bus);
+function TypeBufferWrAddr get_buf_last_sent(bus);
+    buffer_bus.master bus;
 	bus.area 		= LAST_SENT;
     bus.action		= LOAD;
     bus.start_port	= 1;
@@ -429,10 +425,10 @@ module write_buffer (
         begin
             if (address < `PACKET_SIZE) begin
 
-                set_wr_buf(get_buf_last_wrote(), address, value);
+                set_wr_buf(bus, get_buf_last_wrote(bus), address, value);
 
-                if (address > get_wr_buf(get_buf_last_wrote()))
-                    set_wr_buf(get_buf_last_wrote(), address);
+                if (address > get_wr_buf_len(bus, get_buf_last_wrote(bus))+1)
+                    set_wr_buf_len(bus, get_buf_last_wrote(bus), address+1);
                     
                 return_port <= 0;
             end else begin
@@ -459,7 +455,7 @@ module write_buffer_len (
     end else begin
         if (start_port)
         begin
-            return_port <= get_wr_buf(get_buf_last_wrote());
+            return_port <= get_wr_buf_len(bus, get_buf_last_wrote(bus));
             done_port <= 1;
         end
     end
@@ -484,9 +480,9 @@ module write_buffer_next (
     
         if (start_port) begin
 
-            if (get_buf_last_wrote() != get_buf_last_sent() - 1) begin
-                set_buf_last_wrote((get_buf_last_wrote() + 1) % `BUFFER_SIZE_WR);  
-                set_wr_buf(get_buf_last_wrote(), 0);
+            if (get_buf_last_wrote(bus) != get_buf_last_sent(bus) - 1) begin
+                set_buf_last_wrote(bus, (get_buf_last_wrote(bus) + 1) % `BUFFER_SIZE_WR);  
+                set_wr_buf_len    (bus, (get_buf_last_wrote(bus) + 1) % `BUFFER_SIZE_WR, 0);
                 return_port <= 0; 
             end else begin
                 return_port <= 1; // The buffer overflowed 
@@ -514,8 +510,8 @@ module read_buffer (
         if (start_port)
         begin
 
-            if (address < get_rd_buf_len(get_buf_last_read()))
-                return_port <= get_rd_buf(get_buf_last_read(), address);
+            if (address < get_rd_buf_len(bus, get_buf_last_read(bus)))
+                return_port <= get_rd_buf(bus, get_buf_last_read(bus), address);
 			else
 				return_port <= 0;
 				
@@ -539,7 +535,7 @@ module read_buffer_len (
     end else begin
         if (start_port)
         begin
-            return_port <= get_rd_buf_len(get_buf_last_read());            
+            return_port <= get_rd_buf_len(bus, get_buf_last_read(bus));            
             done_port <= 1;
         end
     end
@@ -561,8 +557,8 @@ module read_buffer_next (
     end else begin
         if (start_port)
         begin
-            if (get_buf_last_read() != get_buf_last_recv()) begin
-                set_buf_last_read((get_buf_last_read() + 1) % `BUFFER_SIZE_RD);
+            if (get_buf_last_read(bus) != get_buf_last_recv(bus)) begin
+                set_buf_last_read(bus, (get_buf_last_read(bus) + 1) % `BUFFER_SIZE_RD);
                 return_port <= 0;
             end else begin
                 return_port <= 1; // No more buffer to read
@@ -855,10 +851,10 @@ module handle_tx(
         
         case (state_tx)
             STATUS_READY:
-                if (get_buf_last_sent() != get_buf_last_wrote())
+                if (get_buf_last_sent(bus) != get_buf_last_wrote(bus))
                 begin
                     pkg_current     <= 0;
-                    buf_current     <= get_buf_last_sent() + 1;
+                    buf_current     <= get_buf_last_sent(bus) + 1;
                     crc32_tx        <= 0;
                     tx_intergap     <= 0;
                     tx_en           <= 0;
@@ -897,10 +893,10 @@ module handle_tx(
                 end
                 
             STATUS_DATA:
-                if (pkg_current < get_wr_buf(buf_current))
+                if (pkg_current < get_wr_buf_len(bus, buf_current))
                 begin
-                    tx_data       <= get_wr_buf(buf_current, pkg_current);
-                    crc32_tx      <= next_crc32_d8(get_wr_buf(buf_current, pkg_current), crc32_tx);
+                    tx_data       <= get_wr_buf(bus, buf_current, pkg_current);
+                    crc32_tx      <= next_crc32_d8(get_wr_buf(bus, buf_current, pkg_current), crc32_tx);
                     pkg_current   <= pkg_current + 1;
                 end else begin
                     state_tx      <= STATUS_SEND_CRC_3;
@@ -932,7 +928,7 @@ module handle_tx(
                 
             STATUS_DONE:
                 begin
-                    set_buf_last_sent(buf_current);
+                    set_buf_last_sent(bus, buf_current);
                     state_tx <= STATUS_INTERGAP;
                 end
                 
@@ -983,7 +979,7 @@ module handle_rx(
             case (state_rx)
                 STATUS_READY:
                     if (rx_data == 8'h55) begin
-                        buf_current     <= get_buf_last_recv() + 1;
+                        buf_current     <= get_buf_last_recv(bus) + 1;
                         crc32_rx        <= 0;
                         state_rx        <= STATUS_PREAMBLE_0;
                     end
@@ -1046,12 +1042,12 @@ module handle_rx(
                     end
                     
                 STATUS_DATA:
-                    if (pkg_current < PACKET_SIZE)
+                    if (pkg_current < `PACKET_SIZE)
                     begin
                         
                         if (crc32_rx != 32'hC704DD7B) begin
                         
-							set_rd_buf(buf_current, pkg_current, rx_data);
+							set_rd_buf(bus, buf_current, pkg_current, rx_data);
                             crc32_rx      <= next_crc32_d8(rx_data, crc32_rx);
                             pkg_current   <= pkg_current + 1;
                             
@@ -1064,8 +1060,8 @@ module handle_rx(
                     
                 STATUS_DONE:
                     begin
-                        set_buf_last_recv(buf_current);
-                        set_rd_buf_len(pkg_current, pkg_current-4);
+                        set_buf_last_recv(bus, buf_current);
+                        set_rd_buf_len(bus, pkg_current, pkg_current-4);
                         state_rx                <= STATUS_READY;
                     end
                     
