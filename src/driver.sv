@@ -647,7 +647,7 @@ module driver_operation(
         begin
             case (operation)
                             
-            `OP_READ:
+            OP_READ:
             begin
                 d1_start_port <= start_port;
                 d2_start_port <= 0;
@@ -660,7 +660,7 @@ module driver_operation(
                 return_port <= d1_return_port;
             end
     
-            `OP_READ_LEN:
+            OP_READ_LEN:
             begin
                 d1_start_port <= 0;
                 d2_start_port <= start_port;
@@ -673,7 +673,7 @@ module driver_operation(
                 return_port <= d2_return_port;
             end
             
-            `OP_READ_NEXT:
+            OP_READ_NEXT:
             begin
                 d1_start_port <= 0;
                 d2_start_port <= 0;
@@ -686,7 +686,7 @@ module driver_operation(
                 return_port <= d3_return_port;
             end
                 
-            `OP_WRITE:
+            OP_WRITE:
             begin
                 d1_start_port <= 0;
                 d2_start_port <= 0;
@@ -699,7 +699,7 @@ module driver_operation(
                 return_port <= d4_return_port;
             end
                 
-            `OP_WRITE_LEN:
+            OP_WRITE_LEN:
             begin
                 d1_start_port <= 0;
                 d2_start_port <= 0;
@@ -712,7 +712,7 @@ module driver_operation(
                 return_port <= d5_return_port;
             end
             
-            `OP_WRITE_NEXT:
+            OP_WRITE_NEXT:
             begin
                 d1_start_port <= 0;
                 d2_start_port <= 0;
@@ -848,13 +848,13 @@ module handle_tx(
     always @(posedge clock)
     if (reset)
     begin
-        state_tx <= `STATUS_READY;
+        state_tx <= STATUS_READY;
         tx_en         <= 0;
         tx_er         <= 0;
     end else begin
         
         case (state_tx)
-            `STATUS_READY:
+            STATUS_READY:
                 if (get_buf_last_sent() != get_buf_last_wrote())
                 begin
                     pkg_current     <= 0;
@@ -862,90 +862,90 @@ module handle_tx(
                     crc32_tx        <= 0;
                     tx_intergap     <= 0;
                     tx_en           <= 0;
-                    state_tx        <= `STATUS_PREAMBLE_0;
+                    state_tx        <= STATUS_PREAMBLE_0;
                 end
                 
-            `STATUS_PREAMBLE_0:
+            STATUS_PREAMBLE_0:
                 begin
                     tx_en <= 1;
                     tx_data <= 8'h55;
-                    state_tx <= `STATUS_PREAMBLE_1;
+                    state_tx <= STATUS_PREAMBLE_1;
                 end
             
-            `STATUS_PREAMBLE_1:
-                state_tx <= `STATUS_PREAMBLE_2;
+            STATUS_PREAMBLE_1:
+                state_tx <= STATUS_PREAMBLE_2;
             
-            `STATUS_PREAMBLE_2:
-                state_tx <= `STATUS_PREAMBLE_3;
+            STATUS_PREAMBLE_2:
+                state_tx <= STATUS_PREAMBLE_3;
             
-            `STATUS_PREAMBLE_3:
-                state_tx <= `STATUS_PREAMBLE_4;
+            STATUS_PREAMBLE_3:
+                state_tx <= STATUS_PREAMBLE_4;
             
-            `STATUS_PREAMBLE_4:
-                state_tx <= `STATUS_PREAMBLE_5;
+            STATUS_PREAMBLE_4:
+                state_tx <= STATUS_PREAMBLE_5;
             
-            `STATUS_PREAMBLE_5:
-                state_tx <= `STATUS_PREAMBLE_6;
+            STATUS_PREAMBLE_5:
+                state_tx <= STATUS_PREAMBLE_6;
             
-            `STATUS_PREAMBLE_6:
-                state_tx <= `STATUS_SDF;
+            STATUS_PREAMBLE_6:
+                state_tx <= STATUS_SDF;
             
-            `STATUS_SDF:
+            STATUS_SDF:
                 begin
                     tx_data <= 8'hd5;
-                    state_tx <= `STATUS_DATA;
+                    state_tx <= STATUS_DATA;
                 end
                 
-            `STATUS_DATA:
+            STATUS_DATA:
                 if (pkg_current < get_wr_buf(buf_current))
                 begin
                     tx_data       <= get_wr_buf(buf_current, pkg_current);
                     crc32_tx      <= next_crc32_d8(get_wr_buf(buf_current, pkg_current), crc32_tx);
                     pkg_current   <= pkg_current + 1;
                 end else begin
-                    state_tx      <= `STATUS_SEND_CRC_3;
+                    state_tx      <= STATUS_SEND_CRC_3;
                 end
                 
-            `STATUS_SEND_CRC_3:
+            STATUS_SEND_CRC_3:
                 begin
                     tx_data  <= ~reverse_byte(crc32_tx[31:24]);
-                    state_tx <= `STATUS_SEND_CRC_2;
+                    state_tx <= STATUS_SEND_CRC_2;
                 end
                 
-            `STATUS_SEND_CRC_2:
+            STATUS_SEND_CRC_2:
                 begin
                     tx_data  <= ~reverse_byte(crc32_tx[23:16]);
-                    state_tx <= `STATUS_SEND_CRC_1;
+                    state_tx <= STATUS_SEND_CRC_1;
                 end
                 
-            `STATUS_SEND_CRC_1:
+            STATUS_SEND_CRC_1:
                 begin
                     tx_data  <= ~reverse_byte(crc32_tx[15:8]);
-                    state_tx <= `STATUS_SEND_CRC_0;
+                    state_tx <= STATUS_SEND_CRC_0;
                 end
                 
-            `STATUS_SEND_CRC_0:
+            STATUS_SEND_CRC_0:
                 begin
                     tx_data  <= ~reverse_byte(crc32_tx[7:0]);
-                    state_tx <= `STATUS_DONE;
+                    state_tx <= STATUS_DONE;
                 end
                 
-            `STATUS_DONE:
+            STATUS_DONE:
                 begin
                     set_buf_last_sent(buf_current);
-                    state_tx <= `STATUS_INTERGAP;
+                    state_tx <= STATUS_INTERGAP;
                 end
                 
-            `STATUS_INTERGAP:
+            STATUS_INTERGAP:
                 if (tx_intergap < 12)
                 begin
                     tx_intergap <= tx_intergap + 1;
                 end else begin
-                    state_tx <= `STATUS_READY;
+                    state_tx <= STATUS_READY;
                 end
             
             default:
-                state_tx <= `STATUS_READY;
+                state_tx <= STATUS_READY;
         endcase 
     end
 endmodule
@@ -971,82 +971,82 @@ module handle_rx(
     always @(posedge clock)
     if (reset)
     begin
-        state_rx <= `STATUS_READY;
+        state_rx <= STATUS_READY;
     end else begin
         
         if (!rx_dv | rx_er) begin
         
-            state_rx    <= `STATUS_READY;
+            state_rx    <= STATUS_READY;
             
         end else begin
         
             case (state_rx)
-                `STATUS_READY:
+                STATUS_READY:
                     if (rx_data == 8'h55) begin
                         buf_current     <= get_buf_last_recv() + 1;
                         crc32_rx        <= 0;
-                        state_rx        <= `STATUS_PREAMBLE_0;
+                        state_rx        <= STATUS_PREAMBLE_0;
                     end
                     
                     
-                `STATUS_PREAMBLE_0:
+                STATUS_PREAMBLE_0:
                     if (rx_data == 8'h55) begin
-                        state_rx <= `STATUS_PREAMBLE_1;
+                        state_rx <= STATUS_PREAMBLE_1;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                 
-                `STATUS_PREAMBLE_1:
+                STATUS_PREAMBLE_1:
                     if (rx_data == 8'h55) begin
-                        state_rx <= `STATUS_PREAMBLE_2;
+                        state_rx <= STATUS_PREAMBLE_2;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                 
-                `STATUS_PREAMBLE_2:
+                STATUS_PREAMBLE_2:
                     if (rx_data == 8'h55) begin
-                        state_rx <= `STATUS_PREAMBLE_3;
+                        state_rx <= STATUS_PREAMBLE_3;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                 
-                `STATUS_PREAMBLE_3:
+                STATUS_PREAMBLE_3:
                     if (rx_data == 8'h55) begin
-                        state_rx <= `STATUS_PREAMBLE_4;
+                        state_rx <= STATUS_PREAMBLE_4;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                 
-                `STATUS_PREAMBLE_4:
+                STATUS_PREAMBLE_4:
                     if (rx_data == 8'h55) begin
-                        state_rx <= `STATUS_PREAMBLE_5;
+                        state_rx <= STATUS_PREAMBLE_5;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                 
-                `STATUS_PREAMBLE_5:
+                STATUS_PREAMBLE_5:
                     if (rx_data == 8'h55) begin
-                        state_rx <= `STATUS_PREAMBLE_6;
+                        state_rx <= STATUS_PREAMBLE_6;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                 
-                `STATUS_PREAMBLE_6:
+                STATUS_PREAMBLE_6:
                     if (rx_data == 8'h55) begin
-                        state_rx <= `STATUS_SDF;
+                        state_rx <= STATUS_SDF;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                 
-                `STATUS_SDF:
+                STATUS_SDF:
                     if (rx_data == 8'hd5) begin
-                        state_rx <= `STATUS_DATA;
+                        state_rx <= STATUS_DATA;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                     
-                `STATUS_DATA:
-                    if (pkg_current < `PACKET_SIZE)
+                STATUS_DATA:
+                    if (pkg_current < PACKET_SIZE)
                     begin
                         
                         if (crc32_rx != 32'hC704DD7B) begin
@@ -1056,21 +1056,21 @@ module handle_rx(
                             pkg_current   <= pkg_current + 1;
                             
                         end else begin
-                            state_rx <= `STATUS_DONE;
+                            state_rx <= STATUS_DONE;
                         end;
                     end else begin
-                        state_rx <= `STATUS_READY;
+                        state_rx <= STATUS_READY;
                     end
                     
-                `STATUS_DONE:
+                STATUS_DONE:
                     begin
                         set_buf_last_recv(buf_current);
                         set_rd_buf_len(pkg_current, pkg_current-4);
-                        state_rx                <= `STATUS_READY;
+                        state_rx                <= STATUS_READY;
                     end
                     
                 default:
-                    state_rx      <= `STATUS_READY;
+                    state_rx      <= STATUS_READY;
             endcase 
         end
     end
