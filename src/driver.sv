@@ -54,7 +54,7 @@ typedef enum {
 
 typedef enum {
 	LOAD,
-	STORE,
+	STORE
 } TypeAction;
 
 typedef enum {
@@ -91,19 +91,19 @@ interface buffer_bus();
     output     value_out,
     
     input      start_port,
-    output var done_port);
+    output     done_port);
 	
 	modport master (
-	output var   area,
-    output var   action,
-    output var 	 packet_wr,
-    output var 	 packet_rd,
+	output  area,
+    output  action,
+    output  packet_wr,
+    output  packet_rd,
     
     input        address,
     output       value_in,
     input        value_out,
     
-    output var   start_port,
+    output start_port,
     input        done_port);
 endinterface
 
@@ -260,9 +260,9 @@ module buffer_cntr(
             endcase
             
             bus.done_port <= 1;
+        end
         else
 			bus.done_port <= 0;
-        end
             
     end
 endmodule
