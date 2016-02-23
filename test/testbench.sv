@@ -75,18 +75,21 @@ module testbench();
         if (current_bit == 0)   current_byte = current_byte + 1;
     end
 
-    entry_point U_SIM (
-        .clk_p, 
-        .clk_n, 
+    driver_operation driver_operation_inst(
+        .clock(clk_p), 
         .reset,
-    
+        .start_port(0),
+        .done_port(),
+        .return_port(),
+        .operation(),
+        .address(),
+        .value(),
         .sgmii_tx_p,
         .sgmii_tx_n,
         .sgmii_rx_p,
         .sgmii_rx_n,
         .sgmii_clk_p,
         .sgmii_clk_n,
-        
         .eth_mdio,
         .eth_mdc,
         .eth_reset_n);
