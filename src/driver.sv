@@ -291,11 +291,11 @@ function void set_rd_buf_len(
 	output bus_value_in,
     output bus_start_port);
     
-	bus.area		= RD_BUF_LEN;
-    bus.action		= STORE;
-    bus.packet_rd	= packet;
-	bus.value_in	= value;
-    bus.start_port	= 1;
+	bus_area		= RD_BUF_LEN;
+    bus_action		= STORE;
+    bus_packet_rd	= packet;
+	bus_value_in	= value;
+    bus_start_port	= 1;
 endfunction
 
 // RdBuf
@@ -332,12 +332,12 @@ function void set_rd_buf(
 	output bus_value_in,	
 	output bus_start_port);
 
-	bus.area		= RD_BUF;
-    bus.action		= STORE;
-    bus.packet_rd	= packet;
-    bus.address	    = address;
-	bus.value_in	= value;
-    bus.start_port	= 1;
+	bus_area		= RD_BUF;
+    bus_action		= STORE;
+    bus_packet_rd	= packet;
+    bus_address	    = address;
+	bus_value_in	= value;
+    bus_start_port	= 1;
 endfunction
 
 // WrBufLen
@@ -451,9 +451,9 @@ function TypeBufferWrAddr get_buf_last_wrote(
     output bus_start_port,
     input  bus_value_out);
     
-	bus.area 		= LAST_WROTE;
-    bus.action		= LOAD;
-    bus.start_port	= 1;
+	bus_area 		= LAST_WROTE;
+    bus_action		= LOAD;
+    bus_start_port	= 1;
     return bus.value_out;
 endfunction
 
