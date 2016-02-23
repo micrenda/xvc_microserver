@@ -553,8 +553,8 @@ module write_buffer (
 
                 set_wr_buf(get_buf_last_wrote(bus), address, value, bus.area, bus.action, bus.packet_wr, bus.address, bus.value_in, bus.start_port);
 
-                if (address > get_wr_buf_len(get_buf_last_wrote(bus))+1, , bus.area, bus.action, bus.packet_wr, bus.start_port, bus.value_out)
-                    set_wr_buf_len(bus, get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out), address+1);
+                if (address > get_wr_buf_len(get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out)+1, bus.area, bus.action, bus.packet_wr, bus.start_port, bus.value_out))
+                    set_wr_buf_len(get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out), address+1, bus.area, bus.action, bus.packet_wr, bus.value_in, bus.start_port);
                     
                 return_port <= 0;
             end else begin
