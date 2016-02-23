@@ -272,7 +272,7 @@ function TypePacketAddr	get_rd_buf_len(
     output bus_action,
     output bus_packet_rd,
     output bus_start_port,
-    input bus_value_out);
+    input  bus_value_out);
     
 	bus_area 		= RD_BUF_LEN;
     bus_action		= LOAD;
@@ -551,10 +551,10 @@ module write_buffer (
         begin
             if (address < `PACKET_SIZE) begin
 
-                set_wr_buf(bus, get_buf_last_wrote(bus), address, value);
+                set_wr_buf(get_buf_last_wrote(bus), address, value, bus.area, bus.action, bus.packet_wr, bus.address, bus.value_in, bus.start_port);
 
-                if (address > get_wr_buf_len(bus, get_buf_last_wrote(bus))+1)
-                    set_wr_buf_len(bus, get_buf_last_wrote(bus), address+1);
+                if (address > get_wr_buf_len(get_buf_last_wrote(bus))+1, , bus.area, bus.action, bus.packet_wr, bus.start_port, bus.value_out)
+                    set_wr_buf_len(bus, get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out), address+1);
                     
                 return_port <= 0;
             end else begin
@@ -581,7 +581,7 @@ module write_buffer_len (
     end else begin
         if (start_port)
         begin
-            return_port <= get_wr_buf_len(bus, get_buf_last_wrote(bus));
+            return_port <= get_wr_buf_len(get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out), bus.area, bus.action,	bus.packet_wr, bus.start_port, bus.value_out);
             done_port <= 1;
         end
     end
@@ -606,9 +606,9 @@ module write_buffer_next (
     
         if (start_port) begin
 
-            if (get_buf_last_wrote(bus) != get_buf_last_sent(bus) - 1) begin
-                set_buf_last_wrote(bus, (get_buf_last_wrote(bus) + 1) % `BUFFER_SIZE_WR);  
-                set_wr_buf_len    (bus, (get_buf_last_wrote(bus) + 1) % `BUFFER_SIZE_WR, 0);
+            if (get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out) != get_buf_last_sent(bus.area, bus.action, bus.start_port, bus.value_out) - 1) begin
+                set_buf_last_wrote((get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out) + 1) % `BUFFER_SIZE_WR, , bus.area, bus.action, bus.value_in, bus.start_port);  
+                set_wr_buf_len    ((get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out) + 1) % `BUFFER_SIZE_WR, 0, bus.area, bus.action, bus.packet_wr, bus.value_in, bus.start_port);
                 return_port <= 0; 
             end else begin
                 return_port <= 1; // The buffer overflowed 
@@ -636,8 +636,8 @@ module read_buffer (
         if (start_port)
         begin
 
-            if (address < get_rd_buf_len(bus, get_buf_last_read(bus)))
-                return_port <= get_rd_buf(bus, get_buf_last_read(bus), address);
+            if (address < get_rd_buf_len(get_buf_last_read(bus.area, bus.action, bus.start_port, bus.value_out), bus.area, bus.action, bus.packet_rd, bus.start_port, bus.value_out))
+                return_port <= get_rd_buf(get_buf_last_read(bus.area, bus.action, bus.start_port, bus.value_out), address, bus.area, bus.action, bus.packet_rd, bus.address, bus.start_port, bus.value_out);
 			else
 				return_port <= 0;
 				
@@ -645,6 +645,10 @@ module read_buffer (
         end
     end
 endmodule
+
+
+
+	
 
 module read_buffer_len (
     input clock, 
@@ -661,7 +665,7 @@ module read_buffer_len (
     end else begin
         if (start_port)
         begin
-            return_port <= get_rd_buf_len(bus, get_buf_last_read(bus));            
+            return_port <= get_rd_buf_len(get_buf_last_read(bus.area, bus.action, bus.start_port, bus.value_out), bus.area, bus.action, bus.packet_rd, bus.start_port, bus.value_out);            
             done_port <= 1;
         end
     end
@@ -683,8 +687,8 @@ module read_buffer_next (
     end else begin
         if (start_port)
         begin
-            if (get_buf_last_read(bus) != get_buf_last_recv(bus)) begin
-                set_buf_last_read(bus, (get_buf_last_read(bus) + 1) % `BUFFER_SIZE_RD);
+            if (get_buf_last_read(bus.area, bus.action, bus.start_port, bus.value_out) != get_buf_last_recv(bus)) begin
+                set_buf_last_read((get_buf_last_read(bus.area, bus.action, bus.start_port, bus.value_out) + 1) % `BUFFER_SIZE_RD, bus.area, bus.action, bus.value_in, bus.start_port);
                 return_port <= 0;
             end else begin
                 return_port <= 1; // No more buffer to read
@@ -977,10 +981,10 @@ module handle_tx(
         
         case (state_tx)
             STATUS_READY:
-                if (get_buf_last_sent(bus) != get_buf_last_wrote(bus))
+                if (get_buf_last_sent(bus.area, bus.action, bus.start_port, bus.value_out) != get_buf_last_wrote(bus.area, bus.action, bus.start_port, bus.value_out))
                 begin
                     pkg_current     <= 0;
-                    buf_current     <= get_buf_last_sent(bus) + 1;
+                    buf_current     <= get_buf_last_sent(bus.area, bus.action, bus.start_port, bus.value_out) + 1;
                     crc32_tx        <= 0;
                     tx_intergap     <= 0;
                     tx_en           <= 0;
@@ -1019,15 +1023,15 @@ module handle_tx(
                 end
                 
             STATUS_DATA:
-                if (pkg_current < get_wr_buf_len(bus, buf_current))
+                if (pkg_current < get_wr_buf_len(buf_current, bus.area, bus.action,	bus.packet_wr, bus.start_port, bus.value_out))
                 begin
-                    tx_data       <= get_wr_buf(bus, buf_current, pkg_current);
-                    crc32_tx      <= next_crc32_d8(get_wr_buf(bus, buf_current, pkg_current), crc32_tx);
+                    tx_data       <= get_wr_buf(buf_current, pkg_current, bus.area, bus.action, bus.packet_wr, bus.address, bus.start_port, bus.value_out);
+                    crc32_tx      <= next_crc32_d8(get_wr_buf(bus, buf_current, pkg_current, bus.area, bus.action, bus.packet_wr, bus.address, bus.start_port, bus.value_out), crc32_tx);
                     pkg_current   <= pkg_current + 1;
                 end else begin
                     state_tx      <= STATUS_SEND_CRC_3;
                 end
-                
+    
             STATUS_SEND_CRC_3:
                 begin
                     tx_data  <= ~reverse_byte(crc32_tx[31:24]);
@@ -1054,7 +1058,7 @@ module handle_tx(
                 
             STATUS_DONE:
                 begin
-                    set_buf_last_sent(bus, buf_current);
+                    set_buf_last_sent(buf_current, bus.area, bus.action, bus.value_in, bus.start_port);
                     state_tx <= STATUS_INTERGAP;
                 end
                 
@@ -1105,7 +1109,7 @@ module handle_rx(
             case (state_rx)
                 STATUS_READY:
                     if (rx_data == 8'h55) begin
-                        buf_current     <= get_buf_last_recv(bus) + 1;
+                        buf_current     <= get_buf_last_recv(bus.area, bus.action, bus.start_port, bus.value_out) + 1;
                         crc32_rx        <= 0;
                         state_rx        <= STATUS_PREAMBLE_0;
                     end
@@ -1173,7 +1177,7 @@ module handle_rx(
                         
                         if (crc32_rx != 32'hC704DD7B) begin
                         
-							set_rd_buf(bus, buf_current, pkg_current, rx_data);
+							set_rd_buf(buf_current, pkg_current, rx_data, bus.area, bus.action, bus.packet_rd, bus.address, bus.value_in, bus.start_port);
                             crc32_rx      <= next_crc32_d8(rx_data, crc32_rx);
                             pkg_current   <= pkg_current + 1;
                             
@@ -1186,8 +1190,8 @@ module handle_rx(
                     
                 STATUS_DONE:
                     begin
-                        set_buf_last_recv(bus, buf_current);
-                        set_rd_buf_len(bus, pkg_current, pkg_current-4);
+                        set_buf_last_recv(buf_current, bus.area, bus.action, bus.value_in, bus.start_port);
+                        set_rd_buf_len(pkg_current, pkg_current-4, bus.area, bus.action, bus.packet_rd, bus.value_in, bus.start_port);
                         state_rx                <= STATUS_READY;
                     end
                     
@@ -1197,8 +1201,6 @@ module handle_rx(
         end
     end
 endmodule
-
-
 
 
 module gig_eth_pcs_pma (
