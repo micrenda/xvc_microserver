@@ -265,15 +265,32 @@ endmodule
 //----------------------------------------------------------------------
 
 // RdBufLen
-function TypePacketAddr	get_rd_buf_len(bus, input TypeBufferRdAddr packet);
-	bus.area 		= RD_BUF_LEN;
-    bus.action		= LOAD;
-    bus.packet_rd	= packet;
-    bus.start_port	= 1;
-    return bus.value_out;
+function TypePacketAddr	get_rd_buf_len(
+	input TypeBufferRdAddr packet,
+	
+	output bus_area,
+    output bus_action,
+    output bus_packet_rd,
+    output bus_start_port,
+    input bus_value_out);
+    
+	bus_area 		= RD_BUF_LEN;
+    bus_action		= LOAD;
+    bus_packet_rd	= packet;
+    bus_start_port	= 1;
+    return bus_value_out;
 endfunction
 
-function void set_rd_buf_len(bus, input TypeBufferRdAddr packet, input TypePacketAddr value);
+function void set_rd_buf_len(
+	input TypeBufferRdAddr packet,
+	input TypePacketAddr value,
+	
+	output bus_area,
+    output bus_action,
+    output bus_packet_rd,
+	output bus_value_in,
+    output bus_start_port);
+    
 	bus.area		= RD_BUF_LEN;
     bus.action		= STORE;
     bus.packet_rd	= packet;
@@ -282,16 +299,39 @@ function void set_rd_buf_len(bus, input TypeBufferRdAddr packet, input TypePacke
 endfunction
 
 // RdBuf
-function TypeByte get_rd_buf(bus, input TypeBufferRdAddr packet, input TypePacketAddr address);
-	bus.area 		= RD_BUF;
-    bus.action		= LOAD;
-    bus.packet_rd	= packet;
-    bus.address	    = address;
-    bus.start_port	= 1;
-    return bus.value_out;
+function TypeByte get_rd_buf(
+	input TypeBufferRdAddr packet, 
+	input TypePacketAddr address,
+	
+	output bus_area,		
+	output bus_action,		
+	output bus_packet_rd,	
+	output bus_address,	    
+	output bus_start_port,
+	
+	input bus_value_out);
+
+	bus_area 		= RD_BUF;
+    bus_action		= LOAD;
+    bus_packet_rd	= packet;
+    bus_address	    = address;
+    bus_start_port	= 1;
+    
+    return bus_value_out;
 endfunction
 
-function void set_rd_buf(bus, input TypeBufferRdAddr packet, input TypePacketAddr address, input TypeByte value);
+function void set_rd_buf(
+	input TypeBufferRdAddr packet,
+	input TypePacketAddr address,
+	input TypeByte value,
+	
+	output bus_area,	
+	output bus_action,		
+	output bus_packet_rd,	
+	output bus_address,	    
+	output bus_value_in,	
+	output bus_start_port);
+
 	bus.area		= RD_BUF;
     bus.action		= STORE;
     bus.packet_rd	= packet;
@@ -301,101 +341,188 @@ function void set_rd_buf(bus, input TypeBufferRdAddr packet, input TypePacketAdd
 endfunction
 
 // WrBufLen
-function TypePacketAddr	get_wr_buf_len(bus, input TypeBufferWrAddr packet);
-	bus.area 		= WR_BUF_LEN;
-    bus.action		= LOAD;
-    bus.packet_wr	= packet;
-    bus.start_port	= 1;
-    return bus.value_out;
+function TypePacketAddr	get_wr_buf_len(
+	input TypeBufferWrAddr packet,
+	
+	output bus_area, 		
+	output bus_action,		
+	output bus_packet_wr,
+	output bus_start_port,
+	input  bus_value_out);
+	
+	bus_area 		= WR_BUF_LEN;
+    bus_action		= LOAD;
+    bus_packet_wr	= packet;
+    bus_start_port	= 1;
+    return bus_value_out;
 endfunction
 
-function void 	set_wr_buf_len(bus, input TypeBufferWrAddr packet, logic[7:0] value);
-	bus.area		= WR_BUF_LEN;
-    bus.action		= STORE;
-    bus.packet_wr	= packet;
-	bus.value_in	= value;
-    bus.start_port	= 1;
+function void 	set_wr_buf_len(
+	input TypeBufferWrAddr packet,
+	input logic[7:0] value,
+	
+	output bus_area,
+    output bus_action,
+    output bus_packet_wr,
+	output bus_value_in,
+    output bus_start_port);
+    
+    
+	bus_area		= WR_BUF_LEN;
+    bus_action		= STORE;
+    bus_packet_wr	= packet;
+	bus_value_in	= value;
+    bus_start_port	= 1;
 endfunction
 
 // WrBuf
-function TypeByte get_wr_buf(bus, input TypeBufferWrAddr packet, input TypePacketAddr address);
-	bus.area 		= RD_BUF;
-    bus.action		= LOAD;
-    bus.packet_wr	= packet;
-    bus.address	    = address;
-    bus.start_port	= 1;
-    return bus.value_out;
+function TypeByte get_wr_buf(
+	input TypeBufferWrAddr packet,
+	input TypePacketAddr address,
+	
+	output bus_area,
+    output bus_action,
+    output bus_packet_wr,
+    output bus_address,
+    output bus_start_port,
+    input  bus_value_out);
+	
+	bus_area 		= RD_BUF;
+    bus_action		= LOAD;
+    bus_packet_wr	= packet;
+    bus_address	    = address;
+    bus_start_port	= 1;
+    return bus_value_out;
 endfunction
 
-function void set_wr_buf(bus, input TypeBufferWrAddr packet, input TypePacketAddr address, input TypeByte value);
-	bus.area		= RD_BUF;
-    bus.action		= STORE;
-    bus.packet_wr	= packet;
-    bus.address	    = address;
-	bus.value_in	= value;
-    bus.start_port	= 1;
+function void set_wr_buf(
+	input TypeBufferWrAddr packet,
+	input TypePacketAddr address,
+	input TypeByte value,
+	
+	output bus_area,		
+	output bus_action,		
+	output bus_packet_wr,	
+	output bus_address,	    
+	output bus_value_in,	
+	output bus_start_port);
+	
+	bus_area		= RD_BUF;
+    bus_action		= STORE;
+    bus_packet_wr	= packet;
+    bus_address	    = address;
+	bus_value_in	= value;
+    bus_start_port	= 1;
 endfunction
 
 //----------------------------------------------------------------------
 
 // Sent
-function TypeBufferWrAddr get_buf_last_sent(bus);
-	bus.area 		= LAST_SENT;
-    bus.action		= LOAD;
-    bus.start_port	= 1;
-    return bus.value_out;
+function TypeBufferWrAddr get_buf_last_sent(
+	output bus_area,
+    output bus_action,
+    output bus_start_port,
+    input  bus_value_out);
+    
+	bus_area 		= LAST_SENT;
+    bus_action		= LOAD;
+    bus_start_port	= 1;
+    return bus_value_out;
 endfunction
 
-function TypeBufferWrAddr set_buf_last_sent(bus, input TypeBufferWrAddr value);
-	bus.area		= LAST_SENT;
-    bus.action		= STORE;
-	bus.value_in	= value;
-    bus.start_port	= 1;
+function TypeBufferWrAddr set_buf_last_sent(
+	input TypeBufferWrAddr value,
+
+	output bus_area,
+    output bus_action,
+	output bus_value_in,
+    output bus_start_port);
+    
+	bus_area		= LAST_SENT;
+    bus_action		= STORE;
+	bus_value_in	= value;
+    bus_start_port	= 1;
 endfunction
 
 // Wrote
-function TypeBufferWrAddr get_buf_last_wrote(bus);
+function TypeBufferWrAddr get_buf_last_wrote(
+	output bus_area,
+    output bus_action,
+    output bus_start_port,
+    input  bus_value_out);
+    
 	bus.area 		= LAST_WROTE;
     bus.action		= LOAD;
     bus.start_port	= 1;
     return bus.value_out;
 endfunction
 
-function TypeBufferWrAddr set_buf_last_wrote(bus, input TypeBufferWrAddr value);
-	bus.area		= LAST_WROTE;
-    bus.action		= STORE;
-	bus.value_in	= value;
-    bus.start_port	= 1;
+function TypeBufferWrAddr set_buf_last_wrote(
+	input TypeBufferWrAddr value,
+
+	output bus_area,
+    output bus_action,
+	output bus_value_in,
+    output bus_start_port);
+    
+	bus_area		= LAST_WROTE;
+    bus_action		= STORE;
+	bus_value_in	= value;
+    bus_start_port	= 1;
 endfunction
 
 // Recv
-function TypeBufferRdAddr get_buf_last_recv(bus);
-	bus.area 		= LAST_RECV;
-    bus.action		= LOAD;
-    bus.start_port	= 1;
-    return bus.value_out;
+function TypeBufferRdAddr get_buf_last_recv(
+	output bus_area,
+    output bus_action,
+    output bus_start_port,
+    input  bus_value_out);
+    
+	bus_area 		= LAST_RECV;
+    bus_action		= LOAD;
+    bus_start_port	= 1;
+    return bus_value_out;
 endfunction
 
-function TypeBufferRdAddr set_buf_last_recv(bus, input TypeBufferRdAddr value);
-	bus.area		= LAST_RECV;
-    bus.action		= STORE;
-	bus.value_in	= value;
-    bus.start_port	= 1;
+function TypeBufferRdAddr set_buf_last_recv(
+	input TypeBufferRdAddr value,
+	
+	output bus_area,
+    output bus_action,
+	output bus_value_in,
+    output bus_start_port);
+    
+	bus_area		= LAST_RECV;
+    bus_action		= STORE;
+	bus_value_in	= value;
+    bus_start_port	= 1;
 endfunction
 
 // Read
-function TypeBufferRdAddr get_buf_last_read(bus);
-	bus.area 		= LAST_READ;
-    bus.action		= LOAD;
-    bus.start_port	= 1;
-    return bus.value_out;
+function TypeBufferRdAddr get_buf_last_read(
+	output bus_area,
+    output bus_action,
+    output bus_start_port,
+    input  bus_value_out);
+    
+	bus_area 		= LAST_READ;
+    bus_action		= LOAD;
+    bus_start_port	= 1;
+    return bus_value_out;
 endfunction
 
-function TypeBufferRdAddr set_buf_last_read(bus, input TypeBufferRdAddr value);
-	bus.area		= LAST_READ;
-    bus.action		= STORE;
-	bus.value_in	= value;
-    bus.start_port	= 1;
+function TypeBufferRdAddr set_buf_last_read(
+	input TypeBufferRdAddr value,
+	
+	output bus_area,
+    output bus_action,
+	output bus_value_in,
+    output bus_start_port);
+    
+	bus_area		= LAST_READ;
+    bus_action		= STORE;
+	bus_value_in	= value;
+    bus_start_port	= 1;
 endfunction
 
 //----------------------------------------------------------------------
