@@ -454,7 +454,7 @@ function TypeBufferWrAddr get_buf_last_wrote(
 	bus_area 		= LAST_WROTE;
     bus_action		= LOAD;
     bus_start_port	= 1;
-    return bus.value_out;
+    return bus_value_out;
 endfunction
 
 function TypeBufferWrAddr set_buf_last_wrote(
