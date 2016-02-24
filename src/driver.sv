@@ -306,7 +306,7 @@ function TypeByte get_rd_buf(
 	output TypeArea bus_area,		
 	output TypeAction bus_action,		
 	output TypeBufferRdAddr bus_packet_rd,	
-	output bus_address,	    
+	output TypePacketAddr   bus_address,	    
 	output bus_start_port,
 	
 	input bus_value_out);
@@ -328,7 +328,7 @@ function void set_rd_buf(
 	output TypeArea bus_area,	
 	output TypeAction bus_action,		
 	output TypeBufferRdAddr bus_packet_rd,	
-	output bus_address,	    
+	output TypePacketAddr   bus_address,	    
 	output [31:0] bus_value_in,	
 	output bus_start_port);
 
@@ -460,7 +460,7 @@ endfunction
 function TypeBufferWrAddr set_buf_last_wrote(
 	input TypeBufferWrAddr value,
 
-	output TypeArea bus_area,
+	output TypeArea   bus_area,
     output TypeAction bus_action,
 	output [31:0] bus_value_in,
     output bus_start_port);
