@@ -32,6 +32,9 @@ module testbench();
 
     reg [7:0] ram [0:401];
     
+    reg[31:0] current_byte;
+    reg[2:0]  current_bit;
+    
     // Initialize all variables
     initial begin        
 
@@ -64,8 +67,7 @@ module testbench();
     end
 
 
-    reg[31:0] current_byte;
-    reg[2:0]  current_bit;
+
     
     always begin
         #8
