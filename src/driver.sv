@@ -94,17 +94,163 @@ interface buffer_bus();
         output     done_port);
 	
 	modport master (
-        output  area,
-        output  action,
-        output  packet_wr,
-        output  packet_rd,
+		import get_rd_buf_len,
+		import set_rd_buf_len,
+		import get_rd_buf,
+		import set_rd_buf,
+		import get_wr_buf_len,
+		import set_wr_buf_len,
+		import get_wr_buf,
+		import set_wr_buf,
+		
+		import get_buf_last_sent,
+		import set_buf_last_sent,
+		import get_buf_last_wrote,
+		import set_buf_last_wrote,
+		import get_buf_last_recv,
+		import set_buf_last_recv,
+		import get_buf_last_read,
+		import set_buf_last_read);
         
-        input        address,
-        output       value_in,
-        input        value_out,
         
-        output start_port,
-        input        done_port);
+		 // RdBufLen
+	function TypePacketAddr	get_rd_buf_len(input TypeBufferRdAddr arg_packet);
+		area 		= RD_BUF_LEN;
+		action		= LOAD;
+		packet_rd	= arg_packet;
+		start_port	= 1;
+		return value_out;
+	endfunction
+
+	function void set_rd_buf_len(input TypeBufferRdAddr arg_packet, input TypePacketAddr arg_value);
+		area		= RD_BUF_LEN;
+		action		= STORE;
+		packet_rd	= arg_packet;
+		value_in	= arg_value;
+		start_port	= 1;
+	endfunction
+
+	// RdBuf
+	function TypeByte get_rd_buf(input TypeBufferRdAddr arg_packet, input TypePacketAddr arg_address);
+		area 		= RD_BUF;
+		action		= LOAD;
+		packet_rd	= arg_packet;
+		address	    = arg_address;
+		start_port	= 1;
+		return value_out;
+	endfunction
+
+	function void set_rd_buf(input TypeBufferRdAddr packet, input TypePacketAddr address, input TypeByte value);
+		bus.area		= RD_BUF;
+		bus.action		= STORE;
+		bus.packet_rd	= arg_packet;
+		bus.address	    = arg_address;
+		bus.value_in	= arg_value;
+		bus.start_port	= 1;
+	endfunction
+
+	// WrBufLen
+	function TypePacketAddr	get_wr_buf_len(input TypeBufferWrAddr arg_packet);
+		area 		= WR_BUF_LEN;
+		action		= LOAD;
+		packet_wr	= arg_packet;
+		start_port	= 1;
+		return value_out;
+	endfunction
+
+	function void 	set_wr_buf_len(input TypeBufferWrAddr arg_packet, logic[7:0] arg_value);
+		area		= WR_BUF_LEN;
+		action		= STORE;
+		packet_wr	= arg_packet;
+		value_in	= arg_value;
+		start_port	= 1;
+	endfunction
+
+	// WrBuf
+	function TypeByte get_wr_buf(input TypeBufferWrAddr arg_packet, input TypePacketAddr arg_address);
+		area 		= RD_BUF;
+		action		= LOAD;
+		packet_wr	= arg_packet;
+		address	    = arg_address;
+		start_port	= 1;
+		return value_out;
+	endfunction
+
+	function void set_wr_buf(input TypeBufferWrAddr arg_packet, input TypePacketAddr arg_address, input TypeByte arg_value);
+		area		= RD_BUF;
+		action		= STORE;
+		packet_wr	= arg_packet;
+		address	    = arg_address;
+		value_in	= arg_value;
+		start_port	= 1;
+	endfunction
+
+	//----------------------------------------------------------------------
+
+	// Sent
+	function TypeBufferWrAddr get_buf_last_sent();
+		area 		= LAST_SENT;
+		action		= LOAD;
+		start_port	= 1;
+		return value_out;
+	endfunction
+
+	function TypeBufferWrAddr set_buf_last_sent(input TypeBufferWrAddr arg_value);
+		area		= LAST_SENT;
+		action		= STORE;
+		value_in	= arg_value;
+		start_port	= 1;
+	endfunction
+
+	// Wrote
+	function TypeBufferWrAddr get_buf_last_wrote();
+		area 		= LAST_WROTE;
+		action		= LOAD;
+		start_port	= 1;
+		return value_out;
+	endfunction
+
+	function TypeBufferWrAddr set_buf_last_wrote(input TypeBufferWrAddr arg_value);
+		area		= LAST_WROTE;
+		action		= STORE;
+		value_in	= arg_value;
+		start_port	= 1;
+	endfunction
+
+	// Recv
+	function TypeBufferRdAddr get_buf_last_recv();
+		area 		= LAST_RECV;
+		action		= LOAD;
+		start_port	= 1;
+		return value_out;
+	endfunction
+
+	function TypeBufferRdAddr set_buf_last_recv(input TypeBufferRdAddr arg_value);
+		area		= LAST_RECV;
+		action		= STORE;
+		value_in	= arg_value;
+		start_port	= 1;
+	endfunction
+
+	// Read
+	function TypeBufferRdAddr get_buf_last_read();
+		area 		= LAST_READ;
+		action		= LOAD;
+		start_port	= 1;
+		return value_out;
+	endfunction
+
+	function TypeBufferRdAddr set_buf_last_read(input TypeBufferRdAddr arg_value);
+		area		= LAST_READ;
+		action		= STORE;
+		value_in	= arg_value;
+		start_port	= 1;
+	endfunction
+
+//----------------------------------------------------------------------
+   
+    
+        
 endinterface
 
     
@@ -263,145 +409,6 @@ module buffer_cntr(
 endmodule
 
 //----------------------------------------------------------------------
-
-// RdBufLen
-function TypePacketAddr	get_rd_buf_len(bus, input TypeBufferRdAddr packet);
-	bus.area 		= RD_BUF_LEN;
-    bus.action		= LOAD;
-    bus.packet_rd	= packet;
-    bus.start_port	= 1;
-    return bus.value_out;
-endfunction
-
-function void set_rd_buf_len(bus, input TypeBufferRdAddr packet, input TypePacketAddr value);
-	bus.area		= RD_BUF_LEN;
-    bus.action		= STORE;
-    bus.packet_rd	= packet;
-	bus.value_in	= value;
-    bus.start_port	= 1;
-endfunction
-
-// RdBuf
-function TypeByte get_rd_buf(bus, input TypeBufferRdAddr packet, input TypePacketAddr address);
-	bus.area 		= RD_BUF;
-    bus.action		= LOAD;
-    bus.packet_rd	= packet;
-    bus.address	    = address;
-    bus.start_port	= 1;
-    return bus.value_out;
-endfunction
-
-function void set_rd_buf(bus, input TypeBufferRdAddr packet, input TypePacketAddr address, input TypeByte value);
-	bus.area		= RD_BUF;
-    bus.action		= STORE;
-    bus.packet_rd	= packet;
-    bus.address	    = address;
-	bus.value_in	= value;
-    bus.start_port	= 1;
-endfunction
-
-// WrBufLen
-function TypePacketAddr	get_wr_buf_len(bus, input TypeBufferWrAddr packet);
-	bus.area 		= WR_BUF_LEN;
-    bus.action		= LOAD;
-    bus.packet_wr	= packet;
-    bus.start_port	= 1;
-    return bus.value_out;
-endfunction
-
-function void 	set_wr_buf_len(bus, input TypeBufferWrAddr packet, logic[7:0] value);
-	bus.area		= WR_BUF_LEN;
-    bus.action		= STORE;
-    bus.packet_wr	= packet;
-	bus.value_in	= value;
-    bus.start_port	= 1;
-endfunction
-
-// WrBuf
-function TypeByte get_wr_buf(bus, input TypeBufferWrAddr packet, input TypePacketAddr address);
-	bus.area 		= RD_BUF;
-    bus.action		= LOAD;
-    bus.packet_wr	= packet;
-    bus.address	    = address;
-    bus.start_port	= 1;
-    return bus.value_out;
-endfunction
-
-function void set_wr_buf(bus, input TypeBufferWrAddr packet, input TypePacketAddr address, input TypeByte value);
-	bus.area		= RD_BUF;
-    bus.action		= STORE;
-    bus.packet_wr	= packet;
-    bus.address	    = address;
-	bus.value_in	= value;
-    bus.start_port	= 1;
-endfunction
-
-//----------------------------------------------------------------------
-
-// Sent
-function TypeBufferWrAddr get_buf_last_sent(bus);
-	bus.area 		= LAST_SENT;
-    bus.action		= LOAD;
-    bus.start_port	= 1;
-    return bus.value_out;
-endfunction
-
-function TypeBufferWrAddr set_buf_last_sent(bus, input TypeBufferWrAddr value);
-	bus.area		= LAST_SENT;
-    bus.action		= STORE;
-	bus.value_in	= value;
-    bus.start_port	= 1;
-endfunction
-
-// Wrote
-function TypeBufferWrAddr get_buf_last_wrote(bus);
-	bus.area 		= LAST_WROTE;
-    bus.action		= LOAD;
-    bus.start_port	= 1;
-    return bus.value_out;
-endfunction
-
-function TypeBufferWrAddr set_buf_last_wrote(bus, input TypeBufferWrAddr value);
-	bus.area		= LAST_WROTE;
-    bus.action		= STORE;
-	bus.value_in	= value;
-    bus.start_port	= 1;
-endfunction
-
-// Recv
-function TypeBufferRdAddr get_buf_last_recv(bus);
-	bus.area 		= LAST_RECV;
-    bus.action		= LOAD;
-    bus.start_port	= 1;
-    return bus.value_out;
-endfunction
-
-function TypeBufferRdAddr set_buf_last_recv(bus, input TypeBufferRdAddr value);
-	bus.area		= LAST_RECV;
-    bus.action		= STORE;
-	bus.value_in	= value;
-    bus.start_port	= 1;
-endfunction
-
-// Read
-function TypeBufferRdAddr get_buf_last_read(bus);
-	bus.area 		= LAST_READ;
-    bus.action		= LOAD;
-    bus.start_port	= 1;
-    return bus.value_out;
-endfunction
-
-function TypeBufferRdAddr set_buf_last_read(bus, input TypeBufferRdAddr value);
-	bus.area		= LAST_READ;
-    bus.action		= STORE;
-	bus.value_in	= value;
-    bus.start_port	= 1;
-endfunction
-
-//----------------------------------------------------------------------
-
-
-
 
 
 
