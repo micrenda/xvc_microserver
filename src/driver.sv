@@ -140,7 +140,7 @@ interface buffer_bus();
 		return value_out;
 	endfunction
 
-	function void set_rd_buf(input TypeBufferRdAddr packet, input TypePacketAddr address, input TypeByte value);
+	function void set_rd_buf(input TypeBufferRdAddr arg_packet, input TypePacketAddr arg_address, input TypeByte arg_value);
 		bus.area		= RD_BUF;
 		bus.action		= STORE;
 		bus.packet_rd	= arg_packet;
