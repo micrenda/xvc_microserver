@@ -54,7 +54,7 @@ typedef enum {
 	
 	OP_RECV        = 6,
 	OP_RECV_LEN    = 7,
-	OP_RRECV_NEXT  = 8,
+	OP_RECV_NEXT   = 8,
 	
 	OP_SEND        = 9,
 	OP_SEND_LEN    = 10, 
