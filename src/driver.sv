@@ -315,11 +315,11 @@ module buffer_cntr(
 					 if (bus.address < `PACKET_SIZE) begin
 						buf_o[last_wrote][bus.address] <= bus.value_in;
 						if (bus.address + 1 > buf_o_len[last_wrote])
-							buf_o_len[last_wrote] <= bus.address+1;
+							buf_o_len[last_wrote] <= bus.address + 1;
 							
 						bus.value_out <= 0;
 					end else begin
-						bus.value_out <= 1; // The packet is full
+						bus.value_out <= 1; // No more space in packet
 					end
 				end
 			
@@ -347,8 +347,9 @@ module buffer_cntr(
 					 if (bus.address < `PACKET_SIZE) begin
 						buf_i[last_recv][bus.address] <= bus.value_in;
 						if (bus.address + 1 > buf_i_len[last_recv])
-							buf_i_len[last_recv] <= bus.address+1;
-							
+						begin
+							buf_i_len[last_recv] <= bus.address + 1;
+						end
 						bus.value_out <= 0;
 					end else begin
 						bus.value_out <= 1; // The packet is full
@@ -363,11 +364,12 @@ module buffer_cntr(
 				OP_RECV_NEXT:
 				begin
 				    if (last_read != last_recv + 1) begin
-						if (buf_i_len[last_read] > 0)
+						if (buf_i_len[last_recv] > 0)
 						begin
-							last_read <= (last_read + 1) % `BUFFER_SIZE_I;
-							bus.value_out <= 0;
+							last_recv <= (last_recv + 1) % `BUFFER_SIZE_I;
+							buf_i_len[(last_recv + 1) % `BUFFER_SIZE_I] <= 0;	
 						end
+						bus.value_out <= 0;
 					end else begin
 						bus.value_out <= 1; // The buffer overflowed
 					end
@@ -547,7 +549,7 @@ module handle_tx(
         
         case (state_tx)
             STATUS_READY:
-                if (bus.recv_buffer_next())
+                if (bus.send_buffer_next())
                 begin
                     add_current     <= 0;
                     crc32_tx        <= 0;
@@ -788,11 +790,11 @@ module gig_eth_pcs_pma (
     buffer_bus.master_eth bus);
     
     //wire        clock_mac; 
-    wire[15:0]  gmii_status;     
+    wire[15:0]  	gmii_status;     
     
-    wire        eth_mdio_o;
-    wire        eth_mdio_i;
-    wire        eth_mdio_t;
+    wire        	eth_mdio_o;
+    wire        	eth_mdio_i;
+    wire        	eth_mdio_t;
     
     wire TypeByte	gmii_txd;          
     wire       		gmii_tx_en;  
