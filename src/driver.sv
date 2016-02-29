@@ -4,12 +4,11 @@
 `define BUFFER_SIZE_I   32
 `define PACKET_SIZE     402
 
-// If you change the values above, then you have to check that the sizes defined below are still valid
-// Unfortunately Verilog has not the $size operator.
+// Defining sizes for buffer pointers
 
-`define SIZE_BUFFER_SIZE_O   5
-`define SIZE_BUFFER_SIZE_I   5
-`define SIZE_PACKET_SIZE     16
+`define SIZE_BUFFER_SIZE_O   $clog2(BUFFER_SIZE_O)
+`define SIZE_BUFFER_SIZE_I   $clog2(BUFFER_SIZE_I)
+`define SIZE_PACKET_SIZE     $clog2(PACKET_SIZE)
 
 typedef logic [`SIZE_PACKET_SIZE-1:0]   TypePacketAddr;
 typedef logic [`SIZE_BUFFER_SIZE_I-1:0] TypeBufferIAddr;
@@ -69,17 +68,12 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 
 
 	TypeOp	         action;
-	TypeBufferOAddr  packet_o;
-	TypeBufferIAddr  packet_i;
 	TypePacketAddr   address;
 	logic[31:0]      value_in;
 	logic[31:0]      value_out;
 	
 	modport slave (
         input  	   action,
-        input 	   packet_o,
-        input 	   packet_i,
-        
         input      address,
         input      value_in,
         output     value_out,
@@ -91,6 +85,7 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 		import write_buffer,
 		import write_buffer_len,
 		import write_buffer_next,
+		
 		import read_buffer,
 		import read_buffer_len,
 		import read_buffer_next);
@@ -99,9 +94,11 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 		import recv_buffer,
 		import recv_buffer_len,
 		import recv_buffer_next,
+		import recv_buffer_fix,
+		
 		import send_buffer,
 		import send_buffer_len,
-		import read_buffer_next);
+		import send_buffer_next);
 
 		
 	
@@ -264,10 +261,10 @@ module buffer_cntr(
     input reset,
     buffer_bus.slave bus);
     
-	var TypeIBufLen rd_buf_len;
-	var TypeIBuf    rd_buf;
-	var TypeOBufLen wr_buf_len;
-	var TypeOBuf    wr_buf;
+	var TypeIBufLen buf_i_len;
+	var TypeIBuf    buf_i;
+	var TypeOBufLen buf_o_len;
+	var TypeOBuf    buf_o;
 	
 	var TypeBufferOAddr last_sent;
 	var TypeBufferOAddr last_wrote;
@@ -292,15 +289,15 @@ module buffer_cntr(
             case (bus.action)
             	OP_READ:
             	begin
-					if (bus.address < rd_buf_len[last_read])
-						bus.value_out <= rd_buf[last_read][bus.address];
+					if (bus.address < buf_i_len[last_read])
+						bus.value_out <= buf_i[last_read][bus.address];
 					else
 						bus.value_out <= 0; // Accessing a packet outside the current packet length
             	end
             	
 				OP_READ_LEN:
 				begin
-					bus.value_out <= rd_buf_len[last_read];
+					bus.value_out <= buf_i_len[last_read];
 				end
 					
 				OP_READ_NEXT:
@@ -316,9 +313,9 @@ module buffer_cntr(
 				OP_WRITE:
 				begin
 					 if (bus.address < `PACKET_SIZE) begin
-						wr_buf[last_wrote][bus.address] <= bus.value_in;
-						if (bus.address + 1 > wr_buf_len[last_wrote])
-							wr_buf_len[last_wrote] <= bus.address+1;
+						buf_o[last_wrote][bus.address] <= bus.value_in;
+						if (bus.address + 1 > buf_o_len[last_wrote])
+							buf_o_len[last_wrote] <= bus.address+1;
 							
 						bus.value_out <= 0;
 					end else begin
@@ -328,16 +325,16 @@ module buffer_cntr(
 			
 				OP_WRITE_LEN:
 				begin
-					bus.value_out <= wr_buf_len[last_wrote];
+					bus.value_out <= buf_o_len[last_wrote];
 				end
 				
 				OP_WRITE_NEXT:
 				begin
 					if (last_wrote != last_sent - 1) begin
-						if (wr_buf_len[last_wrote] > 0)
+						if (buf_o_len[last_wrote] > 0)
 						begin
 							last_wrote <= (last_wrote + 1) % `BUFFER_SIZE_O;  
-							wr_buf_len[(last_wrote + 1) % `BUFFER_SIZE_O] <= 0;
+							buf_o_len[(last_wrote + 1) % `BUFFER_SIZE_O] <= 0;
 						end
 						bus.value_out <= 0; 
 					end else begin
@@ -348,9 +345,9 @@ module buffer_cntr(
             	OP_RECV:
 				begin
 					 if (bus.address < `PACKET_SIZE) begin
-						rd_buf[last_recv][bus.address] <= bus.value_in;
-						if (bus.address + 1 > rd_buf_len[last_recv])
-							rd_buf_len[last_recv] <= bus.address+1;
+						buf_i[last_recv][bus.address] <= bus.value_in;
+						if (bus.address + 1 > buf_i_len[last_recv])
+							buf_i_len[last_recv] <= bus.address+1;
 							
 						bus.value_out <= 0;
 					end else begin
@@ -360,13 +357,13 @@ module buffer_cntr(
             	
 				OP_RECV_LEN:
 				begin
-					bus.value_out <= rd_buf_len[last_recv];
+					bus.value_out <= buf_i_len[last_recv];
 				end
 					
 				OP_RECV_NEXT:
 				begin
 				    if (last_read != last_recv + 1) begin
-						if (rd_buf_len[last_read] > 0)
+						if (buf_i_len[last_read] > 0)
 						begin
 							last_read <= (last_read + 1) % `BUFFER_SIZE_I;
 							bus.value_out <= 0;
@@ -378,8 +375,8 @@ module buffer_cntr(
 				
 				OP_SEND:
 				begin
-					if (bus.address < wr_buf_len[last_sent])
-						bus.value_out <= wr_buf[last_sent][bus.address];
+					if (bus.address < buf_o_len[last_sent])
+						bus.value_out <= buf_o[last_sent][bus.address];
 					else
 						bus.value_out <= 0; // Accessing a packet outside the current packet length
             	end
@@ -387,13 +384,13 @@ module buffer_cntr(
 			
 				OP_SEND_LEN:
 				begin
-					bus.value_out <= wr_buf_len[last_sent];
+					bus.value_out <= buf_o_len[last_sent];
 				end
 				
 				OP_SEND_NEXT:
 				begin
 					if (last_wrote != last_sent) begin
-						wr_buf_len[last_sent] <= 0; // Removing the old packet length
+						buf_o_len[last_sent] <= 0; // Removing the old packet length
 						last_sent <= (last_sent + 1) % `BUFFER_SIZE_O;  	
 						bus.value_out <= 0; 
 					end else begin
@@ -404,8 +401,8 @@ module buffer_cntr(
 				
 				OP_RECV_FIX:
 				begin
-				    if (rd_buf_len[last_recv] >= 4)
-					   rd_buf_len[last_recv] <= rd_buf_len[last_recv] - 4;
+				    if (buf_i_len[last_recv] >= 4)
+					   buf_i_len[last_recv] <= buf_i_len[last_recv] - 4;
 				end
             endcase
             
