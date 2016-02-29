@@ -52,46 +52,19 @@ typedef enum {
 	OP_WRITE_NEXT  = 5 
 } TypeOp;
 
-typedef enum {
-	LOAD,
-	STORE,
-	STORE_IF_BIGGER,
-	STORE_IF_LOWER,
-} TypeAction;
 
-typedef enum {
-	NONE,
-	IF_BIGGER,
-	IF_LOWER,
-} TypeStoreMode;
-
-typedef enum {
-	RD_BUF_LEN,
-	RD_BUF,
-	WR_BUF_LEN,
-	WR_BUF,
-	LAST_SENT,
-	LAST_WROTE,
-	LAST_RECV,
-	LAST_READ,
-	QUEUE_RD,
-	QUEUE_WR
-} TypeArea;
+interface buffer_bus(input clock, input reset, input start_port, output reg done_port);
 
 
-interface buffer_bus();
-	TypeArea		 area;
-	TypeAction	     action;
+
+	TypeOp	         action;
 	TypeBufferWrAddr packet_wr;
 	TypeBufferRdAddr packet_rd;
 	TypePacketAddr   address;
 	logic[31:0]      value_in;
 	logic[31:0]      value_out;
-	logic			 start_port;
-	logic			 done_port;
 	
 	modport slave (
-        input  	   area,
         input  	   action,
         input 	   packet_wr,
         input 	   packet_rd,
@@ -104,205 +77,51 @@ interface buffer_bus();
         output     done_port);
 	
 	modport master (
-		import get_rd_buf_len,
-		import set_rd_buf_len,
-		import get_rd_buf,
-		import set_rd_buf,
-		import get_wr_buf_len,
-		import set_wr_buf_len,
-		import get_wr_buf,
-		import set_wr_buf,
-		
-		import get_last_sent,
-		import set_last_sent,
-		import get_last_wrote,
-		import set_last_wrote,
-		import get_last_recv,
-		import set_last_recv,
-		import get_last_read,
-		import set_last_read);
+		import write_buffer,
+		import write_buffer_len,
+		import write_buffer_next,
+		import read_buffer,
+		import read_buffer_len,
+		import read_buffer_next);
         
-        
-		 // RdBufLen
-	function TypePacketAddr	get_rd_buf_len(input TypeBufferRdAddr arg_packet);
-		area 		<= RD_BUF_LEN;
-		action		<= LOAD;
-		packet_rd	<= arg_packet;
-		start_port	<= 1;
+    function TypeByte read_buffer (input TypePacketAddr p_address);
+		action		<= OP_READ;
+		address		<= p_address;
+		value_in	<= value;
 		return value_out;
 	endfunction
 
-	function void set_rd_buf_len(input TypeBufferRdAddr arg_packet, input TypePacketAddr arg_value, input TypeStoreMode arg_store_mode = STORE);
-		area		<= RD_BUF_LEN;
-		action		<= (arg_store_mode == IF_BIGGER) ? STORE_IF_BIGGER : (arg_store_mode == IF_LOWER ? STORE_IF_LOWER : STORE);
-		packet_rd	<= arg_packet;
-		value_in	<= arg_value;
-		start_port	<= 1;
-	endfunction
-	
 
-	// RdBuf
-	function TypeByte get_rd_buf(input TypeBufferRdAddr arg_packet, input TypePacketAddr arg_address);
-		area 		<= RD_BUF;
-		action		<= LOAD;
-		packet_rd	<= arg_packet;
-		address	    <= arg_address;
-		start_port	<= 1;
+	function TypePacketAddr read_buffer_len ();
+		action		<= OP_READ_LEN;
 		return value_out;
 	endfunction
 
-	function void set_rd_buf(input TypeBufferRdAddr arg_packet, input TypePacketAddr arg_address, input TypeByte arg_value);
-		area		<= RD_BUF;
-		action		<= STORE;
-		packet_rd	<= arg_packet;
-		address	    <= arg_address;
-		value_in	<= arg_value;
-		start_port	<= 1;
-	endfunction
 
-	// WrBufLen
-	function TypePacketAddr	get_wr_buf_len(input TypeBufferWrAddr arg_packet);
-		area 		<= WR_BUF_LEN;
-		action		<= LOAD;
-		packet_wr	<= arg_packet;
-		start_port	<= 1;
+	function read_buffer_next ();
+		action		<= OP_READ_NEXT;
 		return value_out;
 	endfunction
 
-	function void 	set_wr_buf_len(input TypeBufferWrAddr arg_packet, input TypePacketAddr arg_value, input TypeStoreMode arg_store_mode = STORE);
-		area		<= WR_BUF_LEN;
-		action		<= (arg_store_mode == IF_BIGGER) ? STORE_IF_BIGGER : (arg_store_mode == IF_LOWER ? STORE_IF_LOWER : STORE);
-		packet_wr	<= arg_packet;
-		value_in	<= arg_value;
-		start_port	<= 1;
-	endfunction
-
-	// WrBuf
-	function TypeByte get_wr_buf(input TypeBufferWrAddr arg_packet, input TypePacketAddr arg_address);
-		area 		<= RD_BUF;
-		action		<= LOAD;
-		packet_wr	<= arg_packet;
-		address	    <= arg_address;
-		start_port	<= 1;
+	function write_buffer (input TypePacketAddr p_address,	input TypeByte p_value);	
+		action		<= OP_WRITE;
+		address		<= p_address;
+		value_in	<= p_value;
 		return value_out;
 	endfunction
 
-	function void set_wr_buf(input TypeBufferWrAddr arg_packet, input TypePacketAddr arg_address, input TypeByte arg_value);
-		area		<= RD_BUF;
-		action		<= STORE;
-		packet_wr	<= arg_packet;
-		address	    <= arg_address;
-		value_in	<= arg_value;
-		start_port	<= 1;
-	endfunction
 
-	//----------------------------------------------------------------------
-
-	// Sent
-	function TypeBufferWrAddr get_last_sent();
-		area 		<= LAST_SENT;
-		action		<= LOAD;
-		start_port	<= 1;
+	function TypePacketAddr write_buffer_len();
+		action		<= OP_WRITE_LEN;
 		return value_out;
 	endfunction
 
-	function TypeBufferWrAddr set_last_sent(input TypeBufferWrAddr arg_value);
-		area		<= LAST_SENT;
-		action		<= STORE;
-		value_in	<= arg_value;
-		start_port	<= 1;
-	endfunction
-	
-	function TypeBufferWrAddr next_last_sent();
-		area		<= LAST_SENT;
-		action		<= STORE;
-		value_in	<= (value_out + 1) % `BUFFER_SIZE_WR;
-		start_port	<= 1;
-	endfunction
 
-	// Wrote
-	function TypeBufferWrAddr get_last_wrote();
-		area 		<= LAST_WROTE;
-		action		<= LOAD;
-		start_port	<= 1;
+	function write_buffer_next ();
+		action		<= OP_WRITE_NEXT;
 		return value_out;
 	endfunction
 
-	function TypeBufferWrAddr set_last_wrote(input TypeBufferWrAddr arg_value);
-		area		<= LAST_WROTE;
-		action		<= STORE;
-		value_in	<= arg_value;
-		start_port	<= 1;
-	endfunction
-	
-	function TypeBufferWrAddr next_last_wrote();
-		area		<= LAST_WROTE;
-		action		<= STORE;
-		value_in	<= (value_out + 1) % `BUFFER_SIZE_WR;
-		start_port	<= 1;
-	endfunction
-
-	// Recv
-	function TypeBufferRdAddr get_last_recv();
-		area 		<= LAST_RECV;
-		action		<= LOAD;
-		start_port	<= 1;
-		return value_out;
-	endfunction
-
-	function TypeBufferRdAddr set_last_recv(input TypeBufferRdAddr arg_value);
-		area		<= LAST_RECV;
-		action		<= STORE;
-		value_in	<= arg_value;
-		start_port	<= 1;
-	endfunction
-	
-	
-	function TypeBufferRdAddr next_last_recv();
-		area		<= LAST_RECV;
-		action		<= STORE;
-		value_in	<= (value_out + 1) % `BUFFER_SIZE_RD;
-		start_port	<= 1;
-	endfunction
-
-	// Read
-	function TypeBufferRdAddr get_last_read();
-		area 		<= LAST_READ;
-		action		<= LOAD;
-		start_port	<= 1;
-		return value_out;
-	endfunction
-
-	function TypeBufferRdAddr set_last_read(input TypeBufferRdAddr arg_value);
-		area		<= LAST_READ;
-		action		<= STORE;
-		value_in	<= arg_value;
-		start_port	<= 1;
-	endfunction
-	
-	function TypeBufferRdAddr next_last_read();
-		area		<= LAST_READ;
-		action		<= STORE;
-		value_in	<= (value_out + 1) % `BUFFER_SIZE_RD;
-		start_port	<= 1;
-	endfunction
-	
-	// Queue
-	function TypeBufferWrAddr get_queue_len_wr();
-		area 		<= QUEUE_WR;
-		action		<= LOAD;
-		start_port	<= 1;
-		return value_out;
-	endfunction
-	
-	function TypeBufferWrAddr get_queue_len_rd();
-		area 		<= QUEUE_RD;
-		action		<= LOAD;
-		start_port	<= 1;
-		return value_out;
-	endfunction
-	
-	
 
 
 //----------------------------------------------------------------------
@@ -387,291 +206,89 @@ module buffer_cntr(
 	var TypeWrBufLen wr_buf_len;
 	var TypeWrBuf    wr_buf;
 	
-	var TypeBufferWrAddr buf_last_sent;
-	var TypeBufferWrAddr buf_last_wrote;
-	var TypeBufferRdAddr buf_last_recv;
-	var TypeBufferRdAddr buf_last_read;
+	var TypeBufferWrAddr last_sent;
+	var TypeBufferWrAddr last_wrote;
+	var TypeBufferRdAddr last_recv;
+	var TypeBufferRdAddr last_read;
 	
 	
 	always @(posedge clock)
     if (reset)
     begin
     
-        buf_last_sent  <= 0;
-        buf_last_wrote <= 0;
-        buf_last_recv  <= 0;
-        buf_last_read  <= 0;
+        last_sent  <= 0;
+        last_wrote <= 0;
+        last_recv  <= 0;
+        last_read  <= 0;
         
     end else begin
     
+        
 		if (bus.start_port)
         begin
-            case (bus.area)
-            
-				RD_BUF_LEN:
+            case (bus.action)
+            	OP_READ:
+            	begin
+					if (address < rd_buf_len[last_read])
+						bus.value_out <= rd_buf[last_read][address];
+					else
+						bus.value_out <= 0;
+            	end
+            	
+				OP_READ_LEN:
 				begin
-					if (bus.action == STORE)
-						rd_buf_len[bus.packet_rd] <= bus.value_in;
-					else if (bus.action == STORE_IF_BIGGER)
-						if (bus.value_in > rd_buf_len[bus.packet_rd]) rd_buf_len[bus.packet_rd] <= bus.value_in;
-					else if (bus.action == STORE_IF_LOWER)
-						if (bus.value_in < rd_buf_len[bus.packet_rd]) rd_buf_len[bus.packet_rd] <= bus.value_in;
-						
-					bus.value_out <= rd_buf_len[bus.packet_rd];
+					bus.value_out <= rd_buf[last_read];
 				end
 					
-					
-				RD_BUF:
+				OP_READ_NEXT:
 				begin
-					if (bus.action == STORE)
-						rd_buf[bus.packet_rd][bus.address] <= bus.value_in;
+				    if (last_read != last_recv) begin
+						last_read((last_read + 1) % `BUFFER_SIZE_RD);
+						bus.value_out <= 0;
+					end else begin
+						bus.value_out <= 1; // No more buffer to read
+					end
+				end
+				
+				OP_WRITE:
+				begin
+					 if (bus.address < `PACKET_SIZE) begin
+						wr_buf[last_wrote][address] <= value_in;
+						if (address+1 > wr_buf_len[last_wrote])
+							wr_buf_len[last_wrote] <= [address+1];
+							
+						bus.value_out <= 0;
+					end else begin
+						bus.value_out <= 1; // The packet is full
+					end
+				end
 			
-					bus.value_out <= rd_buf_len[bus.packet_rd][bus.address];
-				end
-					
-				WR_BUF_LEN:
+				
+				OP_WRITE_LEN:
 				begin
-					if (bus.action == STORE)
-						wr_buf_len[bus.packet_wr] <= bus.value_in;
-					else if (bus.action == STORE_IF_BIGGER)
-						if (bus.value_in > rd_buf_len[bus.packet_wr]) wr_buf_len[bus.packet_wr] <= bus.value_in;
-					else if (bus.action == STORE_IF_LOWER)
-						if (bus.value_in < rd_buf_len[bus.packet_wr]) wr_buf_len[bus.packet_wr] <= bus.value_in;
-					
-					bus.value_out <= wr_buf_len[bus.packet_wr];
-				end
-					
-				WR_BUF:
-				begin
-					if (bus.action == STORE)
-						wr_buf[bus.packet_wr][bus.address] <= bus.value_in;
-					
-					bus.value_out <= wr_buf_len[bus.packet_wr][bus.address];
-				end
-					
-				LAST_SENT:
-				begin
-					if (bus.action == STORE)
-						buf_last_sent <= bus.value_in;
-					
-					bus.value_out <= buf_last_sent;
-				end
-					
-				LAST_WROTE:
-				begin
-					if (bus.action == STORE)
-						buf_last_wrote <= bus.value_in;
-					
-					bus.value_out <= buf_last_wrote;
+					bus.value_out <= wr_buf_len[last_wrote];
 				end
 				
-				LAST_RECV:
+				OP_WRITE_NEXT:
 				begin
-					if (bus.action == STORE)
-						buf_last_recv <= bus.value_in;
-					
-					bus.value_out <= buf_last_recv;
+					if (last_wrote != last_sent - 1) begin
+						last_wrote <= (last_wrote + 1) % `BUFFER_SIZE_WR;  
+						wr_buf_len[(last_wrote + 1) % `BUFFER_SIZE_WR] <= 0;
+						bus.value_out <= 0; 
+					end else begin
+						bus.value_out <= 1; // The buffer overflowed 
+					end
 				end
-				
-				LAST_READ:
-				begin
-					if (bus.action == STORE)
-						buf_last_read <= bus.value_in;
-					
-					bus.value_out <= buf_last_read;
-				end
-					
-					
-				QUEUE_RD:
-				if (bus.action == LOAD)
-				begin
-					if (buf_last_recv >= buf_last_read)
-						bus.value_out <= buf_last_recv - buf_last_read;
-					bus.value_out <= BUFFER_SIZE_RD - buf_last_read + buf_last_recv;
-				end
-					
-				QUEUE_WR:
-				if (bus.action == LOAD)
-				begin
-					if (buf_last_wrote >= buf_last_sent)
-						bus.value_out <= buf_last_wrote - buf_last_sent;
-					
-					bus.value_out <= BUFFER_SIZE_WR - buf_last_sent + buf_last_wrote;
-				end
-					
             endcase
             
             bus.done_port <= 1;
         end
-        else
-			bus.done_port <= 0;
-            
-    end
 endmodule
 
 //----------------------------------------------------------------------
 
 
 
-module write_buffer (
-    input clock, 
-    input reset,
-    input start_port,
-    output reg done_port,
-    input TypePacketAddr address,
-    input TypeByte       value,
-    output reg return_port,
-    buffer_bus.master bus);
-
-    always @(posedge clock)
-    if (reset)
-    begin
-        // nothing to do
-    end else begin
-        if (start_port)
-        begin
-            if (address < `PACKET_SIZE) begin
-
-                bus.set_wr_buf(bus.get_last_wrote(), address, value);
-				bus.set_wr_buf_len(bus.get_last_wrote(), address+1, IF_BIGGER);
-                    
-                return_port <= 0;
-            end else begin
-                return_port <= 1; // The packet is full
-            end
-            
-            done_port <= 1;
-        end
-    end
-endmodule
-
-module write_buffer_len (
-    input clock, 
-    input reset,
-    input start_port,
-    output reg done_port,
-    output TypePacketAddr return_port,
-    buffer_bus.master bus);
-
-    always @(posedge clock)
-    if (reset)
-    begin
-        // Nothing to do
-    end else begin
-        if (start_port)
-        begin
-            return_port <= bus.get_wr_buf_len(bus.get_last_wrote());
-            done_port <= 1;
-        end
-    end
-endmodule
-
-
-module write_buffer_next (
-    input clock, 
-    input reset,
-    input start_port,
-    output reg done_port,
-    output reg return_port,
-    buffer_bus.master bus);
-
-
-    
-    always @(posedge clock)
-    if (reset)
-    begin
-        // Nothing
-    end else begin
-    
-        if (start_port) begin
-
-            if (bus.get_last_wrote() != bus.get_last_sent() - 1) begin
-                bus.set_last_wrote((bus.get_last_wrote() + 1) % `BUFFER_SIZE_WR);  
-                bus.set_wr_buf_len    ((bus.get_last_wrote() + 1) % `BUFFER_SIZE_WR, 0);
-                return_port <= 0; 
-            end else begin
-                return_port <= 1; // The buffer overflowed 
-            end
-            
-            done_port <= 1;
-        end
-    end
-endmodule
-
-module read_buffer (
-    input clock, 
-    input reset,
-    input start_port,
-    input TypePacketAddr address,
-    output reg done_port,
-    output TypeByte return_port,
-    buffer_bus.master bus);
-
-    always @(posedge clock)
-    if (reset)
-    begin
-        // nothing to do
-    end else begin
-        if (start_port)
-        begin
-
-            if (address < bus.get_rd_buf_len(bus.get_last_read()))
-                return_port <= bus.get_rd_buf(bus.get_last_read(), address);
-			else
-				return_port <= 0;
-				
-            done_port <= 1;
-        end
-    end
-endmodule
-
-module read_buffer_len (
-    input clock, 
-    input reset,
-    input start_port,
-    output reg done_port,
-    output TypePacketAddr return_port,
-    buffer_bus.master bus);
-
-    always @(posedge clock)
-    if (reset)
-    begin
-        // Nothing to do
-    end else begin
-        if (start_port)
-        begin
-            return_port <= bus.get_rd_buf_len(bus.get_last_read());            
-            done_port <= 1;
-        end
-    end
-endmodule
-
-module read_buffer_next (
-    input clock, 
-    input reset,
-    input start_port,
-    output reg done_port,
-    output reg return_port,
-    buffer_bus.master bus);
-
-    
-    always @(posedge clock)
-    if (reset)
-    begin
-        // Nothing
-    end else begin
-        if (start_port)
-        begin
-            if (bus.get_last_read() != bus.get_last_recv()) begin
-                bus.set_last_read((bus.get_last_read() + 1) % `BUFFER_SIZE_RD);
-                return_port <= 0;
-            end else begin
-                return_port <= 1; // No more buffer to read
-            end
-            done_port <= 1;
-        end
-    end
-endmodule
 
 
 
@@ -710,32 +327,11 @@ module driver_operation(
     output reg 	eth_reset_n);
 
 
-    buffer_bus bus ( );
-    
-    reg       d1_start_port;
-    reg       d1_done_port;
-    reg[16:0] d1_return_port;
-    
-    reg       d2_start_port;
-    reg       d2_done_port;
-    reg[16:0] d2_return_port;
-    
-    reg       d3_start_port;
-    reg       d3_done_port;
-    reg[16:0] d3_return_port;
-    
-    reg       d4_start_port;
-    reg       d4_done_port;
-    reg[16:0] d4_return_port;
-    
-    reg       d5_start_port;
-    reg       d5_done_port;
-    reg[16:0] d5_return_port;
-    
-    reg       d6_start_port;
-    reg       d6_done_port;
-    reg[16:0] d6_return_port;
-    
+    buffer_bus bus ( 
+        .clock,
+		.reset,
+		.start_port,
+		.done_port);
     
 
     always @(posedge clock)
@@ -749,82 +345,22 @@ module driver_operation(
             case (operation)
                             
             OP_READ:
-            begin
-                d1_start_port <= start_port;
-                d2_start_port <= 0;
-                d3_start_port <= 0;
-                d4_start_port <= 0;
-                d5_start_port <= 0;
-                d6_start_port <= 0;
-
-                done_port   <= d1_done_port;
-                return_port <= d1_return_port;
-            end
-    
+				return_port <= read_buffer(address);
+				
             OP_READ_LEN:
-            begin
-                d1_start_port <= 0;
-                d2_start_port <= start_port;
-                d3_start_port <= 0;
-                d4_start_port <= 0;
-                d5_start_port <= 0;
-                d6_start_port <= 0;
-
-                done_port   <= d2_done_port;
-                return_port <= d2_return_port;
-            end
+				return_port <= read_buffer_len();
             
             OP_READ_NEXT:
-            begin
-                d1_start_port <= 0;
-                d2_start_port <= 0;
-                d3_start_port <= start_port;
-                d4_start_port <= 0;
-                d5_start_port <= 0;
-                d6_start_port <= 0;
-
-                done_port   <= d3_done_port;
-                return_port <= d3_return_port;
-            end
+				return_port <= read_buffer_next();
                 
             OP_WRITE:
-            begin
-                d1_start_port <= 0;
-                d2_start_port <= 0;
-                d3_start_port <= 0;
-                d4_start_port <= start_port;
-                d5_start_port <= 0;
-                d6_start_port <= 0;
-
-                done_port   <= d4_done_port;
-                return_port <= d4_return_port;
-            end
+				return_port <= write_buffer(address, value)
                 
             OP_WRITE_LEN:
-            begin
-                d1_start_port <= 0;
-                d2_start_port <= 0;
-                d3_start_port <= 0;
-                d4_start_port <= 0;
-                d5_start_port <= start_port;
-                d6_start_port <= 0;
-
-                done_port   <= d5_done_port;
-                return_port <= d5_return_port;
-            end
+				return_port <= write_buffer_len();
             
             OP_WRITE_NEXT:
-            begin
-                d1_start_port <= 0;
-                d2_start_port <= 0;
-                d3_start_port <= 0;
-                d4_start_port <= 0;
-                d5_start_port <= 0;
-                d6_start_port <= start_port;
-
-                done_port   <= d6_done_port;
-                return_port <= d6_return_port;
-            end
+				return_port <= write_buffer_next();
                 
             endcase
         end
@@ -852,75 +388,6 @@ module driver_operation(
 		.eth_mdio(eth_mdio),
 		.eth_mdc(eth_mdc),
 		.eth_reset_n(eth_reset_n),
-		
-		.bus(bus));
-    
-
-    read_buffer         read_buffer_inst (
-        .clock(clock),
-        .reset(reset), 
-        
-        .start_port  (d1_start_port), 
-        .done_port   (d1_done_port), 
-        .return_port (d1_return_port),
-        .address(address),
-		
-		.bus(bus));
-
-
-    read_buffer_len		read_buffer_len_inst (
-        .clock(clock), 
-        .reset(reset), 
-        
-        .start_port  (d2_start_port),
-        .done_port   (d2_done_port),
-        .return_port (d2_return_port),
-		
-		.bus(bus));
-
-
-    read_buffer_next    read_buffer_next_inst  (
-        .clock(clock),
-        .reset(reset),
-        .start_port  (d3_start_port),
-        .done_port   (d3_done_port),
-        .return_port (d3_return_port),
-		
-		.bus(bus));
-    
-
-    write_buffer        write_buffer_inst  (
-        .clock(clock),
-        .reset(reset),
-        
-        .start_port  (d4_start_port),
-        .done_port   (d4_done_port),
-        .return_port (d4_return_port),
-        
-        .address(address),
-        .value(value),
-		
-		.bus(bus));
-    
-
-    write_buffer_len	write_buffer_len_inst (
-        .clock(clock), 
-        .reset(reset),
-         
-        .start_port  (d5_start_port),
-        .done_port   (d5_done_port),
-        .return_port (d5_return_port),
-		
-		.bus(bus));
-
-
-    write_buffer_next	write_buffer_next_inst  (
-        .clock(clock),
-        .reset(reset),
-        
-        .start_port  (d6_start_port),
-        .done_port   (d6_done_port),
-        .return_port (d6_return_port),
 		
 		.bus(bus));
 
