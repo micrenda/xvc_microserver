@@ -47,9 +47,18 @@ typedef enum {
 	OP_READ        = 0,
 	OP_READ_LEN    = 1,
 	OP_READ_NEXT   = 2,
+	
 	OP_WRITE       = 3,
 	OP_WRITE_LEN   = 4, 
-	OP_WRITE_NEXT  = 5 
+	OP_WRITE_NEXT  = 5, 
+	
+	OP_RECV        = 6,
+	OP_RECV_LEN    = 7,
+	OP_RRECV_NEXT  = 8,
+	
+	OP_SEND        = 9,
+	OP_SEND_LEN    = 10, 
+	OP_SEND_NEXT   = 11 
 } TypeOp;
 
 
@@ -76,13 +85,24 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
         input      start_port,
         output     done_port);
 	
-	modport master (
+	modport master_drv (
 		import write_buffer,
 		import write_buffer_len,
 		import write_buffer_next,
 		import read_buffer,
 		import read_buffer_len,
 		import read_buffer_next);
+		
+	modport master_eth (
+		import recv_buffer,
+		import recv_buffer_len,
+		import recv_buffer_next,
+		import send_buffer,
+		import send_buffer_len,
+		import read_buffer_next);
+
+		
+		
         
     function TypeByte read_buffer (input TypePacketAddr p_address);
 		action		<= OP_READ;
@@ -90,37 +110,74 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 		return value_out;
 	endfunction
 
-
 	function TypePacketAddr read_buffer_len ();
 		action		<= OP_READ_LEN;
 		return value_out;
 	endfunction
 
-
 	function read_buffer_next ();
 		action		<= OP_READ_NEXT;
 		return value_out;
 	endfunction
+	
+	
+	
 
-	function write_buffer (input TypePacketAddr p_address,	input TypeByte p_value);	
+	function write_buffer (input TypePacketAddr p_address, input TypeByte p_value);	
 		action		<= OP_WRITE;
 		address		<= p_address;
 		value_in	<= p_value;
 		return value_out;
 	endfunction
 
-
 	function TypePacketAddr write_buffer_len();
 		action		<= OP_WRITE_LEN;
 		return value_out;
 	endfunction
-
 
 	function write_buffer_next ();
 		action		<= OP_WRITE_NEXT;
 		return value_out;
 	endfunction
 
+		
+		
+        
+    function TypeByte recv_buffer (input TypePacketAddr p_address);
+		action		<= OP_RECV;
+		address		<= p_address;
+		return value_out;
+	endfunction
+
+	function TypePacketAddr recv_buffer_len ();
+		action		<= OP_RECV_LEN;
+		return value_out;
+	endfunction
+
+	function recv_buffer_next ();
+		action		<= OP_RECV_NEXT;
+		return value_out;
+	endfunction
+	
+	
+	
+
+	function send_buffer (input TypePacketAddr p_address, input TypeByte p_value);	
+		action		<= OP_SEND;
+		address		<= p_address;
+		value_in	<= p_value;
+		return value_out;
+	endfunction
+
+	function TypePacketAddr send_buffer_len();
+		action		<= OP_SEND_LEN;
+		return value_out;
+	endfunction
+
+	function send_buffer_next ();
+		action		<= OP_SEND_NEXT;
+		return value_out;
+	endfunction
 
 
 //----------------------------------------------------------------------
@@ -231,7 +288,7 @@ module buffer_cntr(
 					if (bus.address < rd_buf_len[last_read])
 						bus.value_out <= rd_buf[last_read][bus.address];
 					else
-						bus.value_out <= 0;
+						bus.value_out <= 0; // Accessing a packet outside the current packet length
             	end
             	
 				OP_READ_LEN:
@@ -245,7 +302,7 @@ module buffer_cntr(
 						last_read <= (last_read + 1) % `BUFFER_SIZE_RD;
 						bus.value_out <= 0;
 					end else begin
-						bus.value_out <= 1; // No more buffer to read
+						bus.value_out <= 1; // No more packets to read
 					end
 				end
 				
@@ -262,7 +319,6 @@ module buffer_cntr(
 					end
 				end
 			
-				
 				OP_WRITE_LEN:
 				begin
 					bus.value_out <= wr_buf_len[last_wrote];
@@ -276,6 +332,59 @@ module buffer_cntr(
 						bus.value_out <= 0; 
 					end else begin
 						bus.value_out <= 1; // The buffer overflowed 
+					end
+				end
+				
+            	OP_RECV:
+				begin
+					 if (bus.address < `PACKET_SIZE) begin
+						rd_buf[last_recv][bus.address] <= bus.value_in;
+						if (bus.address + 1 > rd_buf_len[last_recv])
+							rd_buf_len[last_recv] <= bus.address+1;
+							
+						bus.value_out <= 0;
+					end else begin
+						bus.value_out <= 1; // The packet is full
+					end
+				end
+            	
+				OP_RECV_LEN:
+				begin
+					bus.value_out <= rd_buf_len[last_recv];
+				end
+					
+				OP_RECV_NEXT:
+				begin
+				    if (last_read != last_recv + 1) begin
+						last_recv <= (last_recv + 1) % `BUFFER_SIZE_RD;
+						bus.value_out <= 0;
+					end else begin
+						bus.value_out <= 1; // The buffer overflowed
+					end
+				end
+				
+				OP_SEND:
+				begin
+					if (bus.address < wr_buf_len[last_sent])
+						bus.value_out <= wr_buf[last_sent][bus.address];
+					else
+						bus.value_out <= 0; // Accessing a packet outside the current packet length
+            	end
+				
+			
+				OP_SEND_LEN:
+				begin
+					bus.value_out <= wr_buf_len[last_sent];
+				end
+				
+				OP_SEND_NEXT:
+				begin
+					if (last_wrote != last_sent) begin
+						wr_buf_len[last_sent] <= 0; // Removing the old packet length
+						last_sent <= (last_sent + 1) % `BUFFER_SIZE_WR;  	
+						bus.value_out <= 0; 
+					end else begin
+						bus.value_out <= 1; // No more packets to send
 					end
 				end
             endcase
@@ -361,7 +470,25 @@ module driver_operation(
             
             OP_WRITE_NEXT:
 				return_port <= bus.write_buffer_next();
+			/*	           
+            OP_RECV:
+				return_port <= bus.recv_buffer(address);
+				
+            OP_RECV_LEN:
+				return_port <= bus.recv_buffer_len();
+            
+            OP_READ_NEXT:
+				return_port <= bus.recv_buffer_next();
                 
+            OP_SEND:
+				return_port <= bus.send_buffer(address, value);
+                
+            OP_SEND_LEN:
+				return_port <= bus.send_buffer_len();
+            
+            OP_SEND_NEXT:
+				return_port <= bus.send_buffer_next();
+             */   
             endcase
         end
     
@@ -403,14 +530,13 @@ module handle_tx(
     output var TypeByte tx_data, 
     output var tx_en, 
     output var tx_er,
-    buffer_bus.master bus);
+    buffer_bus.master_eth bus);
 
     var [3:0]   state_tx;
     var [31:0]  crc32_tx;
     var [3:0]   tx_intergap;
     
-    var TypeBufferWrAddr  buf_current;
-    var TypePacketAddr    pkg_current;
+    var TypePacketAddr    add_current;
     
     
     always @(posedge clock)
@@ -423,10 +549,9 @@ module handle_tx(
         
         case (state_tx)
             STATUS_READY:
-                if (bus.get_last_sent() != bus.get_last_wrote())
+                if (bus.recv_buffer_next())
                 begin
-                    pkg_current     <= 0;
-                    buf_current     <= bus.get_last_sent() + 1;
+                    add_current     <= 0;
                     crc32_tx        <= 0;
                     tx_intergap     <= 0;
                     tx_en           <= 0;
@@ -465,11 +590,11 @@ module handle_tx(
                 end
                 
             STATUS_DATA:
-                if (pkg_current < bus.get_wr_buf_len(buf_current))
+                if (add_current < bus.send_buffer_len())
                 begin
-                    tx_data       <= bus.get_wr_buf(buf_current, pkg_current);
-                    crc32_tx      <= next_crc32_d8(bus.get_wr_buf(buf_current, pkg_current), crc32_tx);
-                    pkg_current   <= pkg_current + 1;
+                    tx_data       <= bus.send_buffer(add_current);
+                    crc32_tx      <= next_crc32_d8(bus.send_buffer(add_current), crc32_tx);
+                    add_current   <= add_current + 1;
                 end else begin
                     state_tx      <= STATUS_SEND_CRC_3;
                 end
@@ -500,7 +625,6 @@ module handle_tx(
                 
             STATUS_DONE:
                 begin
-                    bus.set_last_sent(buf_current);
                     state_tx <= STATUS_INTERGAP;
                 end
                 
@@ -526,15 +650,14 @@ module handle_rx(
     input TypeByte rx_data,
     input rx_er,
     input rx_dv,
-    buffer_bus.master bus);
+    buffer_bus.master_eth bus);
 
     
     
     reg [3:0]   state_rx;
     reg [31:0]  crc32_rx;
     
-    var TypeBufferRdAddr   buf_current;
-    var TypePacketAddr     pkg_current;
+    var TypePacketAddr     add_current;
 
     always @(posedge clock)
     if (reset)
@@ -551,9 +674,9 @@ module handle_rx(
             case (state_rx)
                 STATUS_READY:
                     if (rx_data == 8'h55) begin
-                        buf_current     <= bus.get_last_recv() + 1;
                         crc32_rx        <= 0;
                         state_rx        <= STATUS_PREAMBLE_0;
+                        bus.recv_buffer_clear();
                     end
                     
                     
@@ -614,31 +737,30 @@ module handle_rx(
                     end
                     
                 STATUS_DATA:
-                    if (pkg_current < `PACKET_SIZE)
+                    if (add_current < `PACKET_SIZE)
                     begin
                         
                         if (crc32_rx != 32'hC704DD7B) begin
                         
-							bus.set_rd_buf(buf_current, pkg_current, rx_data);
+							bus.read_buffer(add_current, rx_data);
                             crc32_rx      <= next_crc32_d8(rx_data, crc32_rx);
-                            pkg_current   <= pkg_current + 1;
+                            add_current   <= add_current + 1;
                             
                         end else begin
                             state_rx <= STATUS_DONE;
-                        end;
+                        end
                     end else begin
                         state_rx <= STATUS_READY;
                     end
                     
                 STATUS_DONE:
                     begin
-                        bus.set_last_recv(buf_current);
-                        bus.set_rd_buf_len(pkg_current, pkg_current-4);
                         state_rx                <= STATUS_READY;
+                        bus.recv_buffer_next(); // TODO: add remove last 4 bytes
                     end
                     
                 default:
-                    state_rx      <= STATUS_READY;
+                    state_rx <= STATUS_READY;
             endcase 
         end
     end
@@ -663,7 +785,7 @@ module gig_eth_pcs_pma (
     output  eth_mdc,
     output reg eth_reset_n,
     
-    buffer_bus.master bus);
+    buffer_bus.master_eth bus);
     
     //wire        clock_mac; 
     wire[15:0]  gmii_status;     
