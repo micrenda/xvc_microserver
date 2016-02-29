@@ -87,7 +87,6 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
     function TypeByte read_buffer (input TypePacketAddr p_address);
 		action		<= OP_READ;
 		address		<= p_address;
-		value_in	<= value;
 		return value_out;
 	endfunction
 
@@ -229,21 +228,21 @@ module buffer_cntr(
             case (bus.action)
             	OP_READ:
             	begin
-					if (address < rd_buf_len[last_read])
-						bus.value_out <= rd_buf[last_read][address];
+					if (bus.address < rd_buf_len[last_read])
+						bus.value_out <= rd_buf[last_read][bus.address];
 					else
 						bus.value_out <= 0;
             	end
             	
 				OP_READ_LEN:
 				begin
-					bus.value_out <= rd_buf[last_read];
+					bus.value_out <= rd_buf_len[last_read];
 				end
 					
 				OP_READ_NEXT:
 				begin
 				    if (last_read != last_recv) begin
-						last_read((last_read + 1) % `BUFFER_SIZE_RD);
+						last_read <= (last_read + 1) % `BUFFER_SIZE_RD;
 						bus.value_out <= 0;
 					end else begin
 						bus.value_out <= 1; // No more buffer to read
@@ -253,9 +252,9 @@ module buffer_cntr(
 				OP_WRITE:
 				begin
 					 if (bus.address < `PACKET_SIZE) begin
-						wr_buf[last_wrote][address] <= value_in;
-						if (address+1 > wr_buf_len[last_wrote])
-							wr_buf_len[last_wrote] <= [address+1];
+						wr_buf[last_wrote][bus.address] <= bus.value_in;
+						if (bus.address + 1 > wr_buf_len[last_wrote])
+							wr_buf_len[last_wrote] <= bus.address+1;
 							
 						bus.value_out <= 0;
 					end else begin
@@ -283,6 +282,7 @@ module buffer_cntr(
             
             bus.done_port <= 1;
         end
+    end
 endmodule
 
 //----------------------------------------------------------------------
@@ -345,22 +345,22 @@ module driver_operation(
             case (operation)
                             
             OP_READ:
-				return_port <= read_buffer(address);
+				return_port <= bus.read_buffer(address);
 				
             OP_READ_LEN:
-				return_port <= read_buffer_len();
+				return_port <= bus.read_buffer_len();
             
             OP_READ_NEXT:
-				return_port <= read_buffer_next();
+				return_port <= bus.read_buffer_next();
                 
             OP_WRITE:
-				return_port <= write_buffer(address, value)
+				return_port <= bus.write_buffer(address, value);
                 
             OP_WRITE_LEN:
-				return_port <= write_buffer_len();
+				return_port <= bus.write_buffer_len();
             
             OP_WRITE_NEXT:
-				return_port <= write_buffer_next();
+				return_port <= bus.write_buffer_next();
                 
             endcase
         end
