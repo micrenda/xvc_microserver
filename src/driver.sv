@@ -403,7 +403,10 @@ module buffer_cntr(
 				
 				
 				OP_RECV_FIX:
-					bus.last_recv <= bus.last_recv - 4;
+				begin
+				    if (rd_buf_len[last_recv] >= 4)
+					   rd_buf_len[last_recv] <= rd_buf_len[last_recv] - 4;
+				end
             endcase
             
             bus.done_port <= 1;
