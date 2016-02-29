@@ -1,27 +1,27 @@
 `timescale 1ns / 1ps
 
-`define BUFFER_SIZE_WR   32
-`define BUFFER_SIZE_RD   32
+`define BUFFER_SIZE_O   32
+`define BUFFER_SIZE_I   32
 `define PACKET_SIZE     402
 
 // If you change the values above, then you have to check that the sizes defined below are still valid
 // Unfortunately Verilog has not the $size operator.
 
-`define SIZE_BUFFER_SIZE_WR   5
-`define SIZE_BUFFER_SIZE_RD   5
+`define SIZE_BUFFER_SIZE_O   5
+`define SIZE_BUFFER_SIZE_I   5
 `define SIZE_PACKET_SIZE     16
 
-typedef logic [`SIZE_PACKET_SIZE-1:0]    TypePacketAddr;
-typedef logic [`SIZE_BUFFER_SIZE_RD-1:0] TypeBufferRdAddr;
-typedef logic [`SIZE_BUFFER_SIZE_WR-1:0] TypeBufferWrAddr;
+typedef logic [`SIZE_PACKET_SIZE-1:0]   TypePacketAddr;
+typedef logic [`SIZE_BUFFER_SIZE_I-1:0] TypeBufferIAddr;
+typedef logic [`SIZE_BUFFER_SIZE_O-1:0] TypeBufferOAddr;
 
 typedef  logic[7:0]      TypeByte;
 
-typedef TypePacketAddr   TypeRdBufLen [0:`BUFFER_SIZE_RD-1];
-typedef TypeByte         TypeRdBuf    [0:`BUFFER_SIZE_RD-1][0:`PACKET_SIZE-1];
+typedef TypePacketAddr   TypeIBufLen [0:`BUFFER_SIZE_I-1];
+typedef TypeByte         TypeIBuf    [0:`BUFFER_SIZE_I-1][0:`PACKET_SIZE-1];
     
-typedef TypePacketAddr   TypeWrBufLen [0:`BUFFER_SIZE_WR-1];
-typedef TypeByte         TypeWrBuf    [0:`BUFFER_SIZE_WR-1][0:`PACKET_SIZE-1];
+typedef TypePacketAddr   TypeOBufLen [0:`BUFFER_SIZE_O-1];
+typedef TypeByte         TypeOBuf    [0:`BUFFER_SIZE_O-1][0:`PACKET_SIZE-1];
 
 
 typedef enum {
@@ -69,16 +69,16 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 
 
 	TypeOp	         action;
-	TypeBufferWrAddr packet_wr;
-	TypeBufferRdAddr packet_rd;
+	TypeBufferOAddr  packet_o;
+	TypeBufferIAddr  packet_i;
 	TypePacketAddr   address;
 	logic[31:0]      value_in;
 	logic[31:0]      value_out;
 	
 	modport slave (
         input  	   action,
-        input 	   packet_wr,
-        input 	   packet_rd,
+        input 	   packet_o,
+        input 	   packet_i,
         
         input      address,
         input      value_in,
@@ -264,15 +264,15 @@ module buffer_cntr(
     input reset,
     buffer_bus.slave bus);
     
-	var TypeRdBufLen rd_buf_len;
-	var TypeRdBuf    rd_buf;
-	var TypeWrBufLen wr_buf_len;
-	var TypeWrBuf    wr_buf;
+	var TypeIBufLen rd_buf_len;
+	var TypeIBuf    rd_buf;
+	var TypeOBufLen wr_buf_len;
+	var TypeOBuf    wr_buf;
 	
-	var TypeBufferWrAddr last_sent;
-	var TypeBufferWrAddr last_wrote;
-	var TypeBufferRdAddr last_recv;
-	var TypeBufferRdAddr last_read;
+	var TypeBufferOAddr last_sent;
+	var TypeBufferOAddr last_wrote;
+	var TypeBufferIAddr last_recv;
+	var TypeBufferIAddr last_read;
 	
 	
 	always @(posedge clock)
@@ -306,7 +306,7 @@ module buffer_cntr(
 				OP_READ_NEXT:
 				begin
 				    if (last_read != last_recv) begin
-						last_read <= (last_read + 1) % `BUFFER_SIZE_RD;
+						last_read <= (last_read + 1) % `BUFFER_SIZE_I;
 						bus.value_out <= 0;
 					end else begin
 						bus.value_out <= 1; // No more packets to read
@@ -336,8 +336,8 @@ module buffer_cntr(
 					if (last_wrote != last_sent - 1) begin
 						if (wr_buf_len[last_wrote] > 0)
 						begin
-							last_wrote <= (last_wrote + 1) % `BUFFER_SIZE_WR;  
-							wr_buf_len[(last_wrote + 1) % `BUFFER_SIZE_WR] <= 0;
+							last_wrote <= (last_wrote + 1) % `BUFFER_SIZE_O;  
+							wr_buf_len[(last_wrote + 1) % `BUFFER_SIZE_O] <= 0;
 						end
 						bus.value_out <= 0; 
 					end else begin
@@ -368,7 +368,7 @@ module buffer_cntr(
 				    if (last_read != last_recv + 1) begin
 						if (rd_buf_len[last_read] > 0)
 						begin
-							last_read <= (last_read + 1) % `BUFFER_SIZE_RD;
+							last_read <= (last_read + 1) % `BUFFER_SIZE_I;
 							bus.value_out <= 0;
 						end
 					end else begin
@@ -394,7 +394,7 @@ module buffer_cntr(
 				begin
 					if (last_wrote != last_sent) begin
 						wr_buf_len[last_sent] <= 0; // Removing the old packet length
-						last_sent <= (last_sent + 1) % `BUFFER_SIZE_WR;  	
+						last_sent <= (last_sent + 1) % `BUFFER_SIZE_O;  	
 						bus.value_out <= 0; 
 					end else begin
 						bus.value_out <= 1; // No more packets to send
