@@ -6,9 +6,9 @@
 
 // Defining sizes for buffer pointers
 
-`define SIZE_BUFFER_SIZE_O   $clog2(BUFFER_SIZE_O)
-`define SIZE_BUFFER_SIZE_I   $clog2(BUFFER_SIZE_I)
-`define SIZE_PACKET_SIZE     $clog2(PACKET_SIZE)
+`define SIZE_BUFFER_SIZE_O   $clog2(`BUFFER_SIZE_O)
+`define SIZE_BUFFER_SIZE_I   $clog2(`BUFFER_SIZE_I)
+`define SIZE_PACKET_SIZE     $clog2(`PACKET_SIZE)
 
 typedef logic [`SIZE_PACKET_SIZE-1:0]   TypePacketAddr;
 typedef logic [`SIZE_BUFFER_SIZE_I-1:0] TypeBufferIAddr;
