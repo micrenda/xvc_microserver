@@ -58,7 +58,9 @@ typedef enum {
 	
 	OP_SEND        = 9,
 	OP_SEND_LEN    = 10, 
-	OP_SEND_NEXT   = 11 
+	OP_SEND_NEXT   = 11, 
+	
+	OP_RECV_FIX	   = 12
 } TypeOp;
 
 
@@ -102,7 +104,7 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 		import read_buffer_next);
 
 		
-		
+	
         
     function TypeByte read_buffer (input TypePacketAddr p_address);
 		action		<= OP_READ;
@@ -156,6 +158,11 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 
 	function recv_buffer_next ();
 		action		<= OP_RECV_NEXT;
+		return value_out;
+	endfunction
+	
+	function recv_buffer_fix();
+		action		<= OP_RECV_FIX;
 		return value_out;
 	endfunction
 	
@@ -327,8 +334,11 @@ module buffer_cntr(
 				OP_WRITE_NEXT:
 				begin
 					if (last_wrote != last_sent - 1) begin
-						last_wrote <= (last_wrote + 1) % `BUFFER_SIZE_WR;  
-						wr_buf_len[(last_wrote + 1) % `BUFFER_SIZE_WR] <= 0;
+						if (wr_buf_len[last_wrote] > 0)
+						begin
+							last_wrote <= (last_wrote + 1) % `BUFFER_SIZE_WR;  
+							wr_buf_len[(last_wrote + 1) % `BUFFER_SIZE_WR] <= 0;
+						end
 						bus.value_out <= 0; 
 					end else begin
 						bus.value_out <= 1; // The buffer overflowed 
@@ -356,8 +366,11 @@ module buffer_cntr(
 				OP_RECV_NEXT:
 				begin
 				    if (last_read != last_recv + 1) begin
-						last_recv <= (last_recv + 1) % `BUFFER_SIZE_RD;
-						bus.value_out <= 0;
+						if (rd_buf_len[last_read] > 0)
+						begin
+							last_read <= (last_read + 1) % `BUFFER_SIZE_RD;
+							bus.value_out <= 0;
+						end
 					end else begin
 						bus.value_out <= 1; // The buffer overflowed
 					end
@@ -387,6 +400,10 @@ module buffer_cntr(
 						bus.value_out <= 1; // No more packets to send
 					end
 				end
+				
+				
+				OP_RECV_FIX:
+					bus.last_recv <= bus.last_recv - 4;
             endcase
             
             bus.done_port <= 1;
@@ -469,26 +486,7 @@ module driver_operation(
 				return_port <= bus.write_buffer_len();
             
             OP_WRITE_NEXT:
-				return_port <= bus.write_buffer_next();
-			/*	           
-            OP_RECV:
-				return_port <= bus.recv_buffer(address);
-				
-            OP_RECV_LEN:
-				return_port <= bus.recv_buffer_len();
-            
-            OP_READ_NEXT:
-				return_port <= bus.recv_buffer_next();
-                
-            OP_SEND:
-				return_port <= bus.send_buffer(address, value);
-                
-            OP_SEND_LEN:
-				return_port <= bus.send_buffer_len();
-            
-            OP_SEND_NEXT:
-				return_port <= bus.send_buffer_next();
-             */   
+				return_port <= bus.write_buffer_next(); 
             endcase
         end
     
@@ -676,7 +674,7 @@ module handle_rx(
                     if (rx_data == 8'h55) begin
                         crc32_rx        <= 0;
                         state_rx        <= STATUS_PREAMBLE_0;
-                        bus.recv_buffer_clear();
+                        bus.recv_buffer_next();
                     end
                     
                     
@@ -742,7 +740,7 @@ module handle_rx(
                         
                         if (crc32_rx != 32'hC704DD7B) begin
                         
-							bus.read_buffer(add_current, rx_data);
+							bus.recv_buffer(add_current, rx_data);
                             crc32_rx      <= next_crc32_d8(rx_data, crc32_rx);
                             add_current   <= add_current + 1;
                             
@@ -755,8 +753,10 @@ module handle_rx(
                     
                 STATUS_DONE:
                     begin
-                        state_rx                <= STATUS_READY;
-                        bus.recv_buffer_next(); // TODO: add remove last 4 bytes
+                        state_rx <= STATUS_READY;
+                        
+                        // Remove last 4 bytes
+                        bus.fix_recv_buffer();
                     end
                     
                 default:
