@@ -142,9 +142,10 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 		
 		
         
-    function TypeByte recv_buffer (input TypePacketAddr p_address);
+    function TypeByte recv_buffer (input TypePacketAddr p_address, input TypeByte p_value);
 		action		<= OP_RECV;
 		address		<= p_address;
+		value_in	<= p_value;
 		return value_out;
 	endfunction
 
@@ -166,10 +167,9 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 	
 	
 
-	function send_buffer (input TypePacketAddr p_address, input TypeByte p_value);	
+	function send_buffer (input TypePacketAddr p_address);	
 		action		<= OP_SEND;
 		address		<= p_address;
-		value_in	<= p_value;
 		return value_out;
 	endfunction
 
@@ -758,7 +758,7 @@ module handle_rx(
                         state_rx <= STATUS_READY;
                         
                         // Remove last 4 bytes
-                        bus.fix_recv_buffer();
+                        bus.recv_buffer_fix();
                     end
                     
                 default:
