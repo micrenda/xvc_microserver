@@ -67,16 +67,48 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 
 
 
-	TypeOp	         action;
-	TypePacketAddr   address;
-	logic[31:0]      value_in;
-	logic[31:0]      value_out;
+	TypeOp	         write_action;
+	TypePacketAddr   write_address;
+	logic[31:0]      write_value_in;
+	logic[31:0]      write_value_out;
+	
+	TypeOp	         read_action;
+	TypePacketAddr   read_address;
+	logic[31:0]      read_value_in;
+	logic[31:0]      read_value_out;
+	
+	TypeOp	         recv_action;
+	TypePacketAddr   recv_address;
+	logic[31:0]      recv_value_in;
+	logic[31:0]      recv_value_out;
+	
+	TypeOp	         send_action;
+	TypePacketAddr   send_address;
+	logic[31:0]      send_value_in;
+	logic[31:0]      send_value_out;
+	
 	
 	modport slave (
-        input  	   action,
-        input      address,
-        input      value_in,
-        output     value_out,
+	
+        input  	   write_action,
+        input      write_address,
+        input      write_value_in,
+        output     write_value_out,
+        
+        input  	   read_action,
+        input      read_address,
+        input      read_value_in,
+        output     read_value_out,
+        
+        input  	   recv_action,
+        input      recv_address,
+        input      recv_value_in,
+        output     recv_value_out,
+        
+        input  	   send_action,
+        input      send_address,
+        input      send_value_in,
+        output     send_value_out,
         
         input      start_port,
         output     done_port);
@@ -104,83 +136,83 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 	
         
     function TypeByte read_buffer (input TypePacketAddr p_address);
-		action		<= OP_READ;
-		address		<= p_address;
-		return value_out;
+		read_action		<= OP_READ;
+		read_address		<= p_address;
+		return read_value_out;
 	endfunction
 
 	function TypePacketAddr read_buffer_len ();
-		action		<= OP_READ_LEN;
-		return value_out;
+		read_action		<= OP_READ_LEN;
+		return read_value_out;
 	endfunction
 
 	function read_buffer_next ();
-		action		<= OP_READ_NEXT;
-		return value_out;
+		read_action		<= OP_READ_NEXT;
+		return read_value_out;
 	endfunction
 	
 	
 	
 
 	function write_buffer (input TypePacketAddr p_address, input TypeByte p_value);	
-		action		<= OP_WRITE;
-		address		<= p_address;
-		value_in	<= p_value;
-		return value_out;
+		write_action		<= OP_WRITE;
+		write_address		<= p_address;
+		write_value_in		<= p_value;
+		return write_value_out;
 	endfunction
 
 	function TypePacketAddr write_buffer_len();
-		action		<= OP_WRITE_LEN;
-		return value_out;
+		write_action		<= OP_WRITE_LEN;
+		return write_value_out;
 	endfunction
 
 	function write_buffer_next ();
-		action		<= OP_WRITE_NEXT;
-		return value_out;
+		write_action		<= OP_WRITE_NEXT;
+		return write_value_out;
 	endfunction
 
 		
 		
         
     function TypeByte recv_buffer (input TypePacketAddr p_address, input TypeByte p_value);
-		action		<= OP_RECV;
-		address		<= p_address;
-		value_in	<= p_value;
-		return value_out;
+		recv_action		<= OP_RECV;
+		recv_address		<= p_address;
+		recv_value_in	<= p_value;
+		return recv_value_out;
 	endfunction
 
 	function TypePacketAddr recv_buffer_len ();
-		action		<= OP_RECV_LEN;
-		return value_out;
+		recv_action		<= OP_RECV_LEN;
+		return recv_value_out;
 	endfunction
 
 	function recv_buffer_next ();
-		action		<= OP_RECV_NEXT;
-		return value_out;
+		recv_action		<= OP_RECV_NEXT;
+		return recv_value_out;
 	endfunction
 	
 	function recv_buffer_fix();
-		action		<= OP_RECV_FIX;
-		return value_out;
+		recv_action		<= OP_RECV_FIX;
+		return recv_value_out;
 	endfunction
 	
 	
 	
 
 	function send_buffer (input TypePacketAddr p_address);	
-		action		<= OP_SEND;
-		address		<= p_address;
-		return value_out;
+		send_action		<= OP_SEND;
+		send_address	<= p_address;
+		return send_value_out;
 	endfunction
 
 	function TypePacketAddr send_buffer_len();
-		action		<= OP_SEND_LEN;
-		return value_out;
+		send_action		<= OP_SEND_LEN;
+		return send_value_out;
 	endfunction
 
 	function send_buffer_next ();
-		action		<= OP_SEND_NEXT;
-		return value_out;
+		send_action		<= OP_SEND_NEXT;
+		return send_value_out;
 	endfunction
 
 
@@ -286,46 +318,49 @@ module buffer_cntr(
         
 		if (bus.start_port)
         begin
-            case (bus.action)
+            case (bus.read_action)
             	OP_READ:
             	begin
-					if (bus.address < buf_i_len[last_read])
-						bus.value_out <= buf_i[last_read][bus.address];
+					if (bus.read_address < buf_i_len[last_read])
+						bus.read_value_out <= buf_i[last_read][bus.read_address];
 					else
-						bus.value_out <= 0; // Accessing a packet outside the current packet length
+						bus.read_value_out <= 0; // Accessing a packet outside the current packet length
             	end
             	
 				OP_READ_LEN:
 				begin
-					bus.value_out <= buf_i_len[last_read];
+					bus.read_value_out <= buf_i_len[last_read];
 				end
 					
 				OP_READ_NEXT:
 				begin
 				    if (last_read != last_recv) begin
 						last_read <= (last_read + 1) % `BUFFER_SIZE_I;
-						bus.value_out <= 0;
+						bus.read_value_out <= 0;
 					end else begin
-						bus.value_out <= 1; // No more packets to read
+						bus.read_value_out <= 1; // No more packets to read
 					end
 				end
-				
+			endcase
+			
+			
+			case (bus.write_action)	
 				OP_WRITE:
 				begin
-					 if (bus.address < `PACKET_SIZE) begin
-						buf_o[last_wrote][bus.address] <= bus.value_in;
-						if (bus.address + 1 > buf_o_len[last_wrote])
-							buf_o_len[last_wrote] <= bus.address + 1;
+					 if (bus.write_address < `PACKET_SIZE) begin
+						buf_o[last_wrote][bus.write_address] <= bus.write_value_in;
+						if (bus.write_address + 1 > buf_o_len[last_wrote])
+							buf_o_len[last_wrote] <= bus.write_address + 1;
 							
-						bus.value_out <= 0;
+						bus.write_value_out <= 0;
 					end else begin
-						bus.value_out <= 1; // No more space in packet
+						bus.write_value_out <= 1; // No more space in packet
 					end
 				end
 			
 				OP_WRITE_LEN:
 				begin
-					bus.value_out <= buf_o_len[last_wrote];
+					bus.write_value_out <= buf_o_len[last_wrote];
 				end
 				
 				OP_WRITE_NEXT:
@@ -336,29 +371,32 @@ module buffer_cntr(
 							last_wrote <= (last_wrote + 1) % `BUFFER_SIZE_O;  
 							buf_o_len[(last_wrote + 1) % `BUFFER_SIZE_O] <= 0;
 						end
-						bus.value_out <= 0; 
+						bus.write_value_out <= 0; 
 					end else begin
-						bus.value_out <= 1; // The buffer overflowed 
+						bus.write_value_out <= 1; // The buffer overflowed 
 					end
 				end
-				
+			endcase
+			
+			
+			case (bus.recv_action)	
             	OP_RECV:
 				begin
-					 if (bus.address < `PACKET_SIZE) begin
-						buf_i[last_recv][bus.address] <= bus.value_in;
-						if (bus.address + 1 > buf_i_len[last_recv])
+					 if (bus.recv_address < `PACKET_SIZE) begin
+						buf_i[last_recv][bus.recv_address] <= bus.recv_value_in;
+						if (bus.recv_address + 1 > buf_i_len[last_recv])
 						begin
-							buf_i_len[last_recv] <= bus.address + 1;
+							buf_i_len[last_recv] <= bus.recv_address + 1;
 						end
-						bus.value_out <= 0;
+						bus.recv_value_out <= 0;
 					end else begin
-						bus.value_out <= 1; // The packet is full
+						bus.recv_value_out <= 1; // The packet is full
 					end
 				end
             	
 				OP_RECV_LEN:
 				begin
-					bus.value_out <= buf_i_len[last_recv];
+					bus.recv_value_out <= buf_i_len[last_recv];
 				end
 					
 				OP_RECV_NEXT:
@@ -369,24 +407,28 @@ module buffer_cntr(
 							last_recv <= (last_recv + 1) % `BUFFER_SIZE_I;
 							buf_i_len[(last_recv + 1) % `BUFFER_SIZE_I] <= 0;	
 						end
-						bus.value_out <= 0;
+						bus.recv_value_out <= 0;
 					end else begin
-						bus.value_out <= 1; // The buffer overflowed
+						bus.recv_value_out <= 1; // The buffer overflowed
 					end
 				end
-				
+			
+			endcase
+			
+			
+			case (bus.send_action)
 				OP_SEND:
 				begin
-					if (bus.address < buf_o_len[last_sent])
-						bus.value_out <= buf_o[last_sent][bus.address];
+					if (bus.send_address < buf_o_len[last_sent])
+						bus.send_value_out <= buf_o[last_sent][bus.send_address];
 					else
-						bus.value_out <= 0; // Accessing a packet outside the current packet length
+						bus.send_value_out <= 0; // Accessing a packet outside the current packet length
             	end
 				
 			
 				OP_SEND_LEN:
 				begin
-					bus.value_out <= buf_o_len[last_sent];
+					bus.send_value_out <= buf_o_len[last_sent];
 				end
 				
 				OP_SEND_NEXT:
@@ -394,9 +436,9 @@ module buffer_cntr(
 					if (last_wrote != last_sent) begin
 						buf_o_len[last_sent] <= 0; // Removing the old packet length
 						last_sent <= (last_sent + 1) % `BUFFER_SIZE_O;  	
-						bus.value_out <= 0; 
+						bus.send_value_out <= 0; 
 					end else begin
-						bus.value_out <= 1; // No more packets to send
+						bus.send_value_out <= 1; // No more packets to send
 					end
 				end
 				

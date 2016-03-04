@@ -33,8 +33,11 @@ module testbench_fifo();
 
         #20 reset = 0; 
         
+        // Write 1st packet
         
-        #20 bus_test.write_buffer_next(); 
+        #5 bus_test.write_buffer_next(); 
+        #1	assert (bus_test.write_buffer_len() == 0);
+        
         #1  bus_test.write_buffer(0, 100);
         #1  bus_test.write_buffer(1, 101);
         #1  bus_test.write_buffer(2, 102);
@@ -45,10 +48,43 @@ module testbench_fifo();
         #1  bus_test.write_buffer(7, 107);
                 
 		#1	assert (bus_test.write_buffer_len() == 8);
-            
-
-
+		
+		// Write 2nd packet
         
+        #5 bus_test.write_buffer_next(); 
+        #1	assert (bus_test.write_buffer_len() == 0);
+        
+        #1  bus_test.write_buffer(0, 200);
+        #1  bus_test.write_buffer(1, 201);
+        #1  bus_test.write_buffer(2, 202);
+        #1  bus_test.write_buffer(3, 203);
+                
+		#1	assert (bus_test.write_buffer_len() == 4);
+		
+		
+		// Send 1st packet  
+
+		#5	bus_test.send_buffer_next(); 
+        #1	assert (bus_test.send_buffer_len() == 8);
+        
+        #1  assert (bus_test.send_buffer(0) == 100);
+        #1  assert (bus_test.send_buffer(1) == 101);
+        #1  assert (bus_test.send_buffer(2) == 102);
+        #1  assert (bus_test.send_buffer(3) == 103);
+        #1  assert (bus_test.send_buffer(4) == 104);
+        #1  assert (bus_test.send_buffer(5) == 105);
+        #1  assert (bus_test.send_buffer(6) == 106);
+        #1  assert (bus_test.send_buffer(7) == 107);
+        
+        // Send 2nd packet  
+
+		#5	bus_test.send_buffer_next(); 
+        #1	assert (bus_test.send_buffer_len() == 4);
+        
+        #1  assert (bus_test.send_buffer(0) == 200);
+        #1  assert (bus_test.send_buffer(1) == 201);
+        #1  assert (bus_test.send_buffer(2) == 202);
+        #1  assert (bus_test.send_buffer(3) == 203);
          
     end
 
