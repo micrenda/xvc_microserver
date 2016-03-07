@@ -10,7 +10,9 @@ module entry_point (
     input   	sgmii_rx_n,
     input   	sgmii_clk_p,
     input   	sgmii_clk_n,
+    
     inout      	eth_mdio,
+    
     output     	eth_mdc,
     output	 	eth_reset_n
     
@@ -24,7 +26,12 @@ module entry_point (
     
     
     wire clock;
+    
+    wire eth_mdio_i;
+    wire eth_mdio_o;
+    wire eth_mdio_t;
 
+    IOBUF U10 (.I(eth_mdio_o), .O(eth_mdio_i), .T(eth_mdio_t), .IO(eth_mdio));
 
 	IBUFGDS U1 (
 		.O(clock),
@@ -47,7 +54,9 @@ module entry_point (
 		.sgmii_rx_n,
 		.sgmii_clk_p,
 		.sgmii_clk_n,
-		.eth_mdio,
+		.eth_mdio_o,
+		.eth_mdio_i,
+		.eth_mdio_t,
 		.eth_mdc,
 		.eth_reset_n
 	);

@@ -825,7 +825,10 @@ module gig_eth_pcs_pma (
     input   sgmii_clk_p,
     input   sgmii_clk_n,
     
-    inout   eth_mdio,
+    input   eth_mdio_i,
+    output  eth_mdio_o,
+    output  eth_mdio_t,
+    
     output  eth_mdc,
     output reg eth_reset_n,
     
@@ -834,9 +837,6 @@ module gig_eth_pcs_pma (
     //wire        clock_mac; 
     wire[15:0]  	gmii_status;     
     
-    wire        	eth_mdio_o;
-    wire        	eth_mdio_i;
-    wire        	eth_mdio_t;
     
     wire TypeByte	gmii_txd;          
     wire       		gmii_tx_en;  
@@ -846,7 +846,7 @@ module gig_eth_pcs_pma (
     wire      		gmii_rx_er;
    
     
-    IOBUF U10 (.I(eth_mdio_o), .O(eth_mdio_i), .T(eth_mdio_t), .IO(eth_mdio));
+
     
     
     always @(posedge clock)

@@ -303,10 +303,19 @@
             <connected_objects/>
           </port_o>
           
-          <port_o id="eth_mdio" dir="IO" is_global="1" is_extern="1">
+          <port_o id="eth_mdio_i" dir="IN" is_global="1" is_extern="1">
             <structural_type_descriptor type="BOOL" size="1"/>
             <connected_objects/>
           </port_o>
+          <port_o id="eth_mdio_o" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="eth_mdio_t" dir="OUT" is_global="1" is_extern="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          
           <port_o id="eth_mdc" dir="OUT" is_global="1" is_extern="1">
             <structural_type_descriptor type="BOOL" size="1"/>
             <connected_objects/>
