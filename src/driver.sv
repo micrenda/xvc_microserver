@@ -492,7 +492,11 @@ module driver_operation(
     input   	sgmii_rx_n,
     input   	sgmii_clk_p,
     input   	sgmii_clk_n,
-    inout      	eth_mdio,
+    
+    input      	eth_mdio_i,
+    output     	eth_mdio_o,
+    output     	eth_mdio_t,
+    
     output     	eth_mdc,
     output reg 	eth_reset_n);
 
@@ -554,7 +558,9 @@ module driver_operation(
 		.sgmii_clk_p(sgmii_clk_p),
 		.sgmii_clk_n(sgmii_clk_n),
 		
-		.eth_mdio(eth_mdio),
+		.eth_mdio_i(eth_mdio_i),
+		.eth_mdio_o(eth_mdio_o),
+		.eth_mdio_t(eth_mdio_t),
 		.eth_mdc(eth_mdc),
 		.eth_reset_n(eth_reset_n),
 		
