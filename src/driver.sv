@@ -289,15 +289,15 @@ module buffer_cntr(
     input reset,
     buffer_bus.slave bus);
     
-	var TypeIBufLen buf_i_len;
-	var TypeIBuf    buf_i;
-	var TypeOBufLen buf_o_len;
-	var TypeOBuf    buf_o;
+	var TypeIBufLen buf_i_len		= '{default:0};
+	var TypeIBuf    buf_i			= '{default:0};
+	var TypeOBufLen buf_o_len		= '{default:0};
+	var TypeOBuf    buf_o			= '{default:0};
 	
-	var TypeBufferOAddr last_sent;
-	var TypeBufferOAddr last_wrote;
-	var TypeBufferIAddr last_recv;
-	var TypeBufferIAddr last_read;
+	var TypeBufferOAddr last_sent	= 0;
+	var TypeBufferOAddr last_wrote	= 0;
+	var TypeBufferIAddr last_recv	= 0;
+	var TypeBufferIAddr last_read	= 0;
 	
 	
 	always @(posedge clock)
