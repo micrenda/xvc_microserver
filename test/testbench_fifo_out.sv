@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module testbench_fifo();
+module testbench_fifo_out();
 
 
     reg clock, reset, start_port, done_port;
