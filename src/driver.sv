@@ -592,19 +592,23 @@ module handle_tx(
         state_tx <= STATUS_READY;
         tx_en         <= 0;
         tx_er         <= 0;
-        move_next	  <= 0;
+        send_next	  <= 0;
+        send_len	  <= 0;
+        send_val	  <= 0;
     end else begin
         
         case (state_tx)
             STATUS_READY:
-				bus.send_buffer_next(send_next);
-                if (send_next)
-                begin
-                    add_current     <= 0;
-                    crc32_tx        <= 0;
-                    tx_intergap     <= 0;
-                    tx_en           <= 0;
-                    state_tx        <= STATUS_PREAMBLE_0;
+				begin
+					bus.send_buffer_next(send_next);
+					if (send_next)
+					begin
+						add_current     <= 0;
+						crc32_tx        <= 0;
+						tx_intergap     <= 0;
+						tx_en           <= 0;
+						state_tx        <= STATUS_PREAMBLE_0;
+					end
                 end
                 
             STATUS_PREAMBLE_0:
@@ -639,15 +643,17 @@ module handle_tx(
                 end
                 
             STATUS_DATA:
-				bus.send_buffer_len(send_len)
-                if (add_current < send_len)
-                begin
-                    bus.send_buffer(add_current, send_val);
-                    tx_data 	  <= send_val;
-                    crc32_tx      <= next_crc32_d8(send_val, crc32_tx);
-                    add_current   <= add_current + 1;
-                end else begin
-                    state_tx      <= STATUS_SEND_CRC_3;
+				begin
+					bus.send_buffer_len(send_len)
+					if (add_current < send_len)
+					begin
+						bus.send_buffer(add_current, send_val);
+						tx_data 	  <= send_val;
+						crc32_tx      <= next_crc32_d8(send_val, crc32_tx);
+						add_current   <= add_current + 1;
+					end else begin
+						state_tx      <= STATUS_SEND_CRC_3;
+					end
                 end
                 
             STATUS_SEND_CRC_3:
