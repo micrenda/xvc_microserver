@@ -300,7 +300,7 @@ module buffer_cntr(
 	var TypeBufferIAddr last_read	= 0;
 	
 	
-	always //@(posedge clock)
+	always @(posedge clock)
     if (reset)
     begin
     
