@@ -131,85 +131,85 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 		
 	
         
-    function TypeByte read_buffer (input TypePacketAddr p_address);
+    task read_buffer (input TypePacketAddr p_address, output TypeByte p_ret);
 		read_action		<= OP_DEFAULT;
-		read_address		<= p_address;
-		return read_value_out;
-	endfunction
+		read_address	<= p_address;
+		p_ret <= read_value_out;
+	endtask
 
-	function TypePacketAddr read_buffer_len ();
+	task read_buffer_len (output TypePacketAddr p_ret);
 		read_action		<= OP_LEN;
-		return read_value_out;
-	endfunction
+		p_ret <= read_value_out;
+	endtask
 
-	function read_buffer_next ();
+	function read_buffer_next (output p_ret);
 		read_action		<= OP_NEXT;
-		return read_value_out;
-	endfunction
+		p_ret <= read_value_out;
+	endtask
 	
 	
 	
 
-	function write_buffer (input TypePacketAddr p_address, input TypeByte p_value);	
+	task write_buffer (input TypePacketAddr p_address, input TypeByte p_value, output TypeByte p_ret);	
 		write_action		<= OP_DEFAULT;
 		write_address		<= p_address;
 		write_value_in		<= p_value;
-		return write_value_out;
-	endfunction
+		p_ret <= write_value_out;
+	endtask
 
-	function TypePacketAddr write_buffer_len();
+	task write_buffer_len(output TypePacketAddr p_ret);
 		write_action		<= OP_LEN;
-		return write_value_out;
-	endfunction
+		p_ret <= write_value_out;
+	endtask
 
-	function write_buffer_next ();
+	task write_buffer_next (output p_ret);
 		write_action		<= OP_NEXT;
-		return write_value_out;
-	endfunction
+		p_ret <= write_value_out;
+	endtask
 
 		
 		
         
-    function TypeByte recv_buffer (input TypePacketAddr p_address, input TypeByte p_value);
+    task recv_buffer (input TypePacketAddr p_address, input TypeByte p_value, output TypeByte p_ret);
 		recv_action		<= OP_DEFAULT;
 		recv_address	<= p_address;
 		recv_value_in	<= p_value;
-		return recv_value_out;
-	endfunction
+		p_ret <= recv_value_out;
+	endtask
 
-	function TypePacketAddr recv_buffer_len ();
+	task recv_buffer_len (output TypePacketAddr p_ret);
 		recv_action		<= OP_LEN;
-		return recv_value_out;
-	endfunction
+		p_ret <= recv_value_out;
+	endtask
 
-	function recv_buffer_next ();
+	task recv_buffer_next (output p_ret);
 		recv_action		<= OP_NEXT;
-		return recv_value_out;
-	endfunction
+		p_ret <= recv_value_out;
+	endtask
 	
-	function recv_buffer_fix();
+	task recv_buffer_fix(output p_ret);
 		recv_action		<= OP_FIX;
-		return recv_value_out;
-	endfunction
+		p_ret <= recv_value_out;
+	endtask
 	
 	
 	
 
-	function send_buffer (input TypePacketAddr p_address);	
+	task send_buffer (input TypePacketAddr p_address, output TypeByte p_ret);	
 		send_action		<= OP_DEFAULT;
 		send_address	<= p_address;
-		return send_value_out;
-	endfunction
+		p_ret <= send_value_out;
+	endtask
 
-	function TypePacketAddr send_buffer_len();
+	task TypePacketAddr send_buffer_len(output TypePacketAddr p_ret);
 		send_action		<= OP_LEN;
-		return send_value_out;
-	endfunction
+		p_ret <= send_value_out;
+	endtask
 
-	function send_buffer_next ();
+	task send_buffer_next (output p_ret);
 		send_action		<= OP_NEXT;
-		return send_value_out;
-	endfunction
+		p_ret <= send_value_out;
+	endtask
 
 
 //----------------------------------------------------------------------
@@ -515,22 +515,22 @@ module driver_operation(
             case (operation)
                             
             EXT_READ:
-				return_port <= bus.read_buffer(address);
+				bus.read_buffer(address, return_port);
 				
             EXT_READ_LEN:
-				return_port <= bus.read_buffer_len();
+				bus.read_buffer_len(return_port);
             
             EXT_READ_NEXT:
-				return_port <= bus.read_buffer_next();
+				 bus.read_buffer_next(return_port);
                 
             EXT_WRITE:
-				return_port <= bus.write_buffer(address, value);
+				 bus.write_buffer(address, value, return_port);
                 
             EXT_WRITE_LEN:
-				return_port <= bus.write_buffer_len();
+				bus.write_buffer_len(return_port);
             
             EXT_WRITE_NEXT:
-				return_port <= bus.write_buffer_next(); 
+				bus.write_buffer_next(return_port); 
             endcase
         end
     
@@ -582,6 +582,9 @@ module handle_tx(
     
     var TypePacketAddr    add_current;
     
+    var 				send_next;
+    var TypePacketAddr  send_len;
+    var TypeByte		send_val;
     
     always @(posedge clock)
     if (reset)
@@ -589,11 +592,13 @@ module handle_tx(
         state_tx <= STATUS_READY;
         tx_en         <= 0;
         tx_er         <= 0;
+        move_next	  <= 0;
     end else begin
         
         case (state_tx)
             STATUS_READY:
-                if (bus.send_buffer_next())
+				bus.send_buffer_next(send_next);
+                if (send_next)
                 begin
                     add_current     <= 0;
                     crc32_tx        <= 0;
@@ -634,10 +639,12 @@ module handle_tx(
                 end
                 
             STATUS_DATA:
-                if (add_current < bus.send_buffer_len())
+				bus.send_buffer_len(send_len)
+                if (add_current < send_len)
                 begin
-                    tx_data       <= bus.send_buffer(add_current);
-                    crc32_tx      <= next_crc32_d8(bus.send_buffer(add_current), crc32_tx);
+                    bus.send_buffer(add_current, send_val);
+                    tx_data 	  <= send_val;
+                    crc32_tx      <= next_crc32_d8(send_val, crc32_tx);
                     add_current   <= add_current + 1;
                 end else begin
                     state_tx      <= STATUS_SEND_CRC_3;
