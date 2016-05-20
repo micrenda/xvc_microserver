@@ -644,7 +644,7 @@ module handle_tx(
                 
             STATUS_DATA:
 				begin
-					bus.send_buffer_len(send_len)
+					bus.send_buffer_len(send_len);
 					if (add_current < send_len)
 					begin
 						bus.send_buffer(add_current, send_val);
