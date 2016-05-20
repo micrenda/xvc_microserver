@@ -142,7 +142,7 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 		p_ret <= read_value_out;
 	endtask
 
-	function read_buffer_next (output p_ret);
+	task read_buffer_next (output p_ret);
 		read_action		<= OP_NEXT;
 		p_ret <= read_value_out;
 	endtask
@@ -201,7 +201,7 @@ interface buffer_bus(input clock, input reset, input start_port, output reg done
 		p_ret <= send_value_out;
 	endtask
 
-	task TypePacketAddr send_buffer_len(output TypePacketAddr p_ret);
+	task send_buffer_len(output TypePacketAddr p_ret);
 		send_action		<= OP_LEN;
 		p_ret <= send_value_out;
 	endtask
