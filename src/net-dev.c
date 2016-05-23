@@ -13,13 +13,15 @@ void network_device_send(void)
 {
 	if (uip_len > 0)
 	{
-		for (uint16_t i = 0; i < uip_len; i++)
-			drv_write_buffer(i, uip_buf[i]);
-
 		if (drv_write_buffer_next() != 0)
 		{
 			//UIP_LOG(m); //TODO
 		}
+		
+		for (uint16_t i = 0; i < uip_len; i++)
+			drv_write_buffer(i, uip_buf[i]);
+
+		
 	}
 }
 /*---------------------------------------------------------------------------*/

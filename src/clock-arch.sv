@@ -1,7 +1,7 @@
 /*
  * Return the current time in milliseconds
  */
- 
+`timescale 1ns / 1ps 
 /* CLOCK_RATIO is used to know how many clocks we need to count 1ms. Current clock is 200Mhz -> 5ns, so CLOCK_RATIO = 200000*/
 
 `define CLOCK_RATIO 200000

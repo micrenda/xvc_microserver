@@ -27,7 +27,10 @@ module testbench();
     
     reg sgmii_tx_p, sgmii_tx_n, sgmii_rx_p, sgmii_rx_n, sgmii_clk_p, sgmii_clk_n;
     
-    wire eth_mdio;
+    wire eth_mdio_i;
+    wire eth_mdio_o;
+    wire eth_mdio_t;
+    
     reg eth_mdc, eth_reset_n;
 
     reg [7:0] ram [0:401];
@@ -92,7 +95,9 @@ module testbench();
         .sgmii_rx_n,
         .sgmii_clk_p,
         .sgmii_clk_n,
-        .eth_mdio,
+        .eth_mdio_i,
+        .eth_mdio_o,
+        .eth_mdio_t,
         .eth_mdc,
         .eth_reset_n);
 
