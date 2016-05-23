@@ -37,17 +37,18 @@
       </circuit>
     </cell>
     
-    <!--
+    <!---------->
+    
     <cell>
-      <name>write_buffer</name>
-      <operation operation_name="write_buffer" bounded="1" cycles="1" execution_time="1.2"/>
+      <name>wrte_buffer</name>
+      <operation operation_name="wrte_buffer" bounded="1" cycles="1" execution_time="1.2"/>
       <circuit>
-        <component_o id="write_buffer">
+        <component_o id="wrte_buffer">
           <description>This component is part of the XVC Microsever</description>
           <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
           <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
           <license>GPLv3</license>
-          <structural_type_descriptor id_type="write_buffer"/>
+          <structural_type_descriptor id_type="wrte_buffer"/>
           
           <port_o id="clock" dir="IN" is_clock="1">
             <structural_type_descriptor type="BOOL" size="1"/>
@@ -77,15 +78,15 @@
     </cell>
     
     <cell>
-      <name>write_buffer_next</name>
-      <operation operation_name="write_buffer_next" bounded="1" cycles="1" execution_time="1.2"/>
+      <name>wrte_buffer_next</name>
+      <operation operation_name="wrte_buffer_next" bounded="1" cycles="1" execution_time="1.2"/>
       <circuit>
-        <component_o id="write_buffer_next">
+        <component_o id="wrte_buffer_next">
           <description>This component is part of the XVC Microsever</description>
           <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
           <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
           <license>GPLv3</license>
-          <structural_type_descriptor id_type="write_buffer_next"/>
+          <structural_type_descriptor id_type="wrte_buffer_next"/>
           
           <port_o id="clock" dir="IN" is_clock="1">
             <structural_type_descriptor type="BOOL" size="1"/>
@@ -111,15 +112,15 @@
     </cell>
     
     <cell>
-      <name>read_buffer_len</name>
-      <operation operation_name="read_buffer_len" bounded="1" cycles="1" execution_time="1.2"/>
+      <name>wrte_buffer_len</name>
+      <operation operation_name="wrte_buffer_len" bounded="1" cycles="1" execution_time="1.2"/>
       <circuit>
-        <component_o id="read_buffer_len">
+        <component_o id="wrte_buffer_len">
           <description>This component is part of the XVC Microsever</description>
           <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
           <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
           <license>GPLv3</license>
-          <structural_type_descriptor id_type="read_buffer_len"/>
+          <structural_type_descriptor id_type="wrte_buffer_len"/>
           
           <port_o id="clock" dir="IN" is_clock="1">
             <structural_type_descriptor type="BOOL" size="1"/>
@@ -142,7 +143,9 @@
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
-    </cell>
+    </cell>    
+    
+    <!---------->
     
     <cell>
       <name>read_buffer</name>
@@ -211,6 +214,255 @@
         </component_o>
       </circuit>
     </cell>-->
+    
+    <cell>
+      <name>read_buffer_len</name>
+      <operation operation_name="read_buffer_len" bounded="1" cycles="1" execution_time="1.2"/>
+      <circuit>
+        <component_o id="read_buffer_len">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="read_buffer_len"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="UINT" size="16"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
+        </component_o>
+      </circuit>
+    </cell>
+        
+    <!---------->
+    
+     <cell>
+      <name>recv_buffer</name>
+      <operation operation_name="recv_buffer" bounded="1" cycles="1" execution_time="1.2"/>
+      <circuit>
+        <component_o id="recv_buffer">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="recv_buffer"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="value" dir="IN">
+            <structural_type_descriptor type="UINT" size="8"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
+        </component_o>
+      </circuit>
+    </cell>
+    
+    <cell>
+      <name>recv_buffer_next</name>
+      <operation operation_name="recv_buffer_next" bounded="1" cycles="1" execution_time="1.2"/>
+      <circuit>
+        <component_o id="recv_buffer_next">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="recv_buffer_next"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
+        </component_o>
+      </circuit>
+    </cell>
+    
+    <cell>
+      <name>recv_buffer_len</name>
+      <operation operation_name="recv_buffer_len" bounded="1" cycles="1" execution_time="1.2"/>
+      <circuit>
+        <component_o id="recv_buffer_len">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="recv_buffer_len"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="UINT" size="16"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
+        </component_o>
+      </circuit>
+    </cell>    
+    
+    <!---------->
+    
+    <cell>
+      <name>send_buffer</name>
+      <operation operation_name="send_buffer" bounded="1" cycles="1" execution_time="1.2"/>
+      <circuit>
+        <component_o id="send_buffer">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="send_buffer"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="UINT" size="8"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
+        </component_o>
+      </circuit>
+    </cell>
+    
+    <cell>
+      <name>send_buffer_next</name>
+      <operation operation_name="send_buffer_next" bounded="1" cycles="1" execution_time="1.2"/>
+      <circuit>
+        <component_o id="send_buffer_next">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="send_buffer_next"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
+        </component_o>
+      </circuit>
+    </cell>-->
+    
+    <cell>
+      <name>send_buffer_len</name>
+      <operation operation_name="send_buffer_len" bounded="1" cycles="1" execution_time="1.2"/>
+      <circuit>
+        <component_o id="send_buffer_len">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="send_buffer_len"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="UINT" size="16"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
+        </component_o>
+      </circuit>
+    </cell>
+        
+    <!---------->
+    
     <!--
     <cell>
       <name>gig_eth_pcs_pma</name>
@@ -235,100 +487,6 @@
       </circuit>
     </cell>-->
     
-    
-    <cell>
-      <name>driver_operation</name>
-      <operation operation_name="driver_operation" bounded="1" cycles="1" />
-      <circuit>
-        <component_o id="driver_operation">
-          <description>This component is part of the XVC Microsever</description>
-          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
-          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
-          <license>GPLv3</license>
-          <structural_type_descriptor id_type="driver_operation"/>
-          
-          <port_o id="clock" dir="IN" is_clock="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-		  <port_o id="reset" dir="IN">
-            <structural_type_descriptor type="BOOL" size="1"/>
-          </port_o>
-          <port_o id="start_port" dir="IN">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="done_port" dir="OUT">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="return_port" dir="OUT">
-            <structural_type_descriptor type="BOOL" size="16"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="operation" dir="IN">
-            <structural_type_descriptor type="UINT" size="8"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="address" dir="IN">
-            <structural_type_descriptor type="UINT" size="16"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="value" dir="IN">
-            <structural_type_descriptor type="UINT" size="8"/>
-            <connected_objects/>
-          </port_o>
-          
-          <port_o id="sgmii_tx_p" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="sgmii_tx_n" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="sgmii_rx_p" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="sgmii_rx_n" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="sgmii_clk_p" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="sgmii_clk_n" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          
-          <port_o id="eth_mdio_i" dir="IN" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="eth_mdio_o" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="eth_mdio_t" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          
-          <port_o id="eth_mdc" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          <port_o id="eth_reset_n" dir="OUT" is_global="1" is_extern="1">
-            <structural_type_descriptor type="BOOL" size="1"/>
-            <connected_objects/>
-          </port_o>
-          
-          <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
-        </component_o>
-      </circuit>
-    </cell>
     
   </library>
 </technology>
