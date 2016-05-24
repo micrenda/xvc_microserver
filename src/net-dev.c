@@ -13,31 +13,30 @@ void network_device_send(void)
 {
 	if (uip_len > 0)
 	{
-		if (drv_write_buffer_next() != 0)
+		if (drv_wrte_buffer_next())
+		{
+			for (uint16_t i = 0; i < uip_len; i++)
+				drv_wrte_buffer(i, uip_buf[i]);
+		}
+		else
 		{
 			//UIP_LOG(m); //TODO
 		}
-		
-		for (uint16_t i = 0; i < uip_len; i++)
-			drv_write_buffer(i, uip_buf[i]);
-
-		
 	}
 }
 /*---------------------------------------------------------------------------*/
 uint16_t network_device_read(void)
 {
-
-	if (drv_read_buffer_next() != 0)
-		return 0;
+	if (drv_read_buffer_next())
+	{	
+		uip_len = drv_read_buffer_len();
 		
-	uip_len = drv_read_buffer_len();
-	
-	for (uint16_t i = 0; i < uip_len; i++)
-	{
-		uip_buf[i] = drv_read_buffer(i);
+		for (uint16_t i = 0; i < uip_len; i++)
+			uip_buf[i] = drv_read_buffer(i);
+		
+		return uip_len;
 	}
-	
-	return uip_len;
+	else
+		return 0;
 }
 /*---------------------------------------------------------------------------*/

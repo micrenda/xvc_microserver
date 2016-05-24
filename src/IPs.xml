@@ -37,8 +37,6 @@
       </circuit>
     </cell>
     
-    <!---------->
-    
     <cell>
       <name>wrte_buffer</name>
       <operation operation_name="wrte_buffer" bounded="1" cycles="1" execution_time="1.2"/>
@@ -145,8 +143,6 @@
       </circuit>
     </cell>    
     
-    <!---------->
-    
     <cell>
       <name>read_buffer</name>
       <operation operation_name="read_buffer" bounded="1" cycles="1" execution_time="1.2"/>
@@ -248,8 +244,6 @@
         </component_o>
       </circuit>
     </cell>
-        
-    <!---------->
     
      <cell>
       <name>recv_buffer</name>
@@ -357,8 +351,6 @@
       </circuit>
     </cell>    
     
-    <!---------->
-    
     <cell>
       <name>send_buffer</name>
       <operation operation_name="send_buffer" bounded="1" cycles="1" execution_time="1.2"/>
@@ -461,7 +453,6 @@
       </circuit>
     </cell>
         
-    <!---------->
     
     <!--
     <cell>

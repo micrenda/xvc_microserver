@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 /*
  * This driver take care to manage send and receive queue.
  * The implementation of the driver can be found file driver.v

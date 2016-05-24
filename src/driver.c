@@ -60,10 +60,10 @@ unsigned short drv_wrte_buffer_len()
 
 bool drv_wrte_buffer_next()
 {
-	if (last_wrote == last_sent - 1)
+	if (current_wrte == current_send - 1)
 		return false; // Circular buffer overflow
 
-	if (buf_o_len[last_wrote] > 0)
+	if (buf_o_len[current_wrte] > 0)
 	{
 		current_wrte = (current_wrte + 1) % BUFFER_SIZE_O;  
 		buf_o_len[current_wrte] = 0;
@@ -124,10 +124,10 @@ unsigned short drv_recv_buffer_len()
 
 bool drv_recv_buffer_next()
 {
-	if (last_wrote == last_sent - 1)
+	if (current_wrte == current_send - 1)
 		return false; // Circular buffer overflow
 
-	if (buf_i_len[last_wrote] > 0)
+	if (buf_i_len[current_wrte] > 0)
 	{
 		current_recv = (current_recv + 1) % BUFFER_SIZE_O;  
 		buf_i_len[current_recv] = 0;
