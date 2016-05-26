@@ -2,9 +2,11 @@
 
 // Defining sizes for buffer pointers
 
+`define PACKET_SIZE     402
+`define SIZE_PACKET_SIZE     $clog2(`PACKET_SIZE)
 
-typedef  logic[7:0]      TypeByte;
-
+typedef logic[7:0]      TypeByte;
+typedef logic [`SIZE_PACKET_SIZE-1:0]   TypePacketAddr;
 
 
 typedef enum {
@@ -112,8 +114,7 @@ module handle_tx(
     input reset,
     output var TypeByte tx_data, 
     output var tx_en, 
-    output var tx_er,
-    buffer_bus.master_eth bus);
+    output var tx_er);
 
     var [3:0]   state_tx;
     var [31:0]  crc32_tx;
@@ -139,7 +140,7 @@ module handle_tx(
         case (state_tx)
             STATUS_READY:
 				begin
-					bus.send_buffer_next(send_next);
+					send_buffer_next(send_next);
 					if (send_next)
 					begin
 						add_current     <= 0;
@@ -183,10 +184,10 @@ module handle_tx(
                 
             STATUS_DATA:
 				begin
-					bus.send_buffer_len(send_len);
+					send_buffer_len(send_len);
 					if (add_current < send_len)
 					begin
-						bus.send_buffer(add_current, send_val);
+						send_buffer(add_current, send_val);
 						tx_data 	  <= send_val;
 						crc32_tx      <= next_crc32_d8(send_val, crc32_tx);
 						add_current   <= add_current + 1;
@@ -245,8 +246,7 @@ module handle_rx(
     input reset,
     input TypeByte rx_data,
     input rx_er,
-    input rx_dv,
-    buffer_bus.master_eth bus);
+    input rx_dv);
 
     
     
@@ -272,7 +272,7 @@ module handle_rx(
                     if (rx_data == 8'h55) begin
                         crc32_rx        <= 0;
                         state_rx        <= STATUS_PREAMBLE_0;
-                        bus.recv_buffer_next();
+                        recv_buffer_next();
                     end
                     
                     
@@ -338,7 +338,7 @@ module handle_rx(
                         
                         if (crc32_rx != 32'hC704DD7B) begin
                         
-							bus.recv_buffer(add_current, rx_data);
+							recv_buffer(add_current, rx_data);
                             crc32_rx      <= next_crc32_d8(rx_data, crc32_rx);
                             add_current   <= add_current + 1;
                             
@@ -354,7 +354,7 @@ module handle_rx(
                         state_rx <= STATUS_READY;
                         
                         // Remove last 4 bytes
-                        bus.recv_buffer_fix();
+                        recv_buffer_fix();
                     end
                     
                 default:
@@ -383,10 +383,8 @@ module gig_eth_pcs_pma (
     output  eth_mdio_o,
     output  eth_mdio_t,
     
-    output  eth_mdc,
-    output reg eth_reset_n,
-    
-    buffer_bus.master_eth bus);
+    output     eth_mdc,
+    output reg eth_reset_n);
     
     //wire        clock_mac; 
     wire[15:0]  	gmii_status;     
@@ -409,9 +407,6 @@ module gig_eth_pcs_pma (
         eth_reset_n <= 0;
     end else begin
 		eth_reset_n <= 1;
-		
-		
-		
     end
     
     gig_ethernet_pcs_pma_0_example_design U3 (
@@ -450,8 +445,6 @@ module gig_eth_pcs_pma (
       .reset(reset),                                    // input wire reset
       .signal_detect(1)                                 // input wire signal_detect
     );
-    
-
    
     
     handle_tx U4
@@ -460,8 +453,8 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .tx_data(gmii_txd),
         .tx_en(gmii_tx_en),
-        .tx_er(gmii_tx_er),
-        .bus(bus));
+        .tx_er(gmii_tx_er)
+    );
     
     handle_rx U5
     (
@@ -469,8 +462,8 @@ module gig_eth_pcs_pma (
         .reset(reset),
         .rx_data(gmii_rxd),
         .rx_dv(gmii_rx_dv),
-        .rx_er(gmii_rx_er),
-        .bus(bus));
+        .rx_er(gmii_rx_er)
+    );
     
 endmodule
 
