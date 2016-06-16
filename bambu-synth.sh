@@ -27,7 +27,7 @@ echo "#synthesis of micorserver and uIP"
 
 bambu -O3 -v5 --std=c11                                                 \
     --device-name=${DEVICE}                                             \
-    --top-fname=main                                                    \
+    --top-fname=main,handle_tx,handle_rx \
     --top-rtldesign-name=entry_point                                    \
     --do-not-expose-globals                                             \
     --backend-sdc-extensions=${BOARD}/master.sdc                        \
@@ -35,8 +35,6 @@ bambu -O3 -v5 --std=c11                                                 \
     --reset-level=high													\
     --backend-script-extensions=${BASE}/vivado_custom.tcl 				\
     --file-input-data=${BASE}/src/microserver.sv,${BASE}/src/driver.sv,${BASE}/src/clock-arch.sv,${BASE}/vivado_custom.tcl,${BASE}/cores/import_cores.tcl \
-    --evaluation                                                        \
-    --objective=PERIOD,AREA,FREQUENCY,CLOCK_SLACK,REGISTERS,DSPS,BRAMS  \
     -I${BASE}/src/                                                      \
     -I${UCIP}/uip/                                                      \
     ${BASE}/src/constraints_STD.xml                                     \

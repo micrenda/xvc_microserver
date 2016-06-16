@@ -32,12 +32,54 @@
             <structural_type_descriptor type="UINT" size="32"/>
             <connected_objects/>
           </port_o>
-          <NP_functionality LIBRARY="clock-arch " VERILOG_FILE_PROVIDED="clock-arch.sv"/>
+          <NP_functionality LIBRARY="clock-arch" VERILOG_FILE_PROVIDED="clock-arch.sv"/>
         </component_o>
       </circuit>
     </cell>
     
     <cell>
+      <name>next_crc32_d8</name>
+      <operation operation_name="next_crc32_d8" bounded="1" cycles="1" />
+      <circuit>
+        <component_o id="next_crc32_d8">
+          <description>This component is part of the XVC Microsever</description>
+          <copyright>Copyright (C) 2016 IFIN-HH</copyright>  
+          <authors>Michele Renda &lt;michele.renda@cern.ch&gt;</authors> 
+          <license>GPLv3</license>
+          <structural_type_descriptor id_type="next_crc32_d8"/>
+          
+          <port_o id="clock" dir="IN" is_clock="1">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+		  <port_o id="reset" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+          </port_o>
+          <port_o id="start_port" dir="IN">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="done_port" dir="OUT">
+            <structural_type_descriptor type="BOOL" size="1"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="data" dir="IN">
+            <structural_type_descriptor type="UINT" size="8"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="crc" dir="IN">
+            <structural_type_descriptor type="UINT" size="32"/>
+            <connected_objects/>
+          </port_o>
+          <port_o id="return_port" dir="OUT">
+            <structural_type_descriptor type="UINT" size="32"/>
+            <connected_objects/>
+          </port_o>
+          <NP_functionality LIBRARY="driver" VERILOG_FILE_PROVIDED="driver.sv"/>
+        </component_o>
+      </circuit>
+    </cell>
+    
+    <!--<cell>
       <name>wrte_buffer</name>
       <operation operation_name="wrte_buffer" bounded="1" cycles="1" execution_time="1.2"/>
       <circuit>
@@ -209,7 +251,7 @@
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
-    </cell>-->
+    </cell>
     
     <cell>
       <name>read_buffer_len</name>
@@ -417,7 +459,7 @@
           <NP_functionality LIBRARY="driver " VERILOG_FILE_PROVIDED="driver.sv"/>
         </component_o>
       </circuit>
-    </cell>-->
+    </cell>
     
     <cell>
       <name>send_buffer_len</name>
@@ -454,7 +496,7 @@
     </cell>
         
     
-    <!--
+   
     <cell>
       <name>gig_eth_pcs_pma</name>
       <operation operation_name="gig_eth_pcs_pma" bounded="1" cycles="1" />

@@ -23,6 +23,7 @@
  * <string.h>, since we use the memcpy() function in the code.
  */
 #include <string.h>
+#include <stdio.h>
 #include "uip.h"
 #include "uip_arp.h"
 #include "net-dev.h"
