@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-
+typedef logic[7:0]      TypeByte;
     
 // polynomial: (0 1 2 4 5 7 8 10 11 12 16 22 23 26 32)
 // data width: 8
@@ -12,11 +12,11 @@ module next_crc32_d8 (
     output done_port,
 	input  [7:0] data,
 	input  [31:0] crc,
-	output [31:0] return_port)
+	output var [31:0] return_port);
 	
 	
-	reg[7:0]  d;
-	reg[31:0] c;
+	var[7:0]  d;
+	var[31:0] c;
 	
 	always @(posedge clock)
 	begin
