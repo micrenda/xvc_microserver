@@ -26,12 +26,12 @@
  * 	true:	Success
  *  false:	Failure: the packet size is bigger than PACKET_SIZE bytes.
  */
-bool drv_wrte_buffer(unsigned short address, unsigned char value);
+bool wrte_buffer(unsigned short address, unsigned char value);
 
 /*
  * Return the number of bytes of the current written packet
  */
-unsigned short drv_wrte_buffer_len();
+unsigned short wrte_buffer_len();
 
 /*
  * Append a new packet in the sending queue.
@@ -40,19 +40,19 @@ unsigned short drv_wrte_buffer_len();
  * 	true:	Success
  *  false:	Failure: the driver was unable to send all the queued packets and the circular queue had an overflow.
  */
-bool drv_wrte_buffer_next();
+bool wrte_buffer_next();
 
 ////////////////////////////////////////////////////////////////////////
 
 /*
  * Fetch a byte from the current packet.
  */
-unsigned char drv_read_buffer(unsigned short address);
+unsigned char read_buffer(unsigned short address);
 
 /*
  * Return the number of bytes of the current read packet
  */
-unsigned short drv_read_buffer_len();
+unsigned short read_buffer_len();
 
 /*
  * Fetch a new packet in the receiving queue.
@@ -61,7 +61,7 @@ unsigned short drv_read_buffer_len();
  * 	true:	Success
  *  false:	No more data:  no more packets are waiting to be read from the receiving queue.
  */
-bool drv_read_buffer_next();
+bool read_buffer_next();
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -72,12 +72,12 @@ bool drv_read_buffer_next();
  * 	true:	Success
  *  false:	Failure: the packet size is bigger than PACKET_SIZE bytes.
  */
-bool drv_recv_buffer(unsigned short address, unsigned char value);
+bool recv_buffer(unsigned short address, unsigned char value);
 
 /*
  * Return the number of bytes of the current written packet
  */
-unsigned short drv_recv_buffer_len();
+unsigned short recv_buffer_len();
 
 /*
  * Append a new packet in the sending queue.
@@ -86,19 +86,19 @@ unsigned short drv_recv_buffer_len();
  * 	true:	Success
  *  false:	Failure: the driver was unable to send all the queued packets and the circular queue had an overflow.
  */
-bool drv_recv_buffer_next();
+bool recv_buffer_next();
 
 ////////////////////////////////////////////////////////////////////////
 
 /*
  * Fetch a byte from the current packet.
  */
-unsigned char drv_send_buffer(unsigned short address);
+unsigned char send_buffer(unsigned short address);
 
 /*
  * Return the number of bytes of the current read packet
  */
-unsigned short drv_send_buffer_len();
+unsigned short send_buffer_len();
 
 /*
  * Fetch a new packet in the receiving queue.
@@ -107,6 +107,11 @@ unsigned short drv_send_buffer_len();
  * 	true:	Success
  *  false:	No more data:  no more packets are waiting to be read from the receiving queue.
  */
-bool drv_send_buffer_next();
+bool send_buffer_next();
 
 ////////////////////////////////////////////////////////////////////////
+
+
+// External function for crc32 calculation
+
+extern unsigned int next_crc32_d8 (unsigned char data, unsigned int crc);

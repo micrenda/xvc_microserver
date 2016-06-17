@@ -2,9 +2,10 @@
 <constraints>
    <HLS_constraints>
 	   
-      <tech_constraints fu_name="clock_time" 		fu_library="STD_FU" n="1"/>
+      <tech_constraints fu_name="clock_time" 			fu_library="STD_FU" n="1"/>
+      <tech_constraints fu_name="next_crc32_d8" 		fu_library="STD_FU" n="1"/>
       
-      <tech_constraints fu_name="drv_wrte_buffer" 		fu_library="STD_FU" n="1"/>
+      <!--<tech_constraints fu_name="drv_wrte_buffer" 		fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="drv_wrte_buffer_len" 	fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="drv_wrte_buffer_next" 	fu_library="STD_FU" n="1"/>
       
@@ -18,7 +19,7 @@
       
       <tech_constraints fu_name="drv_recv_buffer" 		fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="drv_recv_buffer_len" 	fu_library="STD_FU" n="1"/>
-      <tech_constraints fu_name="drv_recv_buffer_next" 	fu_library="STD_FU" n="1"/>
+      <tech_constraints fu_name="drv_recv_buffer_next" 	fu_library="STD_FU" n="1"/> -->
       
       <!--<tech_constraints fu_name="write_buffer" 		fu_library="STD_FU" n="1"/>
       <tech_constraints fu_name="write_buffer_next" fu_library="STD_FU" n="1"/>

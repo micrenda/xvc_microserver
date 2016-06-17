@@ -40,25 +40,33 @@ module entry_point (
 	);
 	
 	
-	main_minimal_interface U2
-	(
+	gig_eth_pcs_pma U3 (
+
 		.clock(clock), 
-		.reset(reset), 
-		.start_port(1),
-		.done_port(),
-		.return_port(),
-		
+        .reset(reset),
+
 		.sgmii_tx_p,
 		.sgmii_tx_n,
 		.sgmii_rx_p,
 		.sgmii_rx_n,
 		.sgmii_clk_p,
 		.sgmii_clk_n,
-		.eth_mdio_o,
+    
 		.eth_mdio_i,
+		.eth_mdio_o,
 		.eth_mdio_t,
+    
 		.eth_mdc,
-		.eth_reset_n
+		.eth_reset_n);
+	
+	
+	main_minimal_interface U2
+	(
+		.clock(clock), 
+		.reset(reset), 
+		.start_port(1),
+		.done_port(),
+		.return_port()
 	);
 	
 
