@@ -34,7 +34,7 @@ bambu -O3 -v5 --std=c11                                                 \
     --clock-period=${CLK_PERIOD}  										\
     --reset-level=high													\
     --backend-script-extensions=${BASE}/vivado_custom.tcl 				\
-    --file-input-data=${BASE}/src/microserver.sv,${BASE}/src/driver.sv,${BASE}/src/clock-arch.sv,${BASE}/vivado_custom.tcl,${BASE}/cores/import_cores.tcl \
+    --file-input-data=${BASE}/src/microserver.v,${BASE}/src/driver.v,${BASE}/src/clock-arch.v,${BASE}/vivado_custom.tcl,${BASE}/cores/import_cores.tcl \
     -I${BASE}/src/                                                      \
     -I${UCIP}/uip/                                                      \
     ${BASE}/src/constraints_STD.xml                                     \
