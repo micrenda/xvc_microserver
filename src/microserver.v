@@ -31,16 +31,16 @@ module entry_point (
     wire eth_mdio_o;
     wire eth_mdio_t;
 
-    IOBUF U10 (.I(eth_mdio_o), .O(eth_mdio_i), .T(eth_mdio_t), .IO(eth_mdio));
+    IOBUF iobuf_inst (.I(eth_mdio_o), .O(eth_mdio_i), .T(eth_mdio_t), .IO(eth_mdio));
 
-	IBUFGDS U1 (
+	IBUFGDS ibufgds_inst (
 		.O(clock),
 		.I(clk_p),
 		.IB(clk_n)
 	);
 	
 	
-	gig_eth_pcs_pma U3 (
+	gig_eth_pcs_pma gig_eth_pcs_pma_inst (
 
 		.clock(clock), 
         .reset(reset),
@@ -60,7 +60,7 @@ module entry_point (
 		.eth_reset_n);
 	
 	
-	main_minimal_interface U2
+	main_minimal_interface main_minimal_interface_inst
 	(
 		.clock(clock), 
 		.reset(reset), 

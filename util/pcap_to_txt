@@ -1,0 +1,2 @@
+#!/bin/sh
+tshark -x -r $1 | cut -c 7-54 | tr -d '\n' | tr -s ' '

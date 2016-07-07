@@ -4,13 +4,13 @@ DEVICE		= xc7vx485t,-2,ffg1761-VVD
 CLK_PERIOD	= 5
 BOARD		= $(BASE)/boards/VC707
 XILINX	   ?= /opt/Xilinx/Vivado/2015.4/ids_lite/ISE
-SYNTH		= $(BASE)/synth
+BUILD		= $(BASE)/build
 GIG_ETH_PCS_PMA=ip_cores/gig_eth_pcs_pma_v11_5/example_design/gig_eth_pcs_pma_v11_5_example_design.vhd
 
 
 clean:
-	rm -rf $(SYNTH)
-	rm synth.log
+	rm -rf $(BUILD)
+	rm build.log
 
 gcc-compile: 
 	gcc -g -std=c99 -o microserver  -Iuip/uip/ -Isrc	\
@@ -26,18 +26,18 @@ gcc-compile:
 	uip/uip/uiplib.c  								
 
 
-synth:
+build/top.v:
 	echo "#synthesis of micorserver and uIP"
 	
-	rm -rf $(SYNTH) && mkdir $(SYNTH)
+	rm -rf $(BUILD) && mkdir $(BUILD)
 	
 
 	# Workaround - Copying some files that will be needed during syntetis
-	cp cores/    $(SYNTH)/ -r
+	cp cores/    $(BUILD)/ -r
 	# End workaround
 
 	
-	cd $(SYNTH); bambu -O3 -v5 --std=c11                                    \
+	cd $(BUILD); bambu -O3 -v5 --std=c11                                    \
 		--device-name=${DEVICE}                                             \
 		--top-fname=main,handle_tx,handle_rx                                \
 		--top-rtldesign-name=entry_point                                    \
@@ -59,34 +59,35 @@ synth:
 		${UCIP}/uip/uip.c                                                   \
 		${UCIP}/uip/uiplib.c                                                \
 		${UCIP}/uip/psock.c                                                 \
-	 2>&1 | tee ../synth.log
+	 2>&1 | tee ../build.log
 
+synth: build/top.v
 
 tb1: synth
-	cp ${BASE}/test/driver-test.v	$(SYNTH)
-	cp ${BASE}/test/tb1.v			$(SYNTH)
-	cp ${BASE}/test/tb1.txt			$(SYNTH)
-	cd $(SYNTH); iverilog 													\
+	cp ${BASE}/test/driver-test.v	$(BUILD)
+	cp ${BASE}/test/tb1.v			$(BUILD)
+	cp ${BASE}/test/tb1.hex			$(BUILD)
+	cd $(BUILD); iverilog 													\
 		-v -g 2012 -o tb1													\
-		$(SYNTH)/tb1.v														\
-		$(SYNTH)/clock-arch.v												\
-		$(SYNTH)/microserver.v												\
-		$(SYNTH)/driver-test.v												\
-		$(SYNTH)/top.v														\
+		$(BUILD)/tb1.v														\
+		$(BUILD)/clock-arch.v												\
+		$(BUILD)/microserver.v												\
+		$(BUILD)/driver-test.v												\
+		$(BUILD)/top.v														\
 		$(XILINX)/verilog/src/glbl.v										\
 		-y$(XILINX)/verilog/src/unisims								
 		
 	
 tb1.vcd: tb1
-	cd $(SYNTH); ./tb1
+	cd $(BUILD); ./tb1
 
 iverilog-compile-full: synth
-	cd $(SYNTH); iverilog 													\
+	cd $(BUILD); iverilog 													\
 		-v -g 2012 -o microserver-test-2									\
-		$(SYNTH)/clock-arch.v												\
-		$(SYNTH)/driver.v													\
-		$(SYNTH)/microserver.v												\
-		$(SYNTH)/top.v														\
-		`find $(SYNTH)/cores/gig_ethernet_pcs_pma_0/ -iname '*.v'` 			\
+		$(BUILD)/clock-arch.v												\
+		$(BUILD)/driver.v													\
+		$(BUILD)/microserver.v												\
+		$(BUILD)/top.v														\
+		`find $(BUILD)/cores/gig_ethernet_pcs_pma_0/ -iname '*.v'` 			\
 		$(XILINX)/verilog/src/glbl.v										\
 		-y$(XILINX)/verilog/src/unisims									

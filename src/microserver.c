@@ -118,6 +118,9 @@ int main()
 
 	network_device_init();
 	uip_init();
+	
+	struct uip_eth_addr mac = {{0x08,0x00,0x30,0xe2,0x94,0x81}};
+	uip_setethaddr(mac);
 
 	uip_ipaddr(ipaddr, 192,168,0,2);
 	uip_sethostaddr(ipaddr);

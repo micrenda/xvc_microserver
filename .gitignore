@@ -1,5 +1,5 @@
-/synth
+/build
 nohup.out
-synth.log
+build.log
 bitgen.log
 /bistream.bit

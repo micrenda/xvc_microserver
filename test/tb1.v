@@ -34,7 +34,7 @@ module tb1();
     #40 reset = 0; 
         start_port = 1;
             
-        file = $fopen("tb1.txt", "r");
+        file = $fopen("tb1.hex", "r");
         
         $display("Opening file: %d", file);
         
@@ -48,15 +48,14 @@ module tb1();
 			send_packet_run = !send_packet_run;
 			#1 wait(send_packet_done);
 			a++;
-			
-			if (a > 10)
-				$finish;
 		end;
         
         
+       
+        
 	    $fclose(file);
         
-    #40 $finish();   
+    #40000 $finish();   
                 
         
     end
@@ -70,7 +69,7 @@ module tb1();
        #4  sgmii_clk = ~sgmii_clk;
     end
 
-	entry_point U1 (
+	entry_point entry_point_inst (
 		.clk_p(clock), 
 		.clk_n(~clock), 
 		.reset,
@@ -95,7 +94,7 @@ module tb1();
 	);
 	
 
-	send_packet U3 (
+	send_packet send_packet_inst (
 		.packet_line,
 		.run(send_packet_run),
 		.done(send_packet_done),
@@ -186,7 +185,7 @@ module send_packet (
 		
 	end
 	
-	send_byte U2( .run(send_byte_run), .done(send_byte_done), .sgmii_clk,  .sgmii_rx_p, .sgmii_rx_n, .value(send_byte_value));
+	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .sgmii_clk,  .sgmii_rx_p, .sgmii_rx_n, .value(send_byte_value));
 	
 endmodule
 
