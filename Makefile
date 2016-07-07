@@ -9,7 +9,8 @@ GIG_ETH_PCS_PMA=ip_cores/gig_eth_pcs_pma_v11_5/example_design/gig_eth_pcs_pma_v1
 
 
 clean:
-
+	rm -rf $(SYNTH)
+	rm synth.log
 
 gcc-compile: 
 	gcc -g -std=c99 -o microserver  -Iuip/uip/ -Isrc	\
@@ -36,7 +37,7 @@ synth:
 	# End workaround
 
 	
-	cd $(SYNTH); bambu -O3 -v5 --std=c11                                       \
+	cd $(SYNTH); bambu -O3 -v5 --std=c11                                    \
 		--device-name=${DEVICE}                                             \
 		--top-fname=main,handle_tx,handle_rx                                \
 		--top-rtldesign-name=entry_point                                    \
@@ -61,18 +62,26 @@ synth:
 	 2>&1 | tee ../synth.log
 
 
-iverilog-compile: synth
-	iverilog 																\
-		-v -g 2012 -o microserver-test-1 													\
+tb1: synth
+	cp ${BASE}/test/driver-test.v	$(SYNTH)
+	cp ${BASE}/test/tb1.v			$(SYNTH)
+	cp ${BASE}/test/tb1.txt			$(SYNTH)
+	cd $(SYNTH); iverilog 													\
+		-v -g 2012 -o tb1													\
+		$(SYNTH)/tb1.v														\
 		$(SYNTH)/clock-arch.v												\
 		$(SYNTH)/microserver.v												\
-		${BASE}/test/driver-test.v											\
+		$(SYNTH)/driver-test.v												\
 		$(SYNTH)/top.v														\
 		$(XILINX)/verilog/src/glbl.v										\
 		-y$(XILINX)/verilog/src/unisims								
+		
+	
+tb1.vcd: tb1
+	cd $(SYNTH); ./tb1
 
 iverilog-compile-full: synth
-	iverilog 																\
+	cd $(SYNTH); iverilog 													\
 		-v -g 2012 -o microserver-test-2									\
 		$(SYNTH)/clock-arch.v												\
 		$(SYNTH)/driver.v													\
