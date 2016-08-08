@@ -14,7 +14,9 @@ module entry_point (
     inout      	eth_mdio,
     
     output     	eth_mdc,
-    output	 	eth_reset_n
+    output	 	eth_reset_n,
+    
+    input		sgmii_clk_ser // This is a 625Mhz clock used only for testing
     
 	/*input [7:0]	gpio_switches,
 	output[7:0]	gpio_leds,
@@ -40,7 +42,7 @@ module entry_point (
 	);
 	
 	
-	gig_eth_pcs_pma gig_eth_pcs_pma_inst (
+	driver driver_inst (
 
 		.clock(clock), 
         .reset(reset),
@@ -57,7 +59,10 @@ module entry_point (
 		.eth_mdio_t,
     
 		.eth_mdc,
-		.eth_reset_n);
+		.eth_reset_n,
+		
+		.sgmii_clk_ser
+		);
 	
 	
 	main_minimal_interface main_minimal_interface_inst

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+if [[ -z $1 || -z $2 ]]
+then
+	echo "Program argument:"
+	echo "$0 <src> <dst>"
+	echo ""
+	echo "Example: $0 /opt/Xilinx/Vivado/2015.4/   build/vhdl_lib/"
+	exit 1
+fi
+
+SRC=$1
+DST=$2
+
+mkdir -p $DST
+
+cp -r $SRC/vhdl/src/unisims $DST/unisim
+cp    $DST/unisim/unisim_VCOMP.vhd $DST/unisim/vcomponents.pkg
+
+cp -r $SRC/vhdl/src/ieee $DST
+
+cd $DST/ieee
+ls *.vhd | while read FILE
+do
+	mv $FILE `basename $FILE .vhd`.pkg
+done

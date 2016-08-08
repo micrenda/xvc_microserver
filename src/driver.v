@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 
-module gig_eth_pcs_pma (
+module driver (
 
     input clock, 
     input reset,
@@ -34,7 +34,12 @@ module gig_eth_pcs_pma (
     wire      		gmii_clock;
    
     
-
+	IBUFGDS ibufgds_inst (
+		.O(gmii_clock),
+		.I(sgmii_clk_p),
+		.IB(sgmii_clk_n)
+	);
+	
     
     
     always @(posedge clock)
@@ -45,7 +50,7 @@ module gig_eth_pcs_pma (
 		eth_reset_n <= 1;
     end
     
-    gig_ethernet_pcs_pma_0_example_design U3 (
+    gig_ethernet_pcs_pma_0_example_design gig_ethernet_pcs_pma_0_example_design_inst (
       .independent_clock(clock),                        // input wire independent_clock_bufg
       .gtrefclk_p(sgmii_clk_p),                         // input wire gtrefclk_p
       .gtrefclk_n(sgmii_clk_n),                         // input wire gtrefclk_n
@@ -82,7 +87,7 @@ module gig_eth_pcs_pma (
       .signal_detect(1)                                 // input wire signal_detect
     );
    
-    handle_tx_minimal_interface U4
+    handle_tx_minimal_interface handle_tx_minimal_interface_inst
     (
         .clock(gmii_clock), 
         .reset(reset),
@@ -93,7 +98,7 @@ module gig_eth_pcs_pma (
         .done_port()
     );
     
-    handle_rx_minimal_interface U5
+    handle_rx_minimal_interface handle_rx_minimal_interface_inst
     (
         .clock(gmii_clock), 
         .reset(reset),

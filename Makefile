@@ -67,27 +67,63 @@ tb1: synth
 	cp ${BASE}/test/driver-test.v	$(BUILD)
 	cp ${BASE}/test/tb1.v			$(BUILD)
 	cp ${BASE}/test/tb1.hex			$(BUILD)
+	cp ${BASE}/test/util/8b10b/encode.v	$(BUILD)/8b10b_encode.v
+	cp ${BASE}/test/util/8b10b/decode.v	$(BUILD)/8b10b_decode.v
+	
+	echo "# flags needed by vhdlpp to compile Xilinx cores"	>  $(BUILD)/tb1.cfg
+	echo "+vhdl-libdir+$(BUILD)/vhdl_lib" 					>> $(BUILD)/tb1.cfg
+	
+	${BASE}/util/create_library_pkgs $(XILINX) $(BUILD)/vhdl_lib
+	
 	cd $(BUILD); iverilog 													\
 		-v -g 2012 -o tb1													\
+		-y$(XILINX)/verilog/src/unisims										\
+		-c$(BUILD)/tb1.cfg													\
 		$(BUILD)/tb1.v														\
 		$(BUILD)/clock-arch.v												\
 		$(BUILD)/microserver.v												\
 		$(BUILD)/driver-test.v												\
-		$(BUILD)/top.v														\
 		$(XILINX)/verilog/src/glbl.v										\
-		-y$(XILINX)/verilog/src/unisims								
+		$(BUILD)/top.v														\
+		$(BUILD)/8b10b_encode.v												\
+		$(BUILD)/8b10b_decode.v												
 		
+		
+# 		-y$(XILINX)/verilog/src/unisims										\
+#		-y$(XILINX)/vhdl/src/unisims										\
 	
-tb1.vcd: tb1
+tb1-run: tb1
 	cd $(BUILD); ./tb1
-
-iverilog-compile-full: synth
+	
+	
+	
+tb1-cmp: synth
+	cp ${BASE}/test/driver-test.v	$(BUILD)
+	cp ${BASE}/test/tb1.v			$(BUILD)
+	cp ${BASE}/test/tb1.hex			$(BUILD)
+	cp ${BASE}/test/util/*.vhd		$(BUILD)
+	
+	echo "# flags needed by vhdlpp to compile Xilinx cores"	>  $(BUILD)/tb1.cfg
+	echo "+vhdl-libdir+$(BUILD)/vhdl_lib" 					>> $(BUILD)/tb1.cfg
+	
+	${BASE}/util/create_library_pkgs $(XILINX) $(BUILD)/vhdl_lib
+	
 	cd $(BUILD); iverilog 													\
-		-v -g 2012 -o microserver-test-2									\
+		-v -g 2012 -o tb1													\
+		-y$(XILINX)/verilog/src/unisims										\
+		-c$(BUILD)/tb1.cfg													\
+		$(BUILD)/tb1.v														\
 		$(BUILD)/clock-arch.v												\
-		$(BUILD)/driver.v													\
 		$(BUILD)/microserver.v												\
+		$(BUILD)/driver.v													\
 		$(BUILD)/top.v														\
-		`find $(BUILD)/cores/gig_ethernet_pcs_pma_0/ -iname '*.v'` 			\
 		$(XILINX)/verilog/src/glbl.v										\
-		-y$(XILINX)/verilog/src/unisims									
+		`find $(BUILD)/cores/gig_ethernet_pcs_pma_0/ -iname '*.v'` 			\
+		$(BUILD)/8b10_dec.vhd												\
+		$(BUILD)/8b10_enc.vhd												\
+		`find $(XILINX)/vhdl/src/ieee -iname *.vhd`							\
+		${BASE}/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_v15_1_1/hdl/gig_ethernet_pcs_pma_v15_1_rfs_unprotected.vhd	\
+		
+		
+# 		-y$(XILINX)/verilog/src/unisims										\
+#		-y$(XILINX)/vhdl/src/unisims										\
