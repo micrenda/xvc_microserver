@@ -74,7 +74,7 @@
             <structural_type_descriptor type="UINT" size="32"/>
             <connected_objects/>
           </port_o>
-          <NP_functionality LIBRARY="microserver" VERILOG_FILE_PROVIDED="microserver.v"/>
+          <NP_functionality LIBRARY="crc32" VERILOG_FILE_PROVIDED="crc32.v"/>
         </component_o>
       </circuit>
     </cell>

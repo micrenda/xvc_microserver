@@ -64,7 +64,8 @@ build/top.v:
 synth: build/top.v
 
 tb1: synth
-	cp ${BASE}/test/driver-test.v	$(BUILD)
+	cp ${BASE}/test/driver-test.v			$(BUILD)
+	cp ${BASE}/test/microserver-test.v		$(BUILD)
 	cp ${BASE}/test/tb1.v			$(BUILD)
 	cp ${BASE}/test/tb1.hex			$(BUILD)
 	cp ${BASE}/test/util/8b10b/encode.v	$(BUILD)/8b10b_encode.v
@@ -81,7 +82,7 @@ tb1: synth
 		-c$(BUILD)/tb1.cfg													\
 		$(BUILD)/tb1.v														\
 		$(BUILD)/clock-arch.v												\
-		$(BUILD)/microserver.v												\
+		$(BUILD)/microserver-test.v												\
 		$(BUILD)/driver-test.v												\
 		$(XILINX)/verilog/src/glbl.v										\
 		$(BUILD)/top.v														\
