@@ -6,8 +6,7 @@ module entry_point (
     
     output[7:0]  	sgmii_tx,
     input[7:0]   	sgmii_rx,
-    input   	sgmii_clk,
-    input   	sgmii_clk,
+    input   	sgmii_clk
     
     
 	/*input [7:0]	gpio_switches,
@@ -36,7 +35,7 @@ module entry_point (
 
 		.sgmii_tx,
 		.sgmii_rx,
-		.sgmii_clk,
+		.sgmii_clk
 		);
 	
 	

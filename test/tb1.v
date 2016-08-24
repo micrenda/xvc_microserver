@@ -7,8 +7,11 @@ module tb1();
 
     reg clock, reset, start_port, done_port;
     
-    reg[7:0] sgmii_rx, sgmii_tx;
-
+    reg sgmii_clk_in;
+    reg sgmii_clk_out;
+    reg sgmii_tx_p, sgmii_tx_n, sgmii_rx_p, sgmii_rx_n;
+    reg eth_mdio, eth_mdc, eth_reset_n;
+    reg ser_sgmii_clk;
 
 	integer file = 0;
 	integer a = 0;
@@ -71,15 +74,28 @@ module tb1();
        #4  sgmii_clk_in = ~sgmii_clk_in;
     end
     
+    // Serial-SGMII Clock generator (625 Mhz)
+    always begin
+       #0.8  ser_sgmii_clk = ~ser_sgmii_clk;
+    end
+
 	entry_point entry_point_inst (
 		.clk_p(clock), 
 		.clk_n(~clock), 
 		.reset,
 		
-	   .sgmii_tx,
-	   .sgmii_rx,
-	   .sgmii_clk(sgmii_clk_out),
+	   .sgmii_tx_p,
+	   .sgmii_tx_n,
+	   .sgmii_rx_p,
+	   .sgmii_rx_n,
+	   .sgmii_clk_p(sgmii_clk_out),
+	   .sgmii_clk_n(~sgmii_clk_out),
 		
+	   .eth_mdio,
+	   .eth_mdc,
+	   .eth_reset_n,
+	   
+	   .sgmii_clk_ser(ser_sgmii_clk)
 		
 		/*input [7:0]	gpio_switches,
 		output[7:0]	gpio_leds,
@@ -95,8 +111,11 @@ module tb1();
 		.packet_line,
 		.run(send_packet_run),
 		.done(send_packet_done),
-		.sgmii_clk,
-		.sgmii_rx);
+		.ser_sgmii_clk,
+		.sgmii_clk_in,
+		.sgmii_clk_out,
+		.sgmii_rx_p,
+		.sgmii_rx_n);
    
 endmodule
     
@@ -105,8 +124,11 @@ module send_packet (
 		input[2047:0] packet_line, 
 		input  run,
 		output reg done,
-		input  sgmii_clk,
-		output sgmii_rx);
+		input  ser_sgmii_clk,
+		input  sgmii_clk_in,
+		output sgmii_clk_out,
+		output sgmii_rx_p,
+		output sgmii_rx_n);
 		
 	reg[7:0]    pos_header;
 	reg[15:0]	pos_packet;
@@ -192,4 +214,67 @@ module send_packet (
 	
 endmodule
 
+
+module send_byte(
+	input  reset,
+	input  ser_sgmii_clk,
+	input  run,
+	output reg done,
+	input      sgmii_clk_in,
+	output reg sgmii_clk_out,
+	output reg sgmii_rx_p,
+	output reg sgmii_rx_n,
+	input[7:0] value8b);
+	
+	
+	reg[7:0] i;
+	
+	reg[9:0] 	value10b;
+	wire[8:0] 	value9b;
+	reg 		disp_curr;
+	reg 		disp_next;
+	
+	reg sgmii_clk_buf_1;
+	
+	
+	assign value9b = {1'b0,value8b};
+	
+	always @(posedge run or negedge run)
+	begin
+		i <= 0;
+		done <= 0;
+		disp_curr <= 0;
+	end
+	
+	always @(posedge ser_sgmii_clk or negedge ser_sgmii_clk)
+	begin
+	
+		sgmii_clk_buf_1 <= sgmii_clk_in;
+		sgmii_clk_out   <= sgmii_clk_buf_1;
+	
+		if (!done)
+		begin
+			
+			if (i < 10)
+			begin
+				sgmii_rx_p <=  value10b[9-i];
+				sgmii_rx_n <= ~value10b[9-i];
+				i <= i + 1;
+			end
+			else
+				done <= 1;
+		end
+		
+		disp_curr <= disp_next;
+	end
+	
+	
+	encode enc_8b10b_inst (
+		.datain(value9b),
+		.dispin(disp_curr),
+		.dataout(value10b),
+		.dispout(disp_next)
+	);
+		
+endmodule
 

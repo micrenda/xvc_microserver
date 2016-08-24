@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include "crc32.h"
 #include "driver.h"
 #include "uip.h"
 

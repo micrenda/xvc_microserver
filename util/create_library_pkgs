@@ -14,10 +14,19 @@ DST=$2
 
 mkdir -p $DST
 
-cp -r $SRC/vhdl/src/unisims $DST/unisim
-cp    $DST/unisim/unisim_VCOMP.vhd $DST/unisim/vcomponents.pkg
 
+elab_pkg()
+{
+sed  -E 's/^([[:space:]]*attribute.*;)/-- commented for vhdlpp compatibility: \1/i' < $1 > $2	
+	
+}
+
+
+cp -r $SRC/vhdl/src/unisims $DST/unisim
 cp -r $SRC/vhdl/src/ieee $DST
+
+elab_pkg    $DST/unisim/unisim_VCOMP.vhd $DST/unisim/vcomponents.pkg
+
 
 cd $DST/ieee
 ls *.vhd | while read FILE
