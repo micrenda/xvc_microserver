@@ -51,7 +51,7 @@ module tb1();
 			$display ("Sending packet %0d", a);
 			send_packet_run = !send_packet_run;
 			#1 wait(send_packet_done);
-			a++;
+			a=a+1;
 		end;
         
         
@@ -134,7 +134,7 @@ module send_packet (
 	reg[15:0]	pos_packet;
 	reg[7:0]    pos_footer;
 	
-	string		file_line;
+	reg[2039:0]		file_line;
 	integer		file_line_pos;
 	reg[7:0]	file_byte;
 	
@@ -191,7 +191,7 @@ module send_packet (
 				$write(" %x", send_byte_value);
 				
 				pos_packet <= pos_packet + 1;
-				file_line_pos += 3;
+				file_line_pos = file_line_pos + 3;
 			end
 			else if (pos_footer < 12)
 			begin

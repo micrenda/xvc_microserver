@@ -3,7 +3,7 @@ UCIP		= $(BASE)/uip
 DEVICE		= xc7vx485t,-2,ffg1761-VVD
 CLK_PERIOD	= 5
 BOARD		= $(BASE)/boards/VC707
-XILINX	   ?= /opt/Xilinx/Vivado/2015.4/ids_lite/ISE
+XILINX	   ?= /opt/Xilinx/Vivado/2016.2/
 BUILD		= $(BASE)/build
 GIG_ETH_PCS_PMA=ip_cores/gig_eth_pcs_pma_v11_5/example_design/gig_eth_pcs_pma_v11_5_example_design.vhd
 
@@ -12,21 +12,21 @@ clean:
 	rm -rf $(BUILD)
 	rm -f  build.log
 
-gcc-compile: 
-	gcc -g -std=c99 -o microserver  -Iuip/uip/ -Isrc	\
-	src/microserver.c 				\
-	src/driver.c 					\
-	src/net-dev.c 					\
-	src/clock-arch.c 				\
-	uip/uip/psock.c  				\
-	uip/uip/timer.c  				\
-	uip/uip/uip_arp.c  				\
-	uip/uip/uip.c  					\
-	uip/uip/uip-fw.c  				\
-	uip/uip/uiplib.c  								
+#gcc-compile: 
+#	gcc -g -std=c99 -o microserver  -Iuip/uip/ -Isrc	\
+#	src/microserver.c 				\
+#	src/driver.c 					\
+#	src/net-dev.c 					\
+#	src/clock-arch.c 				\
+#	uip/uip/psock.c  				\
+#	uip/uip/timer.c  				\
+#	uip/uip/uip_arp.c  				\
+#	uip/uip/uip.c  					\
+#	uip/uip/uip-fw.c  				\
+#	uip/uip/uiplib.c  								
 
 
-build/top.v:
+$(BUILD)/top.v:
 	echo "#synthesis of micorserver and uIP"
 	
 	rm -rf $(BUILD) && mkdir $(BUILD)
@@ -60,75 +60,27 @@ build/top.v:
 		${UCIP}/uip/uiplib.c                                                \
 		${UCIP}/uip/psock.c                                                 \
 	 2>&1 | tee ../build.log
+synth: $(BUILD)/top.v
 
-synth: build/top.v
 
-tb1: synth
-	cp ${BASE}/test/driver-test.v			$(BUILD)
-	cp ${BASE}/test/microserver-test.v		$(BUILD)
+
+$(BUILD)/xsim-dir: synth
+
 	cp ${BASE}/test/tb1.v			$(BUILD)
 	cp ${BASE}/test/tb1.hex			$(BUILD)
 	cp ${BASE}/test/util/8b10b/encode.v	$(BUILD)/8b10b_encode.v
 	cp ${BASE}/test/util/8b10b/decode.v	$(BUILD)/8b10b_decode.v
 	
-	echo "# flags needed by vhdlpp to compile Xilinx cores"	>  $(BUILD)/tb1.cfg
-	echo "+vhdl-libdir+$(BUILD)/vhdl_lib" 					>> $(BUILD)/tb1.cfg
+	cd $(BUILD); $(XILINX)/bin/xvlog -work xvc_microserver `find . -iname '*.v'`
+	cd $(BUILD); $(XILINX)/bin/xvhdl -work xvc_microserver `find . -iname '*.vhd'`
 	
-	${BASE}/util/create_library_pkgs $(XILINX) $(BUILD)/vhdl_lib
+xsim-run: $(BUILD)/xsim-dir
+
+
+
+xelab-run-tb1: xsim-run
 	
-	cd $(BUILD); iverilog 													\
-		-v -g 2012 -o tb1													\
-		-y$(XILINX)/verilog/src/unisims										\
-		-c$(BUILD)/tb1.cfg													\
-		$(BUILD)/tb1.v														\
-		$(BUILD)/clock-arch.v												\
-		$(BUILD)/microserver-test.v												\
-		$(BUILD)/driver-test.v												\
-		$(XILINX)/verilog/src/glbl.v										\
-		$(BUILD)/top.v														\
-		$(BUILD)/crc32.v														\
-		$(BUILD)/8b10b_encode.v												\
-		$(BUILD)/8b10b_decode.v												
-		
-		
-# 		-y$(XILINX)/verilog/src/unisims										\
-#		-y$(XILINX)/vhdl/src/unisims										\
+	cd $(BUILD); $(XILINX)/bin/xelab -L unisim -L SECUREIP  xvc_microserver.tb1
+
+
 	
-tb1-run: tb1
-	cd $(BUILD); ./tb1
-	
-	
-	
-tb1-cmp: synth
-	#cp ${BASE}/test/driver-test.v	$(BUILD)
-	cp ${BASE}/test/tb1.v			$(BUILD)
-	cp ${BASE}/test/tb1.hex			$(BUILD)
-	cp ${BASE}/test/util/8b10b/encode.v	$(BUILD)/8b10b_encode.v
-	cp ${BASE}/test/util/8b10b/decode.v	$(BUILD)/8b10b_decode.v
-	
-	echo "# flags needed by vhdlpp to compile Xilinx cores"	>  $(BUILD)/tb1.cfg
-	echo "+vhdl-libdir+$(BUILD)/vhdl_lib" 					>> $(BUILD)/tb1.cfg
-	
-	${BASE}/util/create_library_pkgs $(XILINX) $(BUILD)/vhdl_lib
-	
-	cd $(BUILD); iverilog 													\
-		-v -g 2012 -o tb1													\
-		-y$(XILINX)/verilog/src/unisims										\
-		-y$(XILINX)/vhdl/src/unisims										\
-		-c$(BUILD)/tb1.cfg													\
-		$(BUILD)/tb1.v														\
-		$(BUILD)/clock-arch.v												\
-		$(BUILD)/microserver.v												\
-		$(BUILD)/driver.v													\
-		$(BUILD)/top.v														\
-		$(BUILD)/crc32.v													\
-		$(XILINX)/verilog/src/glbl.v										\
-		`find $(BUILD)/cores/gig_ethernet_pcs_pma_0/ -iname '*.v'` 			\
-		$(BUILD)/8b10b_encode.v												\
-		$(BUILD)/8b10b_decode.v												\
-		${BASE}/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_v15_1_1/hdl/gig_ethernet_pcs_pma_v15_1_rfs_unprotected.vhd	\
-	
-	
-#		`find $(XILINX)/vhdl/src/ieee -iname *.vhd`							\
-# 		-y$(XILINX)/verilog/src/unisims										\
-#		-y$(XILINX)/vhdl/src/unisims										\
