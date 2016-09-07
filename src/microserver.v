@@ -59,9 +59,7 @@ module entry_point (
 		.eth_mdio_t,
     
 		.eth_mdc,
-		.eth_reset_n,
-		
-		.sgmii_clk_ser
+		.eth_reset_n
 		);
 	
 	
