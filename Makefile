@@ -66,12 +66,13 @@ synth: $(BUILD)/top.v
 
 $(BUILD)/xsim-dir: synth
 
-	cp ${BASE}/test/tb1.v			$(BUILD)
+	cp ${BASE}/test/tb1.sv			$(BUILD)
 	cp ${BASE}/test/tb1.hex			$(BUILD)
 	cp ${BASE}/test/util/8b10b/encode.v	$(BUILD)/8b10b_encode.v
 	cp ${BASE}/test/util/8b10b/decode.v	$(BUILD)/8b10b_decode.v
 	
 	cd $(BUILD); $(XILINX)/bin/xvlog -work xvc_microserver `find . -iname '*.v'`
+	cd $(BUILD); $(XILINX)/bin/xvlog -work xvc_microserver -sv `find . -iname '*.sv'`
 	cd $(BUILD); $(XILINX)/bin/xvhdl -work xvc_microserver `find . -iname '*.vhd'`
 	
 xsim-run: $(BUILD)/xsim-dir
@@ -80,7 +81,13 @@ xsim-run: $(BUILD)/xsim-dir
 
 xelab-run-tb1: xsim-run
 	
-	cd $(BUILD); $(XILINX)/bin/xelab -L unisim -L SECUREIP  xvc_microserver.tb1
-
+	cd $(BUILD); $(XILINX)/bin/xelab --debug typical --relax --mt 8 \
+		-L unisims_ver \
+		-L unimacro_ver \
+		-L secureip  \
+		-L xvc_microserver \
+		xvc_microserver.tb1 \
+		xvc_microserver.glbl \
+		-log xelab.log 
 
 	

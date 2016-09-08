@@ -10,14 +10,15 @@ module tb1();
     reg sgmii_clk_in;
     reg sgmii_clk_out;
     reg sgmii_tx_p, sgmii_tx_n, sgmii_rx_p, sgmii_rx_n;
-    reg eth_mdio, eth_mdc, eth_reset_n;
+    wire eth_mdio;
+    reg  eth_mdc, eth_reset_n;
     reg ser_sgmii_clk;
 
 	integer file = 0;
 	integer a = 0;
 	reg send_packet_run = 0;
 	wire send_packet_done;
-	reg[2047:0] packet_line;
+	string packet_line;
 	
 
         
@@ -121,7 +122,7 @@ endmodule
     
 module send_packet (
 		input  reset,
-		input[2047:0] packet_line, 
+		string packet_line, 
 		input  run,
 		output reg done,
 		input  ser_sgmii_clk,
@@ -134,7 +135,7 @@ module send_packet (
 	reg[15:0]	pos_packet;
 	reg[7:0]    pos_footer;
 	
-	reg[2039:0]		file_line;
+	string		file_line;
 	integer		file_line_pos;
 	reg[7:0]	file_byte;
 	
