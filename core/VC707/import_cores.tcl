@@ -1,0 +1,2 @@
+import_ip core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci
+read_verilog core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_example_design.v
