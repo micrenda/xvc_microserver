@@ -2,10 +2,11 @@ BASE		= $(shell pwd)
 UCIP		= $(BASE)/uip
 DEVICE		= xc7vx485t,-2,ffg1761-VVD
 CLK_PERIOD	= 5
-BOARD		= $(BASE)/boards/VC707
+BOARD	   ?= VC707
+CONFIG		= $(BASE)/config/$(BOARD)
+CORE		= $(BASE)/core/$(BOARD)
 XILINX	   ?= /opt/Xilinx/Vivado/2016.2/
 BUILD		= $(BASE)/build
-GIG_ETH_PCS_PMA=ip_cores/gig_eth_pcs_pma_v11_5/example_design/gig_eth_pcs_pma_v11_5_example_design.vhd
 
 
 clean:
@@ -33,7 +34,7 @@ $(BUILD)/top.v:
 	
 
 	# Workaround - Copying some files that will be needed during syntetis
-	cp cores/    $(BUILD)/ -r
+	cp $(CORE)/    $(BUILD)/core -r
 	# End workaround
 
 	
@@ -42,11 +43,11 @@ $(BUILD)/top.v:
 		--top-fname=main,handle_tx,handle_rx			                    \
 		--top-rtldesign-name=entry_point                                    \
 		--do-not-expose-globals                                             \
-		--backend-sdc-extensions=${BOARD}/master.sdc                        \
+		--backend-sdc-extensions=${CONFIG}/master.sdc                        \
 		--clock-period=${CLK_PERIOD}  										\
 		--reset-level=high													\
 		--backend-script-extensions=${BASE}/vivado_custom.tcl 				\
-		--file-input-data=${BASE}/src/microserver.v,${BASE}/src/crc32.v,${BASE}/src/driver.v,${BASE}/src/clock-arch.v,${BASE}/vivado_custom.tcl,${BASE}/cores/import_cores.tcl \
+		--file-input-data=${BASE}/src/microserver.v,${BASE}/src/crc32.v,${BASE}/src/driver.v,${BASE}/src/clock-arch.v,${BASE}/vivado_custom.tcl,${CORE}/import_cores.tcl \
 		-I${BASE}/src/                                                      \
 		-I${UCIP}/uip/                                                      \
 		${BASE}/src/constraints_STD.xml                                     \

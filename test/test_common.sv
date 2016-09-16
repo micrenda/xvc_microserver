@@ -164,11 +164,14 @@ module send_an(input start, output reg done, output reg an_sgmii_rx_p, input[47:
 	always @(posedge start)
 	begin
 		done = 0;
-		$display("Sending ethernet autonegotiation: %h", an_config);
+		$display("Sending ethernet autonegotiation: %h (%0d bits)", an_config, $size(an_config));
 		
+		$write("an bits:");
 		
-		for (integer i=0; i<16; i=i+1)
+		for (integer i=0; i < $size(an_config); i=i+1)
 		begin
+			$write(" %0d", i);
+		
 			// Clock
 			        an_sgmii_rx_p = 1; 
 			#100    an_sgmii_rx_p = 0;
@@ -177,6 +180,8 @@ module send_an(input start, output reg done, output reg an_sgmii_rx_p, input[47:
 			#65500 an_sgmii_rx_p = 0;				
 			
 		end
+		
+		$display(" done.");
 		
 		done = 1;
 	end
