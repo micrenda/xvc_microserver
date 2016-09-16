@@ -17,6 +17,8 @@ module driver (
     output  eth_mdio_o,
     output  eth_mdio_t,
     
+    input	an_restart_config,
+    
     output     eth_mdc,
     output reg eth_reset_n);
     
@@ -34,13 +36,6 @@ module driver (
     wire      		gmii_clock;
    
     
-	IBUFGDS ibufgds_inst (
-		.O(gmii_clock),
-		.I(sgmii_clk_p),
-		.IB(sgmii_clk_n)
-	);
-	
-    
     
     always @(posedge clock)
     if (reset)
@@ -51,10 +46,16 @@ module driver (
     end
     
     gig_ethernet_pcs_pma_0_example_design gig_ethernet_pcs_pma_0_example_design_inst (
-      .independent_clock(clock),                        // input wire independent_clock_bufg
+      // This is for Transreceiver mode
+      /*.independent_clock(clock),                        // input wire independent_clock_bufg
       .gtrefclk_p(sgmii_clk_p),                         // input wire gtrefclk_p
       .gtrefclk_n(sgmii_clk_n),                         // input wire gtrefclk_n
-      .rxuserclk2(),
+      .rxuserclk2(),*/
+      
+      // This is for SGMII mode
+      .refclk125_p(sgmii_clk_p),
+      .refclk125_n(sgmii_clk_n),
+      
       .txn(sgmii_tx_n),                                 // output wire txn
       .txp(sgmii_tx_p),                                 // output wire txp
       .rxn(sgmii_rx_n),                                 // input wire rxn
@@ -69,16 +70,16 @@ module driver (
       .gmii_rx_dv(gmii_rx_dv),                          // output wire gmii_rx_dv
       .gmii_rx_er(gmii_rx_er),                          // output wire gmii_rx_er
       
-      .mdc(eth_mdc),                                    // input wire mdc
-      .mdio_i(eth_mdio_i),                              // input wire mdio_i
-      .mdio_o(eth_mdio_o),                              // output wire mdio_o
-      .mdio_t(eth_mdio_t),                              // output wire mdio_t
+      //.mdc(eth_mdc),                                    // input wire mdc
+      //.mdio_i(eth_mdio_i),                              // input wire mdio_i
+      //.mdio_o(eth_mdio_o),                              // output wire mdio_o
+      //.mdio_t(eth_mdio_t),                              // output wire mdio_t
       
       .configuration_vector(5'b10000),                  // input wire [4 : 0] configuration_vector
-      .configuration_valid(1),                          // input wire configuration_valid
+      //.configuration_valid(1),                          // input wire configuration_valid
       .an_adv_config_vector(16'h4001),                  // input wire [15 : 0] an_adv_config_vector
-      .an_adv_config_val(1),                            // input wire an_adv_config_val
-      .an_restart_config(0),                            // input wire an_restart_config
+      //.an_adv_config_val(1),                            // input wire an_adv_config_val
+      .an_restart_config(an_restart_config),            // input wire an_restart_config
       .an_interrupt(),                                  // Interrupt to processor to signal that Auto-Negotiation has completed
       .speed_is_10_100(0),                              // input wire speed_is_10_100
       .speed_is_100(0),                                 // input wire speed_is_100

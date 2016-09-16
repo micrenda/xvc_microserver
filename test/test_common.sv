@@ -1,125 +1,3 @@
-`timescale 1ns / 1ps
-
-
-
-module tb1();
-
-
-    reg clock, reset, start_port, done_port;
-    
-    reg sgmii_clk_in;
-    reg sgmii_clk_out;
-    reg sgmii_tx_p, sgmii_tx_n, sgmii_rx_p, sgmii_rx_n;
-    wire eth_mdio;
-    reg  eth_mdc, eth_reset_n;
-    reg ser_sgmii_clk;
-
-	integer file = 0;
-	integer a = 0;
-	reg send_packet_run = 0;
-	wire send_packet_done;
-	string packet_line;
-	
-
-        
-    // Initialize all variables
-    initial begin        
-
-		$dumpfile("tb1.vcd");
-		$dumpvars(0,tb1);
-
-        clock = 0;
-        sgmii_clk_in = 0;
-        ser_sgmii_clk = 0;
-        
-        reset = 1;  
-        
-    
-
-    #40 reset = 0; 
-        start_port = 1;
-            
-        file = $fopen("tb1.hex", "r");
-        
-        $display("Opening file: %d", file);
-        
-        while (!$feof(file))
-        begin
-            
-            packet_line = "";
-			$fgets(packet_line, file);
-		
-			$display ("Sending packet %0d", a);
-			send_packet_run = !send_packet_run;
-			#1 wait(send_packet_done);
-			a=a+1;
-		end;
-        
-        
-		
-        
-	    $fclose(file);
-        
-    #40000 $finish();   
-    #40000 $finish();   
-                
-        
-    end
-
-    // Clock generator
-    always begin
-       #5  clock = ~clock;
-    end
-    // SGMII Clock generator (125 Mhz)
-    always begin
-       #4  sgmii_clk_in = ~sgmii_clk_in;
-    end
-    
-    // Serial-SGMII Clock generator (625 Mhz)
-    always begin
-       #0.8  ser_sgmii_clk = ~ser_sgmii_clk;
-    end
-
-	entry_point entry_point_inst (
-		.clk_p(clock), 
-		.clk_n(~clock), 
-		.reset,
-		
-	   .sgmii_tx_p,
-	   .sgmii_tx_n,
-	   .sgmii_rx_p,
-	   .sgmii_rx_n,
-	   .sgmii_clk_p(sgmii_clk_out),
-	   .sgmii_clk_n(~sgmii_clk_out),
-		
-	   .eth_mdio,
-	   .eth_mdc,
-	   .eth_reset_n,
-	   
-	   .sgmii_clk_ser(ser_sgmii_clk)
-		
-		/*input [7:0]	gpio_switches,
-		output[7:0]	gpio_leds,
-		input [4:0]	gpio_buttons,
-
-		output rs232_tx,
-		input  rs232_rx,*/
-	);
-	
-
-	send_packet send_packet_inst (
-		.reset,
-		.packet_line,
-		.run(send_packet_run),
-		.done(send_packet_done),
-		.ser_sgmii_clk,
-		.sgmii_clk_in,
-		.sgmii_clk_out,
-		.sgmii_rx_p,
-		.sgmii_rx_n);
-   
-endmodule
-    
 module send_packet (
 		input  reset,
 		string packet_line, 
@@ -136,6 +14,7 @@ module send_packet (
 	reg[7:0]    pos_footer;
 	
 	string		file_line;
+	string		file_line_token;
 	integer		file_line_pos;
 	reg[7:0]	file_byte;
 	
@@ -184,9 +63,9 @@ module send_packet (
 			else if (file_line_pos < file_line.len() - 1)
 			begin
 				
-				$sscanf(file_line.substr(file_line_pos, file_line_pos + 3), "%x", file_byte);
+				file_line_token = file_line.substr(file_line_pos, file_line_pos + 2-1);
 				
-				send_byte_value = file_byte;
+				send_byte_value = file_line_token.atohex();
 				send_byte_run = ~send_byte_run;
 				//#1 wait(send_byte_done);
 				$write(" %x", send_byte_value);
@@ -279,3 +158,26 @@ module send_byte(
 		
 endmodule
 
+
+module send_an(input start, output reg done, output reg an_sgmii_rx_p, input[47:0] an_config);
+
+	always @(posedge start)
+	begin
+		done = 0;
+		$display("Sending ethernet autonegotiation: %h", an_config);
+		
+		
+		for (integer i=0; i<16; i=i+1)
+		begin
+			// Clock
+			        an_sgmii_rx_p = 1; 
+			#100    an_sgmii_rx_p = 0;
+			// Data
+			#65400 an_sgmii_rx_p = an_config[i]; 	
+			#65500 an_sgmii_rx_p = 0;				
+			
+		end
+		
+		done = 1;
+	end
+endmodule

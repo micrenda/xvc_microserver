@@ -64,10 +64,12 @@ synth: $(BUILD)/top.v
 
 
 
-$(BUILD)/xsim-dir: synth
+$(BUILD)/xsim.dir: synth
 
-	cp ${BASE}/test/tb1.sv			$(BUILD)
-	cp ${BASE}/test/tb1.hex			$(BUILD)
+	cp    ${BASE}/test/test_common.sv	$(BUILD)
+	cp -r ${BASE}/test/tb1				$(BUILD)
+	cp -r ${BASE}/test/tb2				$(BUILD)
+
 	cp ${BASE}/test/util/8b10b/encode.v	$(BUILD)/8b10b_encode.v
 	cp ${BASE}/test/util/8b10b/decode.v	$(BUILD)/8b10b_decode.v
 	
@@ -75,12 +77,9 @@ $(BUILD)/xsim-dir: synth
 	cd $(BUILD); $(XILINX)/bin/xvlog -work xvc_microserver -sv `find . -iname '*.sv'`
 	cd $(BUILD); $(XILINX)/bin/xvhdl -work xvc_microserver `find . -iname '*.vhd'`
 	
-xsim-run: $(BUILD)/xsim-dir
+xsim-build: $(BUILD)/xsim.dir
 
-
-
-xelab-run-tb1: xsim-run
-	
+$(BUILD)/xsim.dir/snapshot-tb1/: xsim-build
 	cd $(BUILD); $(XILINX)/bin/xelab --debug typical --relax --mt 8 \
 		-L unisims_ver \
 		-L unimacro_ver \
@@ -88,6 +87,25 @@ xelab-run-tb1: xsim-run
 		-L xvc_microserver \
 		xvc_microserver.tb1 \
 		xvc_microserver.glbl \
+		-s snapshot-tb1 \
 		-log xelab.log 
+xelab-tb1: $(BUILD)/xsim.dir/snapshot-tb1/
 
+$(BUILD)/xsim.dir/snapshot-tb2/: xsim-build
+	cd $(BUILD); $(XILINX)/bin/xelab --debug typical --relax --mt 8 \
+		-L unisims_ver \
+		-L unimacro_ver \
+		-L secureip  \
+		-L xvc_microserver \
+		xvc_microserver.tb2 \
+		xvc_microserver.glbl \
+		-s snapshot-tb2 \
+		-log xelab.log 
+xelab-tb2: $(BUILD)/xsim.dir/snapshot-tb2/
+
+xsim-tb1-run: xelab-tb1
+	cd $(BUILD); xsim -t tb1/tb1.tcl  snapshot-tb1 | tee tb1/tb1.log
+	
+xsim-tb2-run: xelab-tb2
+	cd $(BUILD); xsim  snapshot-tb2  | tee tb1/tb1.log
 	

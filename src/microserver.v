@@ -11,12 +11,11 @@ module entry_point (
     input   	sgmii_clk_p,
     input   	sgmii_clk_n,
     
+    input		an_restart_config,
     inout      	eth_mdio,
     
     output     	eth_mdc,
-    output	 	eth_reset_n,
-    
-    input		sgmii_clk_ser // This is a 625Mhz clock used only for testing
+    output	 	eth_reset_n
     
 	/*input [7:0]	gpio_switches,
 	output[7:0]	gpio_leds,
@@ -59,7 +58,9 @@ module entry_point (
 		.eth_mdio_t,
     
 		.eth_mdc,
-		.eth_reset_n
+		.eth_reset_n,
+		
+		.an_restart_config
 		);
 	
 	
