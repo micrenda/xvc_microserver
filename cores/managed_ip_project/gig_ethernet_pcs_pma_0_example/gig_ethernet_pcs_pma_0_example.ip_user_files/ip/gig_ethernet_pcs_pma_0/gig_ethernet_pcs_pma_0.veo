@@ -55,51 +55,34 @@
 
 //----------- Begin Cut here for INSTANTIATION Template ---// INST_TAG
 gig_ethernet_pcs_pma_0 your_instance_name (
-  .gtrefclk_bufg(gtrefclk_bufg),                    // input wire gtrefclk_bufg
-  .gtrefclk(gtrefclk),                              // input wire gtrefclk
-  .txn(txn),                                        // output wire txn
-  .txp(txp),                                        // output wire txp
-  .rxn(rxn),                                        // input wire rxn
-  .rxp(rxp),                                        // input wire rxp
-  .independent_clock_bufg(independent_clock_bufg),  // input wire independent_clock_bufg
-  .txoutclk(txoutclk),                              // output wire txoutclk
-  .rxoutclk(rxoutclk),                              // output wire rxoutclk
-  .resetdone(resetdone),                            // output wire resetdone
-  .cplllock(cplllock),                              // output wire cplllock
-  .mmcm_reset(mmcm_reset),                          // output wire mmcm_reset
-  .userclk(userclk),                                // input wire userclk
-  .userclk2(userclk2),                              // input wire userclk2
-  .pma_reset(pma_reset),                            // input wire pma_reset
-  .mmcm_locked(mmcm_locked),                        // input wire mmcm_locked
-  .rxuserclk(rxuserclk),                            // input wire rxuserclk
-  .rxuserclk2(rxuserclk2),                          // input wire rxuserclk2
-  .sgmii_clk_r(sgmii_clk_r),                        // output wire sgmii_clk_r
-  .sgmii_clk_f(sgmii_clk_f),                        // output wire sgmii_clk_f
-  .sgmii_clk_en(sgmii_clk_en),                      // output wire sgmii_clk_en
-  .gmii_txd(gmii_txd),                              // input wire [7 : 0] gmii_txd
-  .gmii_tx_en(gmii_tx_en),                          // input wire gmii_tx_en
-  .gmii_tx_er(gmii_tx_er),                          // input wire gmii_tx_er
-  .gmii_rxd(gmii_rxd),                              // output wire [7 : 0] gmii_rxd
-  .gmii_rx_dv(gmii_rx_dv),                          // output wire gmii_rx_dv
-  .gmii_rx_er(gmii_rx_er),                          // output wire gmii_rx_er
-  .gmii_isolate(gmii_isolate),                      // output wire gmii_isolate
-  .mdc(mdc),                                        // input wire mdc
-  .mdio_i(mdio_i),                                  // input wire mdio_i
-  .mdio_o(mdio_o),                                  // output wire mdio_o
-  .mdio_t(mdio_t),                                  // output wire mdio_t
-  .configuration_vector(configuration_vector),      // input wire [4 : 0] configuration_vector
-  .configuration_valid(configuration_valid),        // input wire configuration_valid
-  .an_interrupt(an_interrupt),                      // output wire an_interrupt
-  .an_adv_config_vector(an_adv_config_vector),      // input wire [15 : 0] an_adv_config_vector
-  .an_adv_config_val(an_adv_config_val),            // input wire an_adv_config_val
-  .an_restart_config(an_restart_config),            // input wire an_restart_config
-  .speed_is_10_100(speed_is_10_100),                // input wire speed_is_10_100
-  .speed_is_100(speed_is_100),                      // input wire speed_is_100
-  .status_vector(status_vector),                    // output wire [15 : 0] status_vector
-  .reset(reset),                                    // input wire reset
-  .signal_detect(signal_detect),                    // input wire signal_detect
-  .gt0_qplloutclk_in(gt0_qplloutclk_in),            // input wire gt0_qplloutclk_in
-  .gt0_qplloutrefclk_in(gt0_qplloutrefclk_in)      // input wire gt0_qplloutrefclk_in
+  .txn(txn),                                    // output wire txn
+  .txp(txp),                                    // output wire txp
+  .rxn(rxn),                                    // input wire rxn
+  .rxp(rxp),                                    // input wire rxp
+  .clk125m(clk125m),                            // input wire clk125m
+  .mmcm_locked(mmcm_locked),                    // input wire mmcm_locked
+  .sgmii_clk_r(sgmii_clk_r),                    // output wire sgmii_clk_r
+  .sgmii_clk_f(sgmii_clk_f),                    // output wire sgmii_clk_f
+  .sgmii_clk_en(sgmii_clk_en),                  // output wire sgmii_clk_en
+  .clk625(clk625),                              // input wire clk625
+  .clk208(clk208),                              // input wire clk208
+  .clk104(clk104),                              // input wire clk104
+  .gmii_txd(gmii_txd),                          // input wire [7 : 0] gmii_txd
+  .gmii_tx_en(gmii_tx_en),                      // input wire gmii_tx_en
+  .gmii_tx_er(gmii_tx_er),                      // input wire gmii_tx_er
+  .gmii_rxd(gmii_rxd),                          // output wire [7 : 0] gmii_rxd
+  .gmii_rx_dv(gmii_rx_dv),                      // output wire gmii_rx_dv
+  .gmii_rx_er(gmii_rx_er),                      // output wire gmii_rx_er
+  .gmii_isolate(gmii_isolate),                  // output wire gmii_isolate
+  .configuration_vector(configuration_vector),  // input wire [4 : 0] configuration_vector
+  .an_interrupt(an_interrupt),                  // output wire an_interrupt
+  .an_adv_config_vector(an_adv_config_vector),  // input wire [15 : 0] an_adv_config_vector
+  .an_restart_config(an_restart_config),        // input wire an_restart_config
+  .speed_is_10_100(speed_is_10_100),            // input wire speed_is_10_100
+  .speed_is_100(speed_is_100),                  // input wire speed_is_100
+  .status_vector(status_vector),                // output wire [15 : 0] status_vector
+  .reset(reset),                                // input wire reset
+  .signal_detect(signal_detect)                // input wire signal_detect
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------
 

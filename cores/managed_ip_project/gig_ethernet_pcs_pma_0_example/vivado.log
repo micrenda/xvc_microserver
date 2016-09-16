@@ -2,8 +2,8 @@
 # Vivado v2016.2 (64-bit)
 # SW Build 1577090 on Thu Jun  2 16:32:35 MDT 2016
 # IP Build 1577682 on Fri Jun  3 12:00:54 MDT 2016
-# Start of session at: Mon Sep  5 16:53:54 2016
-# Process ID: 17177
+# Start of session at: Wed Sep 14 16:25:36 2016
+# Process ID: 32357
 # Current directory: /home/mrenda/research/xvc_microserver/cores/managed_ip_project/gig_ethernet_pcs_pma_0_example
 # Command line: vivado -source /home/mrenda/research/xvc_microserver/cores/managed_ip_project/gig_ethernet_pcs_pma_0_example/gig_ethernet_pcs_pma_0_ex.tcl
 # Log file: /home/mrenda/research/xvc_microserver/cores/managed_ip_project/gig_ethernet_pcs_pma_0_example/vivado.log
@@ -17,7 +17,7 @@ source /home/mrenda/research/xvc_microserver/cores/managed_ip_project/gig_ethern
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2016.2/data/ip'.
-create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:06 . Memory (MB): peak = 5789.449 ; gain = 86.473 ; free physical = 169 ; free virtual = 7797
+create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:05 . Memory (MB): peak = 5798.270 ; gain = 93.945 ; free physical = 392 ; free virtual = 7977
 # set_property part xc7vx485tffg1761-2 [current_project]
 # set_property target_language verilog [current_project]
 # set_property simulator_language VERILOG [current_project]
@@ -35,10 +35,11 @@ create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:06 . Memory (MB): pea
 # }
 # generate_target -quiet [_filter_supported_targets {instantiation_template synthesis simulation implementation shared_logic} [get_ips gig_ethernet_pcs_pma_0]] [get_ips gig_ethernet_pcs_pma_0]
 # add_files -scan_for_includes -quiet -fileset [current_fileset] \
-#   [list [file join $srcIpDir example_design/support/gig_ethernet_pcs_pma_0_resets.v]] \
-#   [list [file join $srcIpDir example_design/support/gig_ethernet_pcs_pma_0_clocking.v]] \
-#   [list [file join $srcIpDir example_design/support/gig_ethernet_pcs_pma_0_support.v]] \
-#   [list [file join $srcIpDir example_design/support/gig_ethernet_pcs_pma_0_gt_common.v]] \
+#   [list [file join $srcIpDir example_design/gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen.v]] \
+#   [list [file join $srcIpDir example_design/gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v]] \
+#   [list [file join $srcIpDir example_design/gig_ethernet_pcs_pma_0_idelayctrl.v]] \
+#   [list [file join $srcIpDir example_design/gig_ethernet_pcs_pma_0_support.v]] \
+#   [list [file join $srcIpDir example_design/gig_ethernet_pcs_pma_0_sync_block_ex.v]] \
 #   [list [file join $srcIpDir example_design/gig_ethernet_pcs_pma_0_example_design.v]]
 # add_files -quiet -fileset [current_fileset -constrset] \
 #   [list [file join $srcIpDir example_design/gig_ethernet_pcs_pma_0_example_design.xdc]]
@@ -91,4 +92,4 @@ INFO: [exportsim-Tcl-25] Exported '/home/mrenda/research/xvc_microserver/cores/m
 #   error "Problems were encountered while executing the example design script, please review the log files."
 # }
 exit
-INFO: [Common 17-206] Exiting Vivado at Mon Sep  5 16:54:44 2016...
+INFO: [Common 17-206] Exiting Vivado at Wed Sep 14 16:26:59 2016...

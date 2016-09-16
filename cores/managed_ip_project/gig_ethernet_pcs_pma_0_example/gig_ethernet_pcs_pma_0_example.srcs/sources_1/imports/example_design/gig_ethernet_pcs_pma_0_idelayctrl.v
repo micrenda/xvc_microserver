@@ -1,7 +1,16 @@
-//------------------------------------------------------------------------------
-// File       : gig_ethernet_pcs_pma_0_resets.v
-// Author     : Xilinx Inc.
-//------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////////////////////////
+//   ____  ____
+//  /   /\/   /
+// /___/  \  /    Vendor: Xilinx
+// \   \   \/     Version : 1
+//  \   \         Filename : gig_ethernet_pcs_pma_0_idelayctrl.v
+//  /   /         
+// /___/   /\
+// \   \  /  \
+//  \___\/\___\
+//
+//
+///////////////////////////////////////////////////////////////////////////////
 // (c) Copyright 2011 Xilinx, Inc. All rights reserved.
 //
 // This file contains confidential and proprietary information
@@ -49,39 +58,36 @@
 // PART OF THIS FILE AT ALL TIMES. 
 // 
 // 
-//------------------------------------------------------------------------------
-// Description: This module holds the resets for the PCS/PMA core
 
+`timescale 1ns / 1ps
 
-`timescale 1 ps/1 ps
+//***************************** Entity Declaration ****************************
+module gig_ethernet_pcs_pma_0_idelayctrl 
+(
+    input           refclk,
+    output          rdy,
+    input           rst
+);
 
+   //---------------------------------------------------------------------------
+   // An IDELAYCTRL primitive needs to be instantiated for the Fixed Tap Delay
+   // mode of the IDELAY.
+   // All IDELAYs in Fixed Tap Delay mode and the IDELAYCTRL primitives have
+   // to be LOC'ed in the XDC file.
+   //---------------------------------------------------------------------------
 
-//------------------------------------------------------------------------------
-// The module declaration for the example design
-//------------------------------------------------------------------------------
-
-module gig_ethernet_pcs_pma_0_resets
+   IDELAYCTRL 
+#(.SIM_DEVICE ("7SERIES"))
+   dlyctrl
    (
-    input        reset,                    // Asynchronous reset for entire core.
-    input        independent_clock_bufg,   // System clock
-    output       pma_reset                 // Synchronous transcevier PMA reset
+      .RDY       (rdy),
+      .REFCLK    (refclk),
+      .RST       (rst)
    );
+endmodule
 
-   (* ASYNC_REG = "TRUE" *)
-   reg   [3:0]  pma_reset_pipe;           // flip-flop pipeline for reset duration stretch
 
-   
 
-   //---------------------------------------------------------------------------
-   // Transceiver PMA reset circuitry
-   //---------------------------------------------------------------------------
 
-   always@(posedge independent_clock_bufg or posedge reset)
-      if (reset == 1'b1)
-         pma_reset_pipe <= 4'b1111;
-      else
-         pma_reset_pipe <= {pma_reset_pipe[2:0], reset};
 
-   assign pma_reset = pma_reset_pipe[3] ;
 
-endmodule // gig_ethernet_pcs_pma_0_resets

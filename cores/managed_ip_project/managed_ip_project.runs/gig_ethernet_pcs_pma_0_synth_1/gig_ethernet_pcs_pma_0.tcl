@@ -13,6 +13,8 @@ set_property parent.project_path /home/mrenda/research/xvc_microserver/cores/man
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 read_ip -quiet /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci
+set_property used_in_synthesis false [get_files -all /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_example_design.xdc]
+set_property used_in_implementation false [get_files -all /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_example_design.xdc]
 set_property is_locked true [get_files /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci]
 
 foreach dcp [get_files -quiet -all *.dcp] {
@@ -30,44 +32,59 @@ write_checkpoint -force -noxdef gig_ethernet_pcs_pma_0.dcp
 catch { report_utilization -file gig_ethernet_pcs_pma_0_utilization_synth.rpt -pb gig_ethernet_pcs_pma_0_utilization_synth.pb }
 
 if { [catch {
-  file copy -force /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0.dcp /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.dcp
-} _RESULT ] } { 
-  send_msg_id runtcl-3 error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
-  error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
-}
-
-if { [catch {
-  write_verilog -force -mode synth_stub /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_stub.v
+  write_verilog -force -mode synth_stub /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode synth_stub /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_stub.vhdl
+  write_vhdl -force -mode synth_stub /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_verilog -force -mode funcsim /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_sim_netlist.v
+  write_verilog -force -mode funcsim /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode funcsim /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_sim_netlist.vhdl
+  write_vhdl -force -mode funcsim /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
+add_files /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_stub.v -of_objects [get_files /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci]
+
+add_files /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_stub.vhdl -of_objects [get_files /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci]
+
+add_files /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_sim_netlist.v -of_objects [get_files /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci]
+
+add_files /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_sim_netlist.vhdl -of_objects [get_files /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci]
+
+add_files /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0.dcp -of_objects [get_files /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci]
+
 if {[file isdir /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0]} {
   catch { 
-    file copy -force /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_stub.v /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0
+    file copy -force /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_sim_netlist.v /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0
   }
 }
 
 if {[file isdir /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0]} {
   catch { 
-    file copy -force /home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_stub.vhdl /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0
+    file copy -force /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_sim_netlist.vhdl /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0
+  }
+}
+
+if {[file isdir /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0]} {
+  catch { 
+    file copy -force /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_stub.v /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0
+  }
+}
+
+if {[file isdir /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0]} {
+  catch { 
+    file copy -force /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_stub.vhdl /home/mrenda/research/xvc_microserver/cores/ip_user_files/ip/gig_ethernet_pcs_pma_0
   }
 }

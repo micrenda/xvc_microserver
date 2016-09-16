@@ -47,8 +47,9 @@
 //
 // THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 // PART OF THIS FILE AT ALL TIMES. 
-// 
-// 
+
+//
+//
 //------------------------------------------------------------------------------
 // Description: This testbench will exercise the ports of the Ethernet
 // 1000BASE-X PCS/PMA core's example design to perform the following
@@ -121,45 +122,11 @@ module demo_tb;
 
 
   //----------------------------------------------------------------------------
-  // Stimulus - Management Frame data
-  //----------------------------------------------------------------------------
-  // Create management frame
-  reg [0:63] mdio_data;
-
-  initial
-  begin
-                                              
-    mdio_data[0:31]  = 32'hffffffff;  // preamble field
-    mdio_data[32:33] = 2'h1;          // start opcode
-    mdio_data[34:35] = 2'h1;          // write opcode
-    mdio_data[36:40] = 5'd1;          // phyad (write to this device)
-    mdio_data[41:45] = 5'h0;          // regad (write to Configuration Register)
-    mdio_data[46:47] = 2'h2;          // Turn-around cycles
-
-                                      // DATA FIELD
-
-    mdio_data[48]    = 1'b0;          // Do not assert Reset
-    mdio_data[49]    = 1'b0;          // No loopback
-    mdio_data[50]    = 1'b0;          // Speed selection
-    mdio_data[51]    = 1'b0;          // Disable Auto-Negotiation
-    mdio_data[52]    = 1'b0;          // Disable Power Down
-    mdio_data[53]    = 1'b0;          // Disable Isolate GMII
-    mdio_data[54]    = 1'b0;          // Disable Auto-Negotiation Restart
-    mdio_data[55]    = 1'b1;          // Full Duplex Mode
-    mdio_data[56]    = 1'b0;          // Disable Collision Test
-    mdio_data[57]    = 1'b0;          // Speed selection
-    mdio_data[58:63] = 6'h0;          // Reserved
-
-  end
-
-
-
-  //----------------------------------------------------------------------------
   // testbench signals
   //----------------------------------------------------------------------------
 
   // testbench control semaphores
-  reg  configuration_finished;
+  reg                      configuration_finished;
   wire tx_monitor_finished;
   wire rx_monitor_finished;
   wire simulation_finished;
@@ -169,19 +136,14 @@ module demo_tb;
   // DUT signals
   //----------------------------------------------------------------------------
 
-  // An independent clock source used as the reference clock for an
-  // IDELAYCTRL (if present) and for the main GT transceiver reset logic.
-  // This example design assumes that this is of frequency 200MHz.
-  reg  independent_clock;
 
-  // System Reset
-  reg  reset;
+  // System Clock and Reset
+  reg                       reset;
+  reg                       refclk125_p;
+  reg                       refclk125_n;
 
-  // Transceiver Interface
-  //----------------------
-  reg  gtrefclk_p;
-  reg  gtrefclk_n;
-  wire  rxuserclk2;
+  // LVDS transceiver Interface
+  //---------------------------
   wire txp;
   wire txn;
   wire rxp;
@@ -190,34 +152,27 @@ module demo_tb;
   // GMII Interface
   //---------------
   wire gmii_rx_clk;
-  wire [7:0] gmii_txd;
+  wire [7:0]                gmii_txd ;
   wire gmii_tx_en;
   wire gmii_tx_er;
-  wire [7:0] gmii_rxd;
-  wire gmii_rx_dv;
-  wire gmii_rx_er;
+  wire [7:0]                gmii_rxd ;
+  wire  gmii_rx_dv;
+  wire  gmii_rx_er;
 
-  // Management: MDIO Interface
-  //---------------------------
-  reg  mdc;
-  reg  mdio_i;
-  wire mdio_o;
-  wire mdio_t;
+  // Management: Alternative to MDIO Interface
+  //------------------------------------------
   reg [4:0] configuration_vector;
-  reg       configuration_valid;
-  wire       an_interrupt;
+
   wire[15:0] an_adv_config_vector;
-  wire       an_adv_config_val;
   wire       an_restart_config;
-
-
+  wire an_interrupt;
   wire signal_detect;
   wire [15:0] status_vector;
 
-  // Speed Control 
-  wire speed_is_10_100;
-  wire speed_is_100;
-
+  // Speed Control
+  //--------------
+  wire  speed_is_10_100;
+  wire  speed_is_100;
 
   //----------------------------------------------------------------------------
   // Set the speed of operation for the core
@@ -226,43 +181,25 @@ module demo_tb;
   assign speed_is_100    = 1'b0;
   assign speed_is_10_100 = 1'b0;
 
-  //----------------------------------------------------------------------------
   // Create clock sources
   //----------------------------------------------------------------------------
 
-  // An independent clock source used as the reference clock for an
-  // IDELAYCTRL (if present) and for the main GT transceiver reset logic.
-  // This testbench uses the frequency of 200MHz.
+
+  // Create the Transceiver Reference clock (125 MHz)
   initial
   begin
-    independent_clock <= 1'b0;
+    refclk125_p <= 1'b0;
+    refclk125_n <= 1'b1;
     forever
     begin
-      independent_clock <= 1'b0;
-      #2500;
-      independent_clock <= 1'b1;
-      #2500;
-    end
-  end
-
-
-
-  // Create the transceiver Reference clock (125 MHz)
-  initial
-  begin
-    gtrefclk_p <= 1'b0;
-    gtrefclk_n <= 1'b1;
-    forever
-    begin
-      gtrefclk_p <= 1'b0;
-      gtrefclk_n <= 1'b1;
+      refclk125_p <= 1'b0;
+      refclk125_n <= 1'b1;
       #4000;
-      gtrefclk_p <= 1'b1;
-      gtrefclk_n <= 1'b0;
+      refclk125_p <= 1'b1;
+      refclk125_n <= 1'b0;
       #4000;
     end
   end
-
 
 
   //----------------------------------------------------------------------------
@@ -270,153 +207,101 @@ module demo_tb;
   //----------------------------------------------------------------------------
   gig_ethernet_pcs_pma_0_example_design dut
      (
-      .independent_clock      (independent_clock),
-      .gtrefclk_p             (gtrefclk_p),
-      .gtrefclk_n             (gtrefclk_n),
-      .rxuserclk2             (rxuserclk2),
-      .txp                    (txp),
-      .txn                    (txn),
-      .rxp                    (rxp),
-      .rxn                    (rxn),
-      .sgmii_clk              (gmii_rx_clk),
-      .gmii_txd               (gmii_txd),
-      .gmii_tx_en             (gmii_tx_en),
-      .gmii_tx_er             (gmii_tx_er),
+      .refclk125_p               (refclk125_p),
+      .refclk125_n               (refclk125_n),
+      .txp                       (txp),
+      .txn                       (txn),
+      .rxp                       (rxp),
+      .rxn                       (rxn),
+      .sgmii_clk                 (gmii_rx_clk),
+      .gmii_txd                  (gmii_txd),
+      .gmii_tx_en                (gmii_tx_en),
+      .gmii_tx_er                (gmii_tx_er),
       .gmii_rxd               (gmii_rxd),
-      .gmii_rx_dv             (gmii_rx_dv),
-      .gmii_rx_er             (gmii_rx_er),
-      .mdc                    (mdc),
-      .mdio_i                 (mdio_i),
-      .mdio_o                 (mdio_o),
-      .mdio_t                 (mdio_t),
-      .configuration_vector   (configuration_vector),
-      .configuration_valid    (configuration_valid),
-      .an_interrupt           (an_interrupt),
-      .an_adv_config_vector   (an_adv_config_vector),
-      .an_adv_config_val      (an_adv_config_val),
-      .an_restart_config      (an_restart_config),
-      .speed_is_10_100        (speed_is_10_100),
-      .speed_is_100           (speed_is_100),
-      .status_vector          (status_vector),
-      .reset                  (reset),
-      .signal_detect          (signal_detect)
-      );
+      .gmii_rx_dv                (gmii_rx_dv),
+      .gmii_rx_er                (gmii_rx_er),
+      .configuration_vector      (configuration_vector),
+      .an_interrupt              (an_interrupt),
+      .an_adv_config_vector      (an_adv_config_vector),
+      .an_restart_config         (an_restart_config),
+      .speed_is_10_100           (speed_is_10_100),
+      .speed_is_100              (speed_is_100),
+      .status_vector             (status_vector),
+      .reset                     (reset),
+      .signal_detect             (signal_detect)
+   );
 
 
 
-  //----------------------------------------------------------------------------
-  // Instantiate a Stimulus module for the core
-  //----------------------------------------------------------------------------
-  stimulus_tb stimulus
-     (
-      .txp                    (txp),
-      .txn                    (txn),
-      .rxp                    (rxp),
-      .rxn                    (rxn),
+      // Simulate that PMD sublayer has detected and optical input.
+      assign signal_detect = 1'b1;
+      // Instantiate an ethernet frame stimulus and checker module
+      stimulus_tb 
+         stimulus
+         (
+          .txp                    (txp),
+          .txn                    (txn),
+          .rxp                    (rxp),
+          .rxn                    (rxn),
 
       .gmii_tx_clk            (),
-      .gmii_rx_clk            (gmii_rx_clk),
-      .gmii_txd               (gmii_txd),
-      .gmii_tx_en             (gmii_tx_en),
-      .gmii_tx_er             (gmii_tx_er),
-      .gmii_rxd               (gmii_rxd),
-      .gmii_rx_dv             (gmii_rx_dv),
-      .gmii_rx_er             (gmii_rx_er),
+          .gmii_rx_clk            (gmii_rx_clk),
+          .gmii_txd               (gmii_txd),
+          .gmii_tx_en             (gmii_tx_en),
+          .gmii_tx_er             (gmii_tx_er),
+          .gmii_rxd               (gmii_rxd),
+          .gmii_rx_dv             (gmii_rx_dv),
+          .gmii_rx_er             (gmii_rx_er),
 
-      .speed_is_10_100        (speed_is_10_100),
-      .speed_is_100           (speed_is_100),
+          .speed_is_10_100        (speed_is_10_100),
+          .speed_is_100           (speed_is_100),
 
-      .configuration_finished (configuration_finished),
-      .tx_monitor_finished    (tx_monitor_finished),
-      .rx_monitor_finished    (rx_monitor_finished)
-      );
+          .configuration_finished (configuration_finished),
+          .tx_monitor_finished    (tx_monitor_finished),
+          .rx_monitor_finished    (rx_monitor_finished)
+       );
 
 
 
-  //----------------------------------------------------------------------------
-  // Simulate that PMD sublayer has detected and optical input.
-  //----------------------------------------------------------------------------
-  assign signal_detect = 1'b1;
 
 
   assign  an_adv_config_vector = 16'b0000000000100001;
-  assign  an_adv_config_val    = 1'b0;
   assign  an_restart_config    = 1'b0;
 
 
-  //----------------------------------------------------------------------------
-  // Set the PHYAD for the core
-  //----------------------------------------------------------------------------
 
-
-  //----------------------------------------------------------------------------
-  // Configuration process. This process will reset the core, then write
-  // to configuration register 0 to turn off autonegotiation and take
-  // the core out of the isolate state.
-  //----------------------------------------------------------------------------
-
-  // drives MDC at 2.5 MHz
-  initial
-  begin
-    mdc <= 1'b0;
-    forever
-    begin
-      mdc <= 1'b0;
-      #200000;
-      mdc <= 1'b1;
-      #200000;
-    end
-  end
-
-
-  // Main configuration process
+  //-------------------------------------------------------------------------
+  // Set the configuration for the core.  Any of the bits within
+  // "configuration_vector" can be changed dynamically.
+  // The core is then reset
+  //-------------------------------------------------------------------------
   initial
   begin : p_configuration
-    integer MDIO_BIT;       // Bit counter within MDIO frame
-
     $display("** Note: Timing checks are not valid");
 
     configuration_finished <= 0;
-    configuration_vector <= 5'b00000;
-    configuration_valid  <= 1'b0;
-    mdio_i <= 1'b1;
+
+    configuration_vector[0]   <= 1'b0;   // Disable Loopback
+    configuration_vector[1]   <= 1'b0;   // Disable Loopback
+    configuration_vector[2]   <= 1'b0;   // Disable POWERDOWN
+    configuration_vector[3]   <= 1'b0;   // Disable ISOLATE
+    configuration_vector[4]   <= 1'b0;   // Enable  Auto-Neg
 
     // reset the core
     $display("Resetting core...");
     reset <= 1'b1;
     #1000000
-    @(posedge gtrefclk_p)
     reset <= 1'b0;
-    // wait for core to obtain synchronisation
-  
-    #2000000000                     
-    #1000000000                     
- 
-    #250000000    
- 
 
-    // Write to PCS Management configuration register 0.
-    $display("Writing to Control Register in PCS sublayer....");
+    // wait for cores to obtain synchronisation
+    //fix for vivado flow goofup . Vivado trims status_vector[0] for core netlist in case of an since bit 0 and 1 of status vector are same.
+        wait (status_vector[0] == 1);
 
-    @(negedge mdc)    // centre MDIO around MDC rising edge
-
-    MDIO_BIT = 0;
-
-    // transmit serial management frame
-    while(MDIO_BIT !== 64)
-    begin
-      @(negedge mdc);
-      mdio_i <= mdio_data[MDIO_BIT];
-      MDIO_BIT = MDIO_BIT + 1;
-    end
-
-    @(negedge mdc)
-    mdio_i <= 1'b1;  // simulate tri-state with pullup
-    #10000000    
-    // wait for core to obtain synchronisation
-    wait (status_vector[0] == 1);
+  //  wait (status_vector[0] == 1'b1);
     #8000000
 
+
+    @(posedge refclk125_p)
     configuration_finished <= 1;
   end // p_configuration
 
@@ -426,18 +311,22 @@ module demo_tb;
   // End the simulation.
   //----------------------------------------------------------------------------
 
-  assign simulation_finished = tx_monitor_finished & rx_monitor_finished;
+  assign simulation_finished = (tx_monitor_finished == 0 | rx_monitor_finished == 0) ? 1'b0:1'b1;
 
 
   initial
   begin : p_end_simulation
   fork: sim_in_progress
      @(posedge simulation_finished) disable sim_in_progress;
-     #2000000000                     
-     #2000000000                     
-     #500000000                     
+     #2000000000
+     #2000000000
+     #2000000000
+     #2000000000
+     #2000000000
+     #2000000000
+     #2000000000
+     #2000000000
      disable sim_in_progress;
-     
   join
   if (simulation_finished) begin
        #1000000
@@ -448,6 +337,7 @@ module demo_tb;
      $display("** Error: Testbench timed out");
   $stop;
   end // p_end_simulation
+
 
 
 endmodule

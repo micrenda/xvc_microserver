@@ -2,8 +2,8 @@
 # Vivado v2016.2 (64-bit)
 # SW Build 1577090 on Thu Jun  2 16:32:35 MDT 2016
 # IP Build 1577682 on Fri Jun  3 12:00:54 MDT 2016
-# Start of session at: Mon Sep  5 14:27:08 2016
-# Process ID: 9369
+# Start of session at: Wed Sep 14 16:23:36 2016
+# Process ID: 32168
 # Current directory: /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1
 # Command line: vivado -log gig_ethernet_pcs_pma_0.vds -mode batch -messageDb vivado.pb -notrace -source gig_ethernet_pcs_pma_0.tcl
 # Log file: /home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0.vds

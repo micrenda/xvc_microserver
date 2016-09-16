@@ -14,83 +14,94 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7vx485t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7vx485t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 9397 
+INFO: Helper process launched with PID 32190 
+WARNING: [Synth 8-2507] parameter declaration becomes local in gig_ethernet_pcs_pma_0_decode_8b10b_lut_base with formal parameter declaration list [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:102]
+WARNING: [Synth 8-2507] parameter declaration becomes local in gig_ethernet_pcs_pma_0_decode_8b10b_lut_base with formal parameter declaration list [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:103]
+WARNING: [Synth 8-2507] parameter declaration becomes local in gig_ethernet_pcs_pma_0_decode_8b10b_lut_base with formal parameter declaration list [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:104]
+WARNING: [Synth 8-2507] parameter declaration becomes local in gig_ethernet_pcs_pma_0_decode_8b10b_lut_base with formal parameter declaration list [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:105]
+WARNING: [Synth 8-2507] parameter declaration becomes local in gig_ethernet_pcs_pma_0_decode_8b10b_lut_base with formal parameter declaration list [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:106]
+WARNING: [Synth 8-2507] parameter declaration becomes local in gig_ethernet_pcs_pma_0_decode_8b10b_lut_base with formal parameter declaration list [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:107]
+WARNING: [Synth 8-2507] parameter declaration becomes local in gig_ethernet_pcs_pma_0_decode_8b10b_lut_base with formal parameter declaration list [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:120]
+WARNING: [Synth 8-2507] parameter declaration becomes local in gig_ethernet_pcs_pma_0_decode_8b10b_lut_base with formal parameter declaration list [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:121]
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:12 ; elapsed = 00:00:24 . Memory (MB): peak = 1090.973 ; gain = 207.359 ; free physical = 135 ; free virtual = 7889
+Starting RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1100.191 ; gain = 216.578 ; free physical = 376 ; free virtual = 8060
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.v:100]
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_block' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_block.v:101]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.v:98]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_block' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_block.v:95]
 	Parameter EXAMPLE_SIMULATION bound to: 0 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_reset_wtd_timer' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_reset_wtd_timer.v:66]
+	Parameter WAIT_TIME bound to: 24'b010110010110100000101111 
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_reset_wtd_timer' (1#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_reset_wtd_timer.v:66]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sync_block' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_sync_block.v:62]
+	Parameter INITIALISE bound to: 2'b00 
+INFO: [Synth 8-638] synthesizing module 'FD' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:3724]
+	Parameter INIT bound to: 1'b0 
+INFO: [Synth 8-256] done synthesizing module 'FD' (2#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:3724]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sync_block' (3#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_sync_block.v:62]
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_adapt' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_sgmii_adapt.v:124]
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_reset_sync' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_reset_sync.v:62]
 	Parameter INITIALISE bound to: 2'b11 
 INFO: [Synth 8-638] synthesizing module 'FDP' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:3892]
 	Parameter INIT bound to: 1'b1 
-INFO: [Synth 8-256] done synthesizing module 'FDP' (1#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:3892]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_reset_sync' (2#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_reset_sync.v:62]
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sync_block' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_sync_block.v:62]
-	Parameter INITIALISE bound to: 2'b00 
-INFO: [Synth 8-638] synthesizing module 'FD' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:3724]
-	Parameter INIT bound to: 1'b0 
-INFO: [Synth 8-256] done synthesizing module 'FD' (3#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:3724]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sync_block' (4#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_sync_block.v:62]
+INFO: [Synth 8-256] done synthesizing module 'FDP' (4#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:3892]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_reset_sync' (5#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_reset_sync.v:62]
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_clk_gen' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_clk_gen.v:83]
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_johnson_cntr' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_johnson_cntr.v:72]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_johnson_cntr' (5#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_johnson_cntr.v:72]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_clk_gen' (6#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_clk_gen.v:83]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_johnson_cntr' (6#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_johnson_cntr.v:72]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_clk_gen' (7#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_clk_gen.v:83]
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_tx_rate_adapt' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_tx_rate_adapt.v:72]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_tx_rate_adapt' (7#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_tx_rate_adapt.v:72]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_tx_rate_adapt' (8#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_tx_rate_adapt.v:72]
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_rx_rate_adapt' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_rx_rate_adapt.v:79]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_rx_rate_adapt' (8#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_rx_rate_adapt.v:79]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_adapt' (9#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_sgmii_adapt.v:124]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_rx_rate_adapt' (9#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_rx_rate_adapt.v:79]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_adapt' (10#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_adapt/gig_ethernet_pcs_pma_0_sgmii_adapt.v:124]
 	Parameter C_ELABORATION_TRANSIENT_DIR bound to: BlankString - type: string 
 	Parameter C_COMPONENT_NAME bound to: gig_ethernet_pcs_pma_0 - type: string 
 	Parameter C_FAMILY bound to: virtex7 - type: string 
 	Parameter C_RX_GMII_CLK bound to: TXOUTCLK - type: string 
 	Parameter C_IS_SGMII bound to: 1 - type: bool 
-	Parameter C_USE_TRANSCEIVER bound to: 1 - type: bool 
+	Parameter C_USE_TRANSCEIVER bound to: 0 - type: bool 
 	Parameter C_HAS_TEMAC bound to: 1 - type: bool 
 	Parameter C_USE_TBI bound to: 0 - type: bool 
-	Parameter C_USE_LVDS bound to: 0 - type: bool 
+	Parameter C_USE_LVDS bound to: 1 - type: bool 
 	Parameter C_HAS_AN bound to: 1 - type: bool 
-	Parameter C_HAS_MDIO bound to: 1 - type: bool 
+	Parameter C_HAS_MDIO bound to: 0 - type: bool 
 	Parameter C_SGMII_PHY_MODE bound to: 0 - type: bool 
 	Parameter C_DYNAMIC_SWITCHING bound to: 0 - type: bool 
 	Parameter C_SGMII_FABRIC_BUFFER bound to: 1 - type: bool 
 	Parameter C_1588 bound to: 0 - type: integer 
 	Parameter B_SHIFTER_ADDR bound to: 10'b0101001110 
-	Parameter RX_GT_NOMINAL_LATENCY bound to: 16'b0000000011000000 
+	Parameter RX_GT_NOMINAL_LATENCY bound to: 16'b0000000011001000 
 	Parameter GT_RX_BYTE_WIDTH bound to: 1 - type: integer 
 	Parameter C_FAMILY bound to: virtex7 - type: string 
 	Parameter C_RX_GMII_CLK bound to: TXOUTCLK - type: string 
 	Parameter C_IS_SGMII bound to: 1 - type: bool 
-	Parameter C_USE_TRANSCEIVER bound to: 1 - type: bool 
+	Parameter C_USE_TRANSCEIVER bound to: 0 - type: bool 
 	Parameter C_HAS_TEMAC bound to: 1 - type: bool 
 	Parameter C_USE_TBI bound to: 0 - type: bool 
-	Parameter C_USE_LVDS bound to: 0 - type: bool 
+	Parameter C_USE_LVDS bound to: 1 - type: bool 
 	Parameter C_HAS_AN bound to: 1 - type: bool 
-	Parameter C_HAS_MDIO bound to: 1 - type: bool 
+	Parameter C_HAS_MDIO bound to: 0 - type: bool 
 	Parameter C_SGMII_PHY_MODE bound to: 0 - type: bool 
 	Parameter C_DYNAMIC_SWITCHING bound to: 0 - type: bool 
 	Parameter C_QSGMII bound to: 0 - type: bool 
 	Parameter C_1588 bound to: 0 - type: integer 
-	Parameter RX_GT_NOMINAL_LATENCY bound to: 16'b0000000011000000 
+	Parameter RX_GT_NOMINAL_LATENCY bound to: 16'b0000000011001000 
 	Parameter B_SHIFTER_ADDR bound to: 10'b0101001110 
 	Parameter GT_RX_BYTE_WIDTH bound to: 1 - type: integer 
 	Parameter C_FAMILY bound to: virtex7 - type: string 
 	Parameter C_RX_GMII_CLK bound to: TXOUTCLK - type: string 
 	Parameter C_IS_SGMII bound to: 1 - type: bool 
-	Parameter C_USE_TRANSCEIVER bound to: 1 - type: bool 
+	Parameter C_USE_TRANSCEIVER bound to: 0 - type: bool 
 	Parameter C_HAS_TEMAC bound to: 1 - type: bool 
 	Parameter C_USE_TBI bound to: 0 - type: bool 
-	Parameter C_USE_LVDS bound to: 0 - type: bool 
+	Parameter C_USE_LVDS bound to: 1 - type: bool 
 	Parameter C_HAS_AN bound to: 1 - type: bool 
-	Parameter C_HAS_MDIO bound to: 1 - type: bool 
+	Parameter C_HAS_MDIO bound to: 0 - type: bool 
 	Parameter C_SGMII_PHY_MODE bound to: 0 - type: bool 
 	Parameter C_DYNAMIC_SWITCHING bound to: 0 - type: bool 
 	Parameter C_QSGMII bound to: 0 - type: bool 
 	Parameter C_1588 bound to: 0 - type: integer 
-	Parameter RX_GT_NOMINAL_LATENCY bound to: 16'b0000000011000000 
+	Parameter RX_GT_NOMINAL_LATENCY bound to: 16'b0000000011001000 
 	Parameter B_SHIFTER_ADDR bound to: 10'b0101001110 
 	Parameter GT_RX_BYTE_WIDTH bound to: 1 - type: integer 
 	Parameter INITIALISE bound to: 2'b11 
@@ -105,33 +116,6 @@ INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_adapt
 	Parameter INITIALISE bound to: 2'b11 
 	Parameter INIT bound to: 16'b0000000000000000 
 	Parameter INIT bound to: 16'b0000000000000000 
-	Parameter C_IS_SGMII bound to: 1 - type: bool 
-	Parameter C_USE_TRANSCEIVER bound to: 1 - type: bool 
-	Parameter C_HAS_TEMAC bound to: 1 - type: bool 
-	Parameter C_DYNAMIC_SWITCHING bound to: 0 - type: bool 
-	Parameter C_HAS_AN bound to: 1 - type: bool 
-	Parameter C_SGMII_PHY_MODE bound to: 0 - type: bool 
-	Parameter C_1588 bound to: 0 - type: integer 
-	Parameter RX_GT_NOMINAL_LATENCY bound to: 16'b0000000011000000 
-	Parameter C_QSGMII bound to: 0 - type: bool 
-	Parameter C_IS_SGMII bound to: 1 - type: bool 
-	Parameter C_USE_TRANSCEIVER bound to: 1 - type: bool 
-	Parameter C_HAS_TEMAC bound to: 1 - type: bool 
-	Parameter C_DYNAMIC_SWITCHING bound to: 0 - type: bool 
-	Parameter C_HAS_AN bound to: 1 - type: bool 
-	Parameter C_SGMII_PHY_MODE bound to: 0 - type: bool 
-	Parameter C_1588 bound to: 0 - type: integer 
-	Parameter RX_GT_NOMINAL_LATENCY bound to: 16'b0000000011000000 
-	Parameter C_QSGMII bound to: 0 - type: bool 
-	Parameter INITIALISE bound to: 2'b00 
-	Parameter INITIALISE bound to: 2'b00 
-	Parameter INIT bound to: 1'b0 
-	Parameter INIT bound to: 1'b0 
-	Parameter INIT bound to: 1'b0 
-	Parameter INIT bound to: 1'b0 
-	Parameter INIT bound to: 1'b0 
-	Parameter INIT bound to: 1'b0 
-	Parameter INITIALISE bound to: 2'b00 
 	Parameter C_DYNAMIC_SWITCHING bound to: 0 - type: bool 
 	Parameter C_IS_SGMII bound to: 1 - type: bool 
 	Parameter C_SGMII_PHY_MODE bound to: 0 - type: bool 
@@ -141,333 +125,174 @@ INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_adapt
 	Parameter C_QSGMII bound to: 0 - type: bool 
 	Parameter C_QSGMII bound to: 0 - type: bool 
 	Parameter INITIALISE bound to: 2'b00 
+	Parameter INITIALISE bound to: 2'b00 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
+	Parameter INIT bound to: 1'b0 
 	Parameter C_FAMILY bound to: virtex7 - type: string 
-	Parameter C_USE_TRANSCEIVER bound to: 1 - type: bool 
+	Parameter C_USE_TRANSCEIVER bound to: 0 - type: bool 
 	Parameter C_USE_TBI bound to: 0 - type: bool 
-	Parameter C_USE_LVDS bound to: 0 - type: bool 
+	Parameter C_USE_LVDS bound to: 1 - type: bool 
 	Parameter C_FAMILY bound to: virtex7 - type: string 
-	Parameter C_USE_TRANSCEIVER bound to: 1 - type: bool 
+	Parameter C_USE_TRANSCEIVER bound to: 0 - type: bool 
 	Parameter C_USE_TBI bound to: 0 - type: bool 
-	Parameter C_USE_LVDS bound to: 0 - type: bool 
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_transceiver' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_transceiver.v:63]
-	Parameter EXAMPLE_SIMULATION bound to: 0 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_reset_wtd_timer' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_reset_wtd_timer.v:66]
-	Parameter WAIT_TIME bound to: 24'b100011110000110100011000 
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_reset_wtd_timer' (20#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_reset_wtd_timer.v:66]
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_GTWIZARD' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_gtwizard.v:72]
-	Parameter EXAMPLE_SIMULATION bound to: 0 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_GTWIZARD_init' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_gtwizard_init.v:71]
-	Parameter EXAMPLE_SIM_GTRESET_SPEEDUP bound to: TRUE - type: string 
-	Parameter EXAMPLE_SIMULATION bound to: 0 - type: integer 
-	Parameter STABLE_CLOCK_PERIOD bound to: 5 - type: integer 
-	Parameter EXAMPLE_USE_CHIPSCOPE bound to: 0 - type: integer 
-	Parameter RX_CDRLOCK_TIME bound to: 40000.000000 - type: float 
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_GTWIZARD_multi_gt' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_gtwizard_multi_gt.v:72]
-	Parameter WRAPPER_SIM_GTRESET_SPEEDUP bound to: TRUE - type: string 
-	Parameter RX_DFE_KL_CFG2_IN bound to: 806439084 - type: integer 
-	Parameter PMA_RSV_IN bound to: 99456 - type: integer 
-	Parameter QPLL_FBDIV_TOP bound to: 16 - type: integer 
-	Parameter QPLL_FBDIV_IN bound to: 10'b0000100000 
-	Parameter QPLL_FBDIV_RATIO bound to: 1'b1 
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_GTWIZARD_GT' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_gtwizard_gt.v:72]
-	Parameter GT_SIM_GTRESET_SPEEDUP bound to: TRUE - type: string 
-	Parameter RX_DFE_KL_CFG2_IN bound to: 806439084 - type: integer 
-	Parameter PMA_RSV_IN bound to: 99456 - type: integer 
-	Parameter PCS_RSVD_ATTR_IN bound to: 48'b000000000000000000000000000000000000000000000000 
-INFO: [Synth 8-638] synthesizing module 'GTXE2_CHANNEL' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:10525]
-	Parameter ALIGN_COMMA_DOUBLE bound to: FALSE - type: string 
-	Parameter ALIGN_COMMA_ENABLE bound to: 10'b0001111111 
-	Parameter ALIGN_COMMA_WORD bound to: 2 - type: integer 
-	Parameter ALIGN_MCOMMA_DET bound to: TRUE - type: string 
-	Parameter ALIGN_MCOMMA_VALUE bound to: 10'b1010000011 
-	Parameter ALIGN_PCOMMA_DET bound to: TRUE - type: string 
-	Parameter ALIGN_PCOMMA_VALUE bound to: 10'b0101111100 
-	Parameter CBCC_DATA_SOURCE_SEL bound to: DECODED - type: string 
-	Parameter CHAN_BOND_KEEP_ALIGN bound to: FALSE - type: string 
-	Parameter CHAN_BOND_MAX_SKEW bound to: 1 - type: integer 
-	Parameter CHAN_BOND_SEQ_1_1 bound to: 10'b0000000000 
-	Parameter CHAN_BOND_SEQ_1_2 bound to: 10'b0000000000 
-	Parameter CHAN_BOND_SEQ_1_3 bound to: 10'b0000000000 
-	Parameter CHAN_BOND_SEQ_1_4 bound to: 10'b0000000000 
-	Parameter CHAN_BOND_SEQ_1_ENABLE bound to: 4'b1111 
-	Parameter CHAN_BOND_SEQ_2_1 bound to: 10'b0000000000 
-	Parameter CHAN_BOND_SEQ_2_2 bound to: 10'b0000000000 
-	Parameter CHAN_BOND_SEQ_2_3 bound to: 10'b0000000000 
-	Parameter CHAN_BOND_SEQ_2_4 bound to: 10'b0000000000 
-	Parameter CHAN_BOND_SEQ_2_ENABLE bound to: 4'b1111 
-	Parameter CHAN_BOND_SEQ_2_USE bound to: FALSE - type: string 
-	Parameter CHAN_BOND_SEQ_LEN bound to: 1 - type: integer 
-	Parameter CLK_CORRECT_USE bound to: FALSE - type: string 
-	Parameter CLK_COR_KEEP_IDLE bound to: FALSE - type: string 
-	Parameter CLK_COR_MAX_LAT bound to: 36 - type: integer 
-	Parameter CLK_COR_MIN_LAT bound to: 32 - type: integer 
-	Parameter CLK_COR_PRECEDENCE bound to: TRUE - type: string 
-	Parameter CLK_COR_REPEAT_WAIT bound to: 0 - type: integer 
-	Parameter CLK_COR_SEQ_1_1 bound to: 10'b0100000000 
-	Parameter CLK_COR_SEQ_1_2 bound to: 10'b0000000000 
-	Parameter CLK_COR_SEQ_1_3 bound to: 10'b0000000000 
-	Parameter CLK_COR_SEQ_1_4 bound to: 10'b0000000000 
-	Parameter CLK_COR_SEQ_1_ENABLE bound to: 4'b1111 
-	Parameter CLK_COR_SEQ_2_1 bound to: 10'b0100000000 
-	Parameter CLK_COR_SEQ_2_2 bound to: 10'b0000000000 
-	Parameter CLK_COR_SEQ_2_3 bound to: 10'b0000000000 
-	Parameter CLK_COR_SEQ_2_4 bound to: 10'b0000000000 
-	Parameter CLK_COR_SEQ_2_ENABLE bound to: 4'b1111 
-	Parameter CLK_COR_SEQ_2_USE bound to: FALSE - type: string 
-	Parameter CLK_COR_SEQ_LEN bound to: 1 - type: integer 
-	Parameter CPLL_CFG bound to: 24'b101111000000011111011100 
-	Parameter CPLL_FBDIV bound to: 4 - type: integer 
-	Parameter CPLL_FBDIV_45 bound to: 5 - type: integer 
-	Parameter CPLL_INIT_CFG bound to: 24'b000000000000000000011110 
-	Parameter CPLL_LOCK_CFG bound to: 16'b0000000111101000 
-	Parameter CPLL_REFCLK_DIV bound to: 1 - type: integer 
-	Parameter DEC_MCOMMA_DETECT bound to: TRUE - type: string 
-	Parameter DEC_PCOMMA_DETECT bound to: TRUE - type: string 
-	Parameter DEC_VALID_COMMA_ONLY bound to: FALSE - type: string 
-	Parameter DMONITOR_CFG bound to: 24'b000000000000101000000000 
-	Parameter ES_CONTROL bound to: 6'b000000 
-	Parameter ES_ERRDET_EN bound to: FALSE - type: string 
-	Parameter ES_EYE_SCAN_EN bound to: TRUE - type: string 
-	Parameter ES_HORZ_OFFSET bound to: 12'b000000000000 
-	Parameter ES_PMA_CFG bound to: 10'b0000000000 
-	Parameter ES_PRESCALE bound to: 5'b00000 
-	Parameter ES_QUALIFIER bound to: 80'b00000000000000000000000000000000000000000000000000000000000000000000000000000000 
-	Parameter ES_QUAL_MASK bound to: 80'b00000000000000000000000000000000000000000000000000000000000000000000000000000000 
-	Parameter ES_SDATA_MASK bound to: 80'b00000000000000000000000000000000000000000000000000000000000000000000000000000000 
-	Parameter ES_VERT_OFFSET bound to: 9'b000000000 
-	Parameter FTS_DESKEW_SEQ_ENABLE bound to: 4'b1111 
-	Parameter FTS_LANE_DESKEW_CFG bound to: 4'b1111 
-	Parameter FTS_LANE_DESKEW_EN bound to: FALSE - type: string 
-	Parameter GEARBOX_MODE bound to: 3'b000 
-	Parameter IS_CPLLLOCKDETCLK_INVERTED bound to: 1'b0 
-	Parameter IS_DRPCLK_INVERTED bound to: 1'b0 
-	Parameter IS_GTGREFCLK_INVERTED bound to: 1'b0 
-	Parameter IS_RXUSRCLK2_INVERTED bound to: 1'b0 
-	Parameter IS_RXUSRCLK_INVERTED bound to: 1'b0 
-	Parameter IS_TXPHDLYTSTCLK_INVERTED bound to: 1'b0 
-	Parameter IS_TXUSRCLK2_INVERTED bound to: 1'b0 
-	Parameter IS_TXUSRCLK_INVERTED bound to: 1'b0 
-	Parameter OUTREFCLK_SEL_INV bound to: 2'b11 
-	Parameter PCS_PCIE_EN bound to: FALSE - type: string 
-	Parameter PCS_RSVD_ATTR bound to: 48'b000000000000000000000000000000000000000000000000 
-	Parameter PD_TRANS_TIME_FROM_P2 bound to: 12'b000000111100 
-	Parameter PD_TRANS_TIME_NONE_P2 bound to: 8'b00011001 
-	Parameter PD_TRANS_TIME_TO_P2 bound to: 8'b01100100 
-	Parameter PMA_RSV bound to: 99456 - type: integer 
-	Parameter PMA_RSV2 bound to: 16'b0010000001010000 
-	Parameter PMA_RSV3 bound to: 2'b00 
-	Parameter PMA_RSV4 bound to: 0 - type: integer 
-	Parameter RXBUFRESET_TIME bound to: 5'b00001 
-	Parameter RXBUF_ADDR_MODE bound to: FAST - type: string 
-	Parameter RXBUF_EIDLE_HI_CNT bound to: 4'b1000 
-	Parameter RXBUF_EIDLE_LO_CNT bound to: 4'b0000 
-	Parameter RXBUF_EN bound to: TRUE - type: string 
-	Parameter RXBUF_RESET_ON_CB_CHANGE bound to: TRUE - type: string 
-	Parameter RXBUF_RESET_ON_COMMAALIGN bound to: FALSE - type: string 
-	Parameter RXBUF_RESET_ON_EIDLE bound to: FALSE - type: string 
-	Parameter RXBUF_RESET_ON_RATE_CHANGE bound to: TRUE - type: string 
-	Parameter RXBUF_THRESH_OVFLW bound to: 61 - type: integer 
-	Parameter RXBUF_THRESH_OVRD bound to: FALSE - type: string 
-	Parameter RXBUF_THRESH_UNDFLW bound to: 8 - type: integer 
-	Parameter RXCDRFREQRESET_TIME bound to: 5'b00001 
-	Parameter RXCDRPHRESET_TIME bound to: 5'b00001 
-	Parameter RXCDR_CFG bound to: 72'b000000110000000000000000001000111111111100010000000100000000000000100000 
-	Parameter RXCDR_FR_RESET_ON_EIDLE bound to: 1'b0 
-	Parameter RXCDR_HOLD_DURING_EIDLE bound to: 1'b0 
-	Parameter RXCDR_LOCK_CFG bound to: 6'b010101 
-	Parameter RXCDR_PH_RESET_ON_EIDLE bound to: 1'b0 
-	Parameter RXDFELPMRESET_TIME bound to: 7'b0001111 
-	Parameter RXDLY_CFG bound to: 16'b0000000000011111 
-	Parameter RXDLY_LCFG bound to: 9'b000110000 
-	Parameter RXDLY_TAP_CFG bound to: 16'b0000000000000000 
-	Parameter RXGEARBOX_EN bound to: FALSE - type: string 
-	Parameter RXISCANRESET_TIME bound to: 5'b00001 
-	Parameter RXLPM_HF_CFG bound to: 14'b00000011110000 
-	Parameter RXLPM_LF_CFG bound to: 14'b00000011110000 
-	Parameter RXOOB_CFG bound to: 7'b0000110 
-	Parameter RXOUT_DIV bound to: 4 - type: integer 
-	Parameter RXPCSRESET_TIME bound to: 5'b00001 
-	Parameter RXPHDLY_CFG bound to: 24'b000010000100000000100000 
-	Parameter RXPH_CFG bound to: 24'b000000000000000000000000 
-	Parameter RXPH_MONITOR_SEL bound to: 5'b00000 
-	Parameter RXPMARESET_TIME bound to: 5'b00011 
-	Parameter RXPRBS_ERR_LOOPBACK bound to: 1'b0 
-	Parameter RXSLIDE_AUTO_WAIT bound to: 7 - type: integer 
-	Parameter RXSLIDE_MODE bound to: OFF - type: string 
-	Parameter RX_BIAS_CFG bound to: 12'b000000000100 
-	Parameter RX_BUFFER_CFG bound to: 6'b000000 
-	Parameter RX_CLK25_DIV bound to: 5 - type: integer 
-	Parameter RX_CLKMUX_PD bound to: 1'b1 
-	Parameter RX_CM_SEL bound to: 2'b11 
-	Parameter RX_CM_TRIM bound to: 3'b010 
-	Parameter RX_DATA_WIDTH bound to: 20 - type: integer 
-	Parameter RX_DDI_SEL bound to: 6'b000000 
-	Parameter RX_DEBUG_CFG bound to: 12'b000000000000 
-	Parameter RX_DEFER_RESET_BUF_EN bound to: TRUE - type: string 
-	Parameter RX_DFE_GAIN_CFG bound to: 23'b00000100000111111101010 
-	Parameter RX_DFE_H2_CFG bound to: 12'b000000000000 
-	Parameter RX_DFE_H3_CFG bound to: 12'b000001000000 
-	Parameter RX_DFE_H4_CFG bound to: 11'b00011110000 
-	Parameter RX_DFE_H5_CFG bound to: 11'b00011100000 
-	Parameter RX_DFE_KL_CFG bound to: 13'b0000011111110 
-	Parameter RX_DFE_KL_CFG2 bound to: 806439084 - type: integer 
-	Parameter RX_DFE_LPM_CFG bound to: 16'b0000100100000100 
-	Parameter RX_DFE_LPM_HOLD_DURING_EIDLE bound to: 1'b0 
-	Parameter RX_DFE_UT_CFG bound to: 17'b10001111000000000 
-	Parameter RX_DFE_VP_CFG bound to: 17'b00011111100000011 
-	Parameter RX_DFE_XYD_CFG bound to: 13'b0000000000000 
-	Parameter RX_DISPERR_SEQ_MATCH bound to: TRUE - type: string 
-	Parameter RX_INT_DATAWIDTH bound to: 0 - type: integer 
-	Parameter RX_OS_CFG bound to: 13'b0000010000000 
-	Parameter RX_SIG_VALID_DLY bound to: 10 - type: integer 
-	Parameter RX_XCLK_SEL bound to: RXREC - type: string 
-	Parameter SAS_MAX_COM bound to: 64 - type: integer 
-	Parameter SAS_MIN_COM bound to: 36 - type: integer 
-	Parameter SATA_BURST_SEQ_LEN bound to: 4'b0101 
-	Parameter SATA_BURST_VAL bound to: 3'b100 
-	Parameter SATA_CPLL_CFG bound to: VCO_3000MHZ - type: string 
-	Parameter SATA_EIDLE_VAL bound to: 3'b100 
-	Parameter SATA_MAX_BURST bound to: 8 - type: integer 
-	Parameter SATA_MAX_INIT bound to: 21 - type: integer 
-	Parameter SATA_MAX_WAKE bound to: 7 - type: integer 
-	Parameter SATA_MIN_BURST bound to: 4 - type: integer 
-	Parameter SATA_MIN_INIT bound to: 12 - type: integer 
-	Parameter SATA_MIN_WAKE bound to: 4 - type: integer 
-	Parameter SHOW_REALIGN_COMMA bound to: TRUE - type: string 
-	Parameter SIM_CPLLREFCLK_SEL bound to: 3'b001 
-	Parameter SIM_RECEIVER_DETECT_PASS bound to: TRUE - type: string 
-	Parameter SIM_RESET_SPEEDUP bound to: TRUE - type: string 
-	Parameter SIM_TX_EIDLE_DRIVE_LEVEL bound to: X - type: string 
-	Parameter SIM_VERSION bound to: 4.0 - type: string 
-	Parameter TERM_RCAL_CFG bound to: 5'b10000 
-	Parameter TERM_RCAL_OVRD bound to: 1'b0 
-	Parameter TRANS_TIME_RATE bound to: 8'b00001110 
-	Parameter TST_RSV bound to: 0 - type: integer 
-	Parameter TXBUF_EN bound to: TRUE - type: string 
-	Parameter TXBUF_RESET_ON_RATE_CHANGE bound to: TRUE - type: string 
-	Parameter TXDLY_CFG bound to: 16'b0000000000011111 
-	Parameter TXDLY_LCFG bound to: 9'b000110000 
-	Parameter TXDLY_TAP_CFG bound to: 16'b0000000000000000 
-	Parameter TXGEARBOX_EN bound to: FALSE - type: string 
-	Parameter TXOUT_DIV bound to: 4 - type: integer 
-	Parameter TXPCSRESET_TIME bound to: 5'b00001 
-	Parameter TXPHDLY_CFG bound to: 24'b000010000100000000100000 
-	Parameter TXPH_CFG bound to: 16'b0000011110000000 
-	Parameter TXPH_MONITOR_SEL bound to: 5'b00000 
-	Parameter TXPMARESET_TIME bound to: 5'b00001 
-	Parameter TX_CLK25_DIV bound to: 5 - type: integer 
-	Parameter TX_CLKMUX_PD bound to: 1'b1 
-	Parameter TX_DATA_WIDTH bound to: 20 - type: integer 
-	Parameter TX_DEEMPH0 bound to: 5'b00000 
-	Parameter TX_DEEMPH1 bound to: 5'b00000 
-	Parameter TX_DRIVE_MODE bound to: DIRECT - type: string 
-	Parameter TX_EIDLE_ASSERT_DELAY bound to: 3'b110 
-	Parameter TX_EIDLE_DEASSERT_DELAY bound to: 3'b100 
-	Parameter TX_INT_DATAWIDTH bound to: 0 - type: integer 
-	Parameter TX_LOOPBACK_DRIVE_HIZ bound to: FALSE - type: string 
-	Parameter TX_MAINCURSOR_SEL bound to: 1'b0 
-	Parameter TX_MARGIN_FULL_0 bound to: 7'b1001110 
-	Parameter TX_MARGIN_FULL_1 bound to: 7'b1001001 
-	Parameter TX_MARGIN_FULL_2 bound to: 7'b1000101 
-	Parameter TX_MARGIN_FULL_3 bound to: 7'b1000010 
-	Parameter TX_MARGIN_FULL_4 bound to: 7'b1000000 
-	Parameter TX_MARGIN_LOW_0 bound to: 7'b1000110 
-	Parameter TX_MARGIN_LOW_1 bound to: 7'b1000100 
-	Parameter TX_MARGIN_LOW_2 bound to: 7'b1000010 
-	Parameter TX_MARGIN_LOW_3 bound to: 7'b1000000 
-	Parameter TX_MARGIN_LOW_4 bound to: 7'b1000000 
-	Parameter TX_PREDRIVER_MODE bound to: 1'b0 
-	Parameter TX_QPI_STATUS_EN bound to: 1'b0 
-	Parameter TX_RXDETECT_CFG bound to: 14'b01100000110010 
-	Parameter TX_RXDETECT_REF bound to: 3'b100 
-	Parameter TX_XCLK_SEL bound to: TXOUT - type: string 
-	Parameter UCODEER_CLR bound to: 1'b0 
-INFO: [Synth 8-256] done synthesizing module 'GTXE2_CHANNEL' (21#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:10525]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_GTWIZARD_GT' (22#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_gtwizard_gt.v:72]
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_cpll_railing' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_cpll_railing.v:68]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_cpll_railing' (23#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_cpll_railing.v:68]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_GTWIZARD_multi_gt' (24#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_gtwizard_multi_gt.v:72]
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_TX_STARTUP_FSM' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_tx_startup_fsm.v:98]
-	Parameter STABLE_CLOCK_PERIOD bound to: 5 - type: integer 
-	Parameter RETRY_COUNTER_BITWIDTH bound to: 8 - type: integer 
-	Parameter EXAMPLE_SIMULATION bound to: 0 - type: integer 
-	Parameter TX_QPLL_USED bound to: FALSE - type: string 
-	Parameter RX_QPLL_USED bound to: FALSE - type: string 
-	Parameter PHASE_ALIGNMENT_MANUAL bound to: FALSE - type: string 
-	Parameter INIT bound to: 4'b0000 
-	Parameter ASSERT_ALL_RESETS bound to: 4'b0001 
-	Parameter WAIT_FOR_PLL_LOCK bound to: 4'b0010 
-	Parameter RELEASE_PLL_RESET bound to: 4'b0011 
-	Parameter WAIT_FOR_TXOUTCLK bound to: 4'b0100 
-	Parameter RELEASE_MMCM_RESET bound to: 4'b0101 
-	Parameter WAIT_FOR_TXUSRCLK bound to: 4'b0110 
-	Parameter WAIT_RESET_DONE bound to: 4'b0111 
-	Parameter DO_PHASE_ALIGNMENT bound to: 4'b1000 
-	Parameter RESET_FSM_DONE bound to: 4'b1001 
-	Parameter MMCM_LOCK_CNT_MAX bound to: 256 - type: integer 
-	Parameter STARTUP_DELAY bound to: 500 - type: integer 
-	Parameter WAIT_CYCLES bound to: 100 - type: integer 
-	Parameter WAIT_MAX bound to: 110 - type: integer 
-	Parameter WAIT_TIMEOUT_2ms bound to: 400000 - type: integer 
-	Parameter WAIT_TIMEOUT_3ms bound to: 600000 - type: integer 
-	Parameter WAIT_TLOCK_MAX bound to: 20000 - type: integer 
-	Parameter WAIT_TIMEOUT_500us bound to: 100000 - type: integer 
-	Parameter WAIT_1us_CYCLES bound to: 200 - type: integer 
-	Parameter WAIT_1us bound to: 210 - type: integer 
-	Parameter WAIT_TIME_MAX bound to: 2000 - type: integer 
-	Parameter PORT_WIDTH bound to: 19 - type: integer 
-	Parameter MAX_RETRIES bound to: 255 - type: integer 
-	Parameter MAX_WAIT_BYPASS bound to: 86784 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_TX_STARTUP_FSM' (25#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_tx_startup_fsm.v:98]
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_RX_STARTUP_FSM' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_startup_fsm.v:98]
-	Parameter EXAMPLE_SIMULATION bound to: 0 - type: integer 
-	Parameter EQ_MODE bound to: LPM - type: string 
-	Parameter STABLE_CLOCK_PERIOD bound to: 5 - type: integer 
-	Parameter RETRY_COUNTER_BITWIDTH bound to: 8 - type: integer 
-	Parameter TX_QPLL_USED bound to: FALSE - type: string 
-	Parameter RX_QPLL_USED bound to: FALSE - type: string 
-	Parameter PHASE_ALIGNMENT_MANUAL bound to: FALSE - type: string 
-	Parameter INIT bound to: 4'b0000 
-	Parameter ASSERT_ALL_RESETS bound to: 4'b0001 
-	Parameter WAIT_FOR_PLL_LOCK bound to: 4'b0010 
-	Parameter RELEASE_PLL_RESET bound to: 4'b0011 
-	Parameter VERIFY_RECCLK_STABLE bound to: 4'b0100 
-	Parameter RELEASE_MMCM_RESET bound to: 4'b0101 
-	Parameter WAIT_FOR_RXUSRCLK bound to: 4'b0110 
-	Parameter WAIT_RESET_DONE bound to: 4'b0111 
-	Parameter DO_PHASE_ALIGNMENT bound to: 4'b1000 
-	Parameter MONITOR_DATA_VALID bound to: 4'b1001 
-	Parameter FSM_DONE bound to: 4'b1010 
-	Parameter MMCM_LOCK_CNT_MAX bound to: 256 - type: integer 
-	Parameter STARTUP_DELAY bound to: 500 - type: integer 
-	Parameter WAIT_CYCLES bound to: 100 - type: integer 
-	Parameter WAIT_MAX bound to: 110 - type: integer 
-	Parameter WAIT_TIMEOUT_2ms bound to: 400000 - type: integer 
-	Parameter WAIT_TIMEOUT_3ms bound to: 600000 - type: integer 
-	Parameter WAIT_TLOCK_MAX bound to: 20000 - type: integer 
-	Parameter WAIT_TIMEOUT_500us bound to: 100000 - type: integer 
-	Parameter WAIT_TIMEOUT_1us bound to: 200 - type: integer 
-	Parameter WAIT_TIMEOUT_100us bound to: 20000 - type: integer 
-	Parameter WAIT_TIME_MAX bound to: 2000 - type: integer 
-	Parameter PORT_WIDTH bound to: 19 - type: integer 
-	Parameter MAX_RETRIES bound to: 255 - type: integer 
-	Parameter MAX_WAIT_BYPASS bound to: 5000 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_RX_STARTUP_FSM' (26#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_startup_fsm.v:98]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_GTWIZARD_init' (27#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_gtwizard_init.v:71]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_GTWIZARD' (28#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_gtwizard.v:72]
-INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_rx_elastic_buffer' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_elastic_buffer.v:85]
-INFO: [Synth 8-5534] Detected attribute (* ram_style = "distributed" *) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_elastic_buffer.v:199]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_rx_elastic_buffer' (29#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_elastic_buffer.v:85]
-INFO: [Synth 8-4471] merging register 'rxpowerdown_reg_reg' into 'txpowerdown_reg_reg' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_transceiver.v:234]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_transceiver' (30#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_transceiver.v:63]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_block' (31#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_block.v:101]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0' (32#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.v:100]
-WARNING: [Synth 8-3331] design gig_ethernet_pcs_pma_0_RX_STARTUP_FSM has unconnected port QPLLREFCLKLOST
-WARNING: [Synth 8-3331] design gig_ethernet_pcs_pma_0_RX_STARTUP_FSM has unconnected port CPLLREFCLKLOST
-WARNING: [Synth 8-3331] design gig_ethernet_pcs_pma_0_RX_STARTUP_FSM has unconnected port QPLLLOCK
-WARNING: [Synth 8-3331] design gig_ethernet_pcs_pma_0_TX_STARTUP_FSM has unconnected port QPLLREFCLKLOST
-WARNING: [Synth 8-3331] design gig_ethernet_pcs_pma_0_TX_STARTUP_FSM has unconnected port QPLLLOCK
-WARNING: [Synth 8-3331] design gig_ethernet_pcs_pma_0_GTWIZARD_init has unconnected port gt0_cpllreset_in
+	Parameter C_USE_LVDS bound to: 1 - type: bool 
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_lvds_transceiver_k7' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_lvds_transceiver.v:61]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_gearbox_10b_6b' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_gearbox_10b_6b.v:58]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_gearbox_10b_6b' (19#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_gearbox_10b_6b.v:58]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_encode_8b10b_lut_base' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_encode_8b10b_lut_base.v:65]
+	Parameter C_HAS_DISP_IN bound to: 1 - type: integer 
+	Parameter C_HAS_FORCE_CODE bound to: 0 - type: integer 
+	Parameter C_FORCE_CODE_VAL bound to: 1 - type: integer 
+	Parameter C_FORCE_CODE_DISP bound to: 1 - type: integer 
+	Parameter C_HAS_ND bound to: 0 - type: integer 
+	Parameter C_HAS_KERR bound to: 0 - type: integer 
+INFO: [Synth 8-226] default block is never used [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_encode_8b10b_lut_base.v:233]
+INFO: [Synth 8-226] default block is never used [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_encode_8b10b_lut_base.v:453]
+INFO: [Synth 8-226] default block is never used [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_encode_8b10b_lut_base.v:501]
+INFO: [Synth 8-226] default block is never used [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_encode_8b10b_lut_base.v:599]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_encode_8b10b_lut_base' (20#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_encode_8b10b_lut_base.v:65]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_gearbox_6b_10b' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_gearbox_6b_10b.v:57]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_gearbox_6b_10b' (21#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_gearbox_6b_10b.v:57]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_comma_alignment' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_comma_alignment.v:71]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_comma_alignment' (22#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_comma_alignment.v:71]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_decode_8b10b_lut_base' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:65]
+	Parameter C_HAS_CODE_ERR bound to: 1 - type: integer 
+	Parameter C_HAS_DISP_ERR bound to: 1 - type: integer 
+	Parameter C_HAS_DISP_IN bound to: 0 - type: integer 
+	Parameter C_HAS_ND bound to: 0 - type: integer 
+	Parameter C_HAS_SYM_DISP bound to: 0 - type: integer 
+	Parameter C_HAS_RUN_DISP bound to: 1 - type: integer 
+	Parameter C_SINIT_DOUT bound to: 8'b00000000 
+	Parameter C_SINIT_KOUT bound to: 0 - type: integer 
+	Parameter C_SINIT_RUN_DISP bound to: 0 - type: integer 
+	Parameter neg bound to: 3'b001 
+	Parameter pos bound to: 3'b010 
+	Parameter zero bound to: 3'b000 
+	Parameter invalid bound to: 3'b111 
+	Parameter specneg bound to: 3'b110 
+	Parameter specpos bound to: 3'b101 
+	Parameter DEFAULTB5 bound to: 5'b11111 
+	Parameter DEFAULTB3 bound to: 3'b111 
+INFO: [Synth 8-226] default block is never used [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:368]
+INFO: [Synth 8-226] default block is never used [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:508]
+INFO: [Synth 8-226] default block is never used [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:815]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_decode_8b10b_lut_base' (23#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/sgmii_lvds_transceiver/gig_ethernet_pcs_pma_0_decode_8b10b_lut_base.v:65]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_gpio_sgmii_top' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_gpio_sgmii_top.v:61]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_iob' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_phy_iob.v:60]
+INFO: [Synth 8-638] synthesizing module 'IBUFDS_DIFF_OUT' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:14213]
+	Parameter DIFF_TERM bound to: TRUE - type: string 
+	Parameter DQS_BIAS bound to: FALSE - type: string 
+	Parameter IBUF_LOW_PWR bound to: FALSE - type: string 
+	Parameter IOSTANDARD bound to: DEFAULT - type: string 
+INFO: [Synth 8-256] done synthesizing module 'IBUFDS_DIFF_OUT' (24#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:14213]
+INFO: [Synth 8-638] synthesizing module 'IDELAYE2' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:16194]
+	Parameter CINVCTRL_SEL bound to: FALSE - type: string 
+	Parameter DELAY_SRC bound to: IDATAIN - type: string 
+	Parameter HIGH_PERFORMANCE_MODE bound to: TRUE - type: string 
+	Parameter IDELAY_TYPE bound to: VARIABLE - type: string 
+	Parameter IDELAY_VALUE bound to: 0 - type: integer 
+	Parameter IS_C_INVERTED bound to: 1'b0 
+	Parameter IS_DATAIN_INVERTED bound to: 1'b0 
+	Parameter IS_IDATAIN_INVERTED bound to: 1'b0 
+	Parameter PIPE_SEL bound to: FALSE - type: string 
+	Parameter REFCLK_FREQUENCY bound to: 200.000000 - type: float 
+	Parameter SIGNAL_PATTERN bound to: DATA - type: string 
+	Parameter SIM_DELAY_D bound to: 0 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'IDELAYE2' (25#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:16194]
+INFO: [Synth 8-638] synthesizing module 'ISERDESE2' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:19667]
+	Parameter DATA_RATE bound to: DDR - type: string 
+	Parameter DATA_WIDTH bound to: 6 - type: integer 
+	Parameter DYN_CLKDIV_INV_EN bound to: FALSE - type: string 
+	Parameter DYN_CLK_INV_EN bound to: FALSE - type: string 
+	Parameter INIT_Q1 bound to: 1'b0 
+	Parameter INIT_Q2 bound to: 1'b0 
+	Parameter INIT_Q3 bound to: 1'b0 
+	Parameter INIT_Q4 bound to: 1'b0 
+	Parameter INTERFACE_TYPE bound to: NETWORKING - type: string 
+	Parameter IOBDELAY bound to: IFD - type: string 
+	Parameter IS_CLKB_INVERTED bound to: 1'b0 
+	Parameter IS_CLKDIVP_INVERTED bound to: 1'b0 
+	Parameter IS_CLKDIV_INVERTED bound to: 1'b0 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter IS_D_INVERTED bound to: 1'b0 
+	Parameter IS_OCLKB_INVERTED bound to: 1'b0 
+	Parameter IS_OCLK_INVERTED bound to: 1'b0 
+	Parameter NUM_CE bound to: 2 - type: integer 
+	Parameter OFB_USED bound to: FALSE - type: string 
+	Parameter SERDES_MODE bound to: MASTER - type: string 
+	Parameter SRVAL_Q1 bound to: 1'b0 
+	Parameter SRVAL_Q2 bound to: 1'b0 
+	Parameter SRVAL_Q3 bound to: 1'b0 
+	Parameter SRVAL_Q4 bound to: 1'b0 
+INFO: [Synth 8-256] done synthesizing module 'ISERDESE2' (26#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:19667]
+INFO: [Synth 8-638] synthesizing module 'OBUFDS' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:21923]
+	Parameter CAPACITANCE bound to: DONT_CARE - type: string 
+	Parameter IOSTANDARD bound to: DEFAULT - type: string 
+	Parameter SLEW bound to: SLOW - type: string 
+INFO: [Synth 8-256] done synthesizing module 'OBUFDS' (27#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:21923]
+INFO: [Synth 8-638] synthesizing module 'OSERDESE2' [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:25860]
+	Parameter DATA_RATE_OQ bound to: DDR - type: string 
+	Parameter DATA_RATE_TQ bound to: SDR - type: string 
+	Parameter DATA_WIDTH bound to: 6 - type: integer 
+	Parameter INIT_OQ bound to: 1'b0 
+	Parameter INIT_TQ bound to: 1'b0 
+	Parameter IS_CLKDIV_INVERTED bound to: 1'b0 
+	Parameter IS_CLK_INVERTED bound to: 1'b0 
+	Parameter IS_D1_INVERTED bound to: 1'b0 
+	Parameter IS_D2_INVERTED bound to: 1'b0 
+	Parameter IS_D3_INVERTED bound to: 1'b0 
+	Parameter IS_D4_INVERTED bound to: 1'b0 
+	Parameter IS_D5_INVERTED bound to: 1'b0 
+	Parameter IS_D6_INVERTED bound to: 1'b0 
+	Parameter IS_D7_INVERTED bound to: 1'b0 
+	Parameter IS_D8_INVERTED bound to: 1'b0 
+	Parameter IS_T1_INVERTED bound to: 1'b0 
+	Parameter IS_T2_INVERTED bound to: 1'b0 
+	Parameter IS_T3_INVERTED bound to: 1'b0 
+	Parameter IS_T4_INVERTED bound to: 1'b0 
+	Parameter SERDES_MODE bound to: MASTER - type: string 
+	Parameter SRVAL_OQ bound to: 1'b0 
+	Parameter SRVAL_TQ bound to: 1'b0 
+	Parameter TBYTE_CTL bound to: FALSE - type: string 
+	Parameter TBYTE_SRC bound to: FALSE - type: string 
+	Parameter TRISTATE_WIDTH bound to: 1 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'OSERDESE2' (28#1) [/opt/Xilinx/Vivado/2016.2/scripts/rt/data/unisim_comp.v:25860]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_iob' (29#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_phy_iob.v:60]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_eye_monitor' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_eye_monitor.v:57]
+	Parameter RST bound to: 10'b0000000001 
+	Parameter IDLE bound to: 10'b0000000010 
+	Parameter DEC bound to: 10'b0000000100 
+	Parameter WAIT_LEFT bound to: 10'b0000001000 
+	Parameter CHECK_LEFT bound to: 10'b0000010000 
+	Parameter SAVE_LEFT bound to: 10'b0000100000 
+	Parameter INC bound to: 10'b0001000000 
+	Parameter WAIT_RIGHT bound to: 10'b0010000000 
+	Parameter CHECK_RIGHT bound to: 10'b0100000000 
+	Parameter SAVE_RIGHT bound to: 10'b1000000000 
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_eye_monitor' (30#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_eye_monitor.v:57]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_calibration' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_phy_calibration.v:61]
+	Parameter RST bound to: 12'b000000000001 
+	Parameter SET_VAL bound to: 12'b000000000010 
+	Parameter LOAD_VAL bound to: 12'b000000000100 
+	Parameter WAIT_EYE_MON bound to: 12'b000000001000 
+	Parameter INIT_CALC_EYE bound to: 12'b000000010000 
+	Parameter INIT_COMPARE bound to: 12'b000000100000 
+	Parameter INIT_INC bound to: 12'b000001000000 
+	Parameter MAINT_BEGIN bound to: 12'b000010000000 
+	Parameter MAINT_IDLE bound to: 12'b000100000000 
+	Parameter MAINT_CALC_VAL bound to: 12'b001000000000 
+	Parameter MAINT_SET_VAL bound to: 12'b010000000000 
+	Parameter MAINT_LOAD_VAL bound to: 12'b100000000000 
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_calibration' (31#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_phy_calibration.v:61]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_gpio_sgmii_top' (32#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_gpio_sgmii_top.v:61]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_lvds_transceiver_k7' (33#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_lvds_transceiver.v:61]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_block' (34#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_block.v:95]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0' (35#1) [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.v:98]
+WARNING: [Synth 8-3331] design gig_ethernet_pcs_pma_0_decode_8b10b_lut_base has unconnected port disp_in
 WARNING: [Synth 8-3331] design AUTO_NEG has unconnected port RXBUFSTATUS[0]
 WARNING: [Synth 8-3331] design AUTO_NEG has unconnected port MR_ADV_ABILITY[15]
 WARNING: [Synth 8-3331] design AUTO_NEG has unconnected port MR_ADV_ABILITY[14]
@@ -507,38 +332,8 @@ WARNING: [Synth 8-3331] design AUTO_NEG has unconnected port LINK_TIMER_SGMII[1]
 WARNING: [Synth 8-3331] design AUTO_NEG has unconnected port LINK_TIMER_SGMII[0]
 WARNING: [Synth 8-3331] design AUTO_NEG has unconnected port BASEX_OR_SGMII
 WARNING: [Synth 8-3331] design AUTO_NEG has unconnected port RESET_DONE
-WARNING: [Synth 8-3331] design RX has unconnected port RXRUNDISP
 WARNING: [Synth 8-3331] design RX has unconnected port RXBUFSTATUS[0]
 WARNING: [Synth 8-3331] design SYNCHRONISE has unconnected port RXBUFSTATUS[0]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[15]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[14]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[13]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[12]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[11]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[10]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[9]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[8]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[7]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[6]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[5]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[4]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[3]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[2]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[1]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_ADV_CONFIG_VECTOR[0]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port IDLE_DETECT
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[13]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[9]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[8]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[7]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[6]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[5]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[4]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[3]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[2]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[1]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port AN_LP_ABILTY[0]
-WARNING: [Synth 8-3331] design MANAGEMENT has unconnected port BASEX_OR_SGMII_REQ
 WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port GTX_CLK
 WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port RX_CODE_GROUP0[9]
 WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port RX_CODE_GROUP0[8]
@@ -562,9 +357,44 @@ WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port RX_CODE_GROUP1[
 WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port RX_CODE_GROUP1[0]
 WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port PMA_RX_CLK0
 WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port PMA_RX_CLK1
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port PHYAD[4]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port PHYAD[3]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port PHYAD[2]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port PHYAD[1]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port PHYAD[0]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port MDC
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port MDIO_IN
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port CONFIGURATION_VALID
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port AN_ADV_CONFIG_VAL
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port BASEX_OR_SGMII
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DCLK
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_GNT
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DRDY
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[15]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[14]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[13]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[12]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[11]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[10]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[9]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[8]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[7]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[6]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[5]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[4]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[3]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[2]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[1]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port DRP_DO[0]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port SYSTEMTIMER_S_FIELD[47]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port SYSTEMTIMER_S_FIELD[46]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port SYSTEMTIMER_S_FIELD[45]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port SYSTEMTIMER_S_FIELD[44]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port SYSTEMTIMER_S_FIELD[43]
+WARNING: [Synth 8-3331] design GPCS_PMA_GEN has unconnected port SYSTEMTIMER_S_FIELD[42]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1150.418 ; gain = 266.805 ; free physical = 124 ; free virtual = 7834
+Finished RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:17 . Memory (MB): peak = 1149.441 ; gain = 265.828 ; free physical = 354 ; free virtual = 8041
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -574,9 +404,9 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:33 . Memory (MB): peak = 1150.418 ; gain = 266.805 ; free physical = 122 ; free virtual = 7835
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1149.441 ; gain = 265.828 ; free physical = 355 ; free virtual = 8042
 ---------------------------------------------------------------------------------
-INFO: [Netlist 29-17] Analyzing 254 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 116 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Device 21-403] Loading part xc7vx485tffg1761-2
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -588,6 +418,8 @@ Finished Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ether
 Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_board.xdc] for cell 'inst'
 Finished Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_board.xdc] for cell 'inst'
 Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.xdc] for cell 'inst'
+WARNING: [Designutils 20-1567] Use of 'set_false_path' with '-hold' is not supported by synthesis. The constraint will not be passed to synthesis. [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.xdc:10]
+WARNING: [Designutils 20-1567] Use of 'set_false_path' with '-hold' is not supported by synthesis. The constraint will not be passed to synthesis. [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.xdc:11]
 Finished Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.xdc] for cell 'inst'
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/gig_ethernet_pcs_pma_0_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/gig_ethernet_pcs_pma_0_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
@@ -596,28 +428,30 @@ Finished Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/managed_i
 Completed Processing XDC Constraints
 
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 254 instances were transformed.
-  FD => FDRE: 204 instances
-  FDP => FDPE: 48 instances
+  A total of 112 instances were transformed.
+  FD => FDRE: 36 instances
+  FDP => FDPE: 72 instances
+  IBUFDS_DIFF_OUT => IBUFDS_DIFF_OUT (IBUFDS, IBUFDS): 1 instances
+  OBUFDS => OBUFDS_DUAL_BUF (OBUFDS, OBUFDS, INV): 1 instances
   SRL16 => SRL16E: 2 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.28 . Memory (MB): peak = 1577.316 ; gain = 0.000 ; free physical = 118 ; free virtual = 7505
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.07 . Memory (MB): peak = 1575.355 ; gain = 0.000 ; free physical = 112 ; free virtual = 7788
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:46 ; elapsed = 00:02:37 . Memory (MB): peak = 1577.320 ; gain = 693.707 ; free physical = 107 ; free virtual = 7515
+Finished Constraint Validation : Time (s): cpu = 00:00:46 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 126 ; free virtual = 7802
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7vx485tffg1761-2
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:46 ; elapsed = 00:02:37 . Memory (MB): peak = 1577.320 ; gain = 693.707 ; free physical = 106 ; free virtual = 7515
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:46 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 126 ; free virtual = 7802
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 Applied set_property DONT_TOUCH = true for inst. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:46 ; elapsed = 00:02:38 . Memory (MB): peak = 1577.320 ; gain = 693.707 ; free physical = 104 ; free virtual = 7515
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:46 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 126 ; free virtual = 7802
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "sfd_aligned" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5544] ROM "XMIT_CONFIG_INT" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
@@ -628,16 +462,6 @@ INFO: [Synth 8-5544] ROM "CONFIG_DATA" won't be mapped to Block RAM because addr
 INFO: [Synth 8-5544] ROM "TX_CONFIG" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "C1_OR_C2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "TXDATA" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-802] inferred FSM for state register 'STATE_reg' in module 'MDIO_INTERFACE'
-INFO: [Synth 8-5544] ROM "BIT_COUNT_LOAD_VALUE" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "BIT_COUNT_LOAD_EN" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "WE" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "RD" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "ADDRESS_MATCH" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "NEW_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "NEW_STATE" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "NEW_STATE" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "NEW_STATE" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-802] inferred FSM for state register 'STATE_reg' in module 'SYNCHRONISE'
 INFO: [Synth 8-5544] ROM "NEXT_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "NEXT_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
@@ -665,73 +489,22 @@ INFO: [Synth 8-5544] ROM "MGT_TX_RESET_INT" won't be mapped to Block RAM because
 INFO: [Synth 8-5544] ROM "TX_RST_SM" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "MGT_RX_RESET_INT" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "RX_RST_SM" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-802] inferred FSM for state register 'tx_state_reg' in module 'gig_ethernet_pcs_pma_0_TX_STARTUP_FSM'
-INFO: [Synth 8-5546] ROM "init_wait_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "init_wait_done" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_counter" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_2ms" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_tlock_max" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_500us" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "wait_bypass_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_wait_bypass" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "refclk_stable" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "refclk_stable_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5544] ROM "TXUSERRDY" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "gttxreset_i" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "MMCM_RESET" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "tx_fsm_reset_done_int" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "CPLL_RESET" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "reset_time_out" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "run_phase_alignment_int" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "tx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "tx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "tx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "tx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-4471] merging register 'CPLL_RESET_reg' into 'QPLL_RESET_reg' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_startup_fsm.v:552]
-INFO: [Synth 8-4471] merging register 'recclk_mon_count_reset_reg' into 'adapt_count_reset_reg' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_startup_fsm.v:559]
-INFO: [Synth 8-4471] merging register 'RXDFELFHOLD_reg' into 'RXDFEAGCHOLD_reg' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_startup_fsm.v:562]
-INFO: [Synth 8-4471] merging register 'RXLPMLFHOLD_reg' into 'RXDFEAGCHOLD_reg' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_startup_fsm.v:563]
-INFO: [Synth 8-4471] merging register 'RXLPMHFHOLD_reg' into 'RXDFEAGCHOLD_reg' [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/transceiver/gig_ethernet_pcs_pma_0_rx_startup_fsm.v:564]
-INFO: [Synth 8-802] inferred FSM for state register 'rx_state_reg' in module 'gig_ethernet_pcs_pma_0_RX_STARTUP_FSM'
-INFO: [Synth 8-5545] ROM "adapt_count" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
-INFO: [Synth 8-5545] ROM "time_out_adapt" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
-INFO: [Synth 8-5546] ROM "init_wait_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "init_wait_done" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_counter" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_2ms" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_1us" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_100us" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "wait_bypass_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "time_out_wait_bypass" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5544] ROM "retry_counter_int" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "gtrxreset_i" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "mmcm_reset_i" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "run_phase_alignment_int" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "rx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "rx_state" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "rx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "rx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "rx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5544] ROM "rx_state" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
-INFO: [Synth 8-5545] ROM "gt0_rx_cdrlocked" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
-INFO: [Synth 8-5545] ROM "gt0_rx_cdrlock_counter" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
-INFO: [Synth 8-5546] ROM "initialize_ram_complete" won't be mapped to RAM because it is too sparse
----------------------------------------------------------------------------------------------------
-                   State |                     New Encoding |                Previous Encoding 
----------------------------------------------------------------------------------------------------
-        idle_or_preamble |                      00000000001 |                             0000
-          wait_for_start |                      00000000010 |                             0001
-                opcode_1 |                      00000000100 |                             0010
-                opcode_2 |                      00000001000 |                             0011
-                ld_phyad |                      00000010000 |                             0100
-                ld_regad |                      00000100000 |                             0101
-                    ta_1 |                      00001000000 |                             0110
-                    ta_2 |                      00010000000 |                             0111
-                  data_1 |                      00100000000 |                             1000
-                  data_2 |                      01000000000 |                             1001
-                  data_3 |                      10000000000 |                             1010
----------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'STATE_reg' using encoding 'one-hot' in module 'MDIO_INTERFACE'
+INFO: [Synth 8-5546] ROM "timer0" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_phy_iob.v:169]
+INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_phy_iob.v:306]
+INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_sgmii_eye_monitor.v:167]
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'em_state_reg' in module 'gig_ethernet_pcs_pma_0_sgmii_eye_monitor'
+INFO: [Synth 8-5546] ROM "o_eye_mon_done" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "mon_idly_val" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-3898] No Re-encoding of one hot register 'cal_state_reg' in module 'gig_ethernet_pcs_pma_0_sgmii_phy_calibration'
+INFO: [Synth 8-5546] ROM "o_initial_cal_done" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "current_tap" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "maint_best_tap" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "current_tap_window" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "viable_tap_found" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_gpio_sgmii_top.v:205]
+INFO: [Synth 8-5544] ROM "panic_bucket0" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "panic_bucket0" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -792,39 +565,8 @@ INFO: [Synth 8-3354] encoded FSM with state register 'USE_ROCKET_IO.RX_RST_SM_TX
 *
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'USE_ROCKET_IO.TX_RST_SM_reg' using encoding 'sequential' in module 'GPCS_PMA_GEN'
----------------------------------------------------------------------------------------------------
-                   State |                     New Encoding |                Previous Encoding 
----------------------------------------------------------------------------------------------------
-                    INIT |                             0000 |                             0000
-       ASSERT_ALL_RESETS |                             0001 |                             0001
-       WAIT_FOR_PLL_LOCK |                             0010 |                             0010
-       RELEASE_PLL_RESET |                             0011 |                             0011
-       WAIT_FOR_TXOUTCLK |                             0100 |                             0100
-      RELEASE_MMCM_RESET |                             0101 |                             0101
-       WAIT_FOR_TXUSRCLK |                             0110 |                             0110
-         WAIT_RESET_DONE |                             0111 |                             0111
-      DO_PHASE_ALIGNMENT |                             1000 |                             1000
-          RESET_FSM_DONE |                             1001 |                             1001
----------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'tx_state_reg' using encoding 'sequential' in module 'gig_ethernet_pcs_pma_0_TX_STARTUP_FSM'
----------------------------------------------------------------------------------------------------
-                   State |                     New Encoding |                Previous Encoding 
----------------------------------------------------------------------------------------------------
-                    INIT |                             0000 |                             0000
-       ASSERT_ALL_RESETS |                             0001 |                             0001
-       WAIT_FOR_PLL_LOCK |                             0010 |                             0010
-       RELEASE_PLL_RESET |                             0011 |                             0011
-    VERIFY_RECCLK_STABLE |                             0100 |                             0100
-      RELEASE_MMCM_RESET |                             0101 |                             0101
-       WAIT_FOR_RXUSRCLK |                             0110 |                             0110
-         WAIT_RESET_DONE |                             0111 |                             0111
-      DO_PHASE_ALIGNMENT |                             1000 |                             1000
-      MONITOR_DATA_VALID |                             1001 |                             1001
-                FSM_DONE |                             1010 |                             1010
----------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'rx_state_reg' using encoding 'sequential' in module 'gig_ethernet_pcs_pma_0_RX_STARTUP_FSM'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:51 ; elapsed = 00:02:45 . Memory (MB): peak = 1577.320 ; gain = 693.707 ; free physical = 122 ; free virtual = 7506
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:50 ; elapsed = 00:00:53 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 102 ; free virtual = 7779
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -837,66 +579,71 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input     32 Bit       Adders := 1     
 	   2 Input     13 Bit       Adders := 1     
-	   2 Input     10 Bit       Adders := 3     
-	   2 Input      8 Bit       Adders := 4     
+	   2 Input     10 Bit       Adders := 1     
 	   2 Input      6 Bit       Adders := 3     
-	   3 Input      6 Bit       Adders := 2     
-	   2 Input      5 Bit       Adders := 1     
-	   2 Input      4 Bit       Adders := 1     
-	   2 Input      2 Bit       Adders := 3     
+	   2 Input      5 Bit       Adders := 7     
+	   3 Input      5 Bit       Adders := 2     
+	   2 Input      4 Bit       Adders := 5     
+	   2 Input      3 Bit       Adders := 2     
+	   2 Input      2 Bit       Adders := 2     
 +---XORs : 
-	   2 Input      1 Bit         XORs := 26    
+	   2 Input      1 Bit         XORs := 10    
 +---Registers : 
-	              128 Bit    Registers := 1     
-	               96 Bit    Registers := 1     
-	               36 Bit    Registers := 3     
-	               32 Bit    Registers := 1     
-	               16 Bit    Registers := 12    
+	               60 Bit    Registers := 2     
+	               16 Bit    Registers := 7     
 	               13 Bit    Registers := 1     
-	               10 Bit    Registers := 3     
-	                8 Bit    Registers := 23    
-	                6 Bit    Registers := 9     
-	                5 Bit    Registers := 2     
-	                4 Bit    Registers := 4     
-	                3 Bit    Registers := 3     
-	                2 Bit    Registers := 15    
-	                1 Bit    Registers := 307   
+	               12 Bit    Registers := 5     
+	               10 Bit    Registers := 9     
+	                8 Bit    Registers := 18    
+	                6 Bit    Registers := 7     
+	                5 Bit    Registers := 11    
+	                4 Bit    Registers := 8     
+	                3 Bit    Registers := 4     
+	                2 Bit    Registers := 8     
+	                1 Bit    Registers := 231   
 +---Muxes : 
-	   2 Input     32 Bit        Muxes := 1     
-	   2 Input     16 Bit        Muxes := 10    
-	   3 Input     16 Bit        Muxes := 1     
-	  17 Input     16 Bit        Muxes := 1     
+	   7 Input     60 Bit        Muxes := 1     
+	  11 Input     60 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 6     
 	   5 Input     16 Bit        Muxes := 2     
-	   3 Input     15 Bit        Muxes := 1     
 	   3 Input     14 Bit        Muxes := 1     
-	  17 Input     11 Bit        Muxes := 1     
-	   2 Input      8 Bit        Muxes := 10    
+	  13 Input     12 Bit        Muxes := 1     
+	   2 Input     10 Bit        Muxes := 3     
+	   3 Input     10 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 2     
+	   2 Input      8 Bit        Muxes := 8     
 	   8 Input      8 Bit        Muxes := 1     
 	   5 Input      8 Bit        Muxes := 1     
 	   7 Input      8 Bit        Muxes := 1     
 	   3 Input      8 Bit        Muxes := 2     
-	   2 Input      6 Bit        Muxes := 1     
-	   2 Input      5 Bit        Muxes := 1     
-	   2 Input      4 Bit        Muxes := 3     
-	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 15    
+	   3 Input      6 Bit        Muxes := 3     
+	   2 Input      5 Bit        Muxes := 8     
+	   3 Input      5 Bit        Muxes := 1     
 	  32 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 14    
 	   3 Input      4 Bit        Muxes := 2     
-	  15 Input      4 Bit        Muxes := 3     
-	  18 Input      4 Bit        Muxes := 1     
-	   2 Input      3 Bit        Muxes := 3     
-	   3 Input      3 Bit        Muxes := 7     
+	  15 Input      4 Bit        Muxes := 2     
+	   4 Input      4 Bit        Muxes := 1     
+	   6 Input      4 Bit        Muxes := 5     
+	   3 Input      3 Bit        Muxes := 6     
 	   4 Input      3 Bit        Muxes := 2     
+	   2 Input      3 Bit        Muxes := 9     
+	  15 Input      3 Bit        Muxes := 1     
+	  16 Input      3 Bit        Muxes := 1     
 	  10 Input      2 Bit        Muxes := 1     
-	   2 Input      2 Bit        Muxes := 4     
-	   2 Input      1 Bit        Muxes := 124   
+	   2 Input      2 Bit        Muxes := 5     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 80    
 	   4 Input      1 Bit        Muxes := 5     
 	   5 Input      1 Bit        Muxes := 2     
-	   3 Input      1 Bit        Muxes := 6     
+	   3 Input      1 Bit        Muxes := 4     
 	  15 Input      1 Bit        Muxes := 2     
-	  10 Input      1 Bit        Muxes := 17    
-	  11 Input      1 Bit        Muxes := 19    
+	  11 Input      1 Bit        Muxes := 1     
+	   8 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 1     
+	  16 Input      1 Bit        Muxes := 5     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -904,6 +651,13 @@ Finished RTL Component Statistics
 Start RTL Hierarchical Component Statistics 
 ---------------------------------------------------------------------------------
 Hierarchical RTL Component report 
+Module gig_ethernet_pcs_pma_0_reset_wtd_timer 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 1     
++---Registers : 
+	                6 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
 Module gig_ethernet_pcs_pma_0_johnson_cntr 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -949,36 +703,6 @@ Detailed RTL Component Info :
 	   2 Input      1 Bit        Muxes := 10    
 	   4 Input      1 Bit        Muxes := 2     
 	   5 Input      1 Bit        Muxes := 1     
-Module MDIO_INTERFACE 
-Detailed RTL Component Info : 
-+---Adders : 
-	   2 Input      4 Bit       Adders := 1     
-+---Registers : 
-	               16 Bit    Registers := 1     
-	                5 Bit    Registers := 1     
-	                4 Bit    Registers := 1     
-	                2 Bit    Registers := 1     
-	                1 Bit    Registers := 10    
-+---Muxes : 
-	   2 Input     16 Bit        Muxes := 1     
-	  17 Input     11 Bit        Muxes := 1     
-	   2 Input      4 Bit        Muxes := 1     
-	   4 Input      4 Bit        Muxes := 1     
-	   2 Input      3 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 5     
-	   4 Input      1 Bit        Muxes := 1     
-	   3 Input      1 Bit        Muxes := 2     
-Module MANAGEMENT 
-Detailed RTL Component Info : 
-+---Registers : 
-	               16 Bit    Registers := 2     
-	                1 Bit    Registers := 25    
-+---Muxes : 
-	   2 Input     16 Bit        Muxes := 3     
-	   3 Input     16 Bit        Muxes := 1     
-	  17 Input     16 Bit        Muxes := 1     
-	   3 Input     15 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 13    
 Module SYNCHRONISE 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -1035,96 +759,158 @@ Module GPCS_PMA_GEN
 Detailed RTL Component Info : 
 +---Registers : 
 	                8 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
 	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 1     
-	                1 Bit    Registers := 22    
+	                1 Bit    Registers := 25    
 +---Muxes : 
 	   2 Input      8 Bit        Muxes := 2     
 	   3 Input      8 Bit        Muxes := 1     
 	  15 Input      4 Bit        Muxes := 2     
 	   2 Input      1 Bit        Muxes := 8     
 	  15 Input      1 Bit        Muxes := 2     
-Module gig_ethernet_pcs_pma_0_reset_wtd_timer 
+Module gig_ethernet_pcs_pma_0_gearbox_10b_6b 
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input      6 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
 +---Registers : 
+	               60 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
 	                6 Bit    Registers := 1     
-	                1 Bit    Registers := 1     
-Module gig_ethernet_pcs_pma_0_cpll_railing 
-Detailed RTL Component Info : 
-+---Registers : 
-	              128 Bit    Registers := 1     
-	               96 Bit    Registers := 1     
-Module gig_ethernet_pcs_pma_0_TX_STARTUP_FSM 
-Detailed RTL Component Info : 
-+---Adders : 
-	   2 Input     10 Bit       Adders := 1     
-	   2 Input      8 Bit       Adders := 2     
-+---Registers : 
-	               10 Bit    Registers := 1     
-	                8 Bit    Registers := 2     
-	                1 Bit    Registers := 21    
-+---Muxes : 
-	   2 Input      8 Bit        Muxes := 1     
-	  15 Input      4 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 17    
-	  10 Input      1 Bit        Muxes := 17    
-Module gig_ethernet_pcs_pma_0_RX_STARTUP_FSM 
-Detailed RTL Component Info : 
-+---Adders : 
-	   2 Input     10 Bit       Adders := 1     
-	   2 Input      8 Bit       Adders := 2     
-	   2 Input      2 Bit       Adders := 1     
-+---Registers : 
-	               10 Bit    Registers := 1     
-	                8 Bit    Registers := 2     
-	                2 Bit    Registers := 1     
-	                1 Bit    Registers := 23    
-+---Muxes : 
-	   2 Input      8 Bit        Muxes := 1     
-	  18 Input      4 Bit        Muxes := 1     
-	   2 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 21    
-	  11 Input      1 Bit        Muxes := 19    
-Module gig_ethernet_pcs_pma_0_GTWIZARD_init 
-Detailed RTL Component Info : 
-+---Adders : 
-	   2 Input     32 Bit       Adders := 1     
-+---Registers : 
-	               32 Bit    Registers := 1     
-	                1 Bit    Registers := 1     
-+---Muxes : 
-	   2 Input     32 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 1     
-Module gig_ethernet_pcs_pma_0_rx_elastic_buffer 
-Detailed RTL Component Info : 
-+---Adders : 
-	   3 Input      6 Bit       Adders := 2     
-	   2 Input      6 Bit       Adders := 2     
-	   2 Input      5 Bit       Adders := 1     
-+---XORs : 
-	   2 Input      1 Bit         XORs := 20    
-+---Registers : 
-	               36 Bit    Registers := 3     
-	                8 Bit    Registers := 1     
-	                6 Bit    Registers := 8     
-	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
 	                3 Bit    Registers := 1     
-	                1 Bit    Registers := 22    
 +---Muxes : 
-	   2 Input      8 Bit        Muxes := 1     
-	   2 Input      6 Bit        Muxes := 1     
-	   2 Input      5 Bit        Muxes := 1     
-	   3 Input      3 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 9     
-Module gig_ethernet_pcs_pma_0_transceiver 
+	   7 Input     60 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	  11 Input      1 Bit        Muxes := 1     
+Module gig_ethernet_pcs_pma_0_encode_8b10b_lut_base 
 Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 2     
 +---Registers : 
-	               16 Bit    Registers := 2     
+	               10 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     10 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 14    
+	   3 Input      6 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 7     
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 3     
+	   8 Input      1 Bit        Muxes := 1     
+Module gig_ethernet_pcs_pma_0_gearbox_6b_10b 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	               60 Bit    Registers := 1     
+	               10 Bit    Registers := 3     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
++---Muxes : 
+	  11 Input     60 Bit        Muxes := 1     
+	   2 Input     10 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 1     
+Module gig_ethernet_pcs_pma_0_sgmii_comma_alignment 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 2     
+Module gig_ethernet_pcs_pma_0_decode_8b10b_lut_base 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 2     
++---Registers : 
 	                8 Bit    Registers := 1     
-	                2 Bit    Registers := 7     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 5     
++---Muxes : 
+	   6 Input      4 Bit        Muxes := 5     
+	   2 Input      3 Bit        Muxes := 4     
+	  15 Input      3 Bit        Muxes := 1     
+	  16 Input      3 Bit        Muxes := 1     
+	  16 Input      1 Bit        Muxes := 5     
+	   2 Input      1 Bit        Muxes := 2     
+Module gig_ethernet_pcs_pma_0_sgmii_phy_iob 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      6 Bit       Adders := 2     
++---Registers : 
+	               12 Bit    Registers := 4     
+	                6 Bit    Registers := 4     
 	                1 Bit    Registers := 8     
++---Muxes : 
+	   3 Input      6 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+Module gig_ethernet_pcs_pma_0_sgmii_eye_monitor 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
+	   3 Input      5 Bit       Adders := 2     
++---Registers : 
+	               10 Bit    Registers := 2     
+	                5 Bit    Registers := 3     
+	                1 Bit    Registers := 5     
++---Muxes : 
+	   2 Input     10 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 2     
+	   2 Input      3 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 4     
+Module gig_ethernet_pcs_pma_0_sgmii_phy_calibration 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 4     
++---Registers : 
+	               12 Bit    Registers := 1     
+	                5 Bit    Registers := 5     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 4     
++---Muxes : 
+	  13 Input     12 Bit        Muxes := 1     
+	   3 Input     10 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 5     
+	   3 Input      5 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 6     
+	   4 Input      1 Bit        Muxes := 1     
+Module gig_ethernet_pcs_pma_0_gpio_sgmii_top 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      4 Bit       Adders := 1     
++---Registers : 
+	                4 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 3     
+Module gig_ethernet_pcs_pma_0_lvds_transceiver_k7 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      4 Bit       Adders := 2     
++---Registers : 
+	                4 Bit    Registers := 2     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      4 Bit        Muxes := 3     
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
 ---------------------------------------------------------------------------------
@@ -1137,39 +923,25 @@ BRAMs: 2060 (col length: RAMB18 140 RAMB36 70)
 ---------------------------------------------------------------------------------
 Finished Part Resource Summary
 ---------------------------------------------------------------------------------
-Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:52 ; elapsed = 00:02:46 . Memory (MB): peak = 1577.320 ; gain = 693.707 ; free physical = 111 ; free virtual = 7498
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:50 ; elapsed = 00:00:54 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 102 ; free virtual = 7779
 ---------------------------------------------------------------------------------
 Start Cross Boundary Optimization
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "gpcs_pma_inst/TRANSMITTER/EXT_CODE" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/RX_CONFIG_REG_NULL" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "sgmii_eye_mon/mon_idly_val" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "sgmii_eye_mon/o_eye_mon_done" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "sgmii_phy_cal/current_tap" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "p_0_out" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "sgmii_phy_cal/maint_best_tap" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "sgmii_phy_cal/current_tap_window" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "sgmii_phy_cal/viable_tap_found" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "sgmii_phy_cal/o_initial_cal_done" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "sgmii_logic/receiver/sfd_aligned" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/init_wait_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/init_wait_done" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/refclk_stable_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/refclk_stable" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/time_out_counter" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/time_out_2ms" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/time_tlock_max" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/time_out_500us" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/wait_bypass_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/time_out_wait_bypass" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/init_wait_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/init_wait_done" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/time_out_counter" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/time_out_2ms" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/time_out_100us" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/time_out_1us" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5545] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
-INFO: [Synth 8-5545] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/time_out_adapt" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/wait_bypass_count" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5546] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/time_out_wait_bypass" won't be mapped to RAM because it is too sparse
-INFO: [Synth 8-5545] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rx_cdrlock_counter" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
-INFO: [Synth 8-5545] ROM "transceiver_inst/gtwizard_inst/inst/gt0_rx_cdrlocked" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
 ---------------------------------------------------------------------------------
-Finished Cross Boundary Optimization : Time (s): cpu = 00:00:54 ; elapsed = 00:02:48 . Memory (MB): peak = 1577.320 ; gain = 693.707 ; free physical = 104 ; free virtual = 7491
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:52 ; elapsed = 00:00:56 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 134 ; free virtual = 7752
 ---------------------------------------------------------------------------------
-Finished Parallel Reinference  : Time (s): cpu = 00:00:54 ; elapsed = 00:02:48 . Memory (MB): peak = 1577.320 ; gain = 693.707 ; free physical = 104 ; free virtual = 7491
+Finished Parallel Reinference  : Time (s): cpu = 00:00:52 ; elapsed = 00:00:56 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 134 ; free virtual = 7752
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -1180,162 +952,92 @@ Report RTL Partitions:
 Start ROM, RAM, DSP and Shift Register Reporting
 ---------------------------------------------------------------------------------
 
-Distributed RAM: Preliminary Mapping  Report (see note below)
-+-----------------------------+-------------------------------------------------+----------------+----------------------+---------------+
-|Module Name                  | RTL Object                                      | Inference      | Size (Depth x Width) | Primitives    | 
-+-----------------------------+-------------------------------------------------+----------------+----------------------+---------------+
-|gig_ethernet_pcs_pma_0_block | transceiver_inst/rx_elastic_buffer_inst/ram_reg | User Attribute | 64 x 36              | RAM64M x 12   | 
-+-----------------------------+-------------------------------------------------+----------------+----------------------+---------------+
+ROM:
++---------------------------------------------+------------+---------------+----------------+
+|Module Name                                  | RTL Object | Depth x Width | Implemented As | 
++---------------------------------------------+------------+---------------+----------------+
+|gig_ethernet_pcs_pma_0_decode_8b10b_lut_base | b5         | 64x5          | LUT            | 
+|gig_ethernet_pcs_pma_0_decode_8b10b_lut_base | b6_disp    | 64x3          | LUT            | 
+|gig_ethernet_pcs_pma_0_decode_8b10b_lut_base | b5         | 64x5          | LUT            | 
+|gig_ethernet_pcs_pma_0_decode_8b10b_lut_base | b6_disp    | 64x3          | LUT            | 
++---------------------------------------------+------------+---------------+----------------+
 
-Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP and Shift Register Reporting
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Area Optimization
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-3886] merging instance 'inst/transceiver_inst/rx_elastic_buffer_inst/rd_addr_gray_reg[5]' (FDRE) to 'inst/transceiver_inst/rx_elastic_buffer_inst/rd_addr_plus1_reg[5]'
-INFO: [Synth 8-3886] merging instance 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[24]' (FDR) to 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[8]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[15] )
-INFO: [Synth 8-3886] merging instance 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[8]' (FDR) to 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[15]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[29] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[14] )
-INFO: [Synth 8-3886] merging instance 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[24]' (FDR) to 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[8]'
-INFO: [Synth 8-3886] merging instance 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[15]' (FDR) to 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[29]'
-INFO: [Synth 8-3886] merging instance 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[29]' (FDR) to 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[14]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/recclk_mon_restart_count_reg[0] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/recclk_mon_restart_count_reg[1] )
-INFO: [Synth 8-3886] merging instance 'inst/transceiver_inst/rx_elastic_buffer_inst/rxclkcorcnt_reg[1]' (FDR) to 'inst/transceiver_inst/rx_elastic_buffer_inst/rxclkcorcnt_reg[2]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/RXDFEAGCHOLD_reg )
-INFO: [Synth 8-3886] merging instance 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[14]' (FDR) to 'inst/transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[8]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[8] )
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[35]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[34]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[33]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[32]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[31]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[30]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[24]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reset_reg) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/recclk_mon_restart_count_reg[1]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/recclk_mon_restart_count_reg[0]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[0]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[1]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[2]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[3]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[4]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[5]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[6]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[7]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[8]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[9]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[10]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[11]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[12]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[13]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[14]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[16]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[17]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[18]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[19]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[20]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[21]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[22]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[23]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[24]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[25]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[26]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[27]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[28]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[29]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[30]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/adapt_count_reg[31]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/time_out_adapt_reg) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/RXDFEAGCHOLD_reg) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_occupancy_reg[0]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[35]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[34]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[33]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[32]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[31]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[30]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[29]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[24]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[14]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[13]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[35]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[34]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[33]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[32]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[31]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[30]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[29]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg[14]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[35]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[34]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[33]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[32]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[31]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[30]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[29]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_data_reg_reg[14]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rxclkcorcnt_reg[1]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/txbufstatus_reg_reg[0]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/rd_addr_gray_reg[5]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg[8]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[29]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[14]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3332] Sequential element (transceiver_inst/rx_elastic_buffer_inst/wr_data_reg_reg[8]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_ADV_REG_WITH_AN.AN_ADV_REG_reg[11]' (FDE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_ADV_REG_WITH_AN.AN_ADV_REG_reg[15]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[8] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[1] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[9] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[2] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[10] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[3] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[4] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[12] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[5] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[6] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[7] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.NP_LOADED_SET_reg )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[15] )
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[6]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[8]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\lvds_transceiver_mw/gpio_sgmii_top_i/sgmii_phy_iob/mon_idly_requested_value_reg[5] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/\lvds_transceiver_mw/gpio_sgmii_top_i/sgmii_phy_iob/data_idly_requested_value_reg[5] )
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/encode_8b10b/ngnd.nd_reg) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/comma_alignment_inst/data_reg_reg[9]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/comma_alignment_inst/data_reg_reg[8]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/comma_alignment_inst/data_reg_reg[7]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/comma_alignment_inst/data_reg_reg[6]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/decode_8b10b/ngnd.nd_reg) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/decode_8b10b/ngsdn.sym_disp_i_reg[1]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/decode_8b10b/ngsdn.sym_disp_i_reg[0]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/gpio_sgmii_top_i/sgmii_phy_iob/data_idly_requested_value_reg[5]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3332] Sequential element (lvds_transceiver_mw/gpio_sgmii_top_i/sgmii_phy_iob/mon_idly_requested_value_reg[5]) is unused and will be removed from module gig_ethernet_pcs_pma_0_block.
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[8]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[1]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[1]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[2]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[9]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[2]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[2]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[3]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[10]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[3]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[3]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[4]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[4]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[5]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[12]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[5]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[5]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[6]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[13]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[6]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[6]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[7]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[7]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[8]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[1]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[9]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[2]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[10]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[3]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[4]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[12]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[5]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[13]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[6]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[7]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_LOADED_reg )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_MANAGEMENT.MDIO/AN_ADV_REG_WITH_AN.AN_ADV_REG_reg[15] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_PAGE_RX_SET_reg )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[15] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_LOADED_SET_REG1_reg )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/BASE_OR_NP_reg )
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/BASEX_REMOTE_FAULT_reg[0] )
 INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[8]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[9]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[9] )
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[1]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[2]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[3]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[4]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[5]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[6]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[7]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[8]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[9]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[10]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[12]' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15] )
 INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[2]' (FDR) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[4]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TOGGLE_RX_reg' (FDRE) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[12]'
-INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[4]' (FDR) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[7]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[4]' (FDR) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[5]'
+INFO: [Synth 8-3886] merging instance 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[5]' (FDR) to 'inst/gig_ethernet_pcs_pma_0_core/gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[7]'
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[14]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[12]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[11]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[9]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[8]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[7]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[6]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_LP_ADV_ABILITY_INT_reg[1]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
-INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_PAGE_RX_SET_reg) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[13]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[12]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[10]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[9]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[8]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[7]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[6]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[5]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[4]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[3]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[2]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/TX_CONFIG_REG_INT_reg[1]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[13]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[12]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[10]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[9]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
@@ -1346,11 +1048,39 @@ INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[4]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[3]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[2]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
-INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/TX_CONFIG_reg[1]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[5]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[4]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/TRANSMITTER/CONFIG_DATA_reg[2]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RX_INVALID_REG1_reg) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RX_INVALID_REG2_reg) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/BASEX_REMOTE_FAULT_reg[0]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/RX_CONFIG_SNAPSHOT_reg[14]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/BASE_OR_NP_reg) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[16]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[15]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[14]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[13]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[12]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[11]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[10]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[9]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[8]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[7]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[6]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[5]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[4]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[3]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[2]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_RX_INT_reg[1]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_LOADED_SET_REG1_reg) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_LOADED_SET_REG2_reg) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION/MR_NP_LOADED_reg) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
+INFO: [Synth 8-3332] Sequential element (gpcs_pma_inst/USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXBUFSTATUS_INT_reg[0]) is unused and will be removed from module gig_ethernet_pcs_pma_v15_2_1.
 ---------------------------------------------------------------------------------
-Finished Area Optimization : Time (s): cpu = 00:00:59 ; elapsed = 00:02:54 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 111 ; free virtual = 7505
+Finished Area Optimization : Time (s): cpu = 00:01:00 ; elapsed = 00:01:03 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 157 ; free virtual = 7777
 ---------------------------------------------------------------------------------
-Finished Parallel Area Optimization  : Time (s): cpu = 00:00:59 ; elapsed = 00:02:54 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 111 ; free virtual = 7505
+Finished Parallel Area Optimization  : Time (s): cpu = 00:01:00 ; elapsed = 00:01:03 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 157 ; free virtual = 7777
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -1364,18 +1094,10 @@ Start Timing Optimization
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:11 ; elapsed = 00:03:08 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 128 ; free virtual = 7436
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:13 ; elapsed = 00:01:16 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 119 ; free virtual = 7746
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:13 ; elapsed = 00:03:10 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 115 ; free virtual = 7423
+Finished Timing Optimization : Time (s): cpu = 00:01:13 ; elapsed = 00:01:17 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 109 ; free virtual = 7736
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1386,33 +1108,17 @@ Report RTL Partitions:
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_mmcm_lock_reclocked/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
-INFO: [Synth 8-139] cannot merge instances inst/\transceiver_inst/gtwizard_inst/inst/gt0_rxresetfsm_i/sync_cplllock/data_sync_reg1  and inst/\transceiver_inst/gtwizard_inst/inst/gt0_txresetfsm_i/sync_cplllock/data_sync_reg1  because of non-equivalent assertions
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:14 ; elapsed = 00:03:11 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 116 ; free virtual = 7420
+Finished Technology Mapping : Time (s): cpu = 00:01:15 ; elapsed = 00:01:18 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 136 ; free virtual = 7708
 ---------------------------------------------------------------------------------
-Finished Parallel Technology Mapping Optimization  : Time (s): cpu = 00:01:14 ; elapsed = 00:03:11 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 116 ; free virtual = 7420
+Finished Parallel Technology Mapping Optimization  : Time (s): cpu = 00:01:15 ; elapsed = 00:01:18 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 136 ; free virtual = 7708
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
 | |RTL Partition |Replication |Instances |
 +-+--------------+------------+----------+
 +-+--------------+------------+----------+
-Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:01:14 ; elapsed = 00:03:11 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 115 ; free virtual = 7420
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:01:15 ; elapsed = 00:01:18 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 136 ; free virtual = 7708
 ---------------------------------------------------------------------------------
 Start IO Insertion
 ---------------------------------------------------------------------------------
@@ -1429,7 +1135,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:15 ; elapsed = 00:03:12 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 114 ; free virtual = 7419
+Finished IO Insertion : Time (s): cpu = 00:01:15 ; elapsed = 00:01:19 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 127 ; free virtual = 7699
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1442,7 +1148,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:15 ; elapsed = 00:03:12 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 114 ; free virtual = 7419
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:15 ; elapsed = 00:01:19 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 127 ; free virtual = 7699
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1454,38 +1160,36 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:16 ; elapsed = 00:03:12 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 114 ; free virtual = 7419
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:16 ; elapsed = 00:01:19 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 127 ; free virtual = 7699
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:16 ; elapsed = 00:03:12 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 114 ; free virtual = 7419
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:16 ; elapsed = 00:01:19 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 127 ; free virtual = 7699
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:16 ; elapsed = 00:03:12 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 114 ; free virtual = 7419
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:16 ; elapsed = 00:01:20 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 126 ; free virtual = 7698
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:16 ; elapsed = 00:03:13 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 114 ; free virtual = 7419
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:16 ; elapsed = 00:01:20 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 126 ; free virtual = 7698
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
 ---------------------------------------------------------------------------------
 
 Static Shift Register Report:
-+-----------------------------+----------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
-|Module Name                  | RTL Name                                                                               | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
-+-----------------------------+----------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
-|gig_ethernet_pcs_pma_v15_2_1 | gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG5_reg[7]                 | 5      | 8     | NO           | NO                 | YES               | 8      | 0       | 
-|gig_ethernet_pcs_pma_0_block | transceiver_inst/gtwizard_inst/inst/gtwizard_i/cpll_railing0_i/cpllreset_wait_reg[127] | 128    | 1     | NO           | NO                 | YES               | 0      | 4       | 
-|gig_ethernet_pcs_pma_0_block | transceiver_inst/gtwizard_inst/inst/gtwizard_i/cpll_railing0_i/cpllpd_wait_reg[95]     | 96     | 1     | NO           | NO                 | YES               | 0      | 3       | 
-+-----------------------------+----------------------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
++-----------------------------+------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name                  | RTL Name                                                               | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++-----------------------------+------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|gig_ethernet_pcs_pma_v15_2_1 | gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG5_reg[7] | 5      | 8     | NO           | NO                 | YES               | 8      | 0       | 
++-----------------------------+------------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP and Shift Register Reporting
@@ -1501,111 +1205,87 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+--------------+------+
-|      |Cell          |Count |
-+------+--------------+------+
-|1     |CARRY4        |    61|
-|2     |GTXE2_CHANNEL |     1|
-|3     |LUT1          |   226|
-|4     |LUT2          |    84|
-|5     |LUT3          |   138|
-|6     |LUT4          |   174|
-|7     |LUT5          |   159|
-|8     |LUT6          |   182|
-|9     |MUXF7         |     3|
-|10    |RAM64M        |    10|
-|11    |SRL16         |     2|
-|12    |SRL16E        |     8|
-|13    |SRLC32E       |     7|
-|14    |FD            |   204|
-|15    |FDCE          |    18|
-|16    |FDP           |    48|
-|17    |FDPE          |     4|
-|18    |FDRE          |   937|
-|19    |FDSE          |    62|
-+------+--------------+------+
++------+----------------+------+
+|      |Cell            |Count |
++------+----------------+------+
+|1     |CARRY4          |    28|
+|2     |IDELAYE2        |     2|
+|3     |ISERDESE2       |     2|
+|4     |LUT1            |   109|
+|5     |LUT2            |    79|
+|6     |LUT3            |   135|
+|7     |LUT4            |   162|
+|8     |LUT5            |   121|
+|9     |LUT6            |   293|
+|10    |MUXF7           |     9|
+|11    |OSERDESE2       |     1|
+|12    |SRL16           |     2|
+|13    |SRL16E          |     8|
+|14    |FD              |    36|
+|15    |FDP             |    72|
+|16    |FDPE            |     4|
+|17    |FDRE            |   859|
+|18    |FDSE            |    36|
+|19    |IBUFDS_DIFF_OUT |     1|
+|20    |OBUFDS          |     1|
++------+----------------+------+
 
 Report Instance Areas: 
-+------+---------------------------------------------------------------+-----------------------------------------+------+
-|      |Instance                                                       |Module                                   |Cells |
-+------+---------------------------------------------------------------+-----------------------------------------+------+
-|1     |top                                                            |                                         |  2328|
-|2     |  inst                                                         |gig_ethernet_pcs_pma_0_block             |  2328|
-|3     |    gig_ethernet_pcs_pma_0_core                                |gig_ethernet_pcs_pma_v15_2_1             |   905|
-|4     |      gpcs_pma_inst                                            |GPCS_PMA_GEN                             |   905|
-|5     |        \HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION  |AUTO_NEG                                 |   275|
-|6     |        \HAS_MANAGEMENT.MDIO                                   |MANAGEMENT                               |   181|
-|7     |          MDIO_INTERFACE_1                                     |MDIO_INTERFACE                           |   131|
-|8     |          SYNC_MDC                                             |sync_block_37                            |     7|
-|9     |          SYNC_MDIO_IN                                         |sync_block_38                            |     6|
-|10    |        \MGT_RESET.SYNC_ASYNC_RESET                            |reset_sync_block                         |     6|
-|11    |        \MGT_RESET.SYNC_ASYNC_RESET_RECCLK                     |reset_sync_block_35                      |     7|
-|12    |        \MGT_RESET.SYNC_SOFT_RESET_RECCLK                      |reset_sync_block_36                      |     6|
-|13    |        \RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK                 |RX                                       |   185|
-|14    |        \RX_GMII_AT_TXOUTCLK.SYNCHRONISATION                   |SYNCHRONISE                              |    32|
-|15    |        SYNC_SIGNAL_DETECT                                     |sync_block                               |     8|
-|16    |        TRANSMITTER                                            |TX                                       |   134|
-|17    |    sgmii_logic                                                |gig_ethernet_pcs_pma_0_sgmii_adapt       |   121|
-|18    |      clock_generation                                         |gig_ethernet_pcs_pma_0_clk_gen           |    32|
-|19    |        clk_div1                                               |gig_ethernet_pcs_pma_0_johnson_cntr      |    10|
-|20    |        clk_div2                                               |gig_ethernet_pcs_pma_0_johnson_cntr_34   |     9|
-|21    |      gen_sync_reset                                           |gig_ethernet_pcs_pma_0_reset_sync_31     |     6|
-|22    |      receiver                                                 |gig_ethernet_pcs_pma_0_rx_rate_adapt     |    61|
-|23    |      resync_speed_100                                         |gig_ethernet_pcs_pma_0_sync_block_32     |     6|
-|24    |      resync_speed_10_100                                      |gig_ethernet_pcs_pma_0_sync_block_33     |     6|
-|25    |      transmitter                                              |gig_ethernet_pcs_pma_0_tx_rate_adapt     |    10|
-|26    |    sync_block_rx_reset_done                                   |gig_ethernet_pcs_pma_0_sync_block        |     7|
-|27    |    sync_block_tx_reset_done                                   |gig_ethernet_pcs_pma_0_sync_block_0      |     6|
-|28    |    transceiver_inst                                           |gig_ethernet_pcs_pma_0_transceiver       |  1289|
-|29    |      gtwizard_inst                                            |gig_ethernet_pcs_pma_0_GTWIZARD          |   734|
-|30    |        inst                                                   |gig_ethernet_pcs_pma_0_GTWIZARD_init     |   734|
-|31    |          gt0_rxresetfsm_i                                     |gig_ethernet_pcs_pma_0_RX_STARTUP_FSM    |   280|
-|32    |            sync_RXRESETDONE                                   |gig_ethernet_pcs_pma_0_sync_block_24     |     6|
-|33    |            sync_cplllock                                      |gig_ethernet_pcs_pma_0_sync_block_25     |     8|
-|34    |            sync_data_valid                                    |gig_ethernet_pcs_pma_0_sync_block_26     |    17|
-|35    |            sync_mmcm_lock_reclocked                           |gig_ethernet_pcs_pma_0_sync_block_27     |     8|
-|36    |            sync_run_phase_alignment_int                       |gig_ethernet_pcs_pma_0_sync_block_28     |     6|
-|37    |            sync_rx_fsm_reset_done_int                         |gig_ethernet_pcs_pma_0_sync_block_29     |     6|
-|38    |            sync_time_out_wait_bypass                          |gig_ethernet_pcs_pma_0_sync_block_30     |     6|
-|39    |          gt0_txresetfsm_i                                     |gig_ethernet_pcs_pma_0_TX_STARTUP_FSM    |   330|
-|40    |            sync_TXRESETDONE                                   |gig_ethernet_pcs_pma_0_sync_block_18     |     6|
-|41    |            sync_cplllock                                      |gig_ethernet_pcs_pma_0_sync_block_19     |    11|
-|42    |            sync_mmcm_lock_reclocked                           |gig_ethernet_pcs_pma_0_sync_block_20     |     8|
-|43    |            sync_run_phase_alignment_int                       |gig_ethernet_pcs_pma_0_sync_block_21     |     6|
-|44    |            sync_time_out_wait_bypass                          |gig_ethernet_pcs_pma_0_sync_block_22     |     6|
-|45    |            sync_tx_fsm_reset_done_int                         |gig_ethernet_pcs_pma_0_sync_block_23     |     6|
-|46    |          gtwizard_i                                           |gig_ethernet_pcs_pma_0_GTWIZARD_multi_gt |    11|
-|47    |            cpll_railing0_i                                    |gig_ethernet_pcs_pma_0_cpll_railing      |    10|
-|48    |            gt0_GTWIZARD_i                                     |gig_ethernet_pcs_pma_0_GTWIZARD_GT       |     1|
-|49    |      reclock_encommaalign                                     |gig_ethernet_pcs_pma_0_reset_sync        |     6|
-|50    |      reclock_rxreset                                          |gig_ethernet_pcs_pma_0_reset_sync_1      |     9|
-|51    |      reclock_rxreset_indclk                                   |gig_ethernet_pcs_pma_0_reset_sync_2      |     6|
-|52    |      reclock_txreset                                          |gig_ethernet_pcs_pma_0_reset_sync_3      |     6|
-|53    |      reset_wtd_timer                                          |gig_ethernet_pcs_pma_0_reset_wtd_timer   |    80|
-|54    |      rx_elastic_buffer_inst                                   |gig_ethernet_pcs_pma_0_rx_elastic_buffer |   379|
-|55    |        \reclock_rd_addrgray[0].sync_rd_addrgray               |gig_ethernet_pcs_pma_0_sync_block_5      |     6|
-|56    |        \reclock_rd_addrgray[1].sync_rd_addrgray               |gig_ethernet_pcs_pma_0_sync_block_6      |     6|
-|57    |        \reclock_rd_addrgray[2].sync_rd_addrgray               |gig_ethernet_pcs_pma_0_sync_block_7      |     7|
-|58    |        \reclock_rd_addrgray[3].sync_rd_addrgray               |gig_ethernet_pcs_pma_0_sync_block_8      |     8|
-|59    |        \reclock_rd_addrgray[4].sync_rd_addrgray               |gig_ethernet_pcs_pma_0_sync_block_9      |     8|
-|60    |        \reclock_rd_addrgray[5].sync_rd_addrgray               |gig_ethernet_pcs_pma_0_sync_block_10     |     7|
-|61    |        \reclock_wr_addrgray[0].sync_wr_addrgray               |gig_ethernet_pcs_pma_0_sync_block_11     |     6|
-|62    |        \reclock_wr_addrgray[1].sync_wr_addrgray               |gig_ethernet_pcs_pma_0_sync_block_12     |     6|
-|63    |        \reclock_wr_addrgray[2].sync_wr_addrgray               |gig_ethernet_pcs_pma_0_sync_block_13     |     7|
-|64    |        \reclock_wr_addrgray[3].sync_wr_addrgray               |gig_ethernet_pcs_pma_0_sync_block_14     |     8|
-|65    |        \reclock_wr_addrgray[4].sync_wr_addrgray               |gig_ethernet_pcs_pma_0_sync_block_15     |    10|
-|66    |        \reclock_wr_addrgray[5].sync_wr_addrgray               |gig_ethernet_pcs_pma_0_sync_block_16     |    11|
-|67    |        sync_initialize_ram_comp                               |gig_ethernet_pcs_pma_0_sync_block_17     |     7|
-|68    |      sync_block_data_valid                                    |gig_ethernet_pcs_pma_0_sync_block_4      |     6|
-+------+---------------------------------------------------------------+-----------------------------------------+------+
++------+---------------------------------------------------------------+---------------------------------------------+------+
+|      |Instance                                                       |Module                                       |Cells |
++------+---------------------------------------------------------------+---------------------------------------------+------+
+|1     |top                                                            |                                             |  1960|
+|2     |  inst                                                         |gig_ethernet_pcs_pma_0_block                 |  1960|
+|3     |    gig_ethernet_pcs_pma_0_core                                |gig_ethernet_pcs_pma_v15_2_1                 |   735|
+|4     |      gpcs_pma_inst                                            |GPCS_PMA_GEN                                 |   735|
+|5     |        \HAS_AUTO_NEG.AN_RX_GMII_AT_TXOUTCLK.AUTO_NEGOTIATION  |AUTO_NEG                                     |   272|
+|6     |        \MGT_RESET.SYNC_ASYNC_RESET                            |reset_sync_block                             |     7|
+|7     |        \MGT_RESET.SYNC_ASYNC_RESET_RECCLK                     |reset_sync_block_13                          |     7|
+|8     |        \MGT_RESET.SYNC_SOFT_RESET_RECCLK                      |reset_sync_block_14                          |     6|
+|9     |        \RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK                 |RX                                           |   186|
+|10    |        \RX_GMII_AT_TXOUTCLK.SYNCHRONISATION                   |SYNCHRONISE                                  |    34|
+|11    |        SYNC_SIGNAL_DETECT                                     |sync_block                                   |     8|
+|12    |        TRANSMITTER                                            |TX                                           |   133|
+|13    |    lvds_transceiver_mw                                        |gig_ethernet_pcs_pma_0_lvds_transceiver_k7   |  1016|
+|14    |      comma_alignment_inst                                     |gig_ethernet_pcs_pma_0_sgmii_comma_alignment |    29|
+|15    |      decode_8b10b                                             |gig_ethernet_pcs_pma_0_decode_8b10b_lut_base |    12|
+|16    |      encode_8b10b                                             |gig_ethernet_pcs_pma_0_encode_8b10b_lut_base |    36|
+|17    |      gpio_sgmii_top_i                                         |gig_ethernet_pcs_pma_0_gpio_sgmii_top        |   505|
+|18    |        sgmii_eye_mon                                          |gig_ethernet_pcs_pma_0_sgmii_eye_monitor     |   159|
+|19    |        sgmii_phy_cal                                          |gig_ethernet_pcs_pma_0_sgmii_phy_calibration |   118|
+|20    |        sgmii_phy_iob                                          |gig_ethernet_pcs_pma_0_sgmii_phy_iob         |   147|
+|21    |          reset_sync_rst_208                                   |gig_ethernet_pcs_pma_0_reset_sync_10         |    11|
+|22    |          reset_sync_soft_rx_reset_208                         |gig_ethernet_pcs_pma_0_reset_sync_11         |     6|
+|23    |          reset_sync_soft_tx_reset_208                         |gig_ethernet_pcs_pma_0_reset_sync_12         |     6|
+|24    |        sync_block_code_error                                  |gig_ethernet_pcs_pma_0_sync_block_9          |    12|
+|25    |      reset_sync_reset_104                                     |gig_ethernet_pcs_pma_0_reset_sync_3          |     7|
+|26    |      reset_sync_soft_rx_reset_104                             |gig_ethernet_pcs_pma_0_reset_sync_4          |     7|
+|27    |      reset_sync_soft_tx_reset_104                             |gig_ethernet_pcs_pma_0_reset_sync_5          |     6|
+|28    |      rx_gearbox_i                                             |gig_ethernet_pcs_pma_0_gearbox_6b_10b        |   259|
+|29    |        reset_sync_reset_208                                   |gig_ethernet_pcs_pma_0_reset_sync_8          |     6|
+|30    |      sync_block_phy_init_cal_done                             |gig_ethernet_pcs_pma_0_sync_block_6          |     8|
+|31    |      tx_gearbox_i                                             |gig_ethernet_pcs_pma_0_gearbox_10b_6b        |   130|
+|32    |        reset_sync_reset_208                                   |gig_ethernet_pcs_pma_0_reset_sync_7          |     7|
+|33    |    reset_wtd_timer                                            |gig_ethernet_pcs_pma_0_reset_wtd_timer       |    81|
+|34    |    sgmii_logic                                                |gig_ethernet_pcs_pma_0_sgmii_adapt           |   121|
+|35    |      clock_generation                                         |gig_ethernet_pcs_pma_0_clk_gen               |    32|
+|36    |        clk_div1                                               |gig_ethernet_pcs_pma_0_johnson_cntr          |    10|
+|37    |        clk_div2                                               |gig_ethernet_pcs_pma_0_johnson_cntr_2        |     9|
+|38    |      gen_sync_reset                                           |gig_ethernet_pcs_pma_0_reset_sync            |     6|
+|39    |      receiver                                                 |gig_ethernet_pcs_pma_0_rx_rate_adapt         |    61|
+|40    |      resync_speed_100                                         |gig_ethernet_pcs_pma_0_sync_block_0          |     6|
+|41    |      resync_speed_10_100                                      |gig_ethernet_pcs_pma_0_sync_block_1          |     6|
+|42    |      transmitter                                              |gig_ethernet_pcs_pma_0_tx_rate_adapt         |    10|
+|43    |    sync_block_mmcm_locked                                     |gig_ethernet_pcs_pma_0_sync_block            |     6|
++------+---------------------------------------------------------------+---------------------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:16 ; elapsed = 00:03:13 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 114 ; free virtual = 7419
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:16 ; elapsed = 00:01:20 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 126 ; free virtual = 7698
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 225 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:48 ; elapsed = 00:01:04 . Memory (MB): peak = 1577.324 ; gain = 132.449 ; free physical = 113 ; free virtual = 7419
-Synthesis Optimization Complete : Time (s): cpu = 00:01:16 ; elapsed = 00:03:13 . Memory (MB): peak = 1577.324 ; gain = 693.711 ; free physical = 113 ; free virtual = 7419
+Synthesis finished with 0 errors, 0 critical warnings and 232 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 1575.355 ; gain = 131.441 ; free physical = 126 ; free virtual = 7698
+Synthesis Optimization Complete : Time (s): cpu = 00:01:16 ; elapsed = 00:01:20 . Memory (MB): peak = 1575.355 ; gain = 691.742 ; free physical = 128 ; free virtual = 7700
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 325 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 144 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_ooc.xdc] for cell 'inst'
@@ -1613,21 +1293,20 @@ Finished Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ether
 Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_board.xdc] for cell 'inst'
 Finished Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_board.xdc] for cell 'inst'
 Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.xdc] for cell 'inst'
-INFO: [Timing 38-35] Done setting XDC timing constraints. [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.xdc:38]
-get_clocks: Time (s): cpu = 00:00:06 ; elapsed = 00:00:40 . Memory (MB): peak = 2069.785 ; gain = 489.469 ; free physical = 139 ; free virtual = 6996
 Finished Parsing XDC File [/home/mrenda/research/xvc_microserver/cores/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.xdc] for cell 'inst'
-INFO: [Opt 31-138] Pushed 1 inverter(s) to 4 load pin(s).
+INFO: [Opt 31-138] Pushed 2 inverter(s) to 6 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
-  A total of 264 instances were transformed.
-  FD => FDRE: 204 instances
-  FDP => FDPE: 48 instances
-  RAM64M => RAM64M (RAMD64E, RAMD64E, RAMD64E, RAMD64E): 10 instances
+  A total of 112 instances were transformed.
+  FD => FDRE: 36 instances
+  FDP => FDPE: 72 instances
+  IBUFDS_DIFF_OUT => IBUFDS_DIFF_OUT (IBUFDS, IBUFDS): 1 instances
+  OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS, OBUFDS): 1 instances
   SRL16 => SRL16E: 2 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-367 Infos, 100 Warnings, 0 Critical Warnings and 0 Errors encountered.
+251 Infos, 110 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:21 ; elapsed = 00:03:53 . Memory (MB): peak = 2070.785 ; gain = 1101.504 ; free physical = 128 ; free virtual = 7038
-INFO: [Coretcl 2-1174] Renamed 67 cell refs.
-report_utilization: Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:03 . Memory (MB): peak = 2102.805 ; gain = 0.000 ; free physical = 124 ; free virtual = 7053
-INFO: [Common 17-206] Exiting Vivado at Mon Sep  5 14:31:39 2016...
+synth_design: Time (s): cpu = 00:01:16 ; elapsed = 00:01:19 . Memory (MB): peak = 1575.355 ; gain = 606.051 ; free physical = 134 ; free virtual = 7708
+INFO: [Coretcl 2-1174] Renamed 42 cell refs.
+report_utilization: Time (s): cpu = 00:00:00.14 ; elapsed = 00:00:00.25 . Memory (MB): peak = 1607.367 ; gain = 0.000 ; free physical = 133 ; free virtual = 7707
+INFO: [Common 17-206] Exiting Vivado at Wed Sep 14 16:25:15 2016...

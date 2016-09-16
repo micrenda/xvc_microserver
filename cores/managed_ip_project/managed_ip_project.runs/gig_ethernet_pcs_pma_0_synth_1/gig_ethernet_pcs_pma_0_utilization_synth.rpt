@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.2 (lin64) Build 1577090 Thu Jun  2 16:32:35 MDT 2016
-| Date         : Mon Sep  5 14:31:29 2016
+| Date         : Wed Sep 14 16:25:13 2016
 | Host         : ELLAB3-PC running 64-bit Debian GNU/Linux 8.5 (jessie)
 | Command      : report_utilization -file gig_ethernet_pcs_pma_0_utilization_synth.rpt -pb gig_ethernet_pcs_pma_0_utilization_synth.pb
 | Design       : gig_ethernet_pcs_pma_0
@@ -30,15 +30,15 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                |  726 |     0 |    303600 |  0.24 |
-|   LUT as Logic             |  669 |     0 |    303600 |  0.22 |
-|   LUT as Memory            |   57 |     0 |    130800 |  0.04 |
-|     LUT as Distributed RAM |   40 |     0 |           |       |
-|     LUT as Shift Register  |   17 |     0 |           |       |
-| Slice Registers            | 1273 |     0 |    607200 |  0.21 |
-|   Register as Flip Flop    | 1273 |     0 |    607200 |  0.21 |
+| Slice LUTs*                |  671 |     0 |    303600 |  0.22 |
+|   LUT as Logic             |  661 |     0 |    303600 |  0.22 |
+|   LUT as Memory            |   10 |     0 |    130800 | <0.01 |
+|     LUT as Distributed RAM |    0 |     0 |           |       |
+|     LUT as Shift Register  |   10 |     0 |           |       |
+| Slice Registers            | 1007 |     0 |    607200 |  0.17 |
+|   Register as Flip Flop    | 1007 |     0 |    607200 |  0.17 |
 |   Register as Latch        |    0 |     0 |    607200 |  0.00 |
-| F7 Muxes                   |    3 |     0 |    151800 | <0.01 |
+| F7 Muxes                   |    9 |     0 |    151800 | <0.01 |
 | F8 Muxes                   |    0 |     0 |     75900 |  0.00 |
 +----------------------------+------+-------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
@@ -56,10 +56,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 52    |          Yes |           - |          Set |
-| 18    |          Yes |           - |        Reset |
-| 62    |          Yes |         Set |            - |
-| 1141  |          Yes |       Reset |            - |
+| 76    |          Yes |           - |          Set |
+| 0     |          Yes |           - |        Reset |
+| 36    |          Yes |         Set |            - |
+| 895   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -92,7 +92,7 @@ Table of Contents
 +-----------------------------+------+-------+-----------+-------+
 |          Site Type          | Used | Fixed | Available | Util% |
 +-----------------------------+------+-------+-----------+-------+
-| Bonded IOB                  |    0 |     0 |       700 |  0.00 |
+| Bonded IOB                  |    4 |     0 |       700 |  0.57 |
 | Bonded IPADs                |    0 |     0 |        86 |  0.00 |
 | Bonded OPADs                |    0 |     0 |        56 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |        14 |  0.00 |
@@ -100,16 +100,19 @@ Table of Contents
 | OUT_FIFO                    |    0 |     0 |        56 |  0.00 |
 | IN_FIFO                     |    0 |     0 |        56 |  0.00 |
 | IDELAYCTRL                  |    0 |     0 |        14 |  0.00 |
-| IBUFDS                      |    0 |     0 |       672 |  0.00 |
+| IBUFDS                      |    2 |     0 |       672 |  0.30 |
 | GTXE2_COMMON                |    0 |     0 |         7 |  0.00 |
-| GTXE2_CHANNEL               |    1 |     0 |        28 |  3.57 |
+| GTXE2_CHANNEL               |    0 |     0 |        28 |  0.00 |
 | PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |        56 |  0.00 |
 | PHASER_IN/PHASER_IN_PHY     |    0 |     0 |        56 |  0.00 |
-| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |       700 |  0.00 |
+| IDELAYE2/IDELAYE2_FINEDELAY |    2 |     0 |       700 |  0.29 |
+|   IDELAYE2 only             |    2 |     0 |           |       |
 | ODELAYE2/ODELAYE2_FINEDELAY |    0 |     0 |       700 |  0.00 |
 | IBUFDS_GTE2                 |    0 |     0 |        14 |  0.00 |
-| ILOGIC                      |    0 |     0 |       700 |  0.00 |
-| OLOGIC                      |    0 |     0 |       700 |  0.00 |
+| ILOGIC                      |    2 |     0 |       700 |  0.29 |
+|   ISERDES                   |    2 |       |           |       |
+| OLOGIC                      |    1 |     0 |       700 |  0.14 |
+|   OSERDES                   |    1 |       |           |       |
 +-----------------------------+------+-------+-----------+-------+
 
 
@@ -150,26 +153,28 @@ Table of Contents
 7. Primitives
 -------------
 
-+---------------+------+---------------------+
-|    Ref Name   | Used | Functional Category |
-+---------------+------+---------------------+
-| FDRE          | 1141 |        Flop & Latch |
-| LUT6          |  182 |                 LUT |
-| LUT4          |  174 |                 LUT |
-| LUT5          |  159 |                 LUT |
-| LUT3          |  138 |                 LUT |
-| LUT2          |   84 |                 LUT |
-| LUT1          |   66 |                 LUT |
-| FDSE          |   62 |        Flop & Latch |
-| CARRY4        |   61 |          CarryLogic |
-| FDPE          |   52 |        Flop & Latch |
-| RAMD64E       |   40 |  Distributed Memory |
-| FDCE          |   18 |        Flop & Latch |
-| SRL16E        |   10 |  Distributed Memory |
-| SRLC32E       |    7 |  Distributed Memory |
-| MUXF7         |    3 |               MuxFx |
-| GTXE2_CHANNEL |    1 |                  IO |
-+---------------+------+---------------------+
++-----------+------+---------------------+
+|  Ref Name | Used | Functional Category |
++-----------+------+---------------------+
+| FDRE      |  895 |        Flop & Latch |
+| LUT6      |  293 |                 LUT |
+| LUT4      |  162 |                 LUT |
+| LUT3      |  135 |                 LUT |
+| LUT5      |  121 |                 LUT |
+| LUT2      |   79 |                 LUT |
+| FDPE      |   76 |        Flop & Latch |
+| FDSE      |   36 |        Flop & Latch |
+| LUT1      |   28 |                 LUT |
+| CARRY4    |   28 |          CarryLogic |
+| SRL16E    |   10 |  Distributed Memory |
+| MUXF7     |    9 |               MuxFx |
+| OBUFDS    |    2 |                  IO |
+| ISERDESE2 |    2 |                  IO |
+| IDELAYE2  |    2 |                  IO |
+| IBUFDS    |    2 |                  IO |
+| OSERDESE2 |    1 |                  IO |
+| INV       |    1 |                 LUT |
++-----------+------+---------------------+
 
 
 8. Black Boxes

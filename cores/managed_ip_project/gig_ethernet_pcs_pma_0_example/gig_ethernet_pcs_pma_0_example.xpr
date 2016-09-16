@@ -6,7 +6,7 @@
 <Project Version="7" Minor="14" Path="/home/mrenda/research/xvc_microserver/cores/managed_ip_project/gig_ethernet_pcs_pma_0_example/gig_ethernet_pcs_pma_0_example.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="b4e393c4138b4ce7a6c3b9f5eddacb28"/>
+    <Option Name="Id" Val="a43d7a87a2b54688bf45b1f4708db112"/>
     <Option Name="Part" Val="xc7vx485tffg1761-2"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
@@ -43,10 +43,28 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sources_1/imports/example_design/gig_ethernet_pcs_pma_0_idelayctrl.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_idelayctrl.v"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/example_design/gig_ethernet_pcs_pma_0_sync_block_ex.v">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_sync_block_ex.v"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/ip/gig_ethernet_pcs_pma_0.xcix">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0.xcix"/>
-          <Attr Name="ImportTime" Val="1473083634"/>
+          <Attr Name="ImportTime" Val="1473859536"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -55,43 +73,34 @@
       <File Path="$PSRCDIR/sources_1/ip/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci"/>
-          <Attr Name="ImportTime" Val="1473083661"/>
+          <Attr Name="ImportTime" Val="1473859566"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/example_design/support/gig_ethernet_pcs_pma_0_resets.v">
+      <File Path="$PSRCDIR/sources_1/imports/example_design/gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/support/gig_ethernet_pcs_pma_0_resets.v"/>
-          <Attr Name="ImportTime" Val="1473083662"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen.v"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/example_design/support/gig_ethernet_pcs_pma_0_clocking.v">
+      <File Path="$PSRCDIR/sources_1/imports/example_design/gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/support/gig_ethernet_pcs_pma_0_clocking.v"/>
-          <Attr Name="ImportTime" Val="1473083662"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/imports/example_design/support/gig_ethernet_pcs_pma_0_gt_common.v">
+      <File Path="$PSRCDIR/sources_1/imports/example_design/gig_ethernet_pcs_pma_0_support.v">
         <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/support/gig_ethernet_pcs_pma_0_gt_common.v"/>
-          <Attr Name="ImportTime" Val="1473083662"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/example_design/support/gig_ethernet_pcs_pma_0_support.v">
-        <FileInfo>
-          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/support/gig_ethernet_pcs_pma_0_support.v"/>
-          <Attr Name="ImportTime" Val="1473083662"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_support.v"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -100,7 +109,7 @@
       <File Path="$PSRCDIR/sources_1/imports/example_design/gig_ethernet_pcs_pma_0_example_design.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_example_design.v"/>
-          <Attr Name="ImportTime" Val="1473083662"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -116,7 +125,7 @@
       <File Path="$PSRCDIR/constrs_1/imports/example_design/gig_ethernet_pcs_pma_0_example_design.xdc">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/example_design/gig_ethernet_pcs_pma_0_example_design.xdc"/>
-          <Attr Name="ImportTime" Val="1473083662"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
         </FileInfo>
@@ -129,7 +138,7 @@
       <File Path="$PSRCDIR/sim_1/imports/simulation/stimulus_tb.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/simulation/stimulus_tb.v"/>
-          <Attr Name="ImportTime" Val="1473083662"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -137,7 +146,7 @@
       <File Path="$PSRCDIR/sim_1/imports/simulation/demo_tb.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../gig_ethernet_pcs_pma_0/simulation/demo_tb.v"/>
-          <Attr Name="ImportTime" Val="1473083662"/>
+          <Attr Name="ImportTime" Val="1473859567"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>

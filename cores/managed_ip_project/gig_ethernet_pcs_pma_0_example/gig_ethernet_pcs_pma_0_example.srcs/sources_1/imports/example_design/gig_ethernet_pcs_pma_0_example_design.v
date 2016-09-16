@@ -2,7 +2,7 @@
 // File       : gig_ethernet_pcs_pma_0_example_design.v
 // Author     : Xilinx Inc.
 //------------------------------------------------------------------------------
-// (c) Copyright 2009 Xilinx, Inc. All rights reserved.
+// (c) Copyright 2010 Xilinx, Inc. All rights reserved.
 //
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -47,8 +47,9 @@
 //
 // THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 // PART OF THIS FILE AT ALL TIMES. 
-// 
-// 
+
+//
+//
 //------------------------------------------------------------------------------
 // Description: This is the top level Verilog example design for the
 //              Ethernet 1000BASE-X PCS/PMA core.
@@ -96,87 +97,52 @@
 
 
 `timescale 1 ps/1 ps
-(* DowngradeIPIdentifiedWarnings="yes" *)
 
+(* DowngradeIPIdentifiedWarnings="yes" *)
 
 //------------------------------------------------------------------------------
 // The module declaration for the example design
 //------------------------------------------------------------------------------
 
-module gig_ethernet_pcs_pma_0_example_design
-   (
+module gig_ethernet_pcs_pma_0_example_design 
+(
+   // Transceiver Interface
+   //----------------------
+      input  refclk125_p,
+      input  refclk125_n,
+   output          txp,                        // Differential +ve of serial transmission from PMA to PMD.
+   output          txn,                        // Differential -ve of serial transmission from PMA to PMD.
+   input           rxp,                        // Differential +ve for serial reception from PMD to PMA.
+   input           rxn,                        // Differential -ve for serial reception from PMD to PMA.
 
-      // An independent clock source used as the reference clock for an
-      // IDELAYCTRL (if present) and for the main GT transceiver reset logic.
-      // This example design assumes that this is of frequency 200MHz.
-      input            independent_clock,
-
-      // Tranceiver Interface
-      //---------------------
-
-      input            gtrefclk_p,            // Differential +ve of reference clock for MGT: very high quality.
-      input            gtrefclk_n,            // Differential -ve of reference clock for MGT: very high quality.
-      output           rxuserclk2,
-      output           txp,                   // Differential +ve of serial transmission from PMA to PMD.
-      output           txn,                   // Differential -ve of serial transmission from PMA to PMD.
-      input            rxp,                   // Differential +ve for serial reception from PMD to PMA.
-      input            rxn,                   // Differential -ve for serial reception from PMD to PMA.
-
-      // GMII Interface (client MAC <=> PCS)
-      //------------------------------------
-      output           sgmii_clk,             // Clock for client MAC 
-      input [7:0]      gmii_txd,              // Transmit data from client MAC.
-      input            gmii_tx_en,            // Transmit control signal from client MAC.
-      input            gmii_tx_er,            // Transmit control signal from client MAC.
+   output           sgmii_clk,                 // Clock for client MAC (125Mhz, 12.5MHz or 1.25MHz).
+   input      [7:0] gmii_txd,                  // Transmit data from client MAC.
+   input            gmii_tx_en,                // Transmit control signal from client MAC.
+   input            gmii_tx_er,                // Transmit control signal from client MAC.
       output reg [7:0] gmii_rxd,              // Received Data to client MAC.
       output reg       gmii_rx_dv,            // Received control signal to client MAC.
       output reg       gmii_rx_er,            // Received control signal to client MAC.
-      // Management: MDIO Interface
-      //---------------------------
-
-      input            mdc,                   // Management Data Clock
-      input            mdio_i,                // Management Data In
-      output           mdio_o,                // Management Data Out
-      output           mdio_t,                // Management Data Tristate
-      input [4:0]      configuration_vector,  // Alternative to MDIO interface.
-      input            configuration_valid,   // Validation signal for Config vector
-
-      output           an_interrupt,          // Interrupt to processor to signal that Auto-Negotiation has completed
-      input [15:0]     an_adv_config_vector,  // Alternate interface to program REG4 (AN ADV)
-      input            an_adv_config_val,     // Validation signal for AN ADV
-      input            an_restart_config,     // Alternate signal to modify AN restart bit in REG0
-
-      // Speed Control
-      //--------------
-      input            speed_is_10_100,       // Core should operate at either 10Mbps or 100Mbps speeds
-      input            speed_is_100,          // Core should operate at 100Mbps speed
-
-
-      // General IO's
-      //-------------
-      output  [15:0]   status_vector,         // Core status.
-      input            reset,                 // Asynchronous reset for entire core.
-      input            signal_detect          // Input from PMD to indicate presence of optical input.
-
+   // Management: Alternative to MDIO Interface
+   //------------------------------------------
+   input      [4:0] configuration_vector,       // Alternative to MDIO interface.
+   output           an_interrupt,               // Interrupt to processor to signal that Auto-Negotiation has completed
+   input     [15:0] an_adv_config_vector,       // Alternate interface to program REG4 (AN ADV)
+   input            an_restart_config,          // Alternate signal to modify AN restart bit in REG0
+   // Speed Control
+   //--------------
+   input            speed_is_10_100,            // Core should operate at either 10Mbps or 100Mbps speeds
+   input            speed_is_100,               // Core should operate at 100Mbps speed
+   // General IO's
+   //-------------
+      output reg [15:0] status_vector,         // Core status.
+   input            reset,                      // Asynchronous reset for entire core.
+   input            signal_detect               // Input from PMD to indicate presence of optical input.
    );
 
 
-
-  //----------------------------------------------------------------------------
-  // internal signals used in this top level example design.
-  //----------------------------------------------------------------------------
-
-   // clock generation signals for tranceiver
-   wire         gtrefclk_bufg_out;
-   wire         txoutclk;                 // txoutclk from GT transceiver.
-   wire         resetdone;                // To indicate that the GT transceiver has completed its reset cycle
-   wire         userclk;                  
-   wire         userclk2;                 
-
-
-   // An independent clock source used as the reference clock for an
-   // IDELAYCTRL (if present) and for the main GT transceiver reset logic.
-   wire         independent_clock_bufg;
+// Wires and Regs
+wire  clk125;
+wire  clk312;
 
    // GMII signals
    wire         gmii_isolate;             // internal gmii_isolate signal.
@@ -188,12 +154,9 @@ module gig_ethernet_pcs_pma_0_example_design
    wire         gmii_rx_er_int;           // internal gmii_rx_er signal.
    wire sgmii_clk_r , sgmii_clk_f;
 
-   
-   // Route independent_clock input through a BUFG
-   BUFG  bufg_independent_clock (
-      .I         (independent_clock),
-      .O         (independent_clock_bufg)
-   );
+   // Extra registers to ease IOB placement
+   wire  [15:0]  status_vector_int;
+
 
   //----------------------------------------------------------------------------
   // Instantiate the Core Block (core wrapper).
@@ -201,28 +164,32 @@ module gig_ethernet_pcs_pma_0_example_design
  gig_ethernet_pcs_pma_0_support 
    core_support_i
    (
+      // LVDS transceiver Interface
+      //---------------------------
 
-      .gtrefclk_p              (gtrefclk_p),
-      .gtrefclk_n              (gtrefclk_n),
-      .gtrefclk_out            (),
-      .gtrefclk_bufg_out       (gtrefclk_bufg_out),
+      .txp(txp),                   // Differential +ve of serial transmission from PMA to PMD.
+      .txn(txn),                   // Differential -ve of serial transmission from PMA to PMD.
+      .rxp(rxp),                   // Differential +ve for serial reception from PMD to PMA.
+      .rxn(rxn),                   // Differential -ve for serial reception from PMD to PMA.
+
+      .rst_125_out(),
+      .mmcm_locked_out(),
+      .refclk125_p           (refclk125_p),
+      .refclk125_n           (refclk125_n),
       
-      .txp                     (txp),
-      .txn                     (txn),
-      .rxp                     (rxp),
-      .rxn                     (rxn),
-      .mmcm_locked_out         (),
-      .userclk_out             (userclk),
-      .userclk2_out            (userclk2),
-      .rxuserclk_out           (),
-      .rxuserclk2_out          (rxuserclk2),
-      .independent_clock_bufg(independent_clock_bufg),
-      .pma_reset_out           (),
-      .resetdone               (),
-      
+      .clk125_out (clk125),
+      .clk625_out (),
+      .clk208_out (),
+      .clk104_out (),
       .sgmii_clk_r             (sgmii_clk_r),
       .sgmii_clk_f             (sgmii_clk_f),
-      .sgmii_clk_en            (),
+      .sgmii_clk_en          (),
+      // Speed Control
+      //--------------
+      .speed_is_10_100(speed_is_10_100),       // Core should operate at either 10Mbps or 100Mbps speeds
+      .speed_is_100(speed_is_100),          // Core should operate at 100Mbps speed
+      // GMII Interface
+      //---------------
       .gmii_txd              (gmii_txd_int),
       .gmii_tx_en            (gmii_tx_en_int),
       .gmii_tx_er            (gmii_tx_er_int),
@@ -230,27 +197,17 @@ module gig_ethernet_pcs_pma_0_example_design
       .gmii_rx_dv            (gmii_rx_dv_int),
       .gmii_rx_er            (gmii_rx_er_int),
       .gmii_isolate          (gmii_isolate),
-      .mdc                   (mdc),
-      .mdio_i                (mdio_i),
-      .mdio_o                (mdio_o),
-      .mdio_t                (mdio_t),
+      
       .configuration_vector  (configuration_vector),
-      .configuration_valid   (configuration_valid),
+
       .an_interrupt          (an_interrupt),
       .an_adv_config_vector  (an_adv_config_vector),
-      .an_adv_config_val     (an_adv_config_val),
       .an_restart_config     (an_restart_config),
-      .speed_is_10_100       (speed_is_10_100),
-      .speed_is_100          (speed_is_100),
-      .status_vector          (status_vector),
-      .reset                  (reset),
-   
-
-      .signal_detect         (signal_detect),
-      .gt0_qplloutclk_out     (),
-      .gt0_qplloutrefclk_out  ()
-      );
-
+      //-------------
+      .status_vector(status_vector_int),         // Core status.
+      .reset(reset),                 // Asynchronous reset for entire core.
+      .signal_detect(signal_detect)          // Input from PMD to indicate presence of optical input.
+   );
 
 
    //---------------------------------------------------------------------------
@@ -259,7 +216,7 @@ module gig_ethernet_pcs_pma_0_example_design
 
 
    // Drive input GMII signals through IOB input flip-flops (inferred).
-   always @ (posedge userclk2)
+   always @ (posedge clk125)
      begin
          gmii_txd_int    <= gmii_txd;
          gmii_tx_en_int  <= gmii_tx_en;
@@ -274,7 +231,7 @@ module gig_ethernet_pcs_pma_0_example_design
 
 
    // Drive input GMII signals through IOB output flip-flops (inferred).
-   always @ (posedge userclk2)
+   always @ (posedge clk125)
      begin
          gmii_rxd    <= gmii_rxd_int;
          gmii_rx_dv  <= gmii_rx_dv_int;
@@ -284,26 +241,35 @@ module gig_ethernet_pcs_pma_0_example_design
    // SGMII clock logic
    //---------------------------------------------------------------------------
 
-   // All GMII transmitter input signals must be synchronous to this
-   // clock.
+// All GMII transmitter input signals must be synchronous to this
+// clock.
 
-   // All GMII receiver output signals are synchrounous to this clock.
+// All GMII receiver output signals are synchrounous to this clock.
 
-   // This instantiates a DDR output register.  This is a nice way to
-   // drive the output clock since the clock-to-PAD delay will the
-   // same as that of data driven from an IOB Ouput flip-flop.
+// This instantiates a DDR output register.  This is a nice way to
+// drive the output clock since the clock-to-PAD delay will the
+// same as that of data driven from an IOB Ouput flip-flop.
 
 
+  ODDR sgclk_ddr_iob
+  (
+     .Q  (sgmii_clk),
+     .C  (clk125),
+     .CE (1'b1),
+     .D1 (sgmii_clk_r),
+     .D2 (sgmii_clk_f),
+     .R  (1'b0),
+     .S  (1'b0)
+  );
+   
+   
 
-   ODDR sgclk_ddr_iob (
-      .Q  (sgmii_clk),
-      .C  (userclk2),
-      .CE (1'b1),
-      .D1 (sgmii_clk_r),
-      .D2 (sgmii_clk_f),
-      .R  (1'b0),
-      .S  (1'b0)
-   );
-
+   //---------------------------------------------------------------------------
+   // Extra registers to ease IOB placement
+   //---------------------------------------------------------------------------
+   always @ (posedge clk125)
+   begin
+     status_vector <= status_vector_int;
+   end
 
 endmodule // gig_ethernet_pcs_pma_0_example_design

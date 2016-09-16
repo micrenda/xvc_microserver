@@ -47,12 +47,10 @@
 //
 // THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 // PART OF THIS FILE AT ALL TIMES. 
-// 
-// 
 //------------------------------------------------------------------------------
-// Description: This Core Block Level wrapper connects the core to a  
-//              Series-7 Transceiver.
-//
+// Description: This Core Block Level wrapper connects the core to a LVDS 
+//              transceiver implementation
+// 
 //              The SGMII adaptation module is provided to convert
 //              between 1Gbps and 10/100 Mbps rates.  This is connected
 //              to the MAC side of the core to provide a GMII style
@@ -68,17 +66,17 @@
 //    |                                                              |
 //    |                                                              |
 //    |                  --------------          --------------      |
-//    |                  |    Core    |          | Transceiver|      |
-//    |                  |            |          |            |      |
+//    |                  |    Core    |          |    LVDS    |      |
+//    |                  |            |          | transceiver|      |
 //    |    ---------     |            |          |            |      |
 //    |    |       |     |            |          |            |      |
 //    |    | SGMII |     |            |          |            |      |
 //  ------>| Adapt |---->| GMII       |--------->|        TXP |-------->
 //    |    | Module|     | Tx         |          |        TXN |      |
 //    |    |       |     |            |          |            |      |
-//    |    |       |     |            |          |            |      |
-//    |    |       |     |            |          |            |      |
-//    |    |       |     |            |          |            |      |
+//    |    |       |     |            |  trans-  |            |      |
+//    |    |       |     |            | ceiver   |            |      |
+//    |    |       |     |            |    I/F   |            |      |
 //    |    |       |     |            |          |            |      |
 //    |    |       |     | GMII       |          |        RXP |      |
 //  <------|       |<----| Rx         |<---------|        RXN |<--------
@@ -98,35 +96,29 @@
 //------------------------------------------------------------------------------
 
 module gig_ethernet_pcs_pma_0  
-
    (
-      // Transceiver Interface
-      //----------------------
+      // LVDS transceiver Interface
+      //---------------------------
 
 
-      input        gtrefclk,               
-      input        gtrefclk_bufg,
       output       txp,                   // Differential +ve of serial transmission from PMA to PMD.
       output       txn,                   // Differential -ve of serial transmission from PMA to PMD.
       input        rxp,                   // Differential +ve for serial reception from PMD to PMA.
       input        rxn,                   // Differential -ve for serial reception from PMD to PMA.
-      output       resetdone,                 // The GT transceiver has completed its reset cycle
-      output       cplllock,
-      output       mmcm_reset,
-      output       txoutclk,               
-      output       rxoutclk,              
-      input        userclk,                 
-      input        userclk2,                 
-      input        rxuserclk,                
-      input        rxuserclk2,               
-      input        independent_clock_bufg,
-      input        pma_reset,                 // transceiver PMA reset signal
-      input        mmcm_locked,               // MMCM Locked
-      // GMII Interface
-      //---------------
-      output       sgmii_clk_r,           
-      output       sgmii_clk_f,           
+
+      input wire  clk125m,
+      input wire  clk625,
+      input wire  clk208,
+      input wire  clk104,
+      input        mmcm_locked, 
+
+      output       sgmii_clk_r,             // Clock for client MAC (125Mhz, 12.5MHz or 1.25MHz).
+      output       sgmii_clk_f,             // Clock for client MAC (125Mhz, 12.5MHz or 1.25MHz).
       output       sgmii_clk_en,          // Clock enable for client MAC
+      // Speed Control
+      //--------------
+      input        speed_is_10_100,       // Core should operate at either 10Mbps or 100Mbps speeds
+      input        speed_is_100,          // Core should operate at 100Mbps speed
       input [7:0]  gmii_txd,              // Transmit data from client MAC.
       input        gmii_tx_en,            // Transmit control signal from client MAC.
       input        gmii_tx_er,            // Transmit control signal from client MAC.
@@ -134,113 +126,77 @@ module gig_ethernet_pcs_pma_0
       output       gmii_rx_dv,            // Received control signal to client MAC.
       output       gmii_rx_er,            // Received control signal to client MAC.
       output       gmii_isolate,          // Tristate control to electrically isolate GMII.
+      // Management: Alternative to MDIO Interface
+      //------------------------------------------
 
-      // Management: MDIO Interface
-      //---------------------------
-
-      input        mdc,                   // Management Data Clock
-      input        mdio_i,                // Management Data In
-      output       mdio_o,                // Management Data Out
-      output       mdio_t,                // Management Data Tristate
       input [4:0]  configuration_vector,  // Alternative to MDIO interface.
-      input        configuration_valid,   // Validation signal for Config vector
 
       output       an_interrupt,          // Interrupt to processor to signal that Auto-Negotiation has completed
-      input [15:0] an_adv_config_vector,  // Alternate interface to program REG4 (AN ADV)
-      input        an_adv_config_val,     // Validation signal for AN ADV
-      input        an_restart_config,     // Alternate signal to modify AN restart bit in REG0
-
-      // Speed Control
-      //--------------
-      input        speed_is_10_100,       // Core should operate at either 10Mbps or 100Mbps speeds
-      input        speed_is_100,          // Core should operate at 100Mbps speed
+      input [15:0] an_adv_config_vector, // Alternate interface to program REG4 (AN ADV)
+      input        an_restart_config,    // Alternate signal to modify AN restart bit in REG0
 
       // General IO's
       //-------------
       output [15:0] status_vector,         // Core status.
-      input        reset,                 // Asynchronous reset for entire core
-    
-      input        signal_detect,          // Input from PMD to indicate presence of optical input.
-      input            gt0_qplloutclk_in,
-      input            gt0_qplloutrefclk_in
-     
-     
-
+      input        reset,                 // Asynchronous reset for entire core.
+      input        signal_detect          // Input from PMD to indicate presence of optical input.
    );
 
 
-(* CORE_GENERATION_INFO = "gig_ethernet_pcs_pma_0,gig_ethernet_pcs_pma_v15_2_1,{x_ipProduct=Vivado 2016.2,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=gig_ethernet_pcs_pma,x_ipVersion=15.2,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,c_elaboration_transient_dir=.,c_component_name=gig_ethernet_pcs_pma_0,c_family=virtex7,c_architecture=virtex7,c_is_sgmii=true,c_use_transceiver=true,c_use_tbi=false,c_is_2_5g=false,c_use_lvds=false,c_has_an=true,characterization=false,c_has_mdio=true,c_has_ext_mdio=false,c_sgmii_phy_mode=false,c_dynamic_switching=false,c_sgmii_fabric_buffer=true,c_1588=0,gt_rx_byte_width=1,C_EMAC_IF_TEMAC=true,C_PHYADDR=1,EXAMPLE_SIMULATION=0,c_support_level=false,c_RxNibbleBitslice0Used=false,c_tx_in_upper_nibble=1,c_TxLane0_Placement=DIFF_PAIR_0,c_TxLane1_Placement=DIFF_PAIR_1,c_RxLane0_Placement=DIFF_PAIR_0,c_RxLane1_Placement=DIFF_PAIR_1,c_sub_core_name=gig_ethernet_pcs_pma_0_gt,c_transceiver_type=GTXE2,c_gt_type=GTH,c_rx_gmii_clk_src=TXOUTCLK,c_transceivercontrol=false,c_gtinex=false,c_xdevicefamily=xc7vx485t,c_gt_dmonitorout_width=8,c_gt_drpaddr_width=9,c_gt_txdiffctrl_width=4,c_gt_rxmonitorout_width=7,c_num_of_lanes=1,c_refclkrate=125,c_drpclkrate=50.0,c_enable_tx_userclk_reset_port=false}" *)
+
+(* CORE_GENERATION_INFO = "gig_ethernet_pcs_pma_0,gig_ethernet_pcs_pma_v15_2_1,{x_ipProduct=Vivado 2016.2,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=gig_ethernet_pcs_pma,x_ipVersion=15.2,x_ipCoreRevision=1,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,c_elaboration_transient_dir=.,c_component_name=gig_ethernet_pcs_pma_0,c_family=virtex7,c_architecture=virtex7,c_is_sgmii=true,c_use_transceiver=false,c_use_tbi=false,c_is_2_5g=false,c_use_lvds=true,c_has_an=true,characterization=false,c_has_mdio=false,c_has_ext_mdio=false,c_sgmii_phy_mode=false,c_dynamic_switching=false,c_sgmii_fabric_buffer=true,c_1588=0,gt_rx_byte_width=1,C_EMAC_IF_TEMAC=true,C_PHYADDR=1,EXAMPLE_SIMULATION=0,c_support_level=false,c_RxNibbleBitslice0Used=false,c_tx_in_upper_nibble=1,c_TxLane0_Placement=DIFF_PAIR_0,c_TxLane1_Placement=DIFF_PAIR_1,c_RxLane0_Placement=DIFF_PAIR_0,c_RxLane1_Placement=DIFF_PAIR_1,c_sub_core_name=gig_ethernet_pcs_pma_0_gt,c_transceiver_type=GTXE2,c_gt_type=GTH,c_rx_gmii_clk_src=TXOUTCLK,c_transceivercontrol=false,c_gtinex=false,c_xdevicefamily=xc7vx485t,c_gt_dmonitorout_width=8,c_gt_drpaddr_width=9,c_gt_txdiffctrl_width=4,c_gt_rxmonitorout_width=7,c_num_of_lanes=1,c_refclkrate=125,c_drpclkrate=50.0,c_enable_tx_userclk_reset_port=false}" *)
 (* X_CORE_INFO = "gig_ethernet_pcs_pma_v15_2_1,Vivado 2016.2" *)
 
 gig_ethernet_pcs_pma_0_block 
-inst
+
+ inst
    (
-      // Transceiver Interface
-      //----------------------
-
-      .gtrefclk                             (gtrefclk),
-      .gtrefclk_bufg                        (gtrefclk_bufg),
-      
-      .txp                                  (txp),
-      .txn                                  (txn),
-      .rxp                                  (rxp),
-      .rxn                                  (rxn),
-      .resetdone                            (resetdone),
-      .cplllock                             (cplllock),
-      .mmcm_reset                           (mmcm_reset),
-      .txoutclk                             (txoutclk),
-      .rxoutclk                             (rxoutclk),
-      .userclk                              (userclk),
-      .userclk2                             (userclk2),
-      .rxuserclk                            (rxuserclk),
-      .rxuserclk2                           (rxuserclk2),
-      .independent_clock_bufg               (independent_clock_bufg),
-      .pma_reset                            (pma_reset),
-      .mmcm_locked                          (mmcm_locked),
-      // GMII Interface
-      //---------------
-      .sgmii_clk_r                         (sgmii_clk_r),
-      .sgmii_clk_f                         (sgmii_clk_f),
-      .sgmii_clk_en                        (sgmii_clk_en),
-      .gmii_txd                      (gmii_txd),
-      .gmii_tx_en                    (gmii_tx_en),
-      .gmii_tx_er                    (gmii_tx_er),
-      .gmii_rxd                      (gmii_rxd),
-      .gmii_rx_dv                    (gmii_rx_dv),
-      .gmii_rx_er                    (gmii_rx_er),
-      .gmii_isolate                  (gmii_isolate),
-
-      // Management: MDIO Interface
+      // LVDS transceiver Interface
       //---------------------------
 
-      .mdc                           (mdc),
-      .mdio_i                        (mdio_i),
-      .mdio_o                        (mdio_o),
-      .mdio_t                        (mdio_t),
-      .configuration_vector          (configuration_vector),
-      .configuration_valid           (configuration_valid),
 
-      .an_interrupt                  (an_interrupt),
-      .an_adv_config_vector          (an_adv_config_vector),
-      .an_adv_config_val             (an_adv_config_val),
-      .an_restart_config             (an_restart_config),
+      .txp                   (txp),
+      .txn                   (txn),
+      .rxp                   (rxp),
+      .rxn                   (rxn),
 
+      .clk125m               (clk125m),
+      .clk625                (clk625),
+      .clk208                (clk208),
+      .clk104                (clk104),
+      .mmcm_locked           (mmcm_locked),
+      .sgmii_clk_f             (sgmii_clk_f),
+      .sgmii_clk_r             (sgmii_clk_r),
+      .sgmii_clk_en          (sgmii_clk_en),
       // Speed Control
       //--------------
-      .speed_is_10_100               (speed_is_10_100),
-      .speed_is_100                  (speed_is_100),
+      .speed_is_10_100       (speed_is_10_100),
+      .speed_is_100          (speed_is_100),
+
+      .gmii_txd              (gmii_txd),
+      .gmii_tx_en            (gmii_tx_en),
+      .gmii_tx_er            (gmii_tx_er),
+      .gmii_rxd              (gmii_rxd),
+      .gmii_rx_dv            (gmii_rx_dv),
+      .gmii_rx_er            (gmii_rx_er),
+      .gmii_isolate          (gmii_isolate),
+      // Management: Alternative to MDIO Interface
+      //------------------------------------------
+
+      .configuration_vector  (configuration_vector),
+
+      .an_interrupt          (an_interrupt),
+      .an_adv_config_vector  (an_adv_config_vector),
+      .an_restart_config     (an_restart_config),
 
       // General IO's
       //-------------
-      .status_vector               (status_vector),
-      .reset                       (reset),
-    
- 
-      .signal_detect                 (signal_detect),
-      .gt0_qplloutclk_in                 (gt0_qplloutclk_in),
-      .gt0_qplloutrefclk_in              (gt0_qplloutrefclk_in)
-
+      .status_vector         (status_vector),
+      .reset                 (reset),
+      .signal_detect         (signal_detect)
    );
+
+
 
 
 endmodule // gig_ethernet_pcs_pma_0

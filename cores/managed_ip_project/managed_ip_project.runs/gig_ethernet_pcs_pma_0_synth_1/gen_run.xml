@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="gig_ethernet_pcs_pma_0_synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1473074824">
-  <File Type="RDS-DCP" Name="gig_ethernet_pcs_pma_0.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="gig_ethernet_pcs_pma_0_utilization_synth.pb"/>
+<GenRun Id="gig_ethernet_pcs_pma_0_synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1473859415">
+  <File Type="PA-TCL" Name="gig_ethernet_pcs_pma_0.tcl"/>
+  <File Type="RDS-RDS" Name="gig_ethernet_pcs_pma_0.vds"/>
   <File Type="VDS-TIMINGSUMMARY" Name="gig_ethernet_pcs_pma_0_timing_summary_synth.rpt"/>
   <File Type="VDS-TIMING-PB" Name="gig_ethernet_pcs_pma_0_timing_summary_synth.pb"/>
-  <File Type="RDS-RDS" Name="gig_ethernet_pcs_pma_0.vds"/>
-  <File Type="PA-TCL" Name="gig_ethernet_pcs_pma_0.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="gig_ethernet_pcs_pma_0_drc_synth.rpt"/>
+  <File Type="RDS-DCP" Name="gig_ethernet_pcs_pma_0.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="gig_ethernet_pcs_pma_0_utilization_synth.pb"/>
   <File Type="RDS-UTIL" Name="gig_ethernet_pcs_pma_0_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="gig_ethernet_pcs_pma_0_drc_synth.rpt"/>
   <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/gig_ethernet_pcs_pma_0">
+    <File Path="$PPRDIR/../gig_ethernet_pcs_pma_0.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/../gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -22,6 +29,13 @@
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="BlockSrcs" RelSrcDir="$PSRCDIR/gig_ethernet_pcs_pma_0">
+    <File Path="$PPRDIR/../gig_ethernet_pcs_pma_0.xcix">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PPRDIR/../gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0.xci">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
