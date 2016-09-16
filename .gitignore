@@ -3,3 +3,6 @@ nohup.out
 build.log
 bitgen.log
 /bistream.bit
+vivado*.jou
+vivado*.log
+
