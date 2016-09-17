@@ -105,8 +105,8 @@ $(BUILD)/xsim.dir/snapshot-tb2/: xsim-build
 xelab-tb2: $(BUILD)/xsim.dir/snapshot-tb2/
 
 xsim-tb1-run: xelab-tb1
-	cd $(BUILD); xsim -t tb1/tb1.tcl  snapshot-tb1 | tee tb1/tb1.log
+	cd $(BUILD); $(XILINX)/bin/xsim -t tb1/tb1.tcl  snapshot-tb1 | tee tb1/tb1.log
 	
 xsim-tb2-run: xelab-tb2
-	cd $(BUILD); xsim  snapshot-tb2  | tee tb1/tb1.log
+	cd $(BUILD); $(XILINX)/bin/xsim  snapshot-tb2  | tee tb1/tb1.log
 	
