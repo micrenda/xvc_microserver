@@ -5,9 +5,7 @@ CLK_PERIOD	= 5
 BOARD	   ?= VC707
 CONFIG		= $(BASE)/config/$(BOARD)
 CORE		= $(BASE)/core/$(BOARD)
-XILINX	   ?= /opt/Xilinx/Vivado/2016.2/
 BUILD		= $(BASE)/build
-
 
 clean:
 	rm -rf $(BUILD)
@@ -67,6 +65,14 @@ synth: $(BUILD)/top.v
 
 $(BUILD)/xsim.dir: synth
 
+	
+	
+ifeq ($(XILINX_VIVADO),)
+	$(error XILINX_VIVADO env variable was not set) 
+else
+	@echo "XILINX_VIVADO = $(XILINX_VIVADO)"
+endif
+
 	cp    ${BASE}/test/test_common.sv	$(BUILD)
 	cp -r ${BASE}/test/tb1				$(BUILD)
 	cp -r ${BASE}/test/tb2				$(BUILD)
@@ -74,14 +80,14 @@ $(BUILD)/xsim.dir: synth
 	cp ${BASE}/test/util/8b10b/encode.v	$(BUILD)/8b10b_encode.v
 	cp ${BASE}/test/util/8b10b/decode.v	$(BUILD)/8b10b_decode.v
 	
-	cd $(BUILD); $(XILINX)/bin/xvlog -work xvc_microserver `find . -iname '*.v'`
-	cd $(BUILD); $(XILINX)/bin/xvlog -work xvc_microserver -sv `find . -iname '*.sv'`
-	cd $(BUILD); $(XILINX)/bin/xvhdl -work xvc_microserver `find . -iname '*.vhd'`
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xvlog -work xvc_microserver `find . -iname '*.v'`
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xvlog -work xvc_microserver -sv `find . -iname '*.sv'`
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xvhdl -work xvc_microserver `find . -iname '*.vhd'`
 	
 xsim-build: $(BUILD)/xsim.dir
 
 $(BUILD)/xsim.dir/snapshot-tb1/: xsim-build
-	cd $(BUILD); $(XILINX)/bin/xelab --debug typical --relax --mt 8 \
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xelab --debug typical --relax --mt 8 \
 		-L unisims_ver \
 		-L unimacro_ver \
 		-L secureip  \
@@ -93,7 +99,7 @@ $(BUILD)/xsim.dir/snapshot-tb1/: xsim-build
 xelab-tb1: $(BUILD)/xsim.dir/snapshot-tb1/
 
 $(BUILD)/xsim.dir/snapshot-tb2/: xsim-build
-	cd $(BUILD); $(XILINX)/bin/xelab --debug typical --relax --mt 8 \
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xelab --debug typical --relax --mt 8 \
 		-L unisims_ver \
 		-L unimacro_ver \
 		-L secureip  \
@@ -105,8 +111,8 @@ $(BUILD)/xsim.dir/snapshot-tb2/: xsim-build
 xelab-tb2: $(BUILD)/xsim.dir/snapshot-tb2/
 
 xsim-tb1-run: xelab-tb1
-	cd $(BUILD); $(XILINX)/bin/xsim -t tb1/tb1.tcl  snapshot-tb1 | tee tb1/tb1.log
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xsim -t tb1/tb1.tcl  snapshot-tb1 | tee tb1/tb1.log
 	
 xsim-tb2-run: xelab-tb2
-	cd $(BUILD); $(XILINX)/bin/xsim  snapshot-tb2  | tee tb1/tb1.log
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xsim  snapshot-tb2  | tee tb1/tb1.log
 	

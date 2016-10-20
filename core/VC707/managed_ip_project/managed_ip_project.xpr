@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="14" Path="/home/mrenda/research/xvc_microserver/cores/managed_ip_project/managed_ip_project.xpr">
+<Project Version="7" Minor="14" Path="/home/mrenda/research/xvc_microserver/core/VC707/managed_ip_project/managed_ip_project.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="6fb705d62df146a2900e1823cf9913ff"/>

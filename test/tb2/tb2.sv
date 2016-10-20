@@ -139,7 +139,7 @@ module tb2();
 		input  rs232_rx,*/
 	);
 	
-	send_an send_an_inst (
+	send_an_flp send_an_inst (
 		.start(an_start),
 		.done(an_done),
 		.an_sgmii_rx_p,

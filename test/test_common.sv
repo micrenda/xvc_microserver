@@ -90,7 +90,7 @@ module send_packet (
 		
 	end
 	
-	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p, .sgmii_rx_n, .value8b(send_byte_value), .reset);
+	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .is_k(0), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p, .sgmii_rx_n, .value8b(send_byte_value), .reset);
 	
 endmodule
 
@@ -99,6 +99,7 @@ module send_byte(
 	input  reset,
 	input  ser_sgmii_clk,
 	input  run,
+	input  is_k,
 	output reg done,
 	input      sgmii_clk_in,
 	output reg sgmii_clk_out,
@@ -117,7 +118,7 @@ module send_byte(
 	reg sgmii_clk_buf_1;
 	
 	
-	assign value9b = {1'b0,value8b};
+	assign value9b = {is_k,value8b};
 	
 	always @(posedge run or negedge run)
 	begin
@@ -155,16 +156,85 @@ module send_byte(
 		.dataout(value10b),
 		.dispout(disp_next)
 	);
+	
+	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .is_k(is_k), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p, .sgmii_rx_n, .value8b(send_byte_value), .reset);
+	
 		
 endmodule
 
+module send_an_ord(input start, output reg done, output reg an_sgmii_rx_p, input[7:0] an_config);
 
-module send_an(input start, output reg done, output reg an_sgmii_rx_p, input[47:0] an_config);
+	reg is_k;
 
 	always @(posedge start)
 	begin
 		done = 0;
-		$display("Sending ethernet auto-negotiation: %h (%0d bits)", an_config, $size(an_config));
+		$display("Sending /C/ ordered ethernet auto-negotiation: %h (%0d bits)", an_config, $size(an_config));
+		
+		$write("Auto-negotiation ordered set: ");
+		
+		$write("/K28.5");
+		is_k = 1b'1;
+		send_byte_value = 8b'01000_101;
+		send_byte_run = ~send_byte_run;
+		wait(send_byte_done);
+		
+		$write("/D21.5 ");
+		is_k = 1b'0;
+		send_byte_value = 8b'01000_101;
+		send_byte_run = ~send_byte_run;
+		wait(send_byte_done);
+		
+		$write("/D%d.%d/ ", an_config[15:11], an_config[10:8]);
+		is_k = 1b'0;
+		send_byte_value = an_config;
+		send_byte_run = ~send_byte_run;
+		wait(send_byte_done);
+		
+		$write("/D%d.%d/ ", an_config[7:3], an_config[2:1]);
+		is_k = 1b'0;
+		send_byte_value = an_config;
+		send_byte_run = ~send_byte_run;
+		wait(send_byte_done);
+		
+		
+		
+		$display("[%8b] done.", an_config);
+		
+		done = 1;
+	end
+	
+	always @(posedge ser_sgmii_clk or negedge ser_sgmii_clk)
+	begin
+	
+		sgmii_clk_buf_1 <= sgmii_clk_in;
+		sgmii_clk_out   <= sgmii_clk_buf_1;
+	
+		if (!done)
+		begin
+			
+			if (i < 10)
+			begin
+				sgmii_rx_p <=  value10b[9-i];
+				sgmii_rx_n <= ~value10b[9-i];
+				i <= i + 1;
+			end
+			else
+				done <= 1;
+		end
+		
+		disp_curr <= disp_next;
+	end
+	
+	
+endmodule
+
+module send_an_flp(input start, output reg done, output reg an_sgmii_rx_p, input[47:0] an_config);
+
+	always @(posedge start)
+	begin
+		done = 0;
+		$display("Sending FLP ethernet auto-negotiation: %h (%0d bits)", an_config, $size(an_config));
 		
 		$write("Auto-negotiation bits:");
 		

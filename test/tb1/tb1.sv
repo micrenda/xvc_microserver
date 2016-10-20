@@ -115,11 +115,11 @@ module tb1();
 		input  rs232_rx,*/
 	);
 	
-	send_an send_an_inst (
+	send_an_ord send_an_inst (
 		.start(an_start),
 		.done(an_done),
 		.an_sgmii_rx_p,
-		.an_config(48'b00001_01001010_001____00000010001_00001____00000001000_00000)
+		.an_config(16'b_00000)
 	);
 	
 	send_packet send_packet_inst (
