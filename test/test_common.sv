@@ -94,6 +94,95 @@ module send_packet (
 	
 endmodule
 
+module send_an_ord(
+	input  reset, 
+	input start, 
+	output reg done, 
+	input  ser_sgmii_clk,
+	output reg an_sgmii_rx_p, 
+	output reg an_sgmii_rx_n, 
+	input      sgmii_clk_in,
+	output reg sgmii_clk_out,
+	input[15:0] an_config);
+
+	reg 		is_k;
+	reg 		send_byte_run;
+	reg 		send_byte_done;
+	reg[7:0]	send_byte_value;
+
+	always @(posedge start)
+	begin
+		done = 0;
+		$display("Sending /C/ ordered ethernet auto-negotiation: [%16b] (%0d bits)", an_config, $size(an_config));
+		
+		$write("Auto-negotiation ordered set: ");
+		
+		$write("/K28.5");
+		is_k <= 1;
+		send_byte_value = 8'b01000_101;
+		send_byte_run = ~send_byte_run;
+		wait(send_byte_done);
+		
+		$write("/D21.5 ");
+		is_k <= 0;
+		send_byte_value = 8'b01000_101;
+		send_byte_run = ~send_byte_run;
+		wait(send_byte_done);
+		
+		$write("/D%d.%d ", an_config[7:3], an_config[2:1]);
+		is_k <= 0;
+		send_byte_value <=  an_config[7:0];
+		send_byte_run = ~send_byte_run;
+		wait(send_byte_done);
+		
+		$write("/D%d.%d ", an_config[15:11], an_config[10:8]);
+		is_k <= 0;
+		send_byte_value <= an_config[15:8];
+		send_byte_run = ~send_byte_run;
+		wait(send_byte_done);
+		
+		$display("done.", an_config);
+		
+		done = 1;
+	end
+	
+	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .is_k(0), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p(an_sgmii_rx_p), .sgmii_rx_n(an_sgmii_rx_n), .value8b(send_byte_value), .reset);
+	
+	
+	
+endmodule
+
+module send_an_flp(input start, output reg done, output reg an_sgmii_rx_p, output reg an_sgmii_rx_n, input[47:0] an_config);
+
+	always @(posedge start)
+	begin
+		done = 0;
+		$display("Sending FLP ethernet auto-negotiation: %h (%0d bits)", an_config, $size(an_config));
+		
+		$write("Auto-negotiation bits:");
+		
+		for (integer i=0; i < $size(an_config); i=i+1)
+		begin
+			$write(" %0d", i);
+		
+			// Clock
+			        an_sgmii_rx_p = 1; 
+			#100    an_sgmii_rx_p = 0;
+			// Data
+			#65400 an_sgmii_rx_p = an_config[i]; 	
+			#100 an_sgmii_rx_p = 0;				
+			#65400 an_sgmii_rx_p = 0;				
+			
+		end
+		
+		$display(" done.");
+		
+		done = 1;
+	end
+endmodule
+
+
+
 
 module send_byte(
 	input  reset,
@@ -158,91 +247,4 @@ module send_byte(
 	);
 	
 		
-endmodule
-
-module send_an_ord(
-	input  reset, 
-	input start, 
-	output reg done, 
-	input  ser_sgmii_clk,
-	output reg an_sgmii_rx_p, 
-	output reg an_sgmii_rx_n, 
-	input      sgmii_clk_in,
-	output reg sgmii_clk_out,
-	input[15:0] an_config);
-
-	reg 		is_k;
-	reg 		send_byte_run;
-	reg 		send_byte_done;
-	reg[7:0]	send_byte_value;
-
-	always @(posedge start)
-	begin
-		done = 0;
-		$display("Sending /C/ ordered ethernet auto-negotiation: [%16b] (%0d bits)", an_config, $size(an_config));
-		
-		$write("Auto-negotiation ordered set: ");
-		
-		$write("/K28.5");
-		is_k <= 1;
-		send_byte_value = 8'b01000_101;
-		send_byte_run = ~send_byte_run;
-		wait(send_byte_done);
-		
-		$write("/D21.5 ");
-		is_k <= 0;
-		send_byte_value = 8'b01000_101;
-		send_byte_run = ~send_byte_run;
-		wait(send_byte_done);
-		
-		$write("/D%d.%d ", an_config[7:3], an_config[2:1]);
-		is_k <= 0;
-		send_byte_value <= an_config[0:7];
-		send_byte_run = ~send_byte_run;
-		wait(send_byte_done);
-		
-		$write("/D%d.%d ", an_config[15:11], an_config[10:8]);
-		is_k <= 0;
-		send_byte_value <= an_config[15:8];
-		send_byte_run = ~send_byte_run;
-		wait(send_byte_done);
-		
-		$display("done.", an_config);
-		
-		done = 1;
-	end
-	
-	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .is_k(0), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p(an_sgmii_rx_p), .sgmii_rx_n(an_sgmii_rx_n), .value8b(send_byte_value), .reset);
-	
-	
-	
-endmodule
-
-module send_an_flp(input start, output reg done, output reg an_sgmii_rx_p, output reg an_sgmii_rx_n, input[47:0] an_config);
-
-	always @(posedge start)
-	begin
-		done = 0;
-		$display("Sending FLP ethernet auto-negotiation: %h (%0d bits)", an_config, $size(an_config));
-		
-		$write("Auto-negotiation bits:");
-		
-		for (integer i=0; i < $size(an_config); i=i+1)
-		begin
-			$write(" %0d", i);
-		
-			// Clock
-			        an_sgmii_rx_p = 1; 
-			#100    an_sgmii_rx_p = 0;
-			// Data
-			#65400 an_sgmii_rx_p = an_config[i]; 	
-			#100 an_sgmii_rx_p = 0;				
-			#65400 an_sgmii_rx_p = 0;				
-			
-		end
-		
-		$display(" done.");
-		
-		done = 1;
-	end
 endmodule
