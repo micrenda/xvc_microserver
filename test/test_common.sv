@@ -195,15 +195,15 @@ module send_an_ord(
 		send_byte_run = ~send_byte_run;
 		wait(send_byte_done);
 		
-		$write("/D%d.%d ", an_config[15:11], an_config[10:8]);
+		$write("/D%d.%d ", an_config[7:3], an_config[2:1]);
 		is_k <= 0;
-		send_byte_value <= an_config[15:8];
+		send_byte_value <= an_config[0:7];
 		send_byte_run = ~send_byte_run;
 		wait(send_byte_done);
 		
-		$write("/D%d.%d ", an_config[7:3], an_config[2:1]);
+		$write("/D%d.%d ", an_config[15:11], an_config[10:8]);
 		is_k <= 0;
-		send_byte_value <= an_config[7:1];
+		send_byte_value <= an_config[15:8];
 		send_byte_run = ~send_byte_run;
 		wait(send_byte_done);
 		

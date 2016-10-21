@@ -119,7 +119,7 @@ module tb1();
 		.start(an_start),
 		.done(an_done),
 		.an_sgmii_rx_p,
-		.an_config(16'b_00000)
+		.an_config(16'b00_0000_11_11_00000)
 	);
 	
 	send_packet send_packet_inst (
