@@ -169,7 +169,7 @@ module send_an_ord(
 	output reg an_sgmii_rx_n, 
 	input      sgmii_clk_in,
 	output reg sgmii_clk_out,
-	input[7:0] an_config);
+	input[15:0] an_config);
 
 	reg 		is_k;
 	reg 		send_byte_run;
