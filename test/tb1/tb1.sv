@@ -69,8 +69,9 @@ module tb1();
     end
     
 
-	assign sgmii_rx_p = an_running ? an_sgmii_rx_p : data_sgmii_rx_p;
-	assign sgmii_rx_n = an_running ? an_sgmii_rx_n : data_sgmii_rx_n;
+	assign sgmii_clk_out	= an_running ? an_sgmii_clk_out	: data_sgmii_clk_out;
+	assign sgmii_rx_p 		= an_running ? an_sgmii_rx_p 	: data_sgmii_rx_p;
+	assign sgmii_rx_n 		= an_running ? an_sgmii_rx_n 	: data_sgmii_rx_n;
 	
     
 
@@ -116,9 +117,17 @@ module tb1();
 	);
 	
 	send_an_ord send_an_inst (
+	
+		.reset, 
+
+		.ser_sgmii_clk,
+		.sgmii_clk_in,
+		.sgmii_clk_out(an_sgmii_clk_out),
+	
 		.start(an_start),
 		.done(an_done),
-		.an_sgmii_rx_p,
+		.an_sgmii_rx_p(an_sgmii_rx_p),
+		.an_sgmii_rx_n(an_sgmii_rx_n),
 		.an_config(16'b00_0000_11_11_00000)
 	);
 	
@@ -129,7 +138,7 @@ module tb1();
 		.done(send_packet_done),
 		.ser_sgmii_clk,
 		.sgmii_clk_in,
-		.sgmii_clk_out,
+		.sgmii_clk_out(data_sgmii_clk_out),
 		.sgmii_rx_p(data_sgmii_rx_p),
 		.sgmii_rx_n(data_sgmii_rx_n));
    

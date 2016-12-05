@@ -106,7 +106,7 @@ module send_an_ord(
 	input[15:0] an_config);
 
 	reg 		is_k;
-	reg 		send_byte_run;
+	reg 		send_byte_run = 0;
 	reg 		send_byte_done;
 	reg[7:0]	send_byte_value;
 
