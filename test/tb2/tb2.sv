@@ -37,8 +37,10 @@ module tb2();
     // Initialize all variables
     initial begin        
 
-		$dumpfile("tb2/tb2.vcd");
-		$dumpvars(0,tb1);
+		
+	$display("TB2 - Testing first ARP packet");
+	$dumpfile("tb2/tb2.vcd");
+		$dumpvars(0,tb2);
 
         clock = 0;
         sgmii_clk_in = 0;
@@ -60,11 +62,10 @@ module tb2();
 		an_running = 1;
 		an_start = 1;
 		
-		wait(an_done);
+	#1	wait(an_done);
+		an_running = 0;
+		$display("Auto-negotation done");
     
-    
-    #1000
-            
         file = $fopen("tb2/tb2.hex", "r");
         
         $display("Opening file: %d", file);
@@ -86,15 +87,15 @@ module tb2();
         
 	    $fclose(file);
         
-    #40000 $finish();   
-    #40000 $finish();   
+    #40 $finish();  
                 
         
     end
     
 
-	assign sgmii_rx_p = an_running ? an_sgmii_rx_p : data_sgmii_rx_p;
-	assign sgmii_rx_n = an_running ? an_sgmii_rx_n : data_sgmii_rx_n;
+	assign sgmii_clk_out	= an_running ? an_sgmii_clk_out	: data_sgmii_clk_out;
+	assign sgmii_rx_p 		= an_running ? an_sgmii_rx_p 	: data_sgmii_rx_p;
+	assign sgmii_rx_n 		= an_running ? an_sgmii_rx_n 	: data_sgmii_rx_n;
 	
     
 
@@ -119,8 +120,8 @@ module tb2();
 		
 	   .sgmii_tx_p,
 	   .sgmii_tx_n,
-	   .sgmii_rx_p(data_sgmii_rx_p),
-	   .sgmii_rx_n(data_sgmii_rx_n),
+	   .sgmii_rx_p(sgmii_rx_p),
+	   .sgmii_rx_n(sgmii_rx_n),
 	   .sgmii_clk_p(sgmii_clk_out),
 	   .sgmii_clk_n(~sgmii_clk_out),
 		
@@ -139,11 +140,19 @@ module tb2();
 		input  rs232_rx,*/
 	);
 	
-	send_an_flp send_an_inst (
-		.start(an_start),
-		.done(an_done),
-		.an_sgmii_rx_p,
-		.an_config(48'b00001_01001010_001____00000010001_00001____00000001000_00000)
+	send_an_ord send_an_ord_inst (
+	
+		.reset, 
+
+		.ser_sgmii_clk,
+		.sgmii_clk_in,
+		.sgmii_clk_out(an_sgmii_clk_out),
+	
+		.start	(an_start),
+		.done	(an_done),
+		.an_sgmii_rx_p(an_sgmii_rx_p),
+		.an_sgmii_rx_n(an_sgmii_rx_n),
+		.an_config(16'b00_0000_11_11_00000)
 	);
 	
 	send_packet send_packet_inst (
@@ -153,7 +162,7 @@ module tb2();
 		.done(send_packet_done),
 		.ser_sgmii_clk,
 		.sgmii_clk_in,
-		.sgmii_clk_out,
+		.sgmii_clk_out(data_sgmii_clk_out),
 		.sgmii_rx_p(data_sgmii_rx_p),
 		.sgmii_rx_n(data_sgmii_rx_n));
    

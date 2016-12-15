@@ -88,31 +88,31 @@ xsim-build: $(BUILD)/xsim.dir
 
 $(BUILD)/xsim.dir/snapshot-tb1/: xsim-build
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xelab --debug typical --relax --mt 8 \
-		-L unisims_ver \
-		-L unimacro_ver \
-		-L secureip  \
+		-L unisims_ver  \
+		-L unimacro_ver  \
+		-L secureip       \
 		-L xvc_microserver \
 		xvc_microserver.tb1 \
 		xvc_microserver.glbl \
-		-s snapshot-tb1 \
+		-s snapshot-tb1       \
 		-log xelab.log 
 xelab-tb1: $(BUILD)/xsim.dir/snapshot-tb1/
 
 $(BUILD)/xsim.dir/snapshot-tb2/: xsim-build
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xelab --debug typical --relax --mt 8 \
-		-L unisims_ver \
-		-L unimacro_ver \
-		-L secureip  \
+		-L unisims_ver  \
+		-L unimacro_ver  \
+		-L secureip       \
 		-L xvc_microserver \
 		xvc_microserver.tb2 \
 		xvc_microserver.glbl \
-		-s snapshot-tb2 \
+		-s snapshot-tb2       \
 		-log xelab.log 
 xelab-tb2: $(BUILD)/xsim.dir/snapshot-tb2/
 
 xsim-tb1-run: xelab-tb1
-	cd $(BUILD); $(XILINX_VIVADO)/bin/xsim -t tb1/tb1.tcl  snapshot-tb1 | tee tb1/tb1.log
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xsim --onfinish quit -t tb1/tb1.tcl  snapshot-tb1 | tee tb1/tb1.log
 	
 xsim-tb2-run: xelab-tb2
-	cd $(BUILD); $(XILINX_VIVADO)/bin/xsim  snapshot-tb2  | tee tb1/tb1.log
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xsim --onfinish quit -t tb2/tb2.tcl  snapshot-tb2  | tee tb2/tb2.log
 	

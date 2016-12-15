@@ -54,16 +54,15 @@ module tb1();
 		an_restart_config = 1;
     
     // 1000Mb auto negotation
-    #40 
-		an_running = 1;
+	#40	an_running = 1;
 		an_start = 1;
 		
 		wait(an_done);
-    
+		an_running = 0;
 		$display("Auto-negotation done");
         
-    #40000 $finish();   
-    #40000 $finish();   
+    #1000
+		$finish(); 
                 
         
     end
@@ -96,10 +95,12 @@ module tb1();
 		
 	   .sgmii_tx_p,
 	   .sgmii_tx_n,
-	   .sgmii_rx_p(data_sgmii_rx_p),
-	   .sgmii_rx_n(data_sgmii_rx_n),
-	   .sgmii_clk_p(sgmii_clk_out),
-	   .sgmii_clk_n(~sgmii_clk_out),
+	   .sgmii_rx_p(sgmii_rx_p),
+	   .sgmii_rx_n(sgmii_rx_n),
+	   //.sgmii_clk_p(sgmii_clk_out),
+	   //.sgmii_clk_n(~sgmii_clk_out),
+	   .sgmii_clk_p(sgmii_clk_in),
+	   .sgmii_clk_n(~sgmii_clk_in),
 		
 	   .eth_mdio,
 	   .eth_mdc,
@@ -116,20 +117,32 @@ module tb1();
 		input  rs232_rx,*/
 	);
 	
-	send_an_ord send_an_inst (
-	
-		.reset, 
-
-		.ser_sgmii_clk,
-		.sgmii_clk_in,
-		.sgmii_clk_out(an_sgmii_clk_out),
-	
+	assign an_sgmii_clk_out = sgmii_clk_in;
+	send_an_flp send_an_flp_inst (
 		.start(an_start),
-		.done(an_done),
-		.an_sgmii_rx_p(an_sgmii_rx_p),
-		.an_sgmii_rx_n(an_sgmii_rx_n),
-		.an_config(16'b00_0000_11_11_00000)
+		.done(an_done), 
+		.an_sgmii_rx_p, 
+		.an_sgmii_rx_n, 
+		.an_config(
+		48'b00001_111110_00001______0000000000000001______0000000000000000
+		)
 	);
+	
+	//send_an_ord send_an_ord_inst (
+	//
+	//	.reset, 
+	//
+	//	.ser_sgmii_clk,
+	//	.sgmii_clk_in,
+	//	.sgmii_clk_out(an_sgmii_clk_out),
+	//
+	//	.start	(an_start),
+	//	.done	(an_done),
+	//	.an_sgmii_rx_p(an_sgmii_rx_p),
+	//	.an_sgmii_rx_n(an_sgmii_rx_n),
+	//	.an_count(4'd10),
+	//	.an_config(16'b0_0_00_000_00_01_00000)
+	//);
 	
 	send_packet send_packet_inst (
 		.reset,

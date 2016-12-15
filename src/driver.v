@@ -81,8 +81,8 @@ module driver (
       //.an_adv_config_val(1),                            // input wire an_adv_config_val
       .an_restart_config(an_restart_config),            // input wire an_restart_config
       .an_interrupt(),                                  // Interrupt to processor to signal that Auto-Negotiation has completed
-      .speed_is_10_100(0),                              // input wire speed_is_10_100
-      .speed_is_100(0),                                 // input wire speed_is_100
+      .speed_is_10_100(1'b0),                              // input wire speed_is_10_100
+      .speed_is_100(1'b0),                                 // input wire speed_is_100
       .status_vector(gmii_status),                      // output wire [15 : 0] status_vector
       .reset(reset),                                    // input wire reset
       .signal_detect(1)                                 // input wire signal_detect

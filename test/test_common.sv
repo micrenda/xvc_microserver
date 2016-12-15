@@ -90,7 +90,7 @@ module send_packet (
 		
 	end
 	
-	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .is_k(0), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p, .sgmii_rx_n, .value8b(send_byte_value), .reset);
+	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .is_k(1'b0), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p, .sgmii_rx_n, .value8b(send_byte_value), .reset);
 	
 endmodule
 
@@ -103,7 +103,8 @@ module send_an_ord(
 	output reg an_sgmii_rx_n, 
 	input      sgmii_clk_in,
 	output reg sgmii_clk_out,
-	input[15:0] an_config);
+	input[3:0 ] an_count,
+ 	input[15:0] an_config);
 
 	reg 		is_k;
 	reg 		send_byte_run = 0;
@@ -115,38 +116,72 @@ module send_an_ord(
 		done = 0;
 		$display("Sending /C/ ordered ethernet auto-negotiation: [%16b] (%0d bits)", an_config, $size(an_config));
 		
-		$write("Auto-negotiation ordered set: ");
+		$display("Auto-negotiation ordered set:");
 		
-		$write("/K28.5");
-		is_k <= 1;
-		send_byte_value = 8'b01000_101;
-		send_byte_run = ~send_byte_run;
-		wait(send_byte_done);
 		
-		$write("/D21.5 ");
-		is_k <= 0;
-		send_byte_value = 8'b01000_101;
-		send_byte_run = ~send_byte_run;
-		wait(send_byte_done);
+		for(integer i=0;i<an_count;i++)
+		begin
 		
-		$write("/D%d.%d ", an_config[7:3], an_config[2:1]);
-		is_k <= 0;
-		send_byte_value <=  an_config[7:0];
-		send_byte_run = ~send_byte_run;
-		wait(send_byte_done);
+			$write("/K28.5");
+			is_k = 1;
+			send_byte_value = 8'b101_11100;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$write("/D21.5");
+			is_k = 0;
+			send_byte_value = 8'b101_10101;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$write("/D%0d.%0d", an_config[4:0], an_config[7:5]);
+			is_k = 0;
+			send_byte_value =  an_config[7:0];
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$write("/D%0d.%0d", an_config[12:8], an_config[15:13]);
+			is_k = 0;
+			send_byte_value = an_config[15:8];
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$display("");
+			
+			$write("/K28.5");
+			is_k = 1;
+			send_byte_value = 8'b101_11100;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$write("/D2.2");
+			is_k = 0;
+			send_byte_value = 8'b010_00010;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$write("/D%0d.%0d", an_config[4:0], an_config[7:5]);
+			is_k = 0;
+			send_byte_value =  an_config[7:0];
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$write("/D%0d.%0d", an_config[12:8], an_config[15:13]);
+			is_k = 0;
+			send_byte_value = an_config[15:8];
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$display("");
+			
+		end
 		
-		$write("/D%d.%d ", an_config[15:11], an_config[10:8]);
-		is_k <= 0;
-		send_byte_value <= an_config[15:8];
-		send_byte_run = ~send_byte_run;
-		wait(send_byte_done);
-		
-		$display("done.", an_config);
+		$display("done.");
 		
 		done = 1;
 	end
 	
-	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .is_k(0), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p(an_sgmii_rx_p), .sgmii_rx_n(an_sgmii_rx_n), .value8b(send_byte_value), .reset);
+	send_byte send_byte_inst( .run(send_byte_run), .done(send_byte_done), .is_k(is_k), .ser_sgmii_clk, .sgmii_clk_in, .sgmii_clk_out,  .sgmii_rx_p(an_sgmii_rx_p), .sgmii_rx_n(an_sgmii_rx_n), .value8b(send_byte_value), .reset);
 	
 	
 	
@@ -169,7 +204,7 @@ module send_an_flp(input start, output reg done, output reg an_sgmii_rx_p, outpu
 			        an_sgmii_rx_p = 1; 
 			#100    an_sgmii_rx_p = 0;
 			// Data
-			#65400 an_sgmii_rx_p = an_config[i]; 	
+			#65400 an_sgmii_rx_p = an_config[$size(an_config) - i -1]; 	
 			#100 an_sgmii_rx_p = 0;				
 			#65400 an_sgmii_rx_p = 0;				
 			
@@ -221,6 +256,7 @@ module send_byte(
 	
 		sgmii_clk_buf_1 <= sgmii_clk_in;
 		sgmii_clk_out   <= sgmii_clk_buf_1;
+		
 	
 		if (!done)
 		begin
@@ -232,7 +268,16 @@ module send_byte(
 				i <= i + 1;
 			end
 			else
+			begin						
+				sgmii_rx_p <=  1;
+				sgmii_rx_n <=  0;
 				done <= 1;
+			end
+		end
+		else
+		begin
+			sgmii_rx_p <=  1;
+			sgmii_rx_n <=  0;
 		end
 		
 		disp_curr <= disp_next;
