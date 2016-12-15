@@ -1,13 +1,12 @@
 onbreak {quit -force}
 onerror {quit -force}
 
-asim -t 1ps +access +r +m+gig_ethernet_pcs_pma_0 -L unisims_ver -L unimacro_ver -L secureip -L xil_defaultlib -O5 xil_defaultlib.gig_ethernet_pcs_pma_0 xil_defaultlib.glbl
+asim -t 1ps +access +r +m+gig_ethernet_pcs_pma_0 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -O5 xil_defaultlib.gig_ethernet_pcs_pma_0 xil_defaultlib.glbl
 
 do {wave.do}
 
 view wave
 view structure
-view signals
 
 do {gig_ethernet_pcs_pma_0.udo}
 

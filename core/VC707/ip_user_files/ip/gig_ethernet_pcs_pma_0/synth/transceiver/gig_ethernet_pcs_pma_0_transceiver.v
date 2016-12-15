@@ -67,6 +67,7 @@ module gig_ethernet_pcs_pma_0_transceiver #
 (
    output           mmcm_reset,
    output           recclk_mmcm_reset,
+   input            recclk_mmcm_locked,
    
    input            encommaalign,
    input            powerdown,
@@ -82,13 +83,13 @@ module gig_ethernet_pcs_pma_0_transceiver #
    input            txchardispval,
    input            txcharisk,
    input            rxreset,
-   output           rxchariscomma,
-   output           rxcharisk,
-   output     [2:0] rxclkcorcnt,
-   output     [7:0] rxdata,
-   output           rxdisperr,
-   output           rxnotintable,
-   output           rxrundisp,
+   output reg       rxchariscomma,
+   output reg       rxcharisk,
+   output reg [2:0] rxclkcorcnt,
+   output reg [7:0] rxdata,
+   output reg       rxdisperr,
+   output reg       rxnotintable,
+   output reg       rxrundisp,
    output           rxbuferr,
    output reg       txbuferr,
    output           plllkdet,
@@ -210,6 +211,18 @@ module gig_ethernet_pcs_pma_0_transceiver #
    wire             wtd_rxpcsreset_in_comb;
    wire             gt0_rxprbssel_in_orded;
 
+ 
+   // Double width signals reclocked onto the 125MHz clock source
+   wire        [1:0] rxchariscomma_double;
+   wire        [1:0] rxcharisk_double;
+   wire       [15:0] rxdata_double;
+   wire        [1:0] rxclkcorcnt_double;
+   wire        [1:0] rxdisperr_double;
+   wire        [1:0] rxnotintable_double;
+   wire        [1:0] rxrundisp_double;
+   wire       [23:0] phase_buffer_data_in;
+   wire       [23:0] phase_buffer_data_out;
+   reg              toggle_rxuserclk;
    wire      [2:0]  rxbufstatus;
    gig_ethernet_pcs_pma_0_sync_block sync_block_data_valid
           (
@@ -508,32 +521,81 @@ module gig_ethernet_pcs_pma_0_transceiver #
    end
 
  
-   // Instantiate the RX elastic buffer. This performs clock
-   // correction on the incoming data to cope with differences
-   // between the user clock and the clock recovered from the data.
-   gig_ethernet_pcs_pma_0_rx_elastic_buffer rx_elastic_buffer_inst (
-      // Signals from the GTX on RXRECCLK
-      .rxrecclk          (rxusrclk2),
-      .rxrecreset        (rxreset_rec),
-      .rxchariscomma_rec (rxchariscomma_rec),
-      .rxcharisk_rec     (rxcharisk_rec),
-      .rxdisperr_rec     (rxdisperr_rec),
-      .rxnotintable_rec  (rxnotintable_rec),
-      .rxrundisp_rec     (2'b0),
-      .rxdata_rec        (rxdata_rec),
+   //-----------------------------------------------------------------------------
+   //-- toggle_rxuserclk signal used to control sampling during bus width conversions
+   //-----------------------------------------------------------------------------
 
-      // Signals reclocked onto usrclk2
-      .rxusrclk2         (usrclk2),
-      .rxreset           (rxreset),
-      .rxchariscomma_usr (rxchariscomma),
-      .rxcharisk_usr     (rxcharisk),
-      .rxdisperr_usr     (rxdisperr),
-      .rxnotintable_usr  (rxnotintable),
-      .rxrundisp_usr     (rxrundisp),
-      .rxclkcorcnt_usr   (rxclkcorcnt),
-      .rxbuferr          (rxbuferr),
-      .rxdata_usr        (rxdata)
-   );
+  always @(posedge rxusrclk2)
+  begin
+    if (rxreset_rec) begin
+      toggle_rxuserclk      <= 1'b0;
+    end
+    else begin
+        toggle_rxuserclk    <= ! toggle_rxuserclk;
+    end
+  end 
+   //---------------------------------------------------------------------------
+   // The core works from a 125MHz clock source, the GT transceiver fabric
+   // interface works from a 62.5MHz clock source.  The following signals
+   // sourced by the GT transceiver therefore need to converted to half width
+   //---------------------------------------------------------------------------
+ wire recclk_mmcm_locked_n;
+ assign recclk_mmcm_locked_n = ~recclk_mmcm_locked;
+
+assign phase_buffer_data_in = {rxdata_rec,rxchariscomma_rec,rxcharisk_rec,rxdisperr_rec,rxnotintable_rec};
+assign rxdata_double        = phase_buffer_data_out[23:8];
+assign rxchariscomma_double = phase_buffer_data_out[7:6];
+assign rxcharisk_double     = phase_buffer_data_out[5:4];
+assign rxdisperr_double     = phase_buffer_data_out[3:2];
+assign rxnotintable_double  = phase_buffer_data_out[1:0];
+assign rxclkcorcnt_double   = 2'b0;
+assign rxrundisp_double     = 2'b0;
+
+
+ gig_ethernet_pcs_pma_0_phase_shift_buffer  #(
+  .DATA_WIDTH (24)) phase_shift_buffer_inst (
+   .reset (recclk_mmcm_locked_n),
+   .wr_clk(rxusrclk),
+   .data_in(phase_buffer_data_in),
+   .rd_clk(rxusrclk2),
+   .rd_en(toggle_rxuserclk),
+   .o_data_out(phase_buffer_data_out));
+
+  // Halve the bus width
+  always @(posedge rxusrclk2)
+  begin
+    if (rxreset_rec) begin
+      rxchariscomma    <= 1'b0;
+      rxcharisk        <= 1'b0;
+      rxdata           <= 8'b0;
+      rxclkcorcnt      <= 3'b0;
+      rxdisperr        <= 1'b0;
+      rxnotintable     <= 1'b0;
+      rxrundisp        <= 1'b0;
+    end
+    else begin
+      if (!toggle_rxuserclk) begin
+        rxchariscomma  <= rxchariscomma_double[0];
+        rxcharisk      <= rxcharisk_double[0];
+        rxdata         <= rxdata_double[7:0];
+        rxclkcorcnt    <= {1'b0, rxclkcorcnt_double};
+        rxdisperr      <= rxdisperr_double[0];
+        rxnotintable   <= rxnotintable_double[0];
+        rxrundisp      <= rxrundisp_double[0];
+      end
+      else begin
+        rxchariscomma  <= rxchariscomma_double[1];
+        rxcharisk      <= rxcharisk_double[1];
+        rxdata         <= rxdata_double[15:8];
+        rxclkcorcnt    <= {1'b0, rxclkcorcnt_double};
+        rxdisperr      <= rxdisperr_double[1];
+        rxnotintable   <= rxnotintable_double[1];
+        rxrundisp      <= rxrundisp_double[1];
+      end
+    end
+  end
+
+assign rxbuferr = rxbufstatus[2]; 
 
    assign gt0_rxbufstatus_out = rxbufstatus; 
    // Hold the transmitter and receiver paths of the GT transceiver in reset

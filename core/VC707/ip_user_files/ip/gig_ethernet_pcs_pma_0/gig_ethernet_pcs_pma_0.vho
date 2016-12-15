@@ -46,26 +46,34 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 
--- IP VLNV: xilinx.com:ip:gig_ethernet_pcs_pma:15.2
--- IP Revision: 1
+-- IP VLNV: xilinx.com:ip:gig_ethernet_pcs_pma:16.0
+-- IP Revision: 0
 
 -- The following code must appear in the VHDL architecture header.
 
 ------------- Begin Cut here for COMPONENT Declaration ------ COMP_TAG
 COMPONENT gig_ethernet_pcs_pma_0
   PORT (
+    gtrefclk_bufg : IN STD_LOGIC;
+    gtrefclk : IN STD_LOGIC;
     txn : OUT STD_LOGIC;
     txp : OUT STD_LOGIC;
     rxn : IN STD_LOGIC;
     rxp : IN STD_LOGIC;
-    clk125m : IN STD_LOGIC;
+    independent_clock_bufg : IN STD_LOGIC;
+    txoutclk : OUT STD_LOGIC;
+    rxoutclk : OUT STD_LOGIC;
+    resetdone : OUT STD_LOGIC;
+    cplllock : OUT STD_LOGIC;
+    mmcm_reset : OUT STD_LOGIC;
+    recclk_mmcm_reset : OUT STD_LOGIC;
+    recclk_mmcm_locked : IN STD_LOGIC;
+    userclk : IN STD_LOGIC;
+    userclk2 : IN STD_LOGIC;
+    pma_reset : IN STD_LOGIC;
     mmcm_locked : IN STD_LOGIC;
-    sgmii_clk_r : OUT STD_LOGIC;
-    sgmii_clk_f : OUT STD_LOGIC;
-    sgmii_clk_en : OUT STD_LOGIC;
-    clk625 : IN STD_LOGIC;
-    clk208 : IN STD_LOGIC;
-    clk104 : IN STD_LOGIC;
+    rxuserclk : IN STD_LOGIC;
+    rxuserclk2 : IN STD_LOGIC;
     gmii_txd : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     gmii_tx_en : IN STD_LOGIC;
     gmii_tx_er : IN STD_LOGIC;
@@ -77,11 +85,11 @@ COMPONENT gig_ethernet_pcs_pma_0
     an_interrupt : OUT STD_LOGIC;
     an_adv_config_vector : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
     an_restart_config : IN STD_LOGIC;
-    speed_is_10_100 : IN STD_LOGIC;
-    speed_is_100 : IN STD_LOGIC;
     status_vector : OUT STD_LOGIC_VECTOR(15 DOWNTO 0);
     reset : IN STD_LOGIC;
-    signal_detect : IN STD_LOGIC
+    signal_detect : IN STD_LOGIC;
+    gt0_qplloutclk_in : IN STD_LOGIC;
+    gt0_qplloutrefclk_in : IN STD_LOGIC
   );
 END COMPONENT;
 -- COMP_TAG_END ------ End COMPONENT Declaration ------------
@@ -92,18 +100,26 @@ END COMPONENT;
 ------------- Begin Cut here for INSTANTIATION Template ----- INST_TAG
 your_instance_name : gig_ethernet_pcs_pma_0
   PORT MAP (
+    gtrefclk_bufg => gtrefclk_bufg,
+    gtrefclk => gtrefclk,
     txn => txn,
     txp => txp,
     rxn => rxn,
     rxp => rxp,
-    clk125m => clk125m,
+    independent_clock_bufg => independent_clock_bufg,
+    txoutclk => txoutclk,
+    rxoutclk => rxoutclk,
+    resetdone => resetdone,
+    cplllock => cplllock,
+    mmcm_reset => mmcm_reset,
+    recclk_mmcm_reset => recclk_mmcm_reset,
+    recclk_mmcm_locked => recclk_mmcm_locked,
+    userclk => userclk,
+    userclk2 => userclk2,
+    pma_reset => pma_reset,
     mmcm_locked => mmcm_locked,
-    sgmii_clk_r => sgmii_clk_r,
-    sgmii_clk_f => sgmii_clk_f,
-    sgmii_clk_en => sgmii_clk_en,
-    clk625 => clk625,
-    clk208 => clk208,
-    clk104 => clk104,
+    rxuserclk => rxuserclk,
+    rxuserclk2 => rxuserclk2,
     gmii_txd => gmii_txd,
     gmii_tx_en => gmii_tx_en,
     gmii_tx_er => gmii_tx_er,
@@ -115,11 +131,11 @@ your_instance_name : gig_ethernet_pcs_pma_0
     an_interrupt => an_interrupt,
     an_adv_config_vector => an_adv_config_vector,
     an_restart_config => an_restart_config,
-    speed_is_10_100 => speed_is_10_100,
-    speed_is_100 => speed_is_100,
     status_vector => status_vector,
     reset => reset,
-    signal_detect => signal_detect
+    signal_detect => signal_detect,
+    gt0_qplloutclk_in => gt0_qplloutclk_in,
+    gt0_qplloutrefclk_in => gt0_qplloutrefclk_in
   );
 -- INST_TAG_END ------ End INSTANTIATION Template ---------
 

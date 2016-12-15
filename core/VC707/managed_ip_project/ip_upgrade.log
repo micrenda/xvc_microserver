@@ -1,0 +1,82 @@
+Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
+| Date         : Thu Dec 15 13:06:54 2016
+| Host         : ELLAPC3 running 64-bit Debian GNU/Linux 8.6 (jessie)
+| Command      : upgrade_ip
+| Device       : xc7vx485tffg1761-2
+------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'gig_ethernet_pcs_pma_0'
+
+1. Summary
+----------
+
+CAUTION (success, with warnings) in the upgrade of gig_ethernet_pcs_pma_0 from xilinx.com:ip:gig_ethernet_pcs_pma:15.2 (Rev. 1) to xilinx.com:ip:gig_ethernet_pcs_pma:16.0
+
+After upgrade, an IP may have parameter differences compared to the original customization. Please review the parameters within the IP customization GUI to ensure proper functionality.
+
+2. Customization warnings
+-------------------------
+
+Parameter 'C_PHYADDR' is no longer present on the upgraded IP 'gig_ethernet_pcs_pma_0', and cannot be set to '1'
+
+
+3. Debug Commands
+-----------------
+
+  The following debug information can be passed to Vivado as Tcl commands,
+in order to validate or debug the output of the upgrade flow.
+  You may consult any warnings from within this upgrade, and alter or remove
+the configuration parameter(s) which caused the warning; then execute the Tcl
+commands, and use the IP Customization GUI to verify the IP configuration.
+
+create_ip -vlnv xilinx.com:ip:gig_ethernet_pcs_pma:16.0 -user_name gig_ethernet_pcs_pma_0
+set_property -dict "\
+  CONFIG.Auto_Negotiation {true} \
+  CONFIG.Component_Name {gig_ethernet_pcs_pma_0} \
+  CONFIG.DIFFCLK_BOARD_INTERFACE {Custom} \
+  CONFIG.DrpClkRate {50.0} \
+  CONFIG.EMAC_IF_TEMAC {TEMAC} \
+  CONFIG.ETHERNET_BOARD_INTERFACE {Custom} \
+  CONFIG.EXAMPLE_SIMULATION {0} \
+  CONFIG.Enable_1588 {false} \
+  CONFIG.Enable_1588_1step {false} \
+  CONFIG.Ext_Management_Interface {false} \
+  CONFIG.GT_Type {GTH} \
+  CONFIG.GTinEx {false} \
+  CONFIG.LvdsRefClk {125} \
+  CONFIG.MDIO_BOARD_INTERFACE {Custom} \
+  CONFIG.Management_Interface {false} \
+  CONFIG.MaxDataRate {1G} \
+  CONFIG.NumOfLanes {1} \
+  CONFIG.Physical_Interface {LVDS} \
+  CONFIG.RefClkRate {125} \
+  CONFIG.RxGmiiClkSrc {TXOUTCLK} \
+  CONFIG.RxLane0_Placement {DIFF_PAIR_0} \
+  CONFIG.RxLane1_Placement {DIFF_PAIR_1} \
+  CONFIG.RxNibbleBitslice0Used {false} \
+  CONFIG.SGMII_Mode {10_100_1000} \
+  CONFIG.SGMII_PHY_Mode {false} \
+  CONFIG.Standard {SGMII} \
+  CONFIG.SupportLevel {Include_Shared_Logic_in_Example_Design} \
+  CONFIG.Timer_Format {Time_of_day} \
+  CONFIG.TransceiverControl {false} \
+  CONFIG.TxLane0_Placement {DIFF_PAIR_0} \
+  CONFIG.TxLane1_Placement {DIFF_PAIR_1} \
+  CONFIG.Tx_In_Upper_Nibble {1} \
+  CONFIG.USE_BOARD_FLOW {false} \
+  CONFIG.an_interrupt_port.SENSITIVITY {EDGE_RISING} \
+  CONFIG.clk104_port.FREQ_HZ {104166666} \
+  CONFIG.clk104_port.PHASE {0} \
+  CONFIG.clk125m_port.ASSOCIATED_RESET {reset_port} \
+  CONFIG.clk125m_port.FREQ_HZ {125000000} \
+  CONFIG.clk125m_port.PHASE {0} \
+  CONFIG.clk208_port.FREQ_HZ {208333333} \
+  CONFIG.clk208_port.PHASE {0} \
+  CONFIG.clk625_port.FREQ_HZ {625000000} \
+  CONFIG.clk625_port.PHASE {0} \
+  CONFIG.reset_port.POLARITY {ACTIVE_HIGH} \
+  CONFIG.sgmii.BOARD.ASSOCIATED_PARAM {ETHERNET_BOARD_INTERFACE} " [get_ips gig_ethernet_pcs_pma_0]
+
+
