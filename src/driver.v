@@ -76,23 +76,23 @@ module driver (
       //.mdio_t(eth_mdio_t),                              // output wire mdio_t
       
       .configuration_vector(5'b10000),                  // input wire [4 : 0] configuration_vector
-      //.configuration_valid(1),                          // input wire configuration_valid
+      .configuration_valid(1'b1),                          // input wire configuration_valid
       .an_adv_config_vector(16'h4001),                  // input wire [15 : 0] an_adv_config_vector
-      //.an_adv_config_val(1),                            // input wire an_adv_config_val
+      .an_adv_config_val(1'b1),                            // input wire an_adv_config_val
       .an_restart_config(an_restart_config),            // input wire an_restart_config
       .an_interrupt(),                                  // Interrupt to processor to signal that Auto-Negotiation has completed
       .speed_is_10_100(1'b0),                              // input wire speed_is_10_100
       .speed_is_100(1'b0),                                 // input wire speed_is_100
       .status_vector(gmii_status),                      // output wire [15 : 0] status_vector
       .reset(reset),                                    // input wire reset
-      .signal_detect(1)                                 // input wire signal_detect
+      .signal_detect(1'b1)                                 // input wire signal_detect
     );
    
     handle_tx_minimal_interface handle_tx_minimal_interface_inst
     (
         .clock(gmii_clock), 
         .reset(reset),
-        .start_port(1),
+        .start_port(1'b1),
         .tx_data(gmii_txd),
         .tx_en(gmii_tx_en),
         .tx_er(gmii_tx_er),

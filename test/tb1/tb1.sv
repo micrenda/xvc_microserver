@@ -54,7 +54,8 @@ module tb1();
 		an_restart_config = 1;
     
     // 1000Mb auto negotation
-	#40	an_running = 1;
+	#40
+		an_running = 1;
 		an_start = 1;
 		
 		wait(an_done);
@@ -117,32 +118,32 @@ module tb1();
 		input  rs232_rx,*/
 	);
 	
-	assign an_sgmii_clk_out = sgmii_clk_in;
-	send_an_flp send_an_flp_inst (
-		.start(an_start),
-		.done(an_done), 
-		.an_sgmii_rx_p, 
-		.an_sgmii_rx_n, 
-		.an_config(
-		48'b00001_111110_00001______0000000000000001______0000000000000000
-		)
-	);
-	
-	//send_an_ord send_an_ord_inst (
-	//
-	//	.reset, 
-	//
-	//	.ser_sgmii_clk,
-	//	.sgmii_clk_in,
-	//	.sgmii_clk_out(an_sgmii_clk_out),
-	//
-	//	.start	(an_start),
-	//	.done	(an_done),
-	//	.an_sgmii_rx_p(an_sgmii_rx_p),
-	//	.an_sgmii_rx_n(an_sgmii_rx_n),
-	//	.an_count(4'd10),
-	//	.an_config(16'b0_0_00_000_00_01_00000)
+	//assign an_sgmii_clk_out = sgmii_clk_in;
+	//send_an_flp send_an_flp_inst (
+		//.start(an_start),
+		//.done(an_done), 
+		//.an_sgmii_rx_p, 
+		//.an_sgmii_rx_n, 
+		//.an_config(
+		//48'b00001_111110_00001______0000000000000001______0000000000000000
+		//)
 	//);
+	
+	send_an_ord send_an_ord_inst (
+	
+		.reset, 
+	
+		.ser_sgmii_clk,
+		.sgmii_clk_in,
+		.sgmii_clk_out(an_sgmii_clk_out),
+	
+		.start	(an_start),
+		.done	(an_done),
+		.an_sgmii_rx_p(an_sgmii_rx_p),
+		.an_sgmii_rx_n(an_sgmii_rx_n),
+		.an_count(4'd10),
+		.an_config(16'b0_0_00_000_00_01_00000)
+	);
 	
 	send_packet send_packet_inst (
 		.reset,

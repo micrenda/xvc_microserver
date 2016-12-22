@@ -116,8 +116,37 @@ module send_an_ord(
 		done = 0;
 		$display("Sending /C/ ordered ethernet auto-negotiation: [%16b] (%0d bits)", an_config, $size(an_config));
 		
-		$display("Auto-negotiation ordered set:");
+		$display("Sending %d breaklinks: ", 20);
 		
+		for(integer i=0;i<20;i++)
+		begin
+			// Sending Breakling
+			is_k = 1;
+			send_byte_value = 8'b101_11100;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			is_k = 0;
+			send_byte_value = 8'b101_10101;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			is_k = 0;
+			send_byte_value =  0;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			is_k = 0;
+			send_byte_value = 0;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$write("%d, ", i);
+		end
+		
+		$display("Breaklink sent");
+		
+		$display("Auto-negotiation ordered set:");
 		
 		for(integer i=0;i<an_count;i++)
 		begin
@@ -248,7 +277,9 @@ module send_byte(
 	begin
 		i <= 0;
 		done <= 0;
-		disp_curr <= 0;
+		
+		if (disp_curr === 1'bx)
+			disp_curr <= 0;
 	end
 	
 	always @(posedge ser_sgmii_clk or negedge ser_sgmii_clk)
@@ -261,26 +292,22 @@ module send_byte(
 		if (!done)
 		begin
 			
+			
 			if (i < 10)
 			begin
-				sgmii_rx_p <=  value10b[9-i];
-				sgmii_rx_n <= ~value10b[9-i];
+				sgmii_rx_p <=  value10b[i];
+				sgmii_rx_n <= ~value10b[i];
 				i <= i + 1;
 			end
-			else
+			
+			if (i == 9)
 			begin						
-				sgmii_rx_p <=  1;
-				sgmii_rx_n <=  0;
 				done <= 1;
+				disp_curr <= disp_next;
 			end
 		end
-		else
-		begin
-			sgmii_rx_p <=  1;
-			sgmii_rx_n <=  0;
-		end
 		
-		disp_curr <= disp_next;
+		
 	end
 	
 	

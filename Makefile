@@ -25,16 +25,11 @@ clean:
 #	uip/uip/uiplib.c  								
 
 
-$(BUILD)/top.v:
+$(BUILD)/top.v: $(wildcard src/*.c) $(wildcard src/*.h) $(wildcard src/*.v)
 	echo "#synthesis of micorserver and uIP"
 	
 	rm -rf $(BUILD) && mkdir $(BUILD)
 	
-
-	# Workaround - Copying some files that will be needed during syntetis
-	cp $(CORE)/    $(BUILD)/core -r
-	# End workaround
-
 	
 	cd $(BUILD); bambu -O3 -v1 --std=c11                                    \
 		--device-name=${DEVICE}                                             \
@@ -72,6 +67,7 @@ ifeq ($(XILINX_VIVADO),)
 else
 	@echo "XILINX_VIVADO = $(XILINX_VIVADO)"
 endif
+	cp $(CORE)/    $(BUILD)/core -r
 
 	cp    ${BASE}/test/test_common.sv	$(BUILD)
 	cp -r ${BASE}/test/tb1				$(BUILD)

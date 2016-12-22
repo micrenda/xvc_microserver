@@ -1,0 +1,205 @@
+/*
+
+Vivado v2016.3 (64-bit)
+SW Build 1682563 on Mon Oct 10 19:07:26 MDT 2016
+Process ID: 7183
+
+Current time: 	12/15/16 3:51:36 PM EET
+Time zone: 	Eastern European Time (Europe/Bucharest)
+
+OS: PRETTY_NAME="Debian GNU/Linux 8 (jessie)"
+Version: 4.7.0-0.bpo.1-amd64
+Architecture: amd64
+Available processors (cores): 2
+
+DISPLAY: :0.0
+Screen size: 3840x1200
+Screen resolution (DPI): 96
+Available screens: 2
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_66 64-bit
+Java home: 	/opt/Xilinx/Vivado/2016.3/tps/lnx64/jre
+
+User name: 	mrenda
+User home directory: /home/mrenda
+User working directory: /home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0_ex
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI base root directory: /opt/Xilinx/Vivado
+RDI data directory: /opt/Xilinx/Vivado/2016.3/data
+RDI bin directory: /opt/Xilinx/Vivado/2016.3/bin
+
+Vivado preferences path: /home/mrenda/.Xilinx/Vivado/2016.3/vivado.ini
+Vivado layouts directory: /home/mrenda/.Xilinx/Vivado/2016.3/layouts
+
+GUI allocated memory:	205 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 750 MB
+
+*/
+
+// TclEventType: START_GUI
+// [GUI Memory]: 38 MB (+37885kb) [00:00:19]
+// [Engine Memory]: 666 MB (+546691kb) [00:00:19]
+// Tcl Message: start_gui 
+// TclEventType: START_PROGRESS_DIALOG
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// bt:g (cd:JFrame):  Sourcing Tcl script '/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_ex.tcl' : addNotify
+// Tcl Message: source /home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_ex.tcl 
+// Tcl Message: # set srcIpDir "/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0" # create_project -name gig_ethernet_pcs_pma_0_ex -force 
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_ADD
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// [Engine Memory]: 765 MB (+69202kb) [00:00:24]
+// HMemoryUtils.trashcanNow. Engine heap size: 784 MB. GUI used memory: 22 MB. Current time: 12/15/16 3:51:39 PM EET
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 49 MB (+9254kb) [00:00:31]
+// [Engine Memory]: 809 MB (+6213kb) [00:00:31]
+// [GUI Memory]: 53 MB (+1807kb) [00:00:36]
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2016.3/data/ip'. 
+// HMemoryUtils.trashcanNow. Engine heap size: 825 MB. GUI used memory: 27 MB. Current time: 12/15/16 3:51:54 PM EET
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// TclEventType: RUN_MODIFY
+// TclEventType: PART_MODIFIED
+// Tcl Message: create_project: Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 5808.273 ; gain = 95.859 ; free physical = 73 ; free virtual = 47805 
+// Tcl Message: # set_property part xc7vx485tffg1761-2 [current_project] 
+// TclEventType: PROJECT_CHANGE
+// TclEventType: BOARD_MODIFIED
+// Tcl Message: # set_property target_language verilog [current_project] # set_property simulator_language VERILOG [current_project] # set projDir [get_property DIRECTORY [current_project]] # set importDir [file join $projDir imports] # file mkdir $importDir # set_property coreContainer.enable false [current_project] # set_property board_part xilinx.com:vc707:part0:1.3 [current_project] 
+// Tcl Message: # set returnCode 0 # import_ip -files [list [file join $srcIpDir gig_ethernet_pcs_pma_0.xci]] -name gig_ethernet_pcs_pma_0 
+// TclEventType: IP_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: IP_LOCK_CHANGE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: # add_files -quiet -copy_to $importDir -fileset [current_fileset -constrset] \ #   [list [file join $srcIpDir example_design/gig_ethernet_pcs_pma_0_example_design.xdc]] # if { [catch {current_fileset -simset} exc] } { create_fileset -simset sim_1 } # add_files -quiet -scan_for_includes -copy_to $importDir -fileset [current_fileset -simset] \ #   [list [file join $srcIpDir simulation/demo_tb.v]] \ #   [list [file join $srcIpDir simulation/stimulus_tb.v]] # set_property USED_IN_SYNTHESIS false [get_files [list [file join $importDir demo_tb.v]]] # set_property USED_IN_SYNTHESIS false [get_files [list [file join $importDir stimulus_tb.v]]] # set_property TOP [lindex [find_top] 0] [current_fileset] 
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// Tcl Message: # update_compile_order -fileset [current_fileset] # update_compile_order -fileset [current_fileset -simset] 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: PROJECT_CHANGE
+// Tcl Message: # set tops [list] # foreach tfile [ get_files -filter {name=~"*.xci" || name=~"*.bd"}] { if { [lsearch [list_property $tfile] PARENT_COMPOSITE_FILE ] == -1} {lappend tops $tfile} } # generate_target all $tops # export_ip_user_files -force 
+// TclEventType: PROJECT_CHANGE
+// WARNING: HTimer (ActiveMsgMonitor Process Messages Timer) is taking too long to process. Increasing delay to 2000 ms.
+// TclEventType: STOP_PROGRESS_DIALOG
+// WARNING: HTimer (ActiveMsgMonitor Process Messages Timer) is taking too long to process. Increasing delay to 3000 ms.
+// [GUI Memory]: 57 MB (+410kb) [00:00:56]
+// [Engine Memory]: 851 MB (+987kb) [00:00:56]
+// Tcl Message: # set dfile [file join $srcIpDir oepdone.txt] # if { [ catch { set doneFile [open $dfile w] } ] } { # } else {  #   puts $doneFile "Open Example Project DONE" #   close $doneFile # } # if { $returnCode != 0 } { #   error "Problems were encountered while executing the example design script, please review the log files." # } 
+// TclEventType: STOP_PROGRESS_DIALOG
+dismissDialog("Sourcing Tcl script '/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_ex.tcl'"); // bt:g (cd:JFrame)
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_UPDATE_GRAPH
+// WARNING: HTimer (ActiveMsgMonitor Process Messages Timer) is taking too long to process. Increasing delay to 2000 ms.
+// WARNING: HTimer (a:a Update Status Timer) is taking too long to process. Increasing delay to 3000 ms.
+// WARNING: HTimer (StateMonitor Timer) is taking too long to process. Increasing delay to 4000 ms.
+// WARNING: HTimer (StateMonitor Timer) is taking too long to process. Increasing delay to 5000 ms.
+// WARNING: HTimer (ActiveMsgMonitor Process Messages Timer) is taking too long to process. Increasing delay to 3000 ms.
+// WARNING: HSwingWorker (Update Runs Swing Worker) is taking too long to process. Increasing delay to 3000 ms.
+// WARNING: HTimer (StateMonitor Timer) is taking too long to process. Increasing delay to 6000 ms.
+// [GUI Memory]: 59 MB (+65kb) [00:15:41]
+// WARNING: HTimer (StateMonitor Timer) is taking too long to process. Increasing delay to 7000 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 861 MB. GUI used memory: 28 MB. Current time: 12/15/16 4:22:01 PM EET
+// PAPropertyPanels.initPanels (gig_ethernet_pcs_pma_0_example_design.v) elapsed time: 1.7s
+// Elapsed time: 2384 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true, false, false, false, true, false); // y:i (D:JPanel, cd:JFrame) - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true); // y:i (D:JPanel, cd:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true); // y:i (D:JPanel, cd:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true, false, false, false, true, false); // y:i (D:JPanel, cd:JFrame) - Popup Trigger - Node
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // Z:JMenu (ai:JPopupMenu, cd:JFrame)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // Z:JMenu (ai:JPopupMenu, cd:JFrame)
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // Z:JMenu (ai:JPopupMenu, cd:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true); // y:i (D:JPanel, cd:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true, false, false, false, true, false); // y:i (D:JPanel, cd:JFrame) - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true); // y:i (D:JPanel, cd:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true); // y:i (D:JPanel, cd:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true, false, false, false, false, true); // y:i (D:JPanel, cd:JFrame) - Double Click - Node
+// HMemoryUtils.trashcanNow. Engine heap size: 870 MB. GUI used memory: 29 MB. Current time: 12/15/16 4:32:14 PM EET
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true, false, false, false, true, false); // y:i (D:JPanel, cd:JFrame) - Popup Trigger - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true); // y:i (D:JPanel, cd:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v), core_support_i - gig_ethernet_pcs_pma_0_support (gig_ethernet_pcs_pma_0_support.v)]", 2, true); // y:i (D:JPanel, cd:JFrame) - Node
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1); // y:i (D:JPanel, cd:JFrame)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources]", 0, true); // y:i (D:JPanel, cd:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true); // y:i (D:JPanel, cd:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, gig_ethernet_pcs_pma_0_example_design (gig_ethernet_pcs_pma_0_example_design.v)]", 1, true, false, false, false, true, false); // y:i (D:JPanel, cd:JFrame) - Popup Trigger - Node
+selectMenu(PAResourceCommand.PACommandNames_AUTO_UPDATE_HIER, "Hierarchy Update"); // Z:JMenu (ai:JPopupMenu, cd:JFrame)
+selectMenu(PAResourceQtoS.SrcMenu_IP_HIERARCHY, "IP Hierarchy"); // Z:JMenu (ai:JPopupMenu, cd:JFrame)
+selectButton(PAResourceTtoZ.TaskBanner_CLOSE, (String) null); // k:JideButton (JPanel:JComponent, cd:JFrame)
+closeTask("Project Manager", "Project Manager", "DesignTask.PROJECT_SETUP");
+// Run Command: PAResourceCommand.PACommandNames_CLOSE_PROJECT
+// y:aO (cd:JFrame): Close Project: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, y:aO)
+// bt:g (cd:JFrame):  Close Project : addNotify
+dismissDialog("Close Project"); // y:aO (cd:JFrame)
+// TclEventType: PROJECT_CLOSE
+// HMemoryUtils.trashcanNow. Engine heap size: 876 MB. GUI used memory: 48 MB. Current time: 12/15/16 4:32:39 PM EET
+// Tcl Message: close_project 
+// Tcl Message: close_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 5882.801 ; gain = 40.957 ; free physical = 367 ; free virtual = 47195 
+// 'b' command handler elapsed time: 11 seconds
+dismissDialog("Close Project"); // bt:g (cd:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 25 MB. Current time: 12/15/16 5:02:44 PM EET
+// WARNING: HTimer (WrapperUtils Delayed Delete Timer) is taking too long to process. Increasing delay to 2000 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 5:33:02 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 6:02:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 6:32:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 7:02:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 7:32:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 8:02:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 8:32:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 9:02:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 9:32:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 10:02:48 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 10:32:49 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 11:02:49 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/15/16 11:32:49 PM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 12:02:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 12:32:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 1:02:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 1:32:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 2:02:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 2:32:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 3:02:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 3:32:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 4:02:49 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 4:32:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 5:02:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 5:32:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 6:02:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 6:32:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 7:02:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 7:32:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 8:02:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 8:32:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 9:02:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 9:32:50 AM EET
+// HMemoryUtils.trashcanNow. Engine heap size: 878 MB. GUI used memory: 23 MB. Current time: 12/16/16 10:02:50 AM EET
