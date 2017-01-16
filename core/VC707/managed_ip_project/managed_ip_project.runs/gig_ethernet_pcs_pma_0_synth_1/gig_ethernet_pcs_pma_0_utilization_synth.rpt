@@ -1,7 +1,7 @@
 Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
-| Date         : Thu Dec 15 15:50:01 2016
+| Date         : Wed Jan 11 13:14:18 2017
 | Host         : ELLAPC3 running 64-bit Debian GNU/Linux 8.6 (jessie)
 | Command      : report_utilization -file gig_ethernet_pcs_pma_0_utilization_synth.rpt -pb gig_ethernet_pcs_pma_0_utilization_synth.pb
 | Design       : gig_ethernet_pcs_pma_0
@@ -30,13 +30,13 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                |  801 |     0 |    303600 |  0.26 |
-|   LUT as Logic             |  791 |     0 |    303600 |  0.26 |
+| Slice LUTs*                |  804 |     0 |    303600 |  0.26 |
+|   LUT as Logic             |  794 |     0 |    303600 |  0.26 |
 |   LUT as Memory            |   10 |     0 |    130800 | <0.01 |
 |     LUT as Distributed RAM |    0 |     0 |           |       |
 |     LUT as Shift Register  |   10 |     0 |           |       |
-| Slice Registers            | 1081 |     0 |    607200 |  0.18 |
-|   Register as Flip Flop    | 1081 |     0 |    607200 |  0.18 |
+| Slice Registers            | 1094 |     0 |    607200 |  0.18 |
+|   Register as Flip Flop    | 1094 |     0 |    607200 |  0.18 |
 |   Register as Latch        |    0 |     0 |    607200 |  0.00 |
 | F7 Muxes                   |    9 |     0 |    151800 | <0.01 |
 | F8 Muxes                   |    0 |     0 |     75900 |  0.00 |
@@ -56,10 +56,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 76    |          Yes |           - |          Set |
+| 82    |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
 | 36    |          Yes |         Set |            - |
-| 969   |          Yes |       Reset |            - |
+| 976   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -92,15 +92,15 @@ Table of Contents
 +-----------------------------+------+-------+-----------+-------+
 |          Site Type          | Used | Fixed | Available | Util% |
 +-----------------------------+------+-------+-----------+-------+
-| Bonded IOB                  |    4 |     0 |       700 |  0.57 |
+| Bonded IOB                  |    6 |     0 |       700 |  0.86 |
 | Bonded IPADs                |    0 |     0 |        86 |  0.00 |
 | Bonded OPADs                |    0 |     0 |        56 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |        14 |  0.00 |
 | PHASER_REF                  |    0 |     0 |        14 |  0.00 |
 | OUT_FIFO                    |    0 |     0 |        56 |  0.00 |
 | IN_FIFO                     |    0 |     0 |        56 |  0.00 |
-| IDELAYCTRL                  |    0 |     0 |        14 |  0.00 |
-| IBUFDS                      |    2 |     0 |       672 |  0.30 |
+| IDELAYCTRL                  |    1 |     0 |        14 |  7.14 |
+| IBUFDS                      |    3 |     0 |       672 |  0.45 |
 | GTXE2_COMMON                |    0 |     0 |         7 |  0.00 |
 | GTXE2_CHANNEL               |    0 |     0 |        28 |  0.00 |
 | PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |        56 |  0.00 |
@@ -122,9 +122,9 @@ Table of Contents
 +------------+------+-------+-----------+-------+
 |  Site Type | Used | Fixed | Available | Util% |
 +------------+------+-------+-----------+-------+
-| BUFGCTRL   |    0 |     0 |        32 |  0.00 |
+| BUFGCTRL   |    5 |     0 |        32 | 15.63 |
 | BUFIO      |    0 |     0 |        56 |  0.00 |
-| MMCME2_ADV |    0 |     0 |        14 |  0.00 |
+| MMCME2_ADV |    1 |     0 |        14 |  7.14 |
 | PLLE2_ADV  |    0 |     0 |        14 |  0.00 |
 | BUFMRCE    |    0 |     0 |        28 |  0.00 |
 | BUFHCE     |    0 |     0 |       168 |  0.00 |
@@ -153,28 +153,31 @@ Table of Contents
 7. Primitives
 -------------
 
-+-----------+------+---------------------+
-|  Ref Name | Used | Functional Category |
-+-----------+------+---------------------+
-| FDRE      |  969 |        Flop & Latch |
-| LUT6      |  323 |                 LUT |
-| LUT3      |  156 |                 LUT |
-| LUT4      |  152 |                 LUT |
-| LUT5      |  141 |                 LUT |
-| LUT1      |   97 |                 LUT |
-| LUT2      |   82 |                 LUT |
-| FDPE      |   76 |        Flop & Latch |
-| FDSE      |   36 |        Flop & Latch |
-| CARRY4    |   25 |          CarryLogic |
-| SRL16E    |   10 |  Distributed Memory |
-| MUXF7     |    9 |               MuxFx |
-| OBUFDS    |    2 |                  IO |
-| ISERDESE2 |    2 |                  IO |
-| IDELAYE2  |    2 |                  IO |
-| IBUFDS    |    2 |                  IO |
-| OSERDESE2 |    1 |                  IO |
-| INV       |    1 |                 LUT |
-+-----------+------+---------------------+
++------------+------+---------------------+
+|  Ref Name  | Used | Functional Category |
++------------+------+---------------------+
+| FDRE       |  976 |        Flop & Latch |
+| LUT6       |  324 |                 LUT |
+| LUT3       |  156 |                 LUT |
+| LUT4       |  152 |                 LUT |
+| LUT5       |  141 |                 LUT |
+| LUT1       |   99 |                 LUT |
+| LUT2       |   83 |                 LUT |
+| FDPE       |   82 |        Flop & Latch |
+| FDSE       |   36 |        Flop & Latch |
+| CARRY4     |   25 |          CarryLogic |
+| SRL16E     |   10 |  Distributed Memory |
+| MUXF7      |    9 |               MuxFx |
+| BUFG       |    5 |               Clock |
+| IBUFDS     |    3 |                  IO |
+| OBUFDS     |    2 |                  IO |
+| ISERDESE2  |    2 |                  IO |
+| IDELAYE2   |    2 |                  IO |
+| OSERDESE2  |    1 |                  IO |
+| MMCME2_ADV |    1 |               Clock |
+| INV        |    1 |                 LUT |
+| IDELAYCTRL |    1 |                  IO |
++------------+------+---------------------+
 
 
 8. Black Boxes

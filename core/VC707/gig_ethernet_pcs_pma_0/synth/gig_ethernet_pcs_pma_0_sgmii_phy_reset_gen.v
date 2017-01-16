@@ -1,14 +1,8 @@
 //------------------------------------------------------------------------------
-// File       : gig_ethernet_pcs_pma_0_sync_block_ex.vhd
-// Author     : Xilinx Inc.
+// File       : gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v
+// Author     : Xilinx
 //------------------------------------------------------------------------------
-// Description: Used on signals crossing from one clock domain to
-//              another, this is a flip-flop pair, with both flops
-//              placed together with RLOCs into the same slice.  Thus
-//              the routing delay between the two is minimum to safe-
-//              guard against metastability issues.
-//------------------------------------------------------------------------------
-// (c) Copyright 2008-2009 Xilinx, Inc. All rights reserved.
+// (c) Copyright 2006 Xilinx, Inc. All rights reserved.
 //
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -53,88 +47,41 @@
 //
 // THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 // PART OF THIS FILE AT ALL TIMES. 
-// 
-// 
+
+//
+//
+//------------------------------------------------------------------------------
+// Description:   This module takes in an asynchronous reset and gives out its 
+// synchronous counterpart synced to 125Mhz Clock
 //------------------------------------------------------------------------------
 
-`timescale 1ps / 1ps
 
-module gig_ethernet_pcs_pma_0_sync_block_ex #(
-  parameter INITIALISE = 2'b00
-)
-(
-  input        clk,              // clock to be sync'ed to
-  input        data_in,          // Data to be 'synced'
-  output       data_out          // synced data
-);
+`timescale 1ns / 1ps
+module gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen(
+    input  wire clk125,
+    input  wire reset,
+    input  wire mmcm_locked,
+    output reg rst_125
+    );
 
-  // Internal Signals
-  wire data_sync1;
-  wire data_sync2;
-  wire data_sync3;
-  wire data_sync4;
-  wire data_sync5;
-  wire data_sync6;
+(* ASYNC_REG = "TRUE" *)
+reg [5:0] rst_dly;
+wire mmcm_locked_sync_125;    
 
+always @(posedge clk125) begin
+   rst_125 <= |rst_dly;
+end
 
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
-  FD #(
-    .INIT (INITIALISE[0])
-  ) data_sync_reg1 (
-    .C  (clk),
-    .D  (data_in),
-    .Q  (data_sync1)
-  );
+always @(posedge clk125 or posedge reset) begin
+   if (reset) rst_dly <= 6'b111111;
+   else       rst_dly <= { rst_dly[4:0], (~ mmcm_locked_sync_125 ) };
+end
 
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
-  FD #(
-   .INIT (INITIALISE[1])
-  ) data_sync_reg2 (
-  .C  (clk),
-  .D  (data_sync1),
-  .Q  (data_sync2)
-  );
-
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
-  FD #(
-   .INIT (INITIALISE[1])
-  ) data_sync_reg3 (
-  .C  (clk),
-  .D  (data_sync2),
-  .Q  (data_sync3)
-  );
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
-  FD #(
-   .INIT (INITIALISE[1])
-  ) data_sync_reg4 (
-  .C  (clk),
-  .D  (data_sync3),
-  .Q  (data_sync4)
-  );
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
-  FD #(
-   .INIT (INITIALISE[1])
-  ) data_sync_reg5 (
-  .C  (clk),
-  .D  (data_sync4),
-  .Q  (data_sync5)
-  );
-
-  (* shreg_extract = "no", ASYNC_REG = "TRUE" *)
-  FD #(
-   .INIT (INITIALISE[1])
-  ) data_sync_reg6 (
-  .C  (clk),
-  .D  (data_sync5),
-  .Q  (data_sync6)
-  );
-  assign data_out = data_sync6;
-
+gig_ethernet_pcs_pma_0_sync_block sync_block_mmcm_locked
+        (
+           .clk             (clk125),
+           .data_in         (mmcm_locked),
+           .data_out        (mmcm_locked_sync_125)
+        );
 
 endmodule
-
-

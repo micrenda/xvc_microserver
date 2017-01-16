@@ -141,7 +141,27 @@ module send_an_ord(
 			send_byte_run = !send_byte_run;
 			#0.1 wait(send_byte_done);
 			
-			$write("%d, ", i);
+			is_k = 1;
+			send_byte_value = 8'b101_11100;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			is_k = 0;
+			send_byte_value = 8'b010_00010;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			is_k = 0;
+			send_byte_value =  0;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			is_k = 0;
+			send_byte_value = 0;
+			send_byte_run = !send_byte_run;
+			#0.1 wait(send_byte_done);
+			
+			$write("%0d, ", i);
 		end
 		
 		$display("Breaklink sent");

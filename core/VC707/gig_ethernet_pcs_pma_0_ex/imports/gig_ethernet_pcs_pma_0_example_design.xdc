@@ -39,4 +39,3 @@
 # In xdc, all clocks are related by default. This differs from ucf, where clocks are unrelated unless specified otherwise. As a result, you may now see cross-clock paths that were previously unconstrained in ucf. Commented out xdc false path constraints have been generated and can be uncommented, should you wish to remove these new paths. These commands are located after the last clock definition
 create_clock -name refclk125 -period 8.000 [get_ports refclk125_p]
 
-set_false_path -to [get_pins */core_resets_i/rst_dly_reg*/PRE]

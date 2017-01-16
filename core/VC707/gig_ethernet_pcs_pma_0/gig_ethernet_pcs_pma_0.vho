@@ -1,4 +1,4 @@
--- (c) Copyright 1995-2016 Xilinx, Inc. All rights reserved.
+-- (c) Copyright 1995-2017 Xilinx, Inc. All rights reserved.
 -- 
 -- This file contains confidential and proprietary information
 -- of Xilinx, Inc. and is protected under U.S. and
@@ -58,14 +58,17 @@ COMPONENT gig_ethernet_pcs_pma_0
     txp : OUT STD_LOGIC;
     rxn : IN STD_LOGIC;
     rxp : IN STD_LOGIC;
-    clk125m : IN STD_LOGIC;
-    mmcm_locked : IN STD_LOGIC;
+    mmcm_locked_out : OUT STD_LOGIC;
     sgmii_clk_r : OUT STD_LOGIC;
     sgmii_clk_f : OUT STD_LOGIC;
     sgmii_clk_en : OUT STD_LOGIC;
-    clk625 : IN STD_LOGIC;
-    clk208 : IN STD_LOGIC;
-    clk104 : IN STD_LOGIC;
+    clk125_out : OUT STD_LOGIC;
+    clk625_out : OUT STD_LOGIC;
+    clk104_out : OUT STD_LOGIC;
+    clk208_out : OUT STD_LOGIC;
+    rst_125_out : OUT STD_LOGIC;
+    refclk125_n : IN STD_LOGIC;
+    refclk125_p : IN STD_LOGIC;
     gmii_txd : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
     gmii_tx_en : IN STD_LOGIC;
     gmii_tx_er : IN STD_LOGIC;
@@ -108,14 +111,17 @@ your_instance_name : gig_ethernet_pcs_pma_0
     txp => txp,
     rxn => rxn,
     rxp => rxp,
-    clk125m => clk125m,
-    mmcm_locked => mmcm_locked,
+    mmcm_locked_out => mmcm_locked_out,
     sgmii_clk_r => sgmii_clk_r,
     sgmii_clk_f => sgmii_clk_f,
     sgmii_clk_en => sgmii_clk_en,
-    clk625 => clk625,
-    clk208 => clk208,
-    clk104 => clk104,
+    clk125_out => clk125_out,
+    clk625_out => clk625_out,
+    clk104_out => clk104_out,
+    clk208_out => clk208_out,
+    rst_125_out => rst_125_out,
+    refclk125_n => refclk125_n,
+    refclk125_p => refclk125_p,
     gmii_txd => gmii_txd,
     gmii_tx_en => gmii_tx_en,
     gmii_tx_er => gmii_tx_er,

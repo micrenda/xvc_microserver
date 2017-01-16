@@ -168,8 +168,8 @@ wire  clk312;
   //----------------------------------------------------------------------------
   // Instantiate the Core Block (core wrapper).
   //----------------------------------------------------------------------------
- gig_ethernet_pcs_pma_0_support 
-   core_support_i
+ gig_ethernet_pcs_pma_0  
+   core_wrapper_i
    (
       // LVDS transceiver Interface
       //---------------------------

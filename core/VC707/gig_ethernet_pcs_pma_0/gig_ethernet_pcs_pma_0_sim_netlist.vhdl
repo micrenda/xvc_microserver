@@ -1,7 +1,7 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
--- Date        : Thu Dec 15 15:50:03 2016
+-- Date        : Wed Jan 11 13:14:19 2017
 -- Host        : ELLAPC3 running 64-bit Debian GNU/Linux 8.6 (jessie)
 -- Command     : write_vhdl -force -mode funcsim
 --               /home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_sim_netlist.vhdl
@@ -22,7 +22,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_decode_8b10b_lut_base is
     \code_error_stretch_reg[0]_0\ : out STD_LOGIC;
     rxdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
     k : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     code_err_i : in STD_LOGIC;
     \o_rxdata_10b_reg[9]\ : in STD_LOGIC;
     \o_rxdata_10b_reg[7]\ : in STD_LOGIC;
@@ -40,7 +40,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \out\(0),
       Q => rxdata(0),
@@ -51,7 +51,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \out\(1),
       Q => rxdata(1),
@@ -62,7 +62,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \out\(2),
       Q => rxdata(2),
@@ -73,7 +73,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \out\(3),
       Q => rxdata(3),
@@ -84,7 +84,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \out\(4),
       Q => rxdata(4),
@@ -95,7 +95,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => b3(5),
       Q => rxdata(5),
@@ -106,7 +106,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => b3(6),
       Q => rxdata(6),
@@ -117,7 +117,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => b3(7),
       Q => rxdata(7),
@@ -128,7 +128,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => code_err_i,
       Q => \code_error_stretch_reg[0]\,
@@ -139,7 +139,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \o_rxdata_10b_reg[7]\,
       Q => \code_error_stretch_reg[0]_0\,
@@ -150,7 +150,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \o_rxdata_10b_reg[9]\,
       Q => \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXRUNDISP_INT_reg\,
@@ -161,7 +161,7 @@ kout_i_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => k,
       Q => rxcharisk(0),
@@ -174,11 +174,11 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base is
   port (
-    D : out STD_LOGIC_VECTOR ( 9 downto 0 );
+    txdata_10b : out STD_LOGIC_VECTOR ( 9 downto 0 );
     txcharisk : in STD_LOGIC;
     txchardispval : in STD_LOGIC;
     txchardispmode : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     txdata : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
@@ -204,14 +204,14 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8
   signal pdes4 : STD_LOGIC;
   signal \pdes6__13\ : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \dout[0]_i_1\ : label is "soft_lutpair76";
-  attribute SOFT_HLUTNM of \dout[2]_i_1\ : label is "soft_lutpair77";
-  attribute SOFT_HLUTNM of \dout[3]_i_1\ : label is "soft_lutpair77";
-  attribute SOFT_HLUTNM of \dout[4]_i_1\ : label is "soft_lutpair78";
-  attribute SOFT_HLUTNM of \dout[5]_i_2\ : label is "soft_lutpair78";
-  attribute SOFT_HLUTNM of \dout[7]_i_1\ : label is "soft_lutpair75";
-  attribute SOFT_HLUTNM of \dout[8]_i_1\ : label is "soft_lutpair75";
-  attribute SOFT_HLUTNM of \dout[9]_i_6\ : label is "soft_lutpair76";
+  attribute SOFT_HLUTNM of \dout[0]_i_1\ : label is "soft_lutpair77";
+  attribute SOFT_HLUTNM of \dout[2]_i_1\ : label is "soft_lutpair78";
+  attribute SOFT_HLUTNM of \dout[3]_i_1\ : label is "soft_lutpair78";
+  attribute SOFT_HLUTNM of \dout[4]_i_1\ : label is "soft_lutpair79";
+  attribute SOFT_HLUTNM of \dout[5]_i_2\ : label is "soft_lutpair79";
+  attribute SOFT_HLUTNM of \dout[7]_i_1\ : label is "soft_lutpair76";
+  attribute SOFT_HLUTNM of \dout[8]_i_1\ : label is "soft_lutpair76";
+  attribute SOFT_HLUTNM of \dout[9]_i_6\ : label is "soft_lutpair77";
 begin
 \dout[0]_i_1\: unisim.vcomponents.LUT5
     generic map(
@@ -490,10 +490,10 @@ begin
       INIT => '1'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \dout[0]_i_1_n_0\,
-      Q => D(0),
+      Q => txdata_10b(0),
       R => '0'
     );
 \dout_reg[1]\: unisim.vcomponents.FDRE
@@ -501,10 +501,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \dout[1]_i_1_n_0\,
-      Q => D(1),
+      Q => txdata_10b(1),
       R => '0'
     );
 \dout_reg[2]\: unisim.vcomponents.FDSE
@@ -512,10 +512,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \dout[2]_i_1_n_0\,
-      Q => D(2),
+      Q => txdata_10b(2),
       S => \dout[5]_i_1_n_0\
     );
 \dout_reg[3]\: unisim.vcomponents.FDSE
@@ -523,10 +523,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \dout[3]_i_1_n_0\,
-      Q => D(3),
+      Q => txdata_10b(3),
       S => \dout[5]_i_1_n_0\
     );
 \dout_reg[4]\: unisim.vcomponents.FDSE
@@ -534,10 +534,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \dout[4]_i_1_n_0\,
-      Q => D(4),
+      Q => txdata_10b(4),
       S => \dout[5]_i_1_n_0\
     );
 \dout_reg[5]\: unisim.vcomponents.FDSE
@@ -545,10 +545,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \dout[5]_i_2_n_0\,
-      Q => D(5),
+      Q => txdata_10b(5),
       S => \dout[5]_i_1_n_0\
     );
 \dout_reg[6]\: unisim.vcomponents.FDRE
@@ -556,10 +556,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => b4(0),
-      Q => D(6),
+      Q => txdata_10b(6),
       R => '0'
     );
 \dout_reg[7]\: unisim.vcomponents.FDRE
@@ -567,10 +567,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => b4(1),
-      Q => D(7),
+      Q => txdata_10b(7),
       R => '0'
     );
 \dout_reg[8]\: unisim.vcomponents.FDRE
@@ -578,10 +578,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => b4(2),
-      Q => D(8),
+      Q => txdata_10b(8),
       R => '0'
     );
 \dout_reg[9]\: unisim.vcomponents.FDRE
@@ -589,10 +589,10 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => b4(3),
-      Q => D(9),
+      Q => txdata_10b(9),
       R => '0'
     );
 \ngdb.disp_run_i_1\: unisim.vcomponents.LUT4
@@ -611,11 +611,61 @@ begin
       INIT => '1'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => pdes4,
       Q => \ngdb.disp_run_reg_n_0\,
       R => '0'
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_idelayctrl is
+  port (
+    mmcm_locked_out : out STD_LOGIC;
+    CLK : in STD_LOGIC;
+    o_mmcm_locked_i : in STD_LOGIC
+  );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_idelayctrl : entity is "gig_ethernet_pcs_pma_0_idelayctrl";
+end gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_idelayctrl;
+
+architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_idelayctrl is
+  signal dlyctrl_i_1_n_0 : STD_LOGIC;
+  signal idelayctrl_rdy : STD_LOGIC;
+  attribute BOX_TYPE : string;
+  attribute BOX_TYPE of dlyctrl : label is "PRIMITIVE";
+  attribute SOFT_HLUTNM : string;
+  attribute SOFT_HLUTNM of dlyctrl_i_1 : label is "soft_lutpair0";
+  attribute SOFT_HLUTNM of mmcm_locked_out_INST_0 : label is "soft_lutpair0";
+begin
+dlyctrl: unisim.vcomponents.IDELAYCTRL
+    generic map(
+      SIM_DEVICE => "7SERIES"
+    )
+        port map (
+      RDY => idelayctrl_rdy,
+      REFCLK => CLK,
+      RST => dlyctrl_i_1_n_0
+    );
+dlyctrl_i_1: unisim.vcomponents.LUT1
+    generic map(
+      INIT => X"1"
+    )
+        port map (
+      I0 => o_mmcm_locked_i,
+      O => dlyctrl_i_1_n_0
+    );
+mmcm_locked_out_INST_0: unisim.vcomponents.LUT2
+    generic map(
+      INIT => X"8"
+    )
+        port map (
+      I0 => o_mmcm_locked_i,
+      I1 => idelayctrl_rdy,
+      O => mmcm_locked_out
     );
 end STRUCTURE;
 library IEEE;
@@ -628,7 +678,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr is
     sgmii_clk_f_reg : out STD_LOGIC;
     clk_en_12_5_fall_reg : out STD_LOGIC;
     clk_en_12_5_rise_reg : out STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     speed_is_10_100_fall : in STD_LOGIC;
     speed_is_100_fall : in STD_LOGIC;
     clk1_25 : in STD_LOGIC;
@@ -649,8 +699,8 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_
   signal reg5 : STD_LOGIC;
   signal reg5_reg_n_0 : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of clk_en_12_5_fall_i_1 : label is "soft_lutpair152";
-  attribute SOFT_HLUTNM of clk_en_12_5_rise_i_1 : label is "soft_lutpair152";
+  attribute SOFT_HLUTNM of clk_en_12_5_fall_i_1 : label is "soft_lutpair153";
+  attribute SOFT_HLUTNM of clk_en_12_5_rise_i_1 : label is "soft_lutpair153";
 begin
   clk12_5 <= \^clk12_5\;
 clk_en_12_5_fall_i_1: unisim.vcomponents.LUT2
@@ -681,7 +731,7 @@ clk_en_12_5_rise_i_1: unisim.vcomponents.LUT2
     );
 reg1_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in,
       Q => reg1,
@@ -689,7 +739,7 @@ reg1_reg: unisim.vcomponents.FDRE
     );
 reg2_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reg1,
       Q => reg2,
@@ -697,7 +747,7 @@ reg2_reg: unisim.vcomponents.FDRE
     );
 reg3_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reg2,
       Q => \^clk12_5\,
@@ -705,7 +755,7 @@ reg3_reg: unisim.vcomponents.FDRE
     );
 reg4_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \^clk12_5\,
       Q => reg4,
@@ -723,7 +773,7 @@ reg5_i_1: unisim.vcomponents.LUT3
     );
 reg5_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reg4,
       Q => reg5_reg_n_0,
@@ -752,7 +802,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr_2 is
     sgmii_clk_r0_out : out STD_LOGIC;
     clk_en_1_25_fall_reg : out STD_LOGIC;
     clk_en_12_5_rise : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     data_sync_reg6 : in STD_LOGIC;
     data_out : in STD_LOGIC;
     clk12_5 : in STD_LOGIC;
@@ -772,8 +822,8 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_
   signal reg5 : STD_LOGIC;
   signal reg5_reg_n_0 : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of clk_en_1_25_fall_i_1 : label is "soft_lutpair153";
-  attribute SOFT_HLUTNM of sgmii_clk_r_i_1 : label is "soft_lutpair153";
+  attribute SOFT_HLUTNM of clk_en_1_25_fall_i_1 : label is "soft_lutpair154";
+  attribute SOFT_HLUTNM of sgmii_clk_r_i_1 : label is "soft_lutpair154";
 begin
   clk1_25 <= \^clk1_25\;
 clk_en_1_25_fall_i_1: unisim.vcomponents.LUT2
@@ -795,7 +845,7 @@ reg1_i_1: unisim.vcomponents.LUT1
     );
 reg1_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => clk_en_12_5_rise,
       D => reg1_i_1_n_0,
       Q => reg1_reg_n_0,
@@ -803,7 +853,7 @@ reg1_reg: unisim.vcomponents.FDRE
     );
 reg2_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => clk_en_12_5_rise,
       D => reg1_reg_n_0,
       Q => reg2_reg_n_0,
@@ -811,7 +861,7 @@ reg2_reg: unisim.vcomponents.FDRE
     );
 reg3_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => clk_en_12_5_rise,
       D => reg2_reg_n_0,
       Q => \^clk1_25\,
@@ -819,7 +869,7 @@ reg3_reg: unisim.vcomponents.FDRE
     );
 reg4_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => clk_en_12_5_rise,
       D => \^clk1_25\,
       Q => reg4,
@@ -838,7 +888,7 @@ reg4_reg: unisim.vcomponents.FDRE
     );
 reg5_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => clk_en_12_5_rise,
       D => reg4,
       Q => reg5_reg_n_0,
@@ -863,7 +913,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync is
   port (
     reset_out : out STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     mgt_tx_reset : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
@@ -910,7 +960,7 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => '0',
       PRE => mgt_tx_reset,
@@ -921,7 +971,7 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage1,
       PRE => mgt_tx_reset,
@@ -932,7 +982,7 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage2,
       PRE => mgt_tx_reset,
@@ -943,7 +993,7 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage3,
       PRE => mgt_tx_reset,
@@ -954,7 +1004,7 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage4,
       PRE => mgt_tx_reset,
@@ -965,7 +1015,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -990,7 +1040,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10 is
     \mon_idly_requested_value_reg[3]\ : in STD_LOGIC;
     \mon_idly_requested_value_reg[4]\ : in STD_LOGIC;
     reset_sync6_1 : in STD_LOGIC;
-    clk208 : in STD_LOGIC
+    CLK : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10 : entity is "gig_ethernet_pcs_pma_0_reset_sync";
@@ -1005,8 +1055,8 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sy
   signal reset_stage5 : STD_LOGIC;
   signal \reset_sync1_i_1__2_n_0\ : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of data_dly_inc_i_1 : label is "soft_lutpair111";
-  attribute SOFT_HLUTNM of mon_dly_inc_i_1 : label is "soft_lutpair112";
+  attribute SOFT_HLUTNM of data_dly_inc_i_1 : label is "soft_lutpair112";
+  attribute SOFT_HLUTNM of mon_dly_inc_i_1 : label is "soft_lutpair113";
   attribute ASYNC_REG : boolean;
   attribute ASYNC_REG of reset_sync1 : label is std.standard.true;
   attribute BOX_TYPE : string;
@@ -1035,8 +1085,8 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sy
   attribute BOX_TYPE of reset_sync6 : label is "PRIMITIVE";
   attribute SHREG_EXTRACT of reset_sync6 : label is "no";
   attribute XILINX_LEGACY_PRIM of reset_sync6 : label is "FDP";
-  attribute SOFT_HLUTNM of rx_data_idly_i_i_1 : label is "soft_lutpair111";
-  attribute SOFT_HLUTNM of sgmii_tx_oserdes_i_i_1 : label is "soft_lutpair112";
+  attribute SOFT_HLUTNM of rx_data_idly_i_i_1 : label is "soft_lutpair112";
+  attribute SOFT_HLUTNM of sgmii_tx_oserdes_i_i_1 : label is "soft_lutpair113";
 begin
   reset_out <= \^reset_out\;
 data_dly_inc_i_1: unisim.vcomponents.LUT4
@@ -1066,7 +1116,7 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => '0',
       PRE => \reset_sync1_i_1__2_n_0\,
@@ -1085,7 +1135,7 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage1,
       PRE => \reset_sync1_i_1__2_n_0\,
@@ -1096,7 +1146,7 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage2,
       PRE => \reset_sync1_i_1__2_n_0\,
@@ -1107,7 +1157,7 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage3,
       PRE => \reset_sync1_i_1__2_n_0\,
@@ -1118,7 +1168,7 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage4,
       PRE => \reset_sync1_i_1__2_n_0\,
@@ -1129,7 +1179,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -1161,7 +1211,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_11 is
   port (
     reset_out : out STD_LOGIC;
-    clk208 : in STD_LOGIC;
+    CLK : in STD_LOGIC;
     reset_sync6_0 : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
@@ -1208,7 +1258,7 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => '0',
       PRE => reset_sync6_0,
@@ -1219,7 +1269,7 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage1,
       PRE => reset_sync6_0,
@@ -1230,7 +1280,7 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage2,
       PRE => reset_sync6_0,
@@ -1241,7 +1291,7 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage3,
       PRE => reset_sync6_0,
@@ -1252,7 +1302,7 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage4,
       PRE => reset_sync6_0,
@@ -1263,7 +1313,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -1277,7 +1327,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_12 is
   port (
     txn : out STD_LOGIC;
-    clk208 : in STD_LOGIC;
+    CLK : in STD_LOGIC;
     reset_out : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
@@ -1324,7 +1374,7 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => '0',
       PRE => reset_out,
@@ -1335,7 +1385,7 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage1,
       PRE => reset_out,
@@ -1346,7 +1396,7 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage2,
       PRE => reset_out,
@@ -1357,7 +1407,7 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage3,
       PRE => reset_out,
@@ -1368,7 +1418,7 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage4,
       PRE => reset_out,
@@ -1379,7 +1429,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -1394,8 +1444,8 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_3 is
   port (
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
     phy_loss_of_sync_104 : in STD_LOGIC;
-    clk104 : in STD_LOGIC;
-    reset : in STD_LOGIC
+    refclk125_n : in STD_LOGIC;
+    rst_125_reg : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_3 : entity is "gig_ethernet_pcs_pma_0_reset_sync";
@@ -1442,10 +1492,10 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => '0',
-      PRE => reset,
+      PRE => rst_125_reg,
       Q => reset_stage1
     );
 reset_sync2: unisim.vcomponents.FDPE
@@ -1453,10 +1503,10 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage1,
-      PRE => reset,
+      PRE => rst_125_reg,
       Q => reset_stage2
     );
 reset_sync3: unisim.vcomponents.FDPE
@@ -1464,10 +1514,10 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage2,
-      PRE => reset,
+      PRE => rst_125_reg,
       Q => reset_stage3
     );
 reset_sync4: unisim.vcomponents.FDPE
@@ -1475,10 +1525,10 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage3,
-      PRE => reset,
+      PRE => rst_125_reg,
       Q => reset_stage4
     );
 reset_sync5: unisim.vcomponents.FDPE
@@ -1486,10 +1536,10 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage4,
-      PRE => reset,
+      PRE => rst_125_reg,
       Q => reset_stage5
     );
 reset_sync6: unisim.vcomponents.FDPE
@@ -1497,7 +1547,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -1522,7 +1572,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_4 is
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
     reset_out : out STD_LOGIC;
     Q : in STD_LOGIC_VECTOR ( 0 to 0 );
-    clk104 : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\ : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
@@ -1580,7 +1630,7 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => '0',
       PRE => \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\,
@@ -1591,7 +1641,7 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage1,
       PRE => \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\,
@@ -1602,7 +1652,7 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage2,
       PRE => \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\,
@@ -1613,7 +1663,7 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage3,
       PRE => \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\,
@@ -1624,7 +1674,7 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage4,
       PRE => \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\,
@@ -1635,7 +1685,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -1649,7 +1699,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_5 is
   port (
     reset_out : out STD_LOGIC;
-    clk104 : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     mgt_tx_reset : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
@@ -1696,7 +1746,7 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => '0',
       PRE => mgt_tx_reset,
@@ -1707,7 +1757,7 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage1,
       PRE => mgt_tx_reset,
@@ -1718,7 +1768,7 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage2,
       PRE => mgt_tx_reset,
@@ -1729,7 +1779,7 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage3,
       PRE => mgt_tx_reset,
@@ -1740,7 +1790,7 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage4,
       PRE => mgt_tx_reset,
@@ -1751,7 +1801,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -1767,8 +1817,8 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_7 is
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
     reset_out : out STD_LOGIC;
     mgt_tx_reset : in STD_LOGIC;
-    reset : in STD_LOGIC;
-    clk208 : in STD_LOGIC
+    rst_125_reg : in STD_LOGIC;
+    CLK : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_7 : entity is "gig_ethernet_pcs_pma_0_reset_sync";
@@ -1816,7 +1866,7 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => '0',
       PRE => \^sr\(0),
@@ -1828,7 +1878,7 @@ reset_sync1: unisim.vcomponents.FDPE
     )
         port map (
       I0 => mgt_tx_reset,
-      I1 => reset,
+      I1 => rst_125_reg,
       O => \^sr\(0)
     );
 reset_sync2: unisim.vcomponents.FDPE
@@ -1836,7 +1886,7 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage1,
       PRE => \^sr\(0),
@@ -1847,7 +1897,7 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage2,
       PRE => \^sr\(0),
@@ -1858,7 +1908,7 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage3,
       PRE => \^sr\(0),
@@ -1869,7 +1919,7 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage4,
       PRE => \^sr\(0),
@@ -1880,7 +1930,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -1894,7 +1944,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_8 is
   port (
     reset_out : out STD_LOGIC;
-    clk208 : in STD_LOGIC;
+    CLK : in STD_LOGIC;
     SR : in STD_LOGIC_VECTOR ( 0 to 0 )
   );
   attribute ORIG_REF_NAME : string;
@@ -1941,7 +1991,7 @@ reset_sync1: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => '0',
       PRE => SR(0),
@@ -1952,7 +2002,7 @@ reset_sync2: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage1,
       PRE => SR(0),
@@ -1963,7 +2013,7 @@ reset_sync3: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage2,
       PRE => SR(0),
@@ -1974,7 +2024,7 @@ reset_sync4: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage3,
       PRE => SR(0),
@@ -1985,7 +2035,7 @@ reset_sync5: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage4,
       PRE => SR(0),
@@ -1996,7 +2046,7 @@ reset_sync6: unisim.vcomponents.FDPE
       INIT => '1'
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => reset_stage5,
       PRE => '0',
@@ -2012,10 +2062,10 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer is
     wtd_reset : out STD_LOGIC;
     SR : out STD_LOGIC_VECTOR ( 0 to 0 );
     reset_sync5 : out STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
+    status_vector : in STD_LOGIC_VECTOR ( 0 to 0 );
     mgt_rx_reset : in STD_LOGIC;
-    reset : in STD_LOGIC;
-    status_vector : in STD_LOGIC_VECTOR ( 0 to 0 )
+    rst_125_reg : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer : entity is "gig_ethernet_pcs_pma_0_reset_wtd_timer";
@@ -2102,7 +2152,7 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wt
   signal \counter_stg3_reg[8]_i_1_n_5\ : STD_LOGIC;
   signal \counter_stg3_reg[8]_i_1_n_6\ : STD_LOGIC;
   signal \counter_stg3_reg[8]_i_1_n_7\ : STD_LOGIC;
-  signal p_0_in : STD_LOGIC_VECTOR ( 5 downto 0 );
+  signal \p_0_in__2\ : STD_LOGIC_VECTOR ( 5 downto 0 );
   signal reset0 : STD_LOGIC;
   signal reset_i_2_n_0 : STD_LOGIC;
   signal reset_i_3_n_0 : STD_LOGIC;
@@ -2113,14 +2163,14 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wt
   signal \NLW_counter_stg2_reg[8]_i_1_CO_UNCONNECTED\ : STD_LOGIC_VECTOR ( 3 to 3 );
   signal \NLW_counter_stg3_reg[8]_i_1_CO_UNCONNECTED\ : STD_LOGIC_VECTOR ( 3 to 3 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \counter_stg1[0]_i_1\ : label is "soft_lutpair151";
-  attribute SOFT_HLUTNM of \counter_stg1[1]_i_1\ : label is "soft_lutpair151";
-  attribute SOFT_HLUTNM of \counter_stg1[2]_i_1\ : label is "soft_lutpair149";
-  attribute SOFT_HLUTNM of \counter_stg1[3]_i_1\ : label is "soft_lutpair149";
-  attribute SOFT_HLUTNM of \counter_stg1[4]_i_1\ : label is "soft_lutpair148";
-  attribute SOFT_HLUTNM of \counter_stg1[5]_i_3\ : label is "soft_lutpair148";
-  attribute SOFT_HLUTNM of reset_sync1_i_1 : label is "soft_lutpair150";
-  attribute SOFT_HLUTNM of \reset_sync1_i_1__0\ : label is "soft_lutpair150";
+  attribute SOFT_HLUTNM of \counter_stg1[0]_i_1\ : label is "soft_lutpair152";
+  attribute SOFT_HLUTNM of \counter_stg1[1]_i_1\ : label is "soft_lutpair152";
+  attribute SOFT_HLUTNM of \counter_stg1[2]_i_1\ : label is "soft_lutpair150";
+  attribute SOFT_HLUTNM of \counter_stg1[3]_i_1\ : label is "soft_lutpair150";
+  attribute SOFT_HLUTNM of \counter_stg1[4]_i_1\ : label is "soft_lutpair149";
+  attribute SOFT_HLUTNM of \counter_stg1[5]_i_3\ : label is "soft_lutpair149";
+  attribute SOFT_HLUTNM of reset_sync1_i_1 : label is "soft_lutpair151";
+  attribute SOFT_HLUTNM of \reset_sync1_i_1__0\ : label is "soft_lutpair151";
 begin
   wtd_reset <= \^wtd_reset\;
 \counter_stg1[0]_i_1\: unisim.vcomponents.LUT1
@@ -2129,7 +2179,7 @@ begin
     )
         port map (
       I0 => \counter_stg1_reg__1\(0),
-      O => p_0_in(0)
+      O => \p_0_in__2\(0)
     );
 \counter_stg1[1]_i_1\: unisim.vcomponents.LUT2
     generic map(
@@ -2138,7 +2188,7 @@ begin
         port map (
       I0 => \counter_stg1_reg__1\(0),
       I1 => \counter_stg1_reg__1\(1),
-      O => p_0_in(1)
+      O => \p_0_in__2\(1)
     );
 \counter_stg1[2]_i_1\: unisim.vcomponents.LUT3
     generic map(
@@ -2148,7 +2198,7 @@ begin
       I0 => \counter_stg1_reg__1\(1),
       I1 => \counter_stg1_reg__1\(0),
       I2 => \counter_stg1_reg__1\(2),
-      O => p_0_in(2)
+      O => \p_0_in__2\(2)
     );
 \counter_stg1[3]_i_1\: unisim.vcomponents.LUT4
     generic map(
@@ -2159,7 +2209,7 @@ begin
       I1 => \counter_stg1_reg__1\(0),
       I2 => \counter_stg1_reg__1\(1),
       I3 => \counter_stg1_reg__1\(3),
-      O => p_0_in(3)
+      O => \p_0_in__2\(3)
     );
 \counter_stg1[4]_i_1\: unisim.vcomponents.LUT5
     generic map(
@@ -2171,7 +2221,7 @@ begin
       I2 => \counter_stg1_reg__1\(0),
       I3 => \counter_stg1_reg__1\(2),
       I4 => \counter_stg1_reg__1\(4),
-      O => p_0_in(4)
+      O => \p_0_in__2\(4)
     );
 \counter_stg1[5]_i_1\: unisim.vcomponents.LUT5
     generic map(
@@ -2196,7 +2246,7 @@ begin
       I3 => \counter_stg1_reg__1\(1),
       I4 => \counter_stg1_reg__1\(3),
       I5 => \counter_stg1_reg__0\(5),
-      O => p_0_in(5)
+      O => \p_0_in__2\(5)
     );
 \counter_stg1[5]_i_3\: unisim.vcomponents.LUT5
     generic map(
@@ -2215,9 +2265,9 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => p_0_in(0),
+      D => \p_0_in__2\(0),
       Q => \counter_stg1_reg__1\(0),
       R => \counter_stg1[5]_i_1_n_0\
     );
@@ -2226,9 +2276,9 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => p_0_in(1),
+      D => \p_0_in__2\(1),
       Q => \counter_stg1_reg__1\(1),
       R => \counter_stg1[5]_i_1_n_0\
     );
@@ -2237,9 +2287,9 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => p_0_in(2),
+      D => \p_0_in__2\(2),
       Q => \counter_stg1_reg__1\(2),
       R => \counter_stg1[5]_i_1_n_0\
     );
@@ -2248,9 +2298,9 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => p_0_in(3),
+      D => \p_0_in__2\(3),
       Q => \counter_stg1_reg__1\(3),
       R => \counter_stg1[5]_i_1_n_0\
     );
@@ -2259,9 +2309,9 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => p_0_in(4),
+      D => \p_0_in__2\(4),
       Q => \counter_stg1_reg__1\(4),
       R => \counter_stg1[5]_i_1_n_0\
     );
@@ -2270,9 +2320,9 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => p_0_in(5),
+      D => \p_0_in__2\(5),
       Q => \counter_stg1_reg__0\(5),
       R => \counter_stg1[5]_i_1_n_0\
     );
@@ -2390,7 +2440,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[0]_i_2_n_7\,
       Q => counter_stg2_reg(0),
@@ -2419,7 +2469,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[8]_i_1_n_5\,
       Q => counter_stg2_reg(10),
@@ -2430,7 +2480,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[8]_i_1_n_4\,
       Q => counter_stg2_reg(11),
@@ -2441,7 +2491,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[0]_i_2_n_6\,
       Q => counter_stg2_reg(1),
@@ -2452,7 +2502,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[0]_i_2_n_5\,
       Q => counter_stg2_reg(2),
@@ -2463,7 +2513,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[0]_i_2_n_4\,
       Q => counter_stg2_reg(3),
@@ -2474,7 +2524,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[4]_i_1_n_7\,
       Q => counter_stg2_reg(4),
@@ -2503,7 +2553,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[4]_i_1_n_6\,
       Q => counter_stg2_reg(5),
@@ -2514,7 +2564,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[4]_i_1_n_5\,
       Q => counter_stg2_reg(6),
@@ -2525,7 +2575,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[4]_i_1_n_4\,
       Q => counter_stg2_reg(7),
@@ -2536,7 +2586,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[8]_i_1_n_7\,
       Q => counter_stg2_reg(8),
@@ -2565,7 +2615,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg1_roll,
       D => \counter_stg2_reg[8]_i_1_n_6\,
       Q => counter_stg2_reg(9),
@@ -2709,7 +2759,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[0]_i_2_n_7\,
       Q => counter_stg3_reg(0),
@@ -2738,7 +2788,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[8]_i_1_n_5\,
       Q => counter_stg3_reg(10),
@@ -2749,7 +2799,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[8]_i_1_n_4\,
       Q => counter_stg3_reg(11),
@@ -2760,7 +2810,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[0]_i_2_n_6\,
       Q => counter_stg3_reg(1),
@@ -2771,7 +2821,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[0]_i_2_n_5\,
       Q => counter_stg3_reg(2),
@@ -2782,7 +2832,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[0]_i_2_n_4\,
       Q => counter_stg3_reg(3),
@@ -2793,7 +2843,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[4]_i_1_n_7\,
       Q => counter_stg3_reg(4),
@@ -2822,7 +2872,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[4]_i_1_n_6\,
       Q => counter_stg3_reg(5),
@@ -2833,7 +2883,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[4]_i_1_n_5\,
       Q => counter_stg3_reg(6),
@@ -2844,7 +2894,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[4]_i_1_n_4\,
       Q => counter_stg3_reg(7),
@@ -2855,7 +2905,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[8]_i_1_n_7\,
       Q => counter_stg3_reg(8),
@@ -2884,7 +2934,7 @@ begin
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => counter_stg30,
       D => \counter_stg3_reg[8]_i_1_n_6\,
       Q => counter_stg3_reg(9),
@@ -2964,7 +3014,7 @@ reset_i_6: unisim.vcomponents.LUT6
     );
 reset_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => reset0,
       Q => \^wtd_reset\,
@@ -2977,7 +3027,7 @@ reset_sync1_i_1: unisim.vcomponents.LUT3
         port map (
       I0 => \^wtd_reset\,
       I1 => mgt_rx_reset,
-      I2 => reset,
+      I2 => rst_125_reg,
       O => SR(0)
     );
 \reset_sync1_i_1__0\: unisim.vcomponents.LUT2
@@ -3002,7 +3052,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt is
     reset_out : in STD_LOGIC;
     sgmii_clk_en_reg : in STD_LOGIC;
     gmii_rx_dv : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     gmii_rx_er : in STD_LOGIC;
     D : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
@@ -3046,25 +3096,25 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_
   signal sfd_enable_i_3_n_0 : STD_LOGIC;
   signal sfd_enable_i_4_n_0 : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of muxsel_i_2 : label is "soft_lutpair154";
-  attribute SOFT_HLUTNM of rx_dv_aligned_i_1 : label is "soft_lutpair155";
-  attribute SOFT_HLUTNM of rx_er_aligned_i_1 : label is "soft_lutpair155";
-  attribute SOFT_HLUTNM of \rxd_aligned[0]_i_1\ : label is "soft_lutpair156";
-  attribute SOFT_HLUTNM of \rxd_aligned[1]_i_1\ : label is "soft_lutpair159";
-  attribute SOFT_HLUTNM of \rxd_aligned[2]_i_1\ : label is "soft_lutpair158";
-  attribute SOFT_HLUTNM of \rxd_aligned[3]_i_1\ : label is "soft_lutpair157";
-  attribute SOFT_HLUTNM of \rxd_aligned[4]_i_1\ : label is "soft_lutpair156";
-  attribute SOFT_HLUTNM of \rxd_aligned[5]_i_1\ : label is "soft_lutpair159";
-  attribute SOFT_HLUTNM of \rxd_aligned[6]_i_1\ : label is "soft_lutpair158";
-  attribute SOFT_HLUTNM of \rxd_aligned[7]_i_1\ : label is "soft_lutpair157";
-  attribute SOFT_HLUTNM of sfd_enable_i_3 : label is "soft_lutpair154";
+  attribute SOFT_HLUTNM of muxsel_i_2 : label is "soft_lutpair155";
+  attribute SOFT_HLUTNM of rx_dv_aligned_i_1 : label is "soft_lutpair156";
+  attribute SOFT_HLUTNM of rx_er_aligned_i_1 : label is "soft_lutpair156";
+  attribute SOFT_HLUTNM of \rxd_aligned[0]_i_1\ : label is "soft_lutpair157";
+  attribute SOFT_HLUTNM of \rxd_aligned[1]_i_1\ : label is "soft_lutpair160";
+  attribute SOFT_HLUTNM of \rxd_aligned[2]_i_1\ : label is "soft_lutpair159";
+  attribute SOFT_HLUTNM of \rxd_aligned[3]_i_1\ : label is "soft_lutpair158";
+  attribute SOFT_HLUTNM of \rxd_aligned[4]_i_1\ : label is "soft_lutpair157";
+  attribute SOFT_HLUTNM of \rxd_aligned[5]_i_1\ : label is "soft_lutpair160";
+  attribute SOFT_HLUTNM of \rxd_aligned[6]_i_1\ : label is "soft_lutpair159";
+  attribute SOFT_HLUTNM of \rxd_aligned[7]_i_1\ : label is "soft_lutpair158";
+  attribute SOFT_HLUTNM of sfd_enable_i_3 : label is "soft_lutpair155";
 begin
 gmii_rx_dv_out_reg: unisim.vcomponents.FDRE
     generic map(
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rx_dv_aligned,
       Q => gmii_rx_dv_0,
@@ -3075,7 +3125,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rx_er_aligned,
       Q => gmii_rx_er_0,
@@ -3086,7 +3136,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rxd_aligned(0),
       Q => gmii_rxd(0),
@@ -3097,7 +3147,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rxd_aligned(1),
       Q => gmii_rxd(1),
@@ -3108,7 +3158,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rxd_aligned(2),
       Q => gmii_rxd(2),
@@ -3119,7 +3169,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rxd_aligned(3),
       Q => gmii_rxd(3),
@@ -3130,7 +3180,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rxd_aligned(4),
       Q => gmii_rxd(4),
@@ -3141,7 +3191,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rxd_aligned(5),
       Q => gmii_rxd(5),
@@ -3152,7 +3202,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rxd_aligned(6),
       Q => gmii_rxd(6),
@@ -3163,7 +3213,7 @@ gmii_rx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rxd_aligned(7),
       Q => gmii_rxd(7),
@@ -3232,7 +3282,7 @@ muxsel_i_5: unisim.vcomponents.LUT6
     );
 muxsel_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => muxsel_i_1_n_0,
       Q => muxsel,
@@ -3250,7 +3300,7 @@ rx_dv_aligned_i_1: unisim.vcomponents.LUT3
     );
 rx_dv_aligned_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rx_dv_aligned_i_1_n_0,
       Q => rx_dv_aligned,
@@ -3258,7 +3308,7 @@ rx_dv_aligned_reg: unisim.vcomponents.FDRE
     );
 rx_dv_reg1_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => gmii_rx_dv,
       Q => rx_dv_reg1,
@@ -3266,7 +3316,7 @@ rx_dv_reg1_reg: unisim.vcomponents.FDRE
     );
 rx_dv_reg2_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rx_dv_reg1,
       Q => rx_dv_reg2,
@@ -3284,7 +3334,7 @@ rx_er_aligned_i_1: unisim.vcomponents.LUT3
     );
 rx_er_aligned_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rx_er_aligned_0,
       Q => rx_er_aligned,
@@ -3292,7 +3342,7 @@ rx_er_aligned_reg: unisim.vcomponents.FDRE
     );
 rx_er_reg1_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => gmii_rx_er,
       Q => rx_er_reg1,
@@ -3300,7 +3350,7 @@ rx_er_reg1_reg: unisim.vcomponents.FDRE
     );
 rx_er_reg2_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => rx_er_reg1,
       Q => rx_er_reg2,
@@ -3388,7 +3438,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_aligned_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_aligned[0]_i_1_n_0\,
       Q => rxd_aligned(0),
@@ -3396,7 +3446,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_aligned_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_aligned[1]_i_1_n_0\,
       Q => rxd_aligned(1),
@@ -3404,7 +3454,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_aligned_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_aligned[2]_i_1_n_0\,
       Q => rxd_aligned(2),
@@ -3412,7 +3462,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_aligned_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_aligned[3]_i_1_n_0\,
       Q => rxd_aligned(3),
@@ -3420,7 +3470,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_aligned_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_aligned[4]_i_1_n_0\,
       Q => rxd_aligned(4),
@@ -3428,7 +3478,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_aligned_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_aligned[5]_i_1_n_0\,
       Q => rxd_aligned(5),
@@ -3436,7 +3486,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_aligned_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_aligned[6]_i_1_n_0\,
       Q => rxd_aligned(6),
@@ -3444,7 +3494,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_aligned_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_aligned[7]_i_1_n_0\,
       Q => rxd_aligned(7),
@@ -3452,7 +3502,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg1_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => D(0),
       Q => \rxd_reg1_reg_n_0_[0]\,
@@ -3460,7 +3510,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg1_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => D(1),
       Q => \rxd_reg1_reg_n_0_[1]\,
@@ -3468,7 +3518,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg1_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => D(2),
       Q => \rxd_reg1_reg_n_0_[2]\,
@@ -3476,7 +3526,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg1_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => D(3),
       Q => \rxd_reg1_reg_n_0_[3]\,
@@ -3484,7 +3534,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg1_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => D(4),
       Q => p_0_in(0),
@@ -3492,7 +3542,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg1_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => D(5),
       Q => p_0_in(1),
@@ -3500,7 +3550,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg1_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => D(6),
       Q => p_0_in(2),
@@ -3508,7 +3558,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg1_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => D(7),
       Q => p_0_in(3),
@@ -3516,7 +3566,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg2_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_reg1_reg_n_0_[0]\,
       Q => rxd_reg2(0),
@@ -3524,7 +3574,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg2_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_reg1_reg_n_0_[1]\,
       Q => rxd_reg2(1),
@@ -3532,7 +3582,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg2_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_reg1_reg_n_0_[2]\,
       Q => rxd_reg2(2),
@@ -3540,7 +3590,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg2_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => \rxd_reg1_reg_n_0_[3]\,
       Q => rxd_reg2(3),
@@ -3548,7 +3598,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg2_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => p_0_in(0),
       Q => rxd_reg2(4),
@@ -3556,7 +3606,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg2_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => p_0_in(1),
       Q => rxd_reg2(5),
@@ -3564,7 +3614,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg2_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => p_0_in(2),
       Q => rxd_reg2(6),
@@ -3572,7 +3622,7 @@ rx_er_reg2_reg: unisim.vcomponents.FDRE
     );
 \rxd_reg2_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => sgmii_clk_en_reg,
       D => p_0_in(3),
       Q => rxd_reg2(7),
@@ -3629,7 +3679,7 @@ sfd_enable_i_4: unisim.vcomponents.LUT5
     );
 sfd_enable_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => sfd_enable_i_1_n_0,
       Q => sfd_enable,
@@ -3648,15 +3698,15 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_comma_alignment is
     bitslip_reg_1 : out STD_LOGIC;
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
     comma_position0 : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     data_sync_reg6 : in STD_LOGIC;
-    reset : in STD_LOGIC;
+    rst_125_reg : in STD_LOGIC;
     wtd_reset : in STD_LOGIC;
     mgt_rx_reset : in STD_LOGIC;
     \o_rxdata_10b_reg[5]\ : in STD_LOGIC;
     \o_rxdata_10b_reg[5]_0\ : in STD_LOGIC;
     \o_rxdata_10b_reg[3]\ : in STD_LOGIC;
-    Q : in STD_LOGIC_VECTOR ( 9 downto 0 );
+    o_rxdata_10b : in STD_LOGIC_VECTOR ( 9 downto 0 );
     \o_rxdata_10b_reg[5]_1\ : in STD_LOGIC;
     \o_rxdata_10b_reg[2]\ : in STD_LOGIC;
     \o_rxdata_10b_reg[0]\ : in STD_LOGIC
@@ -3680,8 +3730,8 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_co
   signal \data_reg_reg_n_0_[4]\ : STD_LOGIC;
   signal \data_reg_reg_n_0_[5]\ : STD_LOGIC;
   signal enablealign_r : STD_LOGIC;
-  signal p_0_in : STD_LOGIC_VECTOR ( 1 downto 0 );
-  signal p_0_in_0 : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal p_0_in : STD_LOGIC_VECTOR ( 6 to 6 );
+  signal \p_0_in__1\ : STD_LOGIC_VECTOR ( 1 downto 0 );
   signal \timer[2]_i_1_n_0\ : STD_LOGIC;
   signal \timer[3]_i_1_n_0\ : STD_LOGIC;
   signal \timer[4]_i_1_n_0\ : STD_LOGIC;
@@ -3689,10 +3739,10 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_co
   signal \timer[4]_i_3_n_0\ : STD_LOGIC;
   signal \timer_reg__0\ : STD_LOGIC_VECTOR ( 4 downto 0 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \timer[1]_i_1\ : label is "soft_lutpair74";
-  attribute SOFT_HLUTNM of \timer[2]_i_1\ : label is "soft_lutpair74";
-  attribute SOFT_HLUTNM of \timer[3]_i_1\ : label is "soft_lutpair73";
-  attribute SOFT_HLUTNM of \timer[4]_i_3\ : label is "soft_lutpair73";
+  attribute SOFT_HLUTNM of \timer[1]_i_1\ : label is "soft_lutpair75";
+  attribute SOFT_HLUTNM of \timer[2]_i_1\ : label is "soft_lutpair75";
+  attribute SOFT_HLUTNM of \timer[3]_i_1\ : label is "soft_lutpair74";
+  attribute SOFT_HLUTNM of \timer[4]_i_3\ : label is "soft_lutpair74";
 begin
   E(0) <= \^e\(0);
   bitslip_reg_0 <= \^bitslip_reg_0\;
@@ -3703,7 +3753,7 @@ bitslip_i_1: unisim.vcomponents.LUT6
         port map (
       I0 => bitslip_i_2_n_0,
       I1 => \o_rxdata_10b_reg[5]\,
-      I2 => p_0_in_0(6),
+      I2 => p_0_in(6),
       I3 => bitslip_i_4_n_0,
       I4 => bitslip_i_5_n_0,
       I5 => bitslip_i_6_n_0,
@@ -3716,8 +3766,8 @@ bitslip_i_10: unisim.vcomponents.LUT6
         port map (
       I0 => \data_reg_reg_n_0_[4]\,
       I1 => \data_reg_reg_n_0_[2]\,
-      I2 => Q(0),
-      I3 => Q(1),
+      I2 => o_rxdata_10b(0),
+      I3 => o_rxdata_10b(1),
       I4 => \data_reg_reg_n_0_[3]\,
       I5 => \data_reg_reg_n_0_[5]\,
       O => bitslip_reg_1
@@ -3727,8 +3777,8 @@ bitslip_i_13: unisim.vcomponents.LUT6
       INIT => X"101010103F300000"
     )
         port map (
-      I0 => Q(3),
-      I1 => Q(2),
+      I0 => o_rxdata_10b(3),
+      I1 => o_rxdata_10b(2),
       I2 => \data_reg_reg_n_0_[2]\,
       I3 => \data_reg_reg_n_0_[4]\,
       I4 => \data_reg_reg_n_0_[3]\,
@@ -3740,7 +3790,7 @@ bitslip_i_2: unisim.vcomponents.LUT6
       INIT => X"FFFF0000FF040000"
     )
         port map (
-      I0 => p_0_in_0(6),
+      I0 => p_0_in(6),
       I1 => bitslip_i_7_n_0,
       I2 => \^bitslip_reg_0\,
       I3 => \o_rxdata_10b_reg[5]_0\,
@@ -3768,8 +3818,8 @@ bitslip_i_5: unisim.vcomponents.LUT6
         port map (
       I0 => \data_reg_reg_n_0_[3]\,
       I1 => \^bitslip_reg_0\,
-      I2 => Q(3),
-      I3 => p_0_in_0(6),
+      I2 => o_rxdata_10b(3),
+      I3 => p_0_in(6),
       I4 => \data_reg_reg_n_0_[2]\,
       I5 => \o_rxdata_10b_reg[0]\,
       O => bitslip_i_5_n_0
@@ -3781,9 +3831,9 @@ bitslip_i_6: unisim.vcomponents.LUT6
         port map (
       I0 => bitslip_i_13_n_0,
       I1 => bitslip_i_4_n_0,
-      I2 => p_0_in_0(6),
-      I3 => Q(0),
-      I4 => Q(1),
+      I2 => p_0_in(6),
+      I3 => o_rxdata_10b(0),
+      I4 => o_rxdata_10b(1),
       I5 => \o_rxdata_10b_reg[5]_1\,
       O => bitslip_i_6_n_0
     );
@@ -3793,7 +3843,7 @@ bitslip_i_7: unisim.vcomponents.LUT6
     )
         port map (
       I0 => \data_reg_reg_n_0_[5]\,
-      I1 => Q(0),
+      I1 => o_rxdata_10b(0),
       I2 => \data_reg_reg_n_0_[3]\,
       I3 => \data_reg_reg_n_0_[4]\,
       I4 => \data_reg_reg_n_0_[2]\,
@@ -3802,7 +3852,7 @@ bitslip_i_7: unisim.vcomponents.LUT6
     );
 bitslip_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => bitslip_i_1_n_0,
       Q => \^e\(0),
@@ -3810,7 +3860,7 @@ bitslip_reg: unisim.vcomponents.FDRE
     );
 comma_det_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => comma_position0,
       Q => rxchariscomma(0),
@@ -3818,55 +3868,55 @@ comma_det_reg: unisim.vcomponents.FDRE
     );
 \data_reg_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => Q(9),
-      Q => p_0_in_0(6),
+      D => o_rxdata_10b(9),
+      Q => p_0_in(6),
       R => SR(0)
     );
 \data_reg_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => Q(8),
+      D => o_rxdata_10b(8),
       Q => \^bitslip_reg_0\,
       R => SR(0)
     );
 \data_reg_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => Q(7),
+      D => o_rxdata_10b(7),
       Q => \data_reg_reg_n_0_[2]\,
       R => SR(0)
     );
 \data_reg_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => Q(6),
+      D => o_rxdata_10b(6),
       Q => \data_reg_reg_n_0_[3]\,
       R => SR(0)
     );
 \data_reg_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => Q(5),
+      D => o_rxdata_10b(5),
       Q => \data_reg_reg_n_0_[4]\,
       R => SR(0)
     );
 \data_reg_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => Q(4),
+      D => o_rxdata_10b(4),
       Q => \data_reg_reg_n_0_[5]\,
       R => SR(0)
     );
 enablealign_r_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync_reg6,
       Q => enablealign_r,
@@ -3878,7 +3928,7 @@ enablealign_r_reg: unisim.vcomponents.FDRE
     )
         port map (
       I0 => \timer_reg__0\(0),
-      O => p_0_in(0)
+      O => \p_0_in__1\(0)
     );
 \timer[1]_i_1\: unisim.vcomponents.LUT2
     generic map(
@@ -3887,7 +3937,7 @@ enablealign_r_reg: unisim.vcomponents.FDRE
         port map (
       I0 => \timer_reg__0\(0),
       I1 => \timer_reg__0\(1),
-      O => p_0_in(1)
+      O => \p_0_in__1\(1)
     );
 \timer[2]_i_1\: unisim.vcomponents.LUT3
     generic map(
@@ -3916,7 +3966,7 @@ enablealign_r_reg: unisim.vcomponents.FDRE
     )
         port map (
       I0 => \^e\(0),
-      I1 => reset,
+      I1 => rst_125_reg,
       I2 => wtd_reset,
       I3 => mgt_rx_reset,
       O => \timer[4]_i_1_n_0\
@@ -3947,23 +3997,23 @@ enablealign_r_reg: unisim.vcomponents.FDRE
     );
 \timer_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \timer[4]_i_2_n_0\,
-      D => p_0_in(0),
+      D => \p_0_in__1\(0),
       Q => \timer_reg__0\(0),
       R => \timer[4]_i_1_n_0\
     );
 \timer_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \timer[4]_i_2_n_0\,
-      D => p_0_in(1),
+      D => \p_0_in__1\(1),
       Q => \timer_reg__0\(1),
       R => \timer[4]_i_1_n_0\
     );
 \timer_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \timer[4]_i_2_n_0\,
       D => \timer[2]_i_1_n_0\,
       Q => \timer_reg__0\(2),
@@ -3971,7 +4021,7 @@ enablealign_r_reg: unisim.vcomponents.FDRE
     );
 \timer_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \timer[4]_i_2_n_0\,
       D => \timer[3]_i_1_n_0\,
       Q => \timer_reg__0\(3),
@@ -3979,7 +4029,7 @@ enablealign_r_reg: unisim.vcomponents.FDRE
     );
 \timer_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \timer[4]_i_2_n_0\,
       D => \timer[4]_i_3_n_0\,
       Q => \timer_reg__0\(4),
@@ -4000,7 +4050,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor is
     bad_mon_trig0 : out STD_LOGIC;
     \current_tap_window_reg[4]\ : out STD_LOGIC_VECTOR ( 4 downto 0 );
     \current_tap_window_reg[0]\ : out STD_LOGIC;
-    clk104 : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     cid_error0 : in STD_LOGIC;
     S : in STD_LOGIC_VECTOR ( 3 downto 0 );
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
@@ -4159,42 +4209,42 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_ey
   signal NLW_mismatch_error0_carry_O_UNCONNECTED : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal \NLW_wait_cntr_reg[8]_i_1_CO_UNCONNECTED\ : STD_LOGIC_VECTOR ( 3 to 3 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of bad_mon_trig_i_2 : label is "soft_lutpair96";
-  attribute SOFT_HLUTNM of bad_mon_trig_i_3 : label is "soft_lutpair87";
-  attribute SOFT_HLUTNM of \cal_state[9]_i_10\ : label is "soft_lutpair87";
-  attribute SOFT_HLUTNM of \cal_state[9]_i_4\ : label is "soft_lutpair95";
-  attribute SOFT_HLUTNM of \cal_state[9]_i_5\ : label is "soft_lutpair84";
-  attribute SOFT_HLUTNM of \cal_state[9]_i_8\ : label is "soft_lutpair93";
-  attribute SOFT_HLUTNM of \current_tap_window[0]_i_1\ : label is "soft_lutpair93";
-  attribute SOFT_HLUTNM of \current_tap_window[1]_i_1\ : label is "soft_lutpair94";
-  attribute SOFT_HLUTNM of \current_tap_window[2]_i_1\ : label is "soft_lutpair94";
-  attribute SOFT_HLUTNM of \current_tap_window[3]_i_1\ : label is "soft_lutpair95";
-  attribute SOFT_HLUTNM of \current_tap_window[4]_i_2\ : label is "soft_lutpair96";
-  attribute SOFT_HLUTNM of \em_state[3]_i_1\ : label is "soft_lutpair91";
-  attribute SOFT_HLUTNM of \em_state[4]_i_1\ : label is "soft_lutpair91";
-  attribute SOFT_HLUTNM of \em_state[6]_i_1\ : label is "soft_lutpair90";
-  attribute SOFT_HLUTNM of \em_state[7]_i_1\ : label is "soft_lutpair92";
-  attribute SOFT_HLUTNM of \em_state[8]_i_1\ : label is "soft_lutpair92";
-  attribute SOFT_HLUTNM of \em_state[9]_i_2\ : label is "soft_lutpair90";
-  attribute SOFT_HLUTNM of \em_state_inferred__3/i_\ : label is "soft_lutpair81";
-  attribute SOFT_HLUTNM of \em_state_inferred__3/i___0\ : label is "soft_lutpair81";
-  attribute SOFT_HLUTNM of \em_state_inferred__3/i___1\ : label is "soft_lutpair80";
-  attribute SOFT_HLUTNM of \em_state_inferred__3/i___2\ : label is "soft_lutpair80";
-  attribute SOFT_HLUTNM of \maint_best_tap[4]_i_2\ : label is "soft_lutpair84";
-  attribute SOFT_HLUTNM of mon_idly_update_i_1 : label is "soft_lutpair86";
-  attribute SOFT_HLUTNM of mon_idly_update_i_2 : label is "soft_lutpair82";
-  attribute SOFT_HLUTNM of mon_idly_update_i_4 : label is "soft_lutpair85";
-  attribute SOFT_HLUTNM of mon_idly_update_i_6 : label is "soft_lutpair86";
-  attribute SOFT_HLUTNM of \mon_idly_val[4]_i_6\ : label is "soft_lutpair89";
-  attribute SOFT_HLUTNM of \mon_idly_val[4]_i_7\ : label is "soft_lutpair79";
-  attribute SOFT_HLUTNM of \mon_idly_val[4]_i_8\ : label is "soft_lutpair79";
-  attribute SOFT_HLUTNM of o_eye_mon_done_i_4 : label is "soft_lutpair88";
-  attribute SOFT_HLUTNM of \right_margin[0]_i_1\ : label is "soft_lutpair89";
-  attribute SOFT_HLUTNM of \right_margin[3]_i_1\ : label is "soft_lutpair83";
-  attribute SOFT_HLUTNM of \right_margin[4]_i_3\ : label is "soft_lutpair83";
-  attribute SOFT_HLUTNM of \right_margin[4]_i_4\ : label is "soft_lutpair85";
-  attribute SOFT_HLUTNM of \right_margin[4]_i_5\ : label is "soft_lutpair82";
-  attribute SOFT_HLUTNM of \wait_cntr[0]_i_3\ : label is "soft_lutpair88";
+  attribute SOFT_HLUTNM of bad_mon_trig_i_2 : label is "soft_lutpair97";
+  attribute SOFT_HLUTNM of bad_mon_trig_i_3 : label is "soft_lutpair88";
+  attribute SOFT_HLUTNM of \cal_state[9]_i_10\ : label is "soft_lutpair88";
+  attribute SOFT_HLUTNM of \cal_state[9]_i_4\ : label is "soft_lutpair96";
+  attribute SOFT_HLUTNM of \cal_state[9]_i_5\ : label is "soft_lutpair85";
+  attribute SOFT_HLUTNM of \cal_state[9]_i_8\ : label is "soft_lutpair94";
+  attribute SOFT_HLUTNM of \current_tap_window[0]_i_1\ : label is "soft_lutpair94";
+  attribute SOFT_HLUTNM of \current_tap_window[1]_i_1\ : label is "soft_lutpair95";
+  attribute SOFT_HLUTNM of \current_tap_window[2]_i_1\ : label is "soft_lutpair95";
+  attribute SOFT_HLUTNM of \current_tap_window[3]_i_1\ : label is "soft_lutpair96";
+  attribute SOFT_HLUTNM of \current_tap_window[4]_i_2\ : label is "soft_lutpair97";
+  attribute SOFT_HLUTNM of \em_state[3]_i_1\ : label is "soft_lutpair92";
+  attribute SOFT_HLUTNM of \em_state[4]_i_1\ : label is "soft_lutpair92";
+  attribute SOFT_HLUTNM of \em_state[6]_i_1\ : label is "soft_lutpair91";
+  attribute SOFT_HLUTNM of \em_state[7]_i_1\ : label is "soft_lutpair93";
+  attribute SOFT_HLUTNM of \em_state[8]_i_1\ : label is "soft_lutpair93";
+  attribute SOFT_HLUTNM of \em_state[9]_i_2\ : label is "soft_lutpair91";
+  attribute SOFT_HLUTNM of \em_state_inferred__3/i_\ : label is "soft_lutpair82";
+  attribute SOFT_HLUTNM of \em_state_inferred__3/i___0\ : label is "soft_lutpair82";
+  attribute SOFT_HLUTNM of \em_state_inferred__3/i___1\ : label is "soft_lutpair81";
+  attribute SOFT_HLUTNM of \em_state_inferred__3/i___2\ : label is "soft_lutpair81";
+  attribute SOFT_HLUTNM of \maint_best_tap[4]_i_2\ : label is "soft_lutpair85";
+  attribute SOFT_HLUTNM of mon_idly_update_i_1 : label is "soft_lutpair87";
+  attribute SOFT_HLUTNM of mon_idly_update_i_2 : label is "soft_lutpair83";
+  attribute SOFT_HLUTNM of mon_idly_update_i_4 : label is "soft_lutpair86";
+  attribute SOFT_HLUTNM of mon_idly_update_i_6 : label is "soft_lutpair87";
+  attribute SOFT_HLUTNM of \mon_idly_val[4]_i_6\ : label is "soft_lutpair90";
+  attribute SOFT_HLUTNM of \mon_idly_val[4]_i_7\ : label is "soft_lutpair80";
+  attribute SOFT_HLUTNM of \mon_idly_val[4]_i_8\ : label is "soft_lutpair80";
+  attribute SOFT_HLUTNM of o_eye_mon_done_i_4 : label is "soft_lutpair89";
+  attribute SOFT_HLUTNM of \right_margin[0]_i_1\ : label is "soft_lutpair90";
+  attribute SOFT_HLUTNM of \right_margin[3]_i_1\ : label is "soft_lutpair84";
+  attribute SOFT_HLUTNM of \right_margin[4]_i_3\ : label is "soft_lutpair84";
+  attribute SOFT_HLUTNM of \right_margin[4]_i_4\ : label is "soft_lutpair86";
+  attribute SOFT_HLUTNM of \right_margin[4]_i_5\ : label is "soft_lutpair83";
+  attribute SOFT_HLUTNM of \wait_cntr[0]_i_3\ : label is "soft_lutpair89";
 begin
   D(0) <= \^d\(0);
   Q(4 downto 0) <= \^q\(4 downto 0);
@@ -4440,7 +4490,7 @@ bad_mon_trig_i_3: unisim.vcomponents.LUT5
     );
 cid_error_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cid_error0,
       Q => cid_error,
@@ -4558,7 +4608,7 @@ data_bad_i_5: unisim.vcomponents.LUT4
     );
 data_bad_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => data_bad_i_1_n_0,
       Q => data_bad,
@@ -4787,7 +4837,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[0]\: unisim.vcomponents.FDSE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(0),
       Q => \em_state_reg_n_0_[0]\,
@@ -4795,7 +4845,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(1),
       Q => \em_state_reg_n_0_[1]\,
@@ -4803,7 +4853,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(2),
       Q => \em_state_reg_n_0_[2]\,
@@ -4811,7 +4861,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(3),
       Q => \em_state_reg_n_0_[3]\,
@@ -4819,7 +4869,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(4),
       Q => \em_state_reg_n_0_[4]\,
@@ -4827,7 +4877,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(5),
       Q => \em_state_reg_n_0_[5]\,
@@ -4835,7 +4885,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(6),
       Q => \em_state_reg_n_0_[6]\,
@@ -4843,7 +4893,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(7),
       Q => \em_state_reg_n_0_[7]\,
@@ -4851,7 +4901,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(8),
       Q => \em_state_reg_n_0_[8]\,
@@ -4859,7 +4909,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \em_state_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => em_state(9),
       Q => \em_state_reg_n_0_[9]\,
@@ -4925,7 +4975,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \left_margin_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => left_margin0,
       D => right_margin00_out(0),
       Q => \left_margin_reg_n_0_[0]\,
@@ -4933,7 +4983,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \left_margin_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => left_margin0,
       D => left_margin01_out(1),
       Q => \left_margin_reg_n_0_[1]\,
@@ -4941,7 +4991,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \left_margin_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => left_margin0,
       D => left_margin01_out(2),
       Q => \left_margin_reg_n_0_[2]\,
@@ -4949,7 +4999,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \left_margin_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => left_margin0,
       D => \mon_idly_val_reg[3]_0\(0),
       Q => \left_margin_reg_n_0_[3]\,
@@ -4957,7 +5007,7 @@ em_state1_carry_i_4: unisim.vcomponents.LUT3
     );
 \left_margin_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => left_margin0,
       D => \mon_idly_val_reg[3]_0\(1),
       Q => \left_margin_reg_n_0_[4]\,
@@ -5002,7 +5052,7 @@ mismatch_error0_carry: unisim.vcomponents.CARRY4
     );
 mismatch_error_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => mismatch_error0_carry_n_0,
       Q => mismatch_error,
@@ -5102,7 +5152,7 @@ mon_idly_update_i_8: unisim.vcomponents.LUT4
     );
 mon_idly_update_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => mon_idly_update0,
       Q => E(0),
@@ -5254,7 +5304,7 @@ mon_idly_update_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_val_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \mon_idly_val[4]_i_1_n_0\,
       D => \p_0_in__0\(0),
       Q => \^q\(0),
@@ -5262,7 +5312,7 @@ mon_idly_update_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_val_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \mon_idly_val[4]_i_1_n_0\,
       D => \p_0_in__0\(1),
       Q => \^q\(1),
@@ -5270,7 +5320,7 @@ mon_idly_update_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_val_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \mon_idly_val[4]_i_1_n_0\,
       D => \p_0_in__0\(2),
       Q => \^q\(2),
@@ -5278,7 +5328,7 @@ mon_idly_update_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_val_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \mon_idly_val[4]_i_1_n_0\,
       D => \p_0_in__0\(3),
       Q => \^q\(3),
@@ -5286,7 +5336,7 @@ mon_idly_update_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_val_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \mon_idly_val[4]_i_1_n_0\,
       D => \p_0_in__0\(4),
       Q => \^q\(4),
@@ -5329,7 +5379,7 @@ o_eye_mon_done_i_4: unisim.vcomponents.LUT2
     );
 o_eye_mon_done_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => o_eye_mon_done_i_1_n_0,
       Q => \^d\(0),
@@ -5337,7 +5387,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[0]\,
       Q => old_em_state(0),
@@ -5345,7 +5395,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[1]\,
       Q => old_em_state(1),
@@ -5353,7 +5403,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[2]\,
       Q => old_em_state(2),
@@ -5361,7 +5411,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[3]\,
       Q => old_em_state(3),
@@ -5369,7 +5419,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[4]\,
       Q => old_em_state(4),
@@ -5377,7 +5427,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[5]\,
       Q => old_em_state(5),
@@ -5385,7 +5435,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[6]\,
       Q => old_em_state(6),
@@ -5393,7 +5443,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[7]\,
       Q => old_em_state(7),
@@ -5401,7 +5451,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[8]\,
       Q => old_em_state(8),
@@ -5409,7 +5459,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \old_em_state_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \em_state_reg_n_0_[9]\,
       Q => old_em_state(9),
@@ -5520,7 +5570,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \right_margin_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => right_margin0,
       D => right_margin00_out(0),
       Q => \right_margin_reg_n_0_[0]\,
@@ -5528,7 +5578,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \right_margin_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => right_margin0,
       D => \mon_idly_val_reg[1]_0\(0),
       Q => \right_margin_reg_n_0_[1]\,
@@ -5536,7 +5586,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \right_margin_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => right_margin0,
       D => \mon_idly_val_reg[1]_0\(1),
       Q => \right_margin_reg_n_0_[2]\,
@@ -5544,7 +5594,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \right_margin_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => right_margin0,
       D => right_margin00_out(3),
       Q => \right_margin_reg_n_0_[3]\,
@@ -5552,7 +5602,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \right_margin_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => right_margin0,
       D => right_margin00_out(4),
       Q => \right_margin_reg_n_0_[4]\,
@@ -5678,7 +5728,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[0]_i_2_n_7\,
       Q => wait_cntr_reg(0),
@@ -5704,7 +5754,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[8]_i_1_n_5\,
       Q => wait_cntr_reg(10),
@@ -5712,7 +5762,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[8]_i_1_n_4\,
       Q => wait_cntr_reg(11),
@@ -5720,7 +5770,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[0]_i_2_n_6\,
       Q => wait_cntr_reg(1),
@@ -5728,7 +5778,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[0]_i_2_n_5\,
       Q => wait_cntr_reg(2),
@@ -5736,7 +5786,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[0]_i_2_n_4\,
       Q => wait_cntr_reg(3),
@@ -5744,7 +5794,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[4]_i_1_n_7\,
       Q => wait_cntr_reg(4),
@@ -5770,7 +5820,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[4]_i_1_n_6\,
       Q => wait_cntr_reg(5),
@@ -5778,7 +5828,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[4]_i_1_n_5\,
       Q => wait_cntr_reg(6),
@@ -5786,7 +5836,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[4]_i_1_n_4\,
       Q => wait_cntr_reg(7),
@@ -5794,7 +5844,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[8]_i_1_n_7\,
       Q => wait_cntr_reg(8),
@@ -5820,7 +5870,7 @@ o_eye_mon_done_reg: unisim.vcomponents.FDRE
     );
 \wait_cntr_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => \wait_cntr_reg[8]_i_1_n_6\,
       Q => wait_cntr_reg(9),
@@ -5842,7 +5892,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration is
     enable_eye_mon : out STD_LOGIC;
     \cal_state_reg[9]_0\ : out STD_LOGIC;
     \panic_bucket_reg[0]\ : out STD_LOGIC;
-    clk104 : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
     D : in STD_LOGIC_VECTOR ( 1 downto 0 );
     eye_mon_timeout_r : in STD_LOGIC;
@@ -5946,34 +5996,34 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_ph
   signal viable_tap_found_i_2_n_0 : STD_LOGIC;
   signal viable_tap_found_reg_n_0 : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \best_tap[4]_i_3\ : label is "soft_lutpair97";
-  attribute SOFT_HLUTNM of \cal_state[0]_i_5\ : label is "soft_lutpair101";
-  attribute SOFT_HLUTNM of \cal_state[0]_i_6\ : label is "soft_lutpair109";
-  attribute SOFT_HLUTNM of \cal_state[0]_i_7\ : label is "soft_lutpair101";
-  attribute SOFT_HLUTNM of \cal_state[1]_i_4\ : label is "soft_lutpair104";
-  attribute SOFT_HLUTNM of \cal_state[1]_i_5\ : label is "soft_lutpair109";
-  attribute SOFT_HLUTNM of \cal_state[1]_i_6\ : label is "soft_lutpair103";
-  attribute SOFT_HLUTNM of \cal_state[2]_i_1\ : label is "soft_lutpair106";
-  attribute SOFT_HLUTNM of \cal_state[3]_i_2\ : label is "soft_lutpair107";
-  attribute SOFT_HLUTNM of \cal_state[5]_i_2\ : label is "soft_lutpair97";
-  attribute SOFT_HLUTNM of \cal_state[7]_i_2\ : label is "soft_lutpair106";
-  attribute SOFT_HLUTNM of \cal_state[8]_i_6\ : label is "soft_lutpair103";
-  attribute SOFT_HLUTNM of \cal_state[9]_i_2\ : label is "soft_lutpair105";
-  attribute SOFT_HLUTNM of \current_tap[1]_i_2\ : label is "soft_lutpair104";
-  attribute SOFT_HLUTNM of \current_tap[2]_i_2\ : label is "soft_lutpair108";
-  attribute SOFT_HLUTNM of \current_tap[3]_i_2\ : label is "soft_lutpair108";
-  attribute SOFT_HLUTNM of \current_tap[4]_i_3\ : label is "soft_lutpair98";
-  attribute SOFT_HLUTNM of \current_tap[4]_i_4\ : label is "soft_lutpair102";
-  attribute SOFT_HLUTNM of \current_tap[4]_i_5\ : label is "soft_lutpair99";
-  attribute SOFT_HLUTNM of \current_tap[4]_i_6\ : label is "soft_lutpair102";
-  attribute SOFT_HLUTNM of \maint_best_tap[0]_i_1\ : label is "soft_lutpair110";
-  attribute SOFT_HLUTNM of \maint_best_tap[1]_i_1\ : label is "soft_lutpair110";
-  attribute SOFT_HLUTNM of \maint_best_tap[2]_i_1\ : label is "soft_lutpair100";
-  attribute SOFT_HLUTNM of \maint_best_tap[3]_i_1\ : label is "soft_lutpair100";
-  attribute SOFT_HLUTNM of o_data_idelay_update_i_3 : label is "soft_lutpair99";
-  attribute SOFT_HLUTNM of \o_eye_mon_done_fe[1]_i_3\ : label is "soft_lutpair98";
-  attribute SOFT_HLUTNM of o_initial_cal_done_i_1 : label is "soft_lutpair105";
-  attribute SOFT_HLUTNM of \panic_bucket[3]_i_4\ : label is "soft_lutpair107";
+  attribute SOFT_HLUTNM of \best_tap[4]_i_3\ : label is "soft_lutpair98";
+  attribute SOFT_HLUTNM of \cal_state[0]_i_5\ : label is "soft_lutpair102";
+  attribute SOFT_HLUTNM of \cal_state[0]_i_6\ : label is "soft_lutpair110";
+  attribute SOFT_HLUTNM of \cal_state[0]_i_7\ : label is "soft_lutpair102";
+  attribute SOFT_HLUTNM of \cal_state[1]_i_4\ : label is "soft_lutpair105";
+  attribute SOFT_HLUTNM of \cal_state[1]_i_5\ : label is "soft_lutpair110";
+  attribute SOFT_HLUTNM of \cal_state[1]_i_6\ : label is "soft_lutpair104";
+  attribute SOFT_HLUTNM of \cal_state[2]_i_1\ : label is "soft_lutpair107";
+  attribute SOFT_HLUTNM of \cal_state[3]_i_2\ : label is "soft_lutpair108";
+  attribute SOFT_HLUTNM of \cal_state[5]_i_2\ : label is "soft_lutpair98";
+  attribute SOFT_HLUTNM of \cal_state[7]_i_2\ : label is "soft_lutpair107";
+  attribute SOFT_HLUTNM of \cal_state[8]_i_6\ : label is "soft_lutpair104";
+  attribute SOFT_HLUTNM of \cal_state[9]_i_2\ : label is "soft_lutpair106";
+  attribute SOFT_HLUTNM of \current_tap[1]_i_2\ : label is "soft_lutpair105";
+  attribute SOFT_HLUTNM of \current_tap[2]_i_2\ : label is "soft_lutpair109";
+  attribute SOFT_HLUTNM of \current_tap[3]_i_2\ : label is "soft_lutpair109";
+  attribute SOFT_HLUTNM of \current_tap[4]_i_3\ : label is "soft_lutpair99";
+  attribute SOFT_HLUTNM of \current_tap[4]_i_4\ : label is "soft_lutpair103";
+  attribute SOFT_HLUTNM of \current_tap[4]_i_5\ : label is "soft_lutpair100";
+  attribute SOFT_HLUTNM of \current_tap[4]_i_6\ : label is "soft_lutpair103";
+  attribute SOFT_HLUTNM of \maint_best_tap[0]_i_1\ : label is "soft_lutpair111";
+  attribute SOFT_HLUTNM of \maint_best_tap[1]_i_1\ : label is "soft_lutpair111";
+  attribute SOFT_HLUTNM of \maint_best_tap[2]_i_1\ : label is "soft_lutpair101";
+  attribute SOFT_HLUTNM of \maint_best_tap[3]_i_1\ : label is "soft_lutpair101";
+  attribute SOFT_HLUTNM of o_data_idelay_update_i_3 : label is "soft_lutpair100";
+  attribute SOFT_HLUTNM of \o_eye_mon_done_fe[1]_i_3\ : label is "soft_lutpair99";
+  attribute SOFT_HLUTNM of o_initial_cal_done_i_1 : label is "soft_lutpair106";
+  attribute SOFT_HLUTNM of \panic_bucket[3]_i_4\ : label is "soft_lutpair108";
 begin
   Q(4 downto 0) <= \^q\(4 downto 0);
   phy_init_cal_done_104 <= \^phy_init_cal_done_104\;
@@ -6046,7 +6096,7 @@ begin
     );
 \best_tap_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \^q\(0),
       Q => best_tap(0),
@@ -6054,7 +6104,7 @@ begin
     );
 \best_tap_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \^q\(1),
       Q => best_tap(1),
@@ -6062,7 +6112,7 @@ begin
     );
 \best_tap_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \^q\(2),
       Q => best_tap(2),
@@ -6070,7 +6120,7 @@ begin
     );
 \best_tap_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \^q\(3),
       Q => best_tap(3),
@@ -6078,7 +6128,7 @@ begin
     );
 \best_tap_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \^q\(4),
       Q => best_tap(4),
@@ -6086,7 +6136,7 @@ begin
     );
 \best_tap_window_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \current_tap_window_reg_n_0_[0]\,
       Q => best_tap_window(0),
@@ -6094,7 +6144,7 @@ begin
     );
 \best_tap_window_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \current_tap_window_reg_n_0_[1]\,
       Q => best_tap_window(1),
@@ -6102,7 +6152,7 @@ begin
     );
 \best_tap_window_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \current_tap_window_reg_n_0_[2]\,
       Q => best_tap_window(2),
@@ -6110,7 +6160,7 @@ begin
     );
 \best_tap_window_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \current_tap_window_reg_n_0_[3]\,
       Q => best_tap_window(3),
@@ -6118,7 +6168,7 @@ begin
     );
 \best_tap_window_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => best_tap_window0,
       D => \current_tap_window_reg_n_0_[4]\,
       Q => best_tap_window(4),
@@ -6529,7 +6579,7 @@ begin
     );
 \cal_state_reg[0]\: unisim.vcomponents.FDSE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(0),
       Q => \cal_state_reg_n_0_[0]\,
@@ -6537,7 +6587,7 @@ begin
     );
 \cal_state_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(10),
       Q => \cal_state_reg_n_0_[10]\,
@@ -6545,7 +6595,7 @@ begin
     );
 \cal_state_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(11),
       Q => \cal_state_reg_n_0_[11]\,
@@ -6553,7 +6603,7 @@ begin
     );
 \cal_state_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(1),
       Q => \cal_state_reg_n_0_[1]\,
@@ -6561,7 +6611,7 @@ begin
     );
 \cal_state_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(2),
       Q => \cal_state_reg_n_0_[2]\,
@@ -6569,7 +6619,7 @@ begin
     );
 \cal_state_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(3),
       Q => \cal_state_reg_n_0_[3]\,
@@ -6577,7 +6627,7 @@ begin
     );
 \cal_state_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(4),
       Q => \cal_state_reg_n_0_[4]\,
@@ -6585,7 +6635,7 @@ begin
     );
 \cal_state_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(5),
       Q => \cal_state_reg_n_0_[5]\,
@@ -6593,7 +6643,7 @@ begin
     );
 \cal_state_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(6),
       Q => \cal_state_reg_n_0_[6]\,
@@ -6601,7 +6651,7 @@ begin
     );
 \cal_state_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => cal_state(7),
       Q => \cal_state_reg_n_0_[7]\,
@@ -6609,7 +6659,7 @@ begin
     );
 \cal_state_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => D(0),
       Q => \cal_state_reg_n_0_[8]\,
@@ -6617,7 +6667,7 @@ begin
     );
 \cal_state_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => D(1),
       Q => \cal_state_reg_n_0_[9]\,
@@ -6794,7 +6844,7 @@ begin
     );
 \current_tap_reg[0]\: unisim.vcomponents.FDSE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \current_tap[4]_i_1_n_0\,
       D => \current_tap[0]_i_1_n_0\,
       Q => \^q\(0),
@@ -6802,7 +6852,7 @@ begin
     );
 \current_tap_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \current_tap[4]_i_1_n_0\,
       D => \current_tap[1]_i_1_n_0\,
       Q => \^q\(1),
@@ -6810,7 +6860,7 @@ begin
     );
 \current_tap_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \current_tap[4]_i_1_n_0\,
       D => \current_tap[2]_i_1_n_0\,
       Q => \^q\(2),
@@ -6818,7 +6868,7 @@ begin
     );
 \current_tap_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \current_tap[4]_i_1_n_0\,
       D => \current_tap[3]_i_1_n_0\,
       Q => \^q\(3),
@@ -6826,7 +6876,7 @@ begin
     );
 \current_tap_reg[4]\: unisim.vcomponents.FDSE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => \current_tap[4]_i_1_n_0\,
       D => \current_tap[4]_i_2_n_0\,
       Q => \^q\(4),
@@ -6847,7 +6897,7 @@ begin
     );
 \current_tap_window_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(5),
       D => \right_margin_reg[4]_0\(0),
       Q => \current_tap_window_reg_n_0_[0]\,
@@ -6855,7 +6905,7 @@ begin
     );
 \current_tap_window_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(5),
       D => \right_margin_reg[4]_0\(1),
       Q => \current_tap_window_reg_n_0_[1]\,
@@ -6863,7 +6913,7 @@ begin
     );
 \current_tap_window_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(5),
       D => \right_margin_reg[4]_0\(2),
       Q => \current_tap_window_reg_n_0_[2]\,
@@ -6871,7 +6921,7 @@ begin
     );
 \current_tap_window_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(5),
       D => \right_margin_reg[4]_0\(3),
       Q => \current_tap_window_reg_n_0_[3]\,
@@ -6879,7 +6929,7 @@ begin
     );
 \current_tap_window_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(5),
       D => \right_margin_reg[4]_0\(4),
       Q => \current_tap_window_reg_n_0_[4]\,
@@ -6922,7 +6972,7 @@ initial_cal_complete_i_2: unisim.vcomponents.LUT2
     );
 initial_cal_complete_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => initial_cal_complete_i_1_n_0,
       Q => initial_cal_complete,
@@ -6984,7 +7034,7 @@ initial_cal_complete_reg: unisim.vcomponents.FDRE
     );
 \maint_best_tap_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(10),
       D => \maint_best_tap[0]_i_1_n_0\,
       Q => \maint_best_tap_reg_n_0_[0]\,
@@ -6992,7 +7042,7 @@ initial_cal_complete_reg: unisim.vcomponents.FDRE
     );
 \maint_best_tap_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(10),
       D => \maint_best_tap[1]_i_1_n_0\,
       Q => \maint_best_tap_reg_n_0_[1]\,
@@ -7000,7 +7050,7 @@ initial_cal_complete_reg: unisim.vcomponents.FDRE
     );
 \maint_best_tap_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(10),
       D => \maint_best_tap[2]_i_1_n_0\,
       Q => \maint_best_tap_reg_n_0_[2]\,
@@ -7008,7 +7058,7 @@ initial_cal_complete_reg: unisim.vcomponents.FDRE
     );
 \maint_best_tap_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(10),
       D => \maint_best_tap[3]_i_1_n_0\,
       Q => \maint_best_tap_reg_n_0_[3]\,
@@ -7016,7 +7066,7 @@ initial_cal_complete_reg: unisim.vcomponents.FDRE
     );
 \maint_best_tap_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => cal_state(10),
       D => \maint_best_tap[4]_i_1_n_0\,
       Q => \maint_best_tap_reg_n_0_[4]\,
@@ -7059,7 +7109,7 @@ o_data_idelay_update_i_3: unisim.vcomponents.LUT3
     );
 o_data_idelay_update_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => o_data_idelay_update0,
       Q => E(0),
@@ -7102,7 +7152,7 @@ o_data_idelay_update_reg: unisim.vcomponents.FDRE
     );
 \o_eye_mon_done_fe_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => o_eye_mon_done_reg_0(0),
       Q => eye_mon_done_fe(0),
@@ -7110,7 +7160,7 @@ o_data_idelay_update_reg: unisim.vcomponents.FDRE
     );
 \o_eye_mon_done_fe_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => eye_mon_done_fe(0),
       Q => eye_mon_done_fe(1),
@@ -7143,7 +7193,7 @@ o_initial_cal_done_i_1: unisim.vcomponents.LUT5
     );
 o_initial_cal_done_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => o_initial_cal_done_i_1_n_0,
       Q => \^phy_init_cal_done_104\,
@@ -7185,7 +7235,7 @@ viable_tap_found_i_2: unisim.vcomponents.LUT5
     );
 viable_tap_found_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => viable_tap_found_i_1_n_0,
       Q => viable_tap_found_reg_n_0,
@@ -7199,8 +7249,8 @@ use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block is
   port (
     data_out : out STD_LOGIC;
-    mmcm_locked : in STD_LOGIC;
-    clk125m : in STD_LOGIC
+    mmcm_locked_out : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block : entity is "gig_ethernet_pcs_pma_0_sync_block";
@@ -7246,9 +7296,9 @@ data_sync_reg1: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => mmcm_locked,
+      D => mmcm_locked_out,
       Q => data_sync1,
       R => '0'
     );
@@ -7257,7 +7307,7 @@ data_sync_reg2: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync1,
       Q => data_sync2,
@@ -7268,7 +7318,7 @@ data_sync_reg3: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync2,
       Q => data_sync3,
@@ -7279,7 +7329,7 @@ data_sync_reg4: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync3,
       Q => data_sync4,
@@ -7290,7 +7340,7 @@ data_sync_reg5: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync4,
       Q => data_sync5,
@@ -7301,7 +7351,7 @@ data_sync_reg6: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync5,
       Q => data_out,
@@ -7316,7 +7366,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_0 is
   port (
     data_out : out STD_LOGIC;
     speed_is_100 : in STD_LOGIC;
-    clk125m : in STD_LOGIC
+    refclk125_n : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_0 : entity is "gig_ethernet_pcs_pma_0_sync_block";
@@ -7362,7 +7412,7 @@ data_sync_reg1: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => speed_is_100,
       Q => data_sync1,
@@ -7373,7 +7423,7 @@ data_sync_reg2: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync1,
       Q => data_sync2,
@@ -7384,7 +7434,7 @@ data_sync_reg3: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync2,
       Q => data_sync3,
@@ -7395,7 +7445,7 @@ data_sync_reg4: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync3,
       Q => data_sync4,
@@ -7406,7 +7456,7 @@ data_sync_reg5: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync4,
       Q => data_sync5,
@@ -7417,7 +7467,7 @@ data_sync_reg6: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync5,
       Q => data_out,
@@ -7432,7 +7482,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_1 is
   port (
     data_out : out STD_LOGIC;
     speed_is_10_100 : in STD_LOGIC;
-    clk125m : in STD_LOGIC
+    refclk125_n : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_1 : entity is "gig_ethernet_pcs_pma_0_sync_block";
@@ -7478,7 +7528,7 @@ data_sync_reg1: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => speed_is_10_100,
       Q => data_sync1,
@@ -7489,7 +7539,7 @@ data_sync_reg2: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync1,
       Q => data_sync2,
@@ -7500,7 +7550,7 @@ data_sync_reg3: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync2,
       Q => data_sync3,
@@ -7511,7 +7561,7 @@ data_sync_reg4: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync3,
       Q => data_sync4,
@@ -7522,7 +7572,7 @@ data_sync_reg5: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync4,
       Q => data_sync5,
@@ -7533,11 +7583,136 @@ data_sync_reg6: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync5,
       Q => data_out,
       R => '0'
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_17 is
+  port (
+    D : out STD_LOGIC_VECTOR ( 0 to 0 );
+    mmcm_locked_out : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC
+  );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_17 : entity is "gig_ethernet_pcs_pma_0_sync_block";
+end gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_17;
+
+architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_17 is
+  signal data_sync1 : STD_LOGIC;
+  signal data_sync2 : STD_LOGIC;
+  signal data_sync3 : STD_LOGIC;
+  signal data_sync4 : STD_LOGIC;
+  signal data_sync5 : STD_LOGIC;
+  signal mmcm_locked_sync_125 : STD_LOGIC;
+  attribute ASYNC_REG : boolean;
+  attribute ASYNC_REG of data_sync_reg1 : label is std.standard.true;
+  attribute BOX_TYPE : string;
+  attribute BOX_TYPE of data_sync_reg1 : label is "PRIMITIVE";
+  attribute SHREG_EXTRACT : string;
+  attribute SHREG_EXTRACT of data_sync_reg1 : label is "no";
+  attribute XILINX_LEGACY_PRIM : string;
+  attribute XILINX_LEGACY_PRIM of data_sync_reg1 : label is "FD";
+  attribute ASYNC_REG of data_sync_reg2 : label is std.standard.true;
+  attribute BOX_TYPE of data_sync_reg2 : label is "PRIMITIVE";
+  attribute SHREG_EXTRACT of data_sync_reg2 : label is "no";
+  attribute XILINX_LEGACY_PRIM of data_sync_reg2 : label is "FD";
+  attribute ASYNC_REG of data_sync_reg3 : label is std.standard.true;
+  attribute BOX_TYPE of data_sync_reg3 : label is "PRIMITIVE";
+  attribute SHREG_EXTRACT of data_sync_reg3 : label is "no";
+  attribute XILINX_LEGACY_PRIM of data_sync_reg3 : label is "FD";
+  attribute ASYNC_REG of data_sync_reg4 : label is std.standard.true;
+  attribute BOX_TYPE of data_sync_reg4 : label is "PRIMITIVE";
+  attribute SHREG_EXTRACT of data_sync_reg4 : label is "no";
+  attribute XILINX_LEGACY_PRIM of data_sync_reg4 : label is "FD";
+  attribute ASYNC_REG of data_sync_reg5 : label is std.standard.true;
+  attribute BOX_TYPE of data_sync_reg5 : label is "PRIMITIVE";
+  attribute SHREG_EXTRACT of data_sync_reg5 : label is "no";
+  attribute XILINX_LEGACY_PRIM of data_sync_reg5 : label is "FD";
+  attribute ASYNC_REG of data_sync_reg6 : label is std.standard.true;
+  attribute BOX_TYPE of data_sync_reg6 : label is "PRIMITIVE";
+  attribute SHREG_EXTRACT of data_sync_reg6 : label is "no";
+  attribute XILINX_LEGACY_PRIM of data_sync_reg6 : label is "FD";
+begin
+data_sync_reg1: unisim.vcomponents.FDRE
+    generic map(
+      INIT => '0'
+    )
+        port map (
+      C => refclk125_n,
+      CE => '1',
+      D => mmcm_locked_out,
+      Q => data_sync1,
+      R => '0'
+    );
+data_sync_reg2: unisim.vcomponents.FDRE
+    generic map(
+      INIT => '0'
+    )
+        port map (
+      C => refclk125_n,
+      CE => '1',
+      D => data_sync1,
+      Q => data_sync2,
+      R => '0'
+    );
+data_sync_reg3: unisim.vcomponents.FDRE
+    generic map(
+      INIT => '0'
+    )
+        port map (
+      C => refclk125_n,
+      CE => '1',
+      D => data_sync2,
+      Q => data_sync3,
+      R => '0'
+    );
+data_sync_reg4: unisim.vcomponents.FDRE
+    generic map(
+      INIT => '0'
+    )
+        port map (
+      C => refclk125_n,
+      CE => '1',
+      D => data_sync3,
+      Q => data_sync4,
+      R => '0'
+    );
+data_sync_reg5: unisim.vcomponents.FDRE
+    generic map(
+      INIT => '0'
+    )
+        port map (
+      C => refclk125_n,
+      CE => '1',
+      D => data_sync4,
+      Q => data_sync5,
+      R => '0'
+    );
+data_sync_reg6: unisim.vcomponents.FDRE
+    generic map(
+      INIT => '0'
+    )
+        port map (
+      C => refclk125_n,
+      CE => '1',
+      D => data_sync5,
+      Q => mmcm_locked_sync_125,
+      R => '0'
+    );
+\rst_dly[0]_i_1__0\: unisim.vcomponents.LUT1
+    generic map(
+      INIT => X"1"
+    )
+        port map (
+      I0 => mmcm_locked_sync_125,
+      O => D(0)
     );
 end STRUCTURE;
 library IEEE;
@@ -7549,7 +7724,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_6 is
     enablealign_r_reg : out STD_LOGIC;
     signal_detect : out STD_LOGIC;
     data_in : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     enablealign : in STD_LOGIC;
     signal_detect_0 : in STD_LOGIC
   );
@@ -7593,15 +7768,15 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_blo
   attribute SHREG_EXTRACT of data_sync_reg6 : label is "no";
   attribute XILINX_LEGACY_PRIM of data_sync_reg6 : label is "FD";
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of enablealign_r_i_1 : label is "soft_lutpair142";
-  attribute SOFT_HLUTNM of gig_ethernet_pcs_pma_0_core_i_1 : label is "soft_lutpair142";
+  attribute SOFT_HLUTNM of enablealign_r_i_1 : label is "soft_lutpair143";
+  attribute SOFT_HLUTNM of gig_ethernet_pcs_pma_0_core_i_1 : label is "soft_lutpair143";
 begin
 data_sync_reg1: unisim.vcomponents.FDRE
     generic map(
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_in,
       Q => data_sync1,
@@ -7612,7 +7787,7 @@ data_sync_reg2: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync1,
       Q => data_sync2,
@@ -7623,7 +7798,7 @@ data_sync_reg3: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync2,
       Q => data_sync3,
@@ -7634,7 +7809,7 @@ data_sync_reg4: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync3,
       Q => data_sync4,
@@ -7645,7 +7820,7 @@ data_sync_reg5: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync4,
       Q => data_sync5,
@@ -7656,7 +7831,7 @@ data_sync_reg6: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data_sync5,
       Q => lvds_phy_ready,
@@ -7690,11 +7865,11 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_9 is
     E : out STD_LOGIC_VECTOR ( 0 to 0 );
     D : out STD_LOGIC_VECTOR ( 2 downto 0 );
     data_out : out STD_LOGIC;
-    \code_error_stretch_reg[3]\ : in STD_LOGIC_VECTOR ( 3 downto 0 );
     Q : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    \panic_bucket_reg[3]\ : in STD_LOGIC_VECTOR ( 3 downto 0 );
     \o_eye_mon_done_fe_reg[0]\ : in STD_LOGIC;
     bad_mon_trig : in STD_LOGIC;
-    clk104 : in STD_LOGIC
+    refclk125_n : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_9 : entity is "gig_ethernet_pcs_pma_0_sync_block";
@@ -7738,8 +7913,8 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_blo
   attribute SHREG_EXTRACT of data_sync_reg6 : label is "no";
   attribute XILINX_LEGACY_PRIM of data_sync_reg6 : label is "FD";
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \panic_bucket[1]_i_1\ : label is "soft_lutpair118";
-  attribute SOFT_HLUTNM of \panic_bucket[2]_i_1\ : label is "soft_lutpair118";
+  attribute SOFT_HLUTNM of \panic_bucket[1]_i_1\ : label is "soft_lutpair119";
+  attribute SOFT_HLUTNM of \panic_bucket[2]_i_1\ : label is "soft_lutpair119";
 begin
   data_out <= \^data_out\;
 data_sync1_i_1: unisim.vcomponents.LUT4
@@ -7747,10 +7922,10 @@ data_sync1_i_1: unisim.vcomponents.LUT4
       INIT => X"FFFE"
     )
         port map (
-      I0 => \code_error_stretch_reg[3]\(1),
-      I1 => \code_error_stretch_reg[3]\(0),
-      I2 => \code_error_stretch_reg[3]\(2),
-      I3 => \code_error_stretch_reg[3]\(3),
+      I0 => Q(1),
+      I1 => Q(0),
+      I2 => Q(2),
+      I3 => Q(3),
       O => data_sync1_i_1_n_0
     );
 data_sync_reg1: unisim.vcomponents.FDRE
@@ -7758,7 +7933,7 @@ data_sync_reg1: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => data_sync1_i_1_n_0,
       Q => data_sync1,
@@ -7769,7 +7944,7 @@ data_sync_reg2: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => data_sync1,
       Q => data_sync2,
@@ -7780,7 +7955,7 @@ data_sync_reg3: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => data_sync2,
       Q => data_sync3,
@@ -7791,7 +7966,7 @@ data_sync_reg4: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => data_sync3,
       Q => data_sync4,
@@ -7802,7 +7977,7 @@ data_sync_reg5: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => data_sync4,
       Q => data_sync5,
@@ -7813,7 +7988,7 @@ data_sync_reg6: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk104,
+      C => refclk125_n,
       CE => '1',
       D => data_sync5,
       Q => \^data_out\,
@@ -7824,8 +7999,8 @@ data_sync_reg6: unisim.vcomponents.FDRE
       INIT => X"6999"
     )
         port map (
-      I0 => Q(0),
-      I1 => Q(1),
+      I0 => \panic_bucket_reg[3]\(0),
+      I1 => \panic_bucket_reg[3]\(1),
       I2 => bad_mon_trig,
       I3 => \^data_out\,
       O => D(0)
@@ -7835,9 +8010,9 @@ data_sync_reg6: unisim.vcomponents.FDRE
       INIT => X"6AA9A9A9"
     )
         port map (
-      I0 => Q(2),
-      I1 => Q(1),
-      I2 => Q(0),
+      I0 => \panic_bucket_reg[3]\(2),
+      I1 => \panic_bucket_reg[3]\(1),
+      I2 => \panic_bucket_reg[3]\(0),
       I3 => bad_mon_trig,
       I4 => \^data_out\,
       O => D(1)
@@ -7848,10 +8023,10 @@ data_sync_reg6: unisim.vcomponents.FDRE
     )
         port map (
       I0 => \panic_bucket1__0\,
-      I1 => Q(2),
-      I2 => Q(3),
-      I3 => Q(0),
-      I4 => Q(1),
+      I1 => \panic_bucket_reg[3]\(2),
+      I2 => \panic_bucket_reg[3]\(3),
+      I3 => \panic_bucket_reg[3]\(0),
+      I4 => \panic_bucket_reg[3]\(1),
       I5 => \o_eye_mon_done_fe_reg[0]\,
       O => E(0)
     );
@@ -7860,10 +8035,10 @@ data_sync_reg6: unisim.vcomponents.FDRE
       INIT => X"6AAAAAA9AAA9AAA9"
     )
         port map (
-      I0 => Q(3),
-      I1 => Q(2),
-      I2 => Q(1),
-      I3 => Q(0),
+      I0 => \panic_bucket_reg[3]\(3),
+      I1 => \panic_bucket_reg[3]\(2),
+      I2 => \panic_bucket_reg[3]\(1),
+      I3 => \panic_bucket_reg[3]\(0),
       I4 => bad_mon_trig,
       I5 => \^data_out\,
       O => D(2)
@@ -7890,7 +8065,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_tx_rate_adapt is
     reset_out : in STD_LOGIC;
     E : in STD_LOGIC_VECTOR ( 0 to 0 );
     gmii_tx_en_0 : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     gmii_tx_er_0 : in STD_LOGIC;
     gmii_txd : in STD_LOGIC_VECTOR ( 7 downto 0 )
   );
@@ -7905,7 +8080,7 @@ gmii_tx_en_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_tx_en_0,
       Q => gmii_tx_en,
@@ -7916,7 +8091,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_tx_er_0,
       Q => gmii_tx_er,
@@ -7927,7 +8102,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_txd(0),
       Q => Q(0),
@@ -7938,7 +8113,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_txd(1),
       Q => Q(1),
@@ -7949,7 +8124,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_txd(2),
       Q => Q(2),
@@ -7960,7 +8135,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_txd(3),
       Q => Q(3),
@@ -7971,7 +8146,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_txd(4),
       Q => Q(4),
@@ -7982,7 +8157,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_txd(5),
       Q => Q(5),
@@ -7993,7 +8168,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_txd(6),
       Q => Q(6),
@@ -8004,7 +8179,7 @@ gmii_tx_er_out_reg: unisim.vcomponents.FDRE
       INIT => '0'
     )
         port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => gmii_txd(7),
       Q => Q(7),
@@ -8260,40 +8435,40 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_AUTO_NEG is
   signal NLW_LINK_TIMER_SATURATED_COMB0_carry_O_UNCONNECTED : STD_LOGIC_VECTOR ( 3 downto 0 );
   signal \NLW_TIMER4096_reg[8]_i_1_CO_UNCONNECTED\ : STD_LOGIC_VECTOR ( 3 to 3 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of ABILITY_MATCH_i_2 : label is "soft_lutpair14";
-  attribute SOFT_HLUTNM of AN_SYNC_STATUS_i_1 : label is "soft_lutpair5";
-  attribute SOFT_HLUTNM of GENERATE_REMOTE_FAULT_i_3 : label is "soft_lutpair6";
-  attribute SOFT_HLUTNM of GENERATE_REMOTE_FAULT_i_4 : label is "soft_lutpair6";
-  attribute SOFT_HLUTNM of IDLE_MATCH_2_i_1 : label is "soft_lutpair12";
-  attribute SOFT_HLUTNM of IDLE_MATCH_i_1 : label is "soft_lutpair12";
-  attribute SOFT_HLUTNM of \LINK_TIMER[0]_i_1\ : label is "soft_lutpair15";
-  attribute SOFT_HLUTNM of \LINK_TIMER[1]_i_1\ : label is "soft_lutpair15";
-  attribute SOFT_HLUTNM of \LINK_TIMER[2]_i_1\ : label is "soft_lutpair10";
-  attribute SOFT_HLUTNM of \LINK_TIMER[3]_i_1\ : label is "soft_lutpair10";
-  attribute SOFT_HLUTNM of \LINK_TIMER[4]_i_1\ : label is "soft_lutpair7";
-  attribute SOFT_HLUTNM of \LINK_TIMER[7]_i_1\ : label is "soft_lutpair8";
-  attribute SOFT_HLUTNM of \LINK_TIMER[8]_i_2\ : label is "soft_lutpair7";
-  attribute SOFT_HLUTNM of \LINK_TIMER[9]_i_3\ : label is "soft_lutpair8";
-  attribute SOFT_HLUTNM of MR_RESTART_AN_INT_i_2 : label is "soft_lutpair3";
-  attribute SOFT_HLUTNM of \RX_CONFIG_SNAPSHOT[15]_i_2\ : label is "soft_lutpair13";
-  attribute SOFT_HLUTNM of \RX_CONFIG_SNAPSHOT[15]_i_3\ : label is "soft_lutpair16";
-  attribute SOFT_HLUTNM of START_LINK_TIMER_REG_i_1 : label is "soft_lutpair9";
-  attribute SOFT_HLUTNM of START_LINK_TIMER_REG_i_3 : label is "soft_lutpair4";
-  attribute SOFT_HLUTNM of \STATE[0]_i_3\ : label is "soft_lutpair1";
-  attribute SOFT_HLUTNM of \STATE[0]_i_4\ : label is "soft_lutpair0";
-  attribute SOFT_HLUTNM of \STATE[0]_i_6\ : label is "soft_lutpair2";
-  attribute SOFT_HLUTNM of \STATE[1]_i_2\ : label is "soft_lutpair2";
-  attribute SOFT_HLUTNM of \STATE[1]_i_3\ : label is "soft_lutpair13";
-  attribute SOFT_HLUTNM of \STATE[2]_i_1\ : label is "soft_lutpair9";
-  attribute SOFT_HLUTNM of \STATE[2]_i_3\ : label is "soft_lutpair1";
-  attribute SOFT_HLUTNM of \STATE[2]_i_4\ : label is "soft_lutpair0";
-  attribute SOFT_HLUTNM of \STATE[2]_i_5\ : label is "soft_lutpair14";
-  attribute SOFT_HLUTNM of \STATE[2]_i_6\ : label is "soft_lutpair4";
-  attribute SOFT_HLUTNM of \STATE[3]_i_2\ : label is "soft_lutpair11";
-  attribute SOFT_HLUTNM of SYNC_STATUS_HELD_i_1 : label is "soft_lutpair5";
-  attribute SOFT_HLUTNM of \TX_CONFIG_REG_INT[14]_i_1\ : label is "soft_lutpair3";
-  attribute SOFT_HLUTNM of XMIT_CONFIG_INT_i_3 : label is "soft_lutpair16";
-  attribute SOFT_HLUTNM of \XMIT_DATA_INT_i_1__0\ : label is "soft_lutpair11";
+  attribute SOFT_HLUTNM of ABILITY_MATCH_i_2 : label is "soft_lutpair15";
+  attribute SOFT_HLUTNM of AN_SYNC_STATUS_i_1 : label is "soft_lutpair6";
+  attribute SOFT_HLUTNM of GENERATE_REMOTE_FAULT_i_3 : label is "soft_lutpair7";
+  attribute SOFT_HLUTNM of GENERATE_REMOTE_FAULT_i_4 : label is "soft_lutpair7";
+  attribute SOFT_HLUTNM of IDLE_MATCH_2_i_1 : label is "soft_lutpair13";
+  attribute SOFT_HLUTNM of IDLE_MATCH_i_1 : label is "soft_lutpair13";
+  attribute SOFT_HLUTNM of \LINK_TIMER[0]_i_1\ : label is "soft_lutpair16";
+  attribute SOFT_HLUTNM of \LINK_TIMER[1]_i_1\ : label is "soft_lutpair16";
+  attribute SOFT_HLUTNM of \LINK_TIMER[2]_i_1\ : label is "soft_lutpair11";
+  attribute SOFT_HLUTNM of \LINK_TIMER[3]_i_1\ : label is "soft_lutpair11";
+  attribute SOFT_HLUTNM of \LINK_TIMER[4]_i_1\ : label is "soft_lutpair8";
+  attribute SOFT_HLUTNM of \LINK_TIMER[7]_i_1\ : label is "soft_lutpair9";
+  attribute SOFT_HLUTNM of \LINK_TIMER[8]_i_2\ : label is "soft_lutpair8";
+  attribute SOFT_HLUTNM of \LINK_TIMER[9]_i_3\ : label is "soft_lutpair9";
+  attribute SOFT_HLUTNM of MR_RESTART_AN_INT_i_2 : label is "soft_lutpair4";
+  attribute SOFT_HLUTNM of \RX_CONFIG_SNAPSHOT[15]_i_2\ : label is "soft_lutpair14";
+  attribute SOFT_HLUTNM of \RX_CONFIG_SNAPSHOT[15]_i_3\ : label is "soft_lutpair17";
+  attribute SOFT_HLUTNM of START_LINK_TIMER_REG_i_1 : label is "soft_lutpair10";
+  attribute SOFT_HLUTNM of START_LINK_TIMER_REG_i_3 : label is "soft_lutpair5";
+  attribute SOFT_HLUTNM of \STATE[0]_i_3\ : label is "soft_lutpair2";
+  attribute SOFT_HLUTNM of \STATE[0]_i_4\ : label is "soft_lutpair1";
+  attribute SOFT_HLUTNM of \STATE[0]_i_6\ : label is "soft_lutpair3";
+  attribute SOFT_HLUTNM of \STATE[1]_i_2\ : label is "soft_lutpair3";
+  attribute SOFT_HLUTNM of \STATE[1]_i_3\ : label is "soft_lutpair14";
+  attribute SOFT_HLUTNM of \STATE[2]_i_1\ : label is "soft_lutpair10";
+  attribute SOFT_HLUTNM of \STATE[2]_i_3\ : label is "soft_lutpair2";
+  attribute SOFT_HLUTNM of \STATE[2]_i_4\ : label is "soft_lutpair1";
+  attribute SOFT_HLUTNM of \STATE[2]_i_5\ : label is "soft_lutpair15";
+  attribute SOFT_HLUTNM of \STATE[2]_i_6\ : label is "soft_lutpair5";
+  attribute SOFT_HLUTNM of \STATE[3]_i_2\ : label is "soft_lutpair12";
+  attribute SOFT_HLUTNM of SYNC_STATUS_HELD_i_1 : label is "soft_lutpair6";
+  attribute SOFT_HLUTNM of \TX_CONFIG_REG_INT[14]_i_1\ : label is "soft_lutpair4";
+  attribute SOFT_HLUTNM of XMIT_CONFIG_INT_i_3 : label is "soft_lutpair17";
+  attribute SOFT_HLUTNM of \XMIT_DATA_INT_i_1__0\ : label is "soft_lutpair12";
 begin
   CO(0) <= \^co\(0);
   CONFIG_REG_MATCH_reg_0(7 downto 0) <= \^config_reg_match_reg_0\(7 downto 0);
@@ -10786,13 +10961,13 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_MDIO_INTERFACE is
   attribute RTL_KEEP of p_0_in11_in : signal is "yes";
   signal p_1_in : STD_LOGIC_VECTOR ( 13 downto 4 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of CLEAR_STATUS_REG_i_1 : label is "soft_lutpair24";
-  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.ISOLATE_REG_i_1\ : label is "soft_lutpair21";
-  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.ISOLATE_REG_i_2\ : label is "soft_lutpair22";
-  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.LOOPBACK_REG_i_1\ : label is "soft_lutpair22";
-  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.POWERDOWN_REG_i_2\ : label is "soft_lutpair24";
-  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.UNIDIRECTIONAL_ENABLE_REG_i_1\ : label is "soft_lutpair21";
-  attribute SOFT_HLUTNM of \FSM_onehot_STATE[9]_i_2\ : label is "soft_lutpair20";
+  attribute SOFT_HLUTNM of CLEAR_STATUS_REG_i_1 : label is "soft_lutpair25";
+  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.ISOLATE_REG_i_1\ : label is "soft_lutpair22";
+  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.ISOLATE_REG_i_2\ : label is "soft_lutpair23";
+  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.LOOPBACK_REG_i_1\ : label is "soft_lutpair23";
+  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.POWERDOWN_REG_i_2\ : label is "soft_lutpair25";
+  attribute SOFT_HLUTNM of \CONFIG_REG_WITH_AN.UNIDIRECTIONAL_ENABLE_REG_i_1\ : label is "soft_lutpair22";
+  attribute SOFT_HLUTNM of \FSM_onehot_STATE[9]_i_2\ : label is "soft_lutpair21";
   attribute KEEP : string;
   attribute KEEP of \FSM_onehot_STATE_reg[0]\ : label is "yes";
   attribute KEEP of \FSM_onehot_STATE_reg[10]\ : label is "yes";
@@ -10805,17 +10980,17 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_MDIO_INTERFACE is
   attribute KEEP of \FSM_onehot_STATE_reg[7]\ : label is "yes";
   attribute KEEP of \FSM_onehot_STATE_reg[8]\ : label is "yes";
   attribute KEEP of \FSM_onehot_STATE_reg[9]\ : label is "yes";
-  attribute SOFT_HLUTNM of MDIO_OUT_i_3 : label is "soft_lutpair20";
-  attribute SOFT_HLUTNM of MDIO_OUT_i_4 : label is "soft_lutpair25";
-  attribute SOFT_HLUTNM of \OPCODE[1]_i_1\ : label is "soft_lutpair25";
-  attribute SOFT_HLUTNM of \SHIFT_REG[0]_i_1\ : label is "soft_lutpair23";
-  attribute SOFT_HLUTNM of \SHIFT_REG[10]_i_1\ : label is "soft_lutpair17";
-  attribute SOFT_HLUTNM of \SHIFT_REG[14]_i_2\ : label is "soft_lutpair19";
-  attribute SOFT_HLUTNM of \SHIFT_REG[15]_i_4\ : label is "soft_lutpair19";
-  attribute SOFT_HLUTNM of \SHIFT_REG[4]_i_1\ : label is "soft_lutpair23";
-  attribute SOFT_HLUTNM of \SHIFT_REG[5]_i_1\ : label is "soft_lutpair18";
-  attribute SOFT_HLUTNM of \SHIFT_REG[7]_i_2\ : label is "soft_lutpair18";
-  attribute SOFT_HLUTNM of \SHIFT_REG[8]_i_2\ : label is "soft_lutpair17";
+  attribute SOFT_HLUTNM of MDIO_OUT_i_3 : label is "soft_lutpair21";
+  attribute SOFT_HLUTNM of MDIO_OUT_i_4 : label is "soft_lutpair26";
+  attribute SOFT_HLUTNM of \OPCODE[1]_i_1\ : label is "soft_lutpair26";
+  attribute SOFT_HLUTNM of \SHIFT_REG[0]_i_1\ : label is "soft_lutpair24";
+  attribute SOFT_HLUTNM of \SHIFT_REG[10]_i_1\ : label is "soft_lutpair18";
+  attribute SOFT_HLUTNM of \SHIFT_REG[14]_i_2\ : label is "soft_lutpair20";
+  attribute SOFT_HLUTNM of \SHIFT_REG[15]_i_4\ : label is "soft_lutpair20";
+  attribute SOFT_HLUTNM of \SHIFT_REG[4]_i_1\ : label is "soft_lutpair24";
+  attribute SOFT_HLUTNM of \SHIFT_REG[5]_i_1\ : label is "soft_lutpair19";
+  attribute SOFT_HLUTNM of \SHIFT_REG[7]_i_2\ : label is "soft_lutpair19";
+  attribute SOFT_HLUTNM of \SHIFT_REG[8]_i_2\ : label is "soft_lutpair18";
 begin
   \CONFIG_REG_WITH_AN.RESTART_AN_REG_reg\ <= \^config_reg_with_an.restart_an_reg_reg\;
   MDC_RISING_OUT <= \^mdc_rising_out\;
@@ -12493,50 +12668,50 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_RX is
   signal p_0_out : STD_LOGIC_VECTOR ( 11 downto 1 );
   signal p_1_in : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of ABILITY_MATCH_i_3 : label is "soft_lutpair39";
-  attribute SOFT_HLUTNM of \BASEX_REMOTE_FAULT[1]_i_1\ : label is "soft_lutpair41";
-  attribute SOFT_HLUTNM of CGBAD_i_1 : label is "soft_lutpair42";
-  attribute SOFT_HLUTNM of CONSISTENCY_MATCH_i_1 : label is "soft_lutpair41";
-  attribute SOFT_HLUTNM of C_i_1 : label is "soft_lutpair32";
-  attribute SOFT_HLUTNM of FALSE_DATA_i_4 : label is "soft_lutpair40";
-  attribute SOFT_HLUTNM of FALSE_DATA_i_5 : label is "soft_lutpair40";
-  attribute SOFT_HLUTNM of FALSE_K_i_1 : label is "soft_lutpair33";
-  attribute SOFT_HLUTNM of FALSE_NIT_i_1 : label is "soft_lutpair42";
-  attribute SOFT_HLUTNM of I_i_1 : label is "soft_lutpair32";
-  attribute SOFT_HLUTNM of I_i_4 : label is "soft_lutpair30";
-  attribute SOFT_HLUTNM of I_i_5 : label is "soft_lutpair30";
-  attribute SOFT_HLUTNM of K28p5_REG1_i_2 : label is "soft_lutpair33";
+  attribute SOFT_HLUTNM of ABILITY_MATCH_i_3 : label is "soft_lutpair40";
+  attribute SOFT_HLUTNM of \BASEX_REMOTE_FAULT[1]_i_1\ : label is "soft_lutpair42";
+  attribute SOFT_HLUTNM of CGBAD_i_1 : label is "soft_lutpair43";
+  attribute SOFT_HLUTNM of CONSISTENCY_MATCH_i_1 : label is "soft_lutpair42";
+  attribute SOFT_HLUTNM of C_i_1 : label is "soft_lutpair33";
+  attribute SOFT_HLUTNM of FALSE_DATA_i_4 : label is "soft_lutpair41";
+  attribute SOFT_HLUTNM of FALSE_DATA_i_5 : label is "soft_lutpair41";
+  attribute SOFT_HLUTNM of FALSE_K_i_1 : label is "soft_lutpair34";
+  attribute SOFT_HLUTNM of FALSE_NIT_i_1 : label is "soft_lutpair43";
+  attribute SOFT_HLUTNM of I_i_1 : label is "soft_lutpair33";
+  attribute SOFT_HLUTNM of I_i_4 : label is "soft_lutpair31";
+  attribute SOFT_HLUTNM of I_i_5 : label is "soft_lutpair31";
+  attribute SOFT_HLUTNM of K28p5_REG1_i_2 : label is "soft_lutpair34";
   attribute srl_bus_name : string;
-  attribute srl_bus_name of \RXDATA_REG4_reg[0]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
+  attribute srl_bus_name of \RXDATA_REG4_reg[0]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
   attribute srl_name : string;
-  attribute srl_name of \RXDATA_REG4_reg[0]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[0]_srl4 ";
-  attribute srl_bus_name of \RXDATA_REG4_reg[1]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
-  attribute srl_name of \RXDATA_REG4_reg[1]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[1]_srl4 ";
-  attribute srl_bus_name of \RXDATA_REG4_reg[2]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
-  attribute srl_name of \RXDATA_REG4_reg[2]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[2]_srl4 ";
-  attribute srl_bus_name of \RXDATA_REG4_reg[3]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
-  attribute srl_name of \RXDATA_REG4_reg[3]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[3]_srl4 ";
-  attribute srl_bus_name of \RXDATA_REG4_reg[4]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
-  attribute srl_name of \RXDATA_REG4_reg[4]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[4]_srl4 ";
-  attribute srl_bus_name of \RXDATA_REG4_reg[5]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
-  attribute srl_name of \RXDATA_REG4_reg[5]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[5]_srl4 ";
-  attribute srl_bus_name of \RXDATA_REG4_reg[6]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
-  attribute srl_name of \RXDATA_REG4_reg[6]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[6]_srl4 ";
-  attribute srl_bus_name of \RXDATA_REG4_reg[7]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
-  attribute srl_name of \RXDATA_REG4_reg[7]_srl4\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[7]_srl4 ";
-  attribute SOFT_HLUTNM of \RXD[0]_i_1\ : label is "soft_lutpair38";
-  attribute SOFT_HLUTNM of \RXD[1]_i_1\ : label is "soft_lutpair35";
-  attribute SOFT_HLUTNM of \RXD[2]_i_1\ : label is "soft_lutpair37";
-  attribute SOFT_HLUTNM of \RXD[3]_i_1\ : label is "soft_lutpair37";
-  attribute SOFT_HLUTNM of \RXD[4]_i_1\ : label is "soft_lutpair31";
-  attribute SOFT_HLUTNM of \RXD[6]_i_1\ : label is "soft_lutpair35";
-  attribute SOFT_HLUTNM of \RXD[7]_i_1\ : label is "soft_lutpair38";
-  attribute SOFT_HLUTNM of RX_CONFIG_REG_NULL_i_2 : label is "soft_lutpair39";
-  attribute SOFT_HLUTNM of \RX_CONFIG_REG_REG[15]_i_1\ : label is "soft_lutpair36";
-  attribute SOFT_HLUTNM of RX_DATA_ERROR_i_4 : label is "soft_lutpair36";
-  attribute SOFT_HLUTNM of RX_ER_i_3 : label is "soft_lutpair31";
-  attribute SOFT_HLUTNM of R_i_2 : label is "soft_lutpair34";
-  attribute SOFT_HLUTNM of T_i_2 : label is "soft_lutpair34";
+  attribute srl_name of \RXDATA_REG4_reg[0]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[0]_srl4 ";
+  attribute srl_bus_name of \RXDATA_REG4_reg[1]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
+  attribute srl_name of \RXDATA_REG4_reg[1]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[1]_srl4 ";
+  attribute srl_bus_name of \RXDATA_REG4_reg[2]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
+  attribute srl_name of \RXDATA_REG4_reg[2]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[2]_srl4 ";
+  attribute srl_bus_name of \RXDATA_REG4_reg[3]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
+  attribute srl_name of \RXDATA_REG4_reg[3]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[3]_srl4 ";
+  attribute srl_bus_name of \RXDATA_REG4_reg[4]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
+  attribute srl_name of \RXDATA_REG4_reg[4]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[4]_srl4 ";
+  attribute srl_bus_name of \RXDATA_REG4_reg[5]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
+  attribute srl_name of \RXDATA_REG4_reg[5]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[5]_srl4 ";
+  attribute srl_bus_name of \RXDATA_REG4_reg[6]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
+  attribute srl_name of \RXDATA_REG4_reg[6]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[6]_srl4 ";
+  attribute srl_bus_name of \RXDATA_REG4_reg[7]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg ";
+  attribute srl_name of \RXDATA_REG4_reg[7]_srl4\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/RX_GMII_AT_TXOUTCLK.RECEIVER_TXOUTCLK/RXDATA_REG4_reg[7]_srl4 ";
+  attribute SOFT_HLUTNM of \RXD[0]_i_1\ : label is "soft_lutpair39";
+  attribute SOFT_HLUTNM of \RXD[1]_i_1\ : label is "soft_lutpair36";
+  attribute SOFT_HLUTNM of \RXD[2]_i_1\ : label is "soft_lutpair38";
+  attribute SOFT_HLUTNM of \RXD[3]_i_1\ : label is "soft_lutpair38";
+  attribute SOFT_HLUTNM of \RXD[4]_i_1\ : label is "soft_lutpair32";
+  attribute SOFT_HLUTNM of \RXD[6]_i_1\ : label is "soft_lutpair36";
+  attribute SOFT_HLUTNM of \RXD[7]_i_1\ : label is "soft_lutpair39";
+  attribute SOFT_HLUTNM of RX_CONFIG_REG_NULL_i_2 : label is "soft_lutpair40";
+  attribute SOFT_HLUTNM of \RX_CONFIG_REG_REG[15]_i_1\ : label is "soft_lutpair37";
+  attribute SOFT_HLUTNM of RX_DATA_ERROR_i_4 : label is "soft_lutpair37";
+  attribute SOFT_HLUTNM of RX_ER_i_3 : label is "soft_lutpair32";
+  attribute SOFT_HLUTNM of R_i_2 : label is "soft_lutpair35";
+  attribute SOFT_HLUTNM of T_i_2 : label is "soft_lutpair35";
 begin
   ABILITY_MATCH_2_reg(0) <= \^ability_match_2_reg\(0);
   K28p5_REG1 <= \^k28p5_reg1\;
@@ -14343,17 +14518,17 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_SYNCHRONISE is
   signal SYNC_STATUS_i_1_n_0 : STD_LOGIC;
   signal \^enablealign\ : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of ENCOMMAALIGN_i_1 : label is "soft_lutpair45";
-  attribute SOFT_HLUTNM of EVEN_i_1 : label is "soft_lutpair43";
-  attribute SOFT_HLUTNM of \FSM_sequential_STATE[3]_i_3\ : label is "soft_lutpair44";
-  attribute SOFT_HLUTNM of \FSM_sequential_STATE[3]_i_4\ : label is "soft_lutpair43";
+  attribute SOFT_HLUTNM of ENCOMMAALIGN_i_1 : label is "soft_lutpair46";
+  attribute SOFT_HLUTNM of EVEN_i_1 : label is "soft_lutpair44";
+  attribute SOFT_HLUTNM of \FSM_sequential_STATE[3]_i_3\ : label is "soft_lutpair45";
+  attribute SOFT_HLUTNM of \FSM_sequential_STATE[3]_i_4\ : label is "soft_lutpair44";
   attribute KEEP : string;
   attribute KEEP of \FSM_sequential_STATE_reg[0]\ : label is "yes";
   attribute KEEP of \FSM_sequential_STATE_reg[1]\ : label is "yes";
   attribute KEEP of \FSM_sequential_STATE_reg[2]\ : label is "yes";
   attribute KEEP of \FSM_sequential_STATE_reg[3]\ : label is "yes";
-  attribute SOFT_HLUTNM of \GOOD_CGS[1]_i_1\ : label is "soft_lutpair44";
-  attribute SOFT_HLUTNM of SYNC_STATUS_i_1 : label is "soft_lutpair45";
+  attribute SOFT_HLUTNM of \GOOD_CGS[1]_i_1\ : label is "soft_lutpair45";
+  attribute SOFT_HLUTNM of SYNC_STATUS_i_1 : label is "soft_lutpair46";
 begin
   RXEVEN0_out <= \^rxeven0_out\;
   RXSYNC_STATUS <= \^rxsync_status\;
@@ -14824,60 +14999,60 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_TX is
   signal p_45_in : STD_LOGIC;
   signal plusOp : STD_LOGIC_VECTOR ( 1 downto 0 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of C1_OR_C2_i_1 : label is "soft_lutpair57";
-  attribute SOFT_HLUTNM of CODE_GRPISK_i_2 : label is "soft_lutpair51";
-  attribute SOFT_HLUTNM of \CODE_GRP[0]_i_2\ : label is "soft_lutpair49";
-  attribute SOFT_HLUTNM of \CODE_GRP[1]_i_2\ : label is "soft_lutpair60";
-  attribute SOFT_HLUTNM of \CODE_GRP[2]_i_1\ : label is "soft_lutpair48";
-  attribute SOFT_HLUTNM of \CODE_GRP[2]_i_2\ : label is "soft_lutpair49";
-  attribute SOFT_HLUTNM of \CODE_GRP[3]_i_2\ : label is "soft_lutpair46";
-  attribute SOFT_HLUTNM of \CODE_GRP[3]_i_3\ : label is "soft_lutpair47";
-  attribute SOFT_HLUTNM of \CODE_GRP[6]_i_4\ : label is "soft_lutpair48";
-  attribute SOFT_HLUTNM of \CODE_GRP[7]_i_2\ : label is "soft_lutpair51";
-  attribute SOFT_HLUTNM of \CODE_GRP[7]_i_3\ : label is "soft_lutpair46";
-  attribute SOFT_HLUTNM of \CODE_GRP_CNT[1]_i_1\ : label is "soft_lutpair72";
-  attribute SOFT_HLUTNM of \CONFIG_DATA[0]_i_1\ : label is "soft_lutpair59";
-  attribute SOFT_HLUTNM of \CONFIG_DATA[1]_i_1\ : label is "soft_lutpair68";
-  attribute SOFT_HLUTNM of \CONFIG_DATA[2]_i_1\ : label is "soft_lutpair68";
-  attribute SOFT_HLUTNM of \CONFIG_DATA[5]_i_1\ : label is "soft_lutpair59";
-  attribute SOFT_HLUTNM of \CONFIG_DATA[6]_i_1\ : label is "soft_lutpair57";
-  attribute SOFT_HLUTNM of K28p5_i_1 : label is "soft_lutpair50";
-  attribute SOFT_HLUTNM of \NO_QSGMII_CHAR.TXCHARDISPMODE_i_1\ : label is "soft_lutpair72";
-  attribute SOFT_HLUTNM of \NO_QSGMII_CHAR.TXCHARDISPVAL_i_1\ : label is "soft_lutpair61";
-  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXCHARISK_i_1\ : label is "soft_lutpair54";
-  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[0]_i_1\ : label is "soft_lutpair58";
-  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[1]_i_1\ : label is "soft_lutpair53";
-  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[2]_i_1\ : label is "soft_lutpair58";
-  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[4]_i_1\ : label is "soft_lutpair52";
-  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[5]_i_1\ : label is "soft_lutpair54";
-  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[6]_i_1\ : label is "soft_lutpair53";
-  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[7]_i_1\ : label is "soft_lutpair52";
-  attribute SOFT_HLUTNM of \R_i_1__0\ : label is "soft_lutpair47";
-  attribute SOFT_HLUTNM of SYNC_DISPARITY_i_1 : label is "soft_lutpair50";
-  attribute SOFT_HLUTNM of TRIGGER_S_i_1 : label is "soft_lutpair56";
-  attribute SOFT_HLUTNM of TRIGGER_T_i_1 : label is "soft_lutpair56";
-  attribute SOFT_HLUTNM of TX_PACKET_i_1 : label is "soft_lutpair60";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXCHARISCOMMA_INT_i_1\ : label is "soft_lutpair69";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXCHARISK_INT_i_1\ : label is "soft_lutpair69";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[0]_i_1\ : label is "soft_lutpair63";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[1]_i_1\ : label is "soft_lutpair67";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[2]_i_1\ : label is "soft_lutpair66";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[3]_i_1\ : label is "soft_lutpair65";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[4]_i_1\ : label is "soft_lutpair71";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[5]_i_1\ : label is "soft_lutpair64";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[6]_i_1\ : label is "soft_lutpair70";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[7]_i_1\ : label is "soft_lutpair70";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXCHARDISPMODE_i_1\ : label is "soft_lutpair55";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXCHARDISPVAL_i_1\ : label is "soft_lutpair71";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXCHARISK_i_1\ : label is "soft_lutpair61";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[0]_i_1\ : label is "soft_lutpair63";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[1]_i_1\ : label is "soft_lutpair67";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[2]_i_1\ : label is "soft_lutpair66";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[3]_i_1\ : label is "soft_lutpair65";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[4]_i_1\ : label is "soft_lutpair62";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[5]_i_1\ : label is "soft_lutpair64";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[6]_i_1\ : label is "soft_lutpair55";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[7]_i_2\ : label is "soft_lutpair62";
+  attribute SOFT_HLUTNM of C1_OR_C2_i_1 : label is "soft_lutpair58";
+  attribute SOFT_HLUTNM of CODE_GRPISK_i_2 : label is "soft_lutpair52";
+  attribute SOFT_HLUTNM of \CODE_GRP[0]_i_2\ : label is "soft_lutpair50";
+  attribute SOFT_HLUTNM of \CODE_GRP[1]_i_2\ : label is "soft_lutpair61";
+  attribute SOFT_HLUTNM of \CODE_GRP[2]_i_1\ : label is "soft_lutpair49";
+  attribute SOFT_HLUTNM of \CODE_GRP[2]_i_2\ : label is "soft_lutpair50";
+  attribute SOFT_HLUTNM of \CODE_GRP[3]_i_2\ : label is "soft_lutpair47";
+  attribute SOFT_HLUTNM of \CODE_GRP[3]_i_3\ : label is "soft_lutpair48";
+  attribute SOFT_HLUTNM of \CODE_GRP[6]_i_4\ : label is "soft_lutpair49";
+  attribute SOFT_HLUTNM of \CODE_GRP[7]_i_2\ : label is "soft_lutpair52";
+  attribute SOFT_HLUTNM of \CODE_GRP[7]_i_3\ : label is "soft_lutpair47";
+  attribute SOFT_HLUTNM of \CODE_GRP_CNT[1]_i_1\ : label is "soft_lutpair73";
+  attribute SOFT_HLUTNM of \CONFIG_DATA[0]_i_1\ : label is "soft_lutpair60";
+  attribute SOFT_HLUTNM of \CONFIG_DATA[1]_i_1\ : label is "soft_lutpair69";
+  attribute SOFT_HLUTNM of \CONFIG_DATA[2]_i_1\ : label is "soft_lutpair69";
+  attribute SOFT_HLUTNM of \CONFIG_DATA[5]_i_1\ : label is "soft_lutpair60";
+  attribute SOFT_HLUTNM of \CONFIG_DATA[6]_i_1\ : label is "soft_lutpair58";
+  attribute SOFT_HLUTNM of K28p5_i_1 : label is "soft_lutpair51";
+  attribute SOFT_HLUTNM of \NO_QSGMII_CHAR.TXCHARDISPMODE_i_1\ : label is "soft_lutpair73";
+  attribute SOFT_HLUTNM of \NO_QSGMII_CHAR.TXCHARDISPVAL_i_1\ : label is "soft_lutpair62";
+  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXCHARISK_i_1\ : label is "soft_lutpair55";
+  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[0]_i_1\ : label is "soft_lutpair59";
+  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[1]_i_1\ : label is "soft_lutpair54";
+  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[2]_i_1\ : label is "soft_lutpair59";
+  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[4]_i_1\ : label is "soft_lutpair53";
+  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[5]_i_1\ : label is "soft_lutpair55";
+  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[6]_i_1\ : label is "soft_lutpair54";
+  attribute SOFT_HLUTNM of \NO_QSGMII_DATA.TXDATA[7]_i_1\ : label is "soft_lutpair53";
+  attribute SOFT_HLUTNM of \R_i_1__0\ : label is "soft_lutpair48";
+  attribute SOFT_HLUTNM of SYNC_DISPARITY_i_1 : label is "soft_lutpair51";
+  attribute SOFT_HLUTNM of TRIGGER_S_i_1 : label is "soft_lutpair57";
+  attribute SOFT_HLUTNM of TRIGGER_T_i_1 : label is "soft_lutpair57";
+  attribute SOFT_HLUTNM of TX_PACKET_i_1 : label is "soft_lutpair61";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXCHARISCOMMA_INT_i_1\ : label is "soft_lutpair70";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXCHARISK_INT_i_1\ : label is "soft_lutpair70";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[0]_i_1\ : label is "soft_lutpair64";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[1]_i_1\ : label is "soft_lutpair68";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[2]_i_1\ : label is "soft_lutpair67";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[3]_i_1\ : label is "soft_lutpair66";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[4]_i_1\ : label is "soft_lutpair72";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[5]_i_1\ : label is "soft_lutpair65";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[6]_i_1\ : label is "soft_lutpair71";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDATA_INT[7]_i_1\ : label is "soft_lutpair71";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXCHARDISPMODE_i_1\ : label is "soft_lutpair56";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXCHARDISPVAL_i_1\ : label is "soft_lutpair72";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXCHARISK_i_1\ : label is "soft_lutpair62";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[0]_i_1\ : label is "soft_lutpair64";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[1]_i_1\ : label is "soft_lutpair68";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[2]_i_1\ : label is "soft_lutpair67";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[3]_i_1\ : label is "soft_lutpair66";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[4]_i_1\ : label is "soft_lutpair63";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[5]_i_1\ : label is "soft_lutpair65";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[6]_i_1\ : label is "soft_lutpair56";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[7]_i_2\ : label is "soft_lutpair63";
 begin
   Q(0) <= \^q\(0);
   XMIT_CONFIG_INT <= \^xmit_config_int\;
@@ -16952,7 +17127,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_clk_gen is
     sgmii_clk_en : out STD_LOGIC;
     sgmii_clk_f : out STD_LOGIC;
     data_out : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     data_sync_reg6 : in STD_LOGIC;
     reset_out : in STD_LOGIC
   );
@@ -16981,7 +17156,7 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_clk_gen 
 begin
 clk12_5_reg_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => clk12_5,
       Q => clk12_5_reg,
@@ -16989,7 +17164,7 @@ clk12_5_reg_reg: unisim.vcomponents.FDRE
     );
 clk1_25_reg_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => clk1_25,
       Q => clk1_25_reg,
@@ -16997,12 +17172,12 @@ clk1_25_reg_reg: unisim.vcomponents.FDRE
     );
 clk_div1: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr
      port map (
-      clk125m => clk125m,
       clk12_5 => clk12_5,
       clk12_5_reg => clk12_5_reg,
       clk1_25 => clk1_25,
       clk_en_12_5_fall_reg => clk_div1_n_2,
       clk_en_12_5_rise_reg => clk_div1_n_3,
+      refclk125_n => refclk125_n,
       reset_fall => reset_fall,
       reset_out => reset_out,
       sgmii_clk_f_reg => clk_div1_n_1,
@@ -17011,7 +17186,6 @@ clk_div1: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr
     );
 clk_div2: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr_2
      port map (
-      clk125m => clk125m,
       clk12_5 => clk12_5,
       clk1_25 => clk1_25,
       clk1_25_reg => clk1_25_reg,
@@ -17019,12 +17193,13 @@ clk_div2: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr
       clk_en_1_25_fall_reg => clk_div2_n_2,
       data_out => data_out,
       data_sync_reg6 => data_sync_reg6,
+      refclk125_n => refclk125_n,
       reset_out => reset_out,
       sgmii_clk_r0_out => sgmii_clk_r0_out
     );
 clk_en_12_5_fall_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => clk_div1_n_2,
       Q => clk_en_12_5_fall,
@@ -17032,7 +17207,7 @@ clk_en_12_5_fall_reg: unisim.vcomponents.FDRE
     );
 clk_en_12_5_rise_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => clk_div1_n_3,
       Q => clk_en_12_5_rise,
@@ -17040,7 +17215,7 @@ clk_en_12_5_rise_reg: unisim.vcomponents.FDRE
     );
 clk_en_1_25_fall_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => clk_div2_n_2,
       Q => clk_en_1_25_fall,
@@ -17051,7 +17226,7 @@ i_0: unisim.vcomponents.LUT1
       INIT => X"1"
     )
         port map (
-      I0 => clk125m,
+      I0 => refclk125_n,
       O => n_0_0
     );
 reset_fall_reg: unisim.vcomponents.FDRE
@@ -17075,7 +17250,7 @@ sgmii_clk_en_i_1: unisim.vcomponents.LUT4
     );
 sgmii_clk_en_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => sgmii_clk_en_i_1_n_0,
       Q => sgmii_clk_en,
@@ -17091,7 +17266,7 @@ sgmii_clk_f_reg: unisim.vcomponents.FDRE
     );
 sgmii_clk_r_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => sgmii_clk_r0_out,
       Q => sgmii_clk_r,
@@ -17120,12 +17295,12 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b is
   port (
-    o_txdata_6b : out STD_LOGIC_VECTOR ( 5 downto 0 );
+    Q : out STD_LOGIC_VECTOR ( 5 downto 0 );
     mgt_tx_reset : in STD_LOGIC;
-    reset : in STD_LOGIC;
-    clk208 : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
-    txdata_10b : in STD_LOGIC_VECTOR ( 9 downto 0 )
+    rst_125_reg : in STD_LOGIC;
+    CLK : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
+    D : in STD_LOGIC_VECTOR ( 9 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b : entity is "gig_ethernet_pcs_pma_0_gearbox_10b_6b";
@@ -17183,12 +17358,12 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_
   signal \wr_ptr[1]_i_1_n_0\ : STD_LOGIC;
   signal \wr_ptr[2]_i_1_n_0\ : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \o_txdata_6b[5]_i_4\ : label is "soft_lutpair145";
-  attribute SOFT_HLUTNM of \rd_ptr[1]_i_1\ : label is "soft_lutpair144";
-  attribute SOFT_HLUTNM of \rd_ptr[2]_i_1\ : label is "soft_lutpair145";
-  attribute SOFT_HLUTNM of \rd_ptr[3]_i_1\ : label is "soft_lutpair144";
-  attribute SOFT_HLUTNM of \wr_ptr[1]_i_1\ : label is "soft_lutpair143";
-  attribute SOFT_HLUTNM of \wr_ptr[2]_i_1\ : label is "soft_lutpair143";
+  attribute SOFT_HLUTNM of \o_txdata_6b[5]_i_4\ : label is "soft_lutpair146";
+  attribute SOFT_HLUTNM of \rd_ptr[1]_i_1\ : label is "soft_lutpair145";
+  attribute SOFT_HLUTNM of \rd_ptr[2]_i_1\ : label is "soft_lutpair146";
+  attribute SOFT_HLUTNM of \rd_ptr[3]_i_1\ : label is "soft_lutpair145";
+  attribute SOFT_HLUTNM of \wr_ptr[1]_i_1\ : label is "soft_lutpair144";
+  attribute SOFT_HLUTNM of \wr_ptr[2]_i_1\ : label is "soft_lutpair144";
 begin
 \accumulator_60b[19]_i_1\: unisim.vcomponents.LUT3
     generic map(
@@ -17252,7 +17427,7 @@ begin
     );
 \accumulator_60b_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(0),
       Q => \accumulator_60b_reg_n_0_[0]\,
@@ -17260,7 +17435,7 @@ begin
     );
 \accumulator_60b_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(0),
       Q => data1(4),
@@ -17268,7 +17443,7 @@ begin
     );
 \accumulator_60b_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(1),
       Q => data1(5),
@@ -17276,7 +17451,7 @@ begin
     );
 \accumulator_60b_reg[12]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(2),
       Q => data2(0),
@@ -17284,7 +17459,7 @@ begin
     );
 \accumulator_60b_reg[13]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(3),
       Q => data2(1),
@@ -17292,7 +17467,7 @@ begin
     );
 \accumulator_60b_reg[14]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(4),
       Q => data2(2),
@@ -17300,7 +17475,7 @@ begin
     );
 \accumulator_60b_reg[15]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(5),
       Q => data2(3),
@@ -17308,7 +17483,7 @@ begin
     );
 \accumulator_60b_reg[16]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(6),
       Q => data2(4),
@@ -17316,7 +17491,7 @@ begin
     );
 \accumulator_60b_reg[17]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(7),
       Q => data2(5),
@@ -17324,7 +17499,7 @@ begin
     );
 \accumulator_60b_reg[18]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(8),
       Q => data3(0),
@@ -17332,7 +17507,7 @@ begin
     );
 \accumulator_60b_reg[19]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(12),
       D => txdata_10b_r(9),
       Q => data3(1),
@@ -17340,7 +17515,7 @@ begin
     );
 \accumulator_60b_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(1),
       Q => \accumulator_60b_reg_n_0_[1]\,
@@ -17348,7 +17523,7 @@ begin
     );
 \accumulator_60b_reg[20]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(0),
       Q => data3(2),
@@ -17356,7 +17531,7 @@ begin
     );
 \accumulator_60b_reg[21]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(1),
       Q => data3(3),
@@ -17364,7 +17539,7 @@ begin
     );
 \accumulator_60b_reg[22]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(2),
       Q => data3(4),
@@ -17372,7 +17547,7 @@ begin
     );
 \accumulator_60b_reg[23]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(3),
       Q => data3(5),
@@ -17380,7 +17555,7 @@ begin
     );
 \accumulator_60b_reg[24]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(4),
       Q => data4(0),
@@ -17388,7 +17563,7 @@ begin
     );
 \accumulator_60b_reg[25]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(5),
       Q => data4(1),
@@ -17396,7 +17571,7 @@ begin
     );
 \accumulator_60b_reg[26]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(6),
       Q => data4(2),
@@ -17404,7 +17579,7 @@ begin
     );
 \accumulator_60b_reg[27]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(7),
       Q => data4(3),
@@ -17412,7 +17587,7 @@ begin
     );
 \accumulator_60b_reg[28]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(8),
       Q => data4(4),
@@ -17420,7 +17595,7 @@ begin
     );
 \accumulator_60b_reg[29]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(24),
       D => txdata_10b_r(9),
       Q => data4(5),
@@ -17428,7 +17603,7 @@ begin
     );
 \accumulator_60b_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(2),
       Q => \accumulator_60b_reg_n_0_[2]\,
@@ -17436,7 +17611,7 @@ begin
     );
 \accumulator_60b_reg[30]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(0),
       Q => data5(0),
@@ -17444,7 +17619,7 @@ begin
     );
 \accumulator_60b_reg[31]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(1),
       Q => data5(1),
@@ -17452,7 +17627,7 @@ begin
     );
 \accumulator_60b_reg[32]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(2),
       Q => data5(2),
@@ -17460,7 +17635,7 @@ begin
     );
 \accumulator_60b_reg[33]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(3),
       Q => data5(3),
@@ -17468,7 +17643,7 @@ begin
     );
 \accumulator_60b_reg[34]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(4),
       Q => data5(4),
@@ -17476,7 +17651,7 @@ begin
     );
 \accumulator_60b_reg[35]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(5),
       Q => data5(5),
@@ -17484,7 +17659,7 @@ begin
     );
 \accumulator_60b_reg[36]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(6),
       Q => data6(0),
@@ -17492,7 +17667,7 @@ begin
     );
 \accumulator_60b_reg[37]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(7),
       Q => data6(1),
@@ -17500,7 +17675,7 @@ begin
     );
 \accumulator_60b_reg[38]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(8),
       Q => data6(2),
@@ -17508,7 +17683,7 @@ begin
     );
 \accumulator_60b_reg[39]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(30),
       D => txdata_10b_r(9),
       Q => data6(3),
@@ -17516,7 +17691,7 @@ begin
     );
 \accumulator_60b_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(3),
       Q => \accumulator_60b_reg_n_0_[3]\,
@@ -17524,7 +17699,7 @@ begin
     );
 \accumulator_60b_reg[40]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(0),
       Q => data6(4),
@@ -17532,7 +17707,7 @@ begin
     );
 \accumulator_60b_reg[41]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(1),
       Q => data6(5),
@@ -17540,7 +17715,7 @@ begin
     );
 \accumulator_60b_reg[42]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(2),
       Q => data7(0),
@@ -17548,7 +17723,7 @@ begin
     );
 \accumulator_60b_reg[43]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(3),
       Q => data7(1),
@@ -17556,7 +17731,7 @@ begin
     );
 \accumulator_60b_reg[44]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(4),
       Q => data7(2),
@@ -17564,7 +17739,7 @@ begin
     );
 \accumulator_60b_reg[45]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(5),
       Q => data7(3),
@@ -17572,7 +17747,7 @@ begin
     );
 \accumulator_60b_reg[46]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(6),
       Q => data7(4),
@@ -17580,7 +17755,7 @@ begin
     );
 \accumulator_60b_reg[47]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(7),
       Q => data7(5),
@@ -17588,7 +17763,7 @@ begin
     );
 \accumulator_60b_reg[48]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(8),
       Q => data8(0),
@@ -17596,7 +17771,7 @@ begin
     );
 \accumulator_60b_reg[49]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(42),
       D => txdata_10b_r(9),
       Q => data8(1),
@@ -17604,7 +17779,7 @@ begin
     );
 \accumulator_60b_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(4),
       Q => \accumulator_60b_reg_n_0_[4]\,
@@ -17612,7 +17787,7 @@ begin
     );
 \accumulator_60b_reg[50]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(0),
       Q => data8(2),
@@ -17620,7 +17795,7 @@ begin
     );
 \accumulator_60b_reg[51]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(1),
       Q => data8(3),
@@ -17628,7 +17803,7 @@ begin
     );
 \accumulator_60b_reg[52]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(2),
       Q => data8(4),
@@ -17636,7 +17811,7 @@ begin
     );
 \accumulator_60b_reg[53]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(3),
       Q => data8(5),
@@ -17644,7 +17819,7 @@ begin
     );
 \accumulator_60b_reg[54]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(4),
       Q => data9(0),
@@ -17652,7 +17827,7 @@ begin
     );
 \accumulator_60b_reg[55]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(5),
       Q => data9(1),
@@ -17660,7 +17835,7 @@ begin
     );
 \accumulator_60b_reg[56]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(6),
       Q => data9(2),
@@ -17668,7 +17843,7 @@ begin
     );
 \accumulator_60b_reg[57]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(7),
       Q => data9(3),
@@ -17676,7 +17851,7 @@ begin
     );
 \accumulator_60b_reg[58]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(8),
       Q => data9(4),
@@ -17684,7 +17859,7 @@ begin
     );
 \accumulator_60b_reg[59]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(54),
       D => txdata_10b_r(9),
       Q => data9(5),
@@ -17692,7 +17867,7 @@ begin
     );
 \accumulator_60b_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(5),
       Q => \accumulator_60b_reg_n_0_[5]\,
@@ -17700,7 +17875,7 @@ begin
     );
 \accumulator_60b_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(6),
       Q => data1(0),
@@ -17708,7 +17883,7 @@ begin
     );
 \accumulator_60b_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(7),
       Q => data1(1),
@@ -17716,7 +17891,7 @@ begin
     );
 \accumulator_60b_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(8),
       Q => data1(2),
@@ -17724,7 +17899,7 @@ begin
     );
 \accumulator_60b_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => p_0_in(0),
       D => txdata_10b_r(9),
       Q => data1(3),
@@ -17995,10 +18170,10 @@ begin
     );
 \o_txdata_6b_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \o_txdata_6b[5]_i_1_n_0\,
       D => p_0_out(0),
-      Q => o_txdata_6b(0),
+      Q => Q(0),
       R => reset_208
     );
 \o_txdata_6b_reg[0]_i_2\: unisim.vcomponents.MUXF7
@@ -18010,10 +18185,10 @@ begin
     );
 \o_txdata_6b_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \o_txdata_6b[5]_i_1_n_0\,
       D => p_0_out(1),
-      Q => o_txdata_6b(1),
+      Q => Q(1),
       R => reset_208
     );
 \o_txdata_6b_reg[1]_i_2\: unisim.vcomponents.MUXF7
@@ -18025,10 +18200,10 @@ begin
     );
 \o_txdata_6b_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \o_txdata_6b[5]_i_1_n_0\,
       D => p_0_out(2),
-      Q => o_txdata_6b(2),
+      Q => Q(2),
       R => reset_208
     );
 \o_txdata_6b_reg[2]_i_2\: unisim.vcomponents.MUXF7
@@ -18040,10 +18215,10 @@ begin
     );
 \o_txdata_6b_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \o_txdata_6b[5]_i_1_n_0\,
       D => p_0_out(3),
-      Q => o_txdata_6b(3),
+      Q => Q(3),
       R => reset_208
     );
 \o_txdata_6b_reg[3]_i_2\: unisim.vcomponents.MUXF7
@@ -18055,10 +18230,10 @@ begin
     );
 \o_txdata_6b_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \o_txdata_6b[5]_i_1_n_0\,
       D => p_0_out(4),
-      Q => o_txdata_6b(4),
+      Q => Q(4),
       R => reset_208
     );
 \o_txdata_6b_reg[4]_i_2\: unisim.vcomponents.MUXF7
@@ -18070,10 +18245,10 @@ begin
     );
 \o_txdata_6b_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \o_txdata_6b[5]_i_1_n_0\,
       D => p_0_out(5),
-      Q => o_txdata_6b(5),
+      Q => Q(5),
       R => reset_208
     );
 \o_txdata_6b_reg[5]_i_5\: unisim.vcomponents.MUXF7
@@ -18125,7 +18300,7 @@ begin
     );
 \rd_ptr_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \rd_ptr[0]_i_1_n_0\,
       Q => rd_ptr(0),
@@ -18133,7 +18308,7 @@ begin
     );
 \rd_ptr_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \rd_ptr[1]_i_1_n_0\,
       Q => rd_ptr(1),
@@ -18141,7 +18316,7 @@ begin
     );
 \rd_ptr_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \rd_ptr[2]_i_1_n_0\,
       Q => rd_ptr(2),
@@ -18149,7 +18324,7 @@ begin
     );
 \rd_ptr_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \rd_ptr[3]_i_1_n_0\,
       Q => rd_ptr(3),
@@ -18157,89 +18332,89 @@ begin
     );
 reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_7
      port map (
+      CLK => CLK,
       SR(0) => tx_rst,
-      clk208 => clk208,
       mgt_tx_reset => mgt_tx_reset,
-      reset => reset,
-      reset_out => reset_208
+      reset_out => reset_208,
+      rst_125_reg => rst_125_reg
     );
 \txdata_10b_r_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(0),
+      D => D(0),
       Q => txdata_10b_r(0),
       R => '0'
     );
 \txdata_10b_r_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(1),
+      D => D(1),
       Q => txdata_10b_r(1),
       R => '0'
     );
 \txdata_10b_r_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(2),
+      D => D(2),
       Q => txdata_10b_r(2),
       R => '0'
     );
 \txdata_10b_r_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(3),
+      D => D(3),
       Q => txdata_10b_r(3),
       R => '0'
     );
 \txdata_10b_r_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(4),
+      D => D(4),
       Q => txdata_10b_r(4),
       R => '0'
     );
 \txdata_10b_r_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(5),
+      D => D(5),
       Q => txdata_10b_r(5),
       R => '0'
     );
 \txdata_10b_r_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(6),
+      D => D(6),
       Q => txdata_10b_r(6),
       R => '0'
     );
 \txdata_10b_r_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(7),
+      D => D(7),
       Q => txdata_10b_r(7),
       R => '0'
     );
 \txdata_10b_r_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(8),
+      D => D(8),
       Q => txdata_10b_r(8),
       R => '0'
     );
 \txdata_10b_r_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
-      D => txdata_10b(9),
+      D => D(9),
       Q => txdata_10b_r(9),
       R => '0'
     );
@@ -18249,7 +18424,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     )
         port map (
       I0 => wr_ptr(0),
-      I1 => reset,
+      I1 => rst_125_reg,
       I2 => mgt_tx_reset,
       O => \wr_ptr[0]_i_1_n_0\
     );
@@ -18261,7 +18436,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
       I0 => wr_ptr(2),
       I1 => wr_ptr(0),
       I2 => wr_ptr(1),
-      I3 => reset,
+      I3 => rst_125_reg,
       I4 => mgt_tx_reset,
       O => \wr_ptr[1]_i_1_n_0\
     );
@@ -18273,13 +18448,13 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
       I0 => wr_ptr(2),
       I1 => wr_ptr(0),
       I2 => wr_ptr(1),
-      I3 => reset,
+      I3 => rst_125_reg,
       I4 => mgt_tx_reset,
       O => \wr_ptr[2]_i_1_n_0\
     );
 \wr_ptr_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \wr_ptr[0]_i_1_n_0\,
       Q => wr_ptr(0),
@@ -18287,7 +18462,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \wr_ptr_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \wr_ptr[1]_i_1_n_0\,
       Q => wr_ptr(1),
@@ -18295,7 +18470,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \wr_ptr_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \wr_ptr[2]_i_1_n_0\,
       Q => wr_ptr(2),
@@ -18309,7 +18484,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b is
   port (
     \gdeni.disp_err_reg\ : out STD_LOGIC;
-    o_rxdata_10b : out STD_LOGIC_VECTOR ( 9 downto 0 );
+    Q : out STD_LOGIC_VECTOR ( 9 downto 0 );
     code_err_i : out STD_LOGIC;
     \gcerr.code_err_reg\ : out STD_LOGIC;
     k : out STD_LOGIC;
@@ -18325,17 +18500,18 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b is
     \grdni.run_disp_i_reg_0\ : in STD_LOGIC;
     \data_reg_reg[1]\ : in STD_LOGIC;
     \data_reg_reg[4]\ : in STD_LOGIC;
-    clk208 : in STD_LOGIC;
+    CLK : in STD_LOGIC;
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     E : in STD_LOGIC_VECTOR ( 0 to 0 );
-    rxdata_6b : in STD_LOGIC_VECTOR ( 5 downto 0 )
+    D : in STD_LOGIC_VECTOR ( 5 downto 0 )
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b : entity is "gig_ethernet_pcs_pma_0_gearbox_6b_10b";
 end gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b;
 
 architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b is
+  signal \^q\ : STD_LOGIC_VECTOR ( 9 downto 0 );
   signal \accumulator_60b[11]_i_1_n_0\ : STD_LOGIC;
   signal \accumulator_60b[17]_i_1_n_0\ : STD_LOGIC;
   signal \accumulator_60b[23]_i_1_n_0\ : STD_LOGIC;
@@ -18410,7 +18586,6 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_
   signal \grdni.run_disp_i_i_3_n_0\ : STD_LOGIC;
   signal kout_i_i_2_n_0 : STD_LOGIC;
   signal kout_i_i_3_n_0 : STD_LOGIC;
-  signal \^o_rxdata_10b\ : STD_LOGIC_VECTOR ( 9 downto 0 );
   signal \o_rxdata_10b[0]_i_2_n_0\ : STD_LOGIC;
   signal \o_rxdata_10b[0]_i_3_n_0\ : STD_LOGIC;
   signal \o_rxdata_10b[0]_i_4_n_0\ : STD_LOGIC;
@@ -18482,56 +18657,56 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_
   signal \wr_ptr[2]_i_1_n_0\ : STD_LOGIC;
   signal \wr_ptr[3]_i_1_n_0\ : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of bitslip_i_11 : label is "soft_lutpair135";
-  attribute SOFT_HLUTNM of bitslip_i_12 : label is "soft_lutpair138";
-  attribute SOFT_HLUTNM of bitslip_i_14 : label is "soft_lutpair120";
-  attribute SOFT_HLUTNM of \bitslip_position[0]_i_1\ : label is "soft_lutpair140";
-  attribute SOFT_HLUTNM of \bitslip_position[1]_i_1\ : label is "soft_lutpair125";
-  attribute SOFT_HLUTNM of \bitslip_position[2]_i_1\ : label is "soft_lutpair140";
-  attribute SOFT_HLUTNM of \bitslip_position[4]_i_1\ : label is "soft_lutpair125";
-  attribute SOFT_HLUTNM of comma_det_i_1 : label is "soft_lutpair119";
-  attribute SOFT_HLUTNM of comma_det_i_2 : label is "soft_lutpair126";
-  attribute SOFT_HLUTNM of comma_det_i_3 : label is "soft_lutpair126";
-  attribute SOFT_HLUTNM of \dout_i[5]_i_1\ : label is "soft_lutpair121";
-  attribute SOFT_HLUTNM of \dout_i[6]_i_1\ : label is "soft_lutpair121";
-  attribute SOFT_HLUTNM of \dout_i[7]_i_1\ : label is "soft_lutpair122";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_10\ : label is "soft_lutpair135";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_13\ : label is "soft_lutpair119";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_14\ : label is "soft_lutpair141";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_17\ : label is "soft_lutpair120";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_18\ : label is "soft_lutpair136";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_19\ : label is "soft_lutpair123";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_20\ : label is "soft_lutpair141";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_21\ : label is "soft_lutpair124";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_22\ : label is "soft_lutpair124";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_8\ : label is "soft_lutpair123";
-  attribute SOFT_HLUTNM of \gcerr.code_err_i_9\ : label is "soft_lutpair138";
-  attribute SOFT_HLUTNM of \gdeni.disp_err_i_4\ : label is "soft_lutpair127";
-  attribute SOFT_HLUTNM of \gdeni.disp_err_i_5\ : label is "soft_lutpair122";
-  attribute SOFT_HLUTNM of \grdni.run_disp_i_i_2\ : label is "soft_lutpair128";
-  attribute SOFT_HLUTNM of \grdni.run_disp_i_i_3\ : label is "soft_lutpair128";
-  attribute SOFT_HLUTNM of kout_i_i_2 : label is "soft_lutpair136";
-  attribute SOFT_HLUTNM of kout_i_i_3 : label is "soft_lutpair127";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[0]_i_1\ : label is "soft_lutpair134";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[1]_i_1\ : label is "soft_lutpair131";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[2]_i_1\ : label is "soft_lutpair132";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[3]_i_1\ : label is "soft_lutpair133";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[4]_i_1\ : label is "soft_lutpair130";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[5]_i_1\ : label is "soft_lutpair134";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[6]_i_1\ : label is "soft_lutpair133";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[7]_i_1\ : label is "soft_lutpair132";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[8]_i_1\ : label is "soft_lutpair131";
-  attribute SOFT_HLUTNM of \o_rxdata_10b[9]_i_1\ : label is "soft_lutpair130";
-  attribute SOFT_HLUTNM of \rd_ptr[1]_i_1__0\ : label is "soft_lutpair139";
-  attribute SOFT_HLUTNM of \rd_ptr[2]_i_1__0\ : label is "soft_lutpair139";
-  attribute SOFT_HLUTNM of \wr_ptr[0]_i_1__0\ : label is "soft_lutpair137";
-  attribute SOFT_HLUTNM of \wr_ptr[1]_i_1\ : label is "soft_lutpair129";
-  attribute SOFT_HLUTNM of \wr_ptr[2]_i_1\ : label is "soft_lutpair137";
-  attribute SOFT_HLUTNM of \wr_ptr[3]_i_1\ : label is "soft_lutpair129";
+  attribute SOFT_HLUTNM of bitslip_i_11 : label is "soft_lutpair136";
+  attribute SOFT_HLUTNM of bitslip_i_12 : label is "soft_lutpair139";
+  attribute SOFT_HLUTNM of bitslip_i_14 : label is "soft_lutpair121";
+  attribute SOFT_HLUTNM of \bitslip_position[0]_i_1\ : label is "soft_lutpair141";
+  attribute SOFT_HLUTNM of \bitslip_position[1]_i_1\ : label is "soft_lutpair126";
+  attribute SOFT_HLUTNM of \bitslip_position[2]_i_1\ : label is "soft_lutpair141";
+  attribute SOFT_HLUTNM of \bitslip_position[4]_i_1\ : label is "soft_lutpair126";
+  attribute SOFT_HLUTNM of comma_det_i_1 : label is "soft_lutpair120";
+  attribute SOFT_HLUTNM of comma_det_i_2 : label is "soft_lutpair127";
+  attribute SOFT_HLUTNM of comma_det_i_3 : label is "soft_lutpair127";
+  attribute SOFT_HLUTNM of \dout_i[5]_i_1\ : label is "soft_lutpair122";
+  attribute SOFT_HLUTNM of \dout_i[6]_i_1\ : label is "soft_lutpair122";
+  attribute SOFT_HLUTNM of \dout_i[7]_i_1\ : label is "soft_lutpair123";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_10\ : label is "soft_lutpair136";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_13\ : label is "soft_lutpair120";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_14\ : label is "soft_lutpair142";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_17\ : label is "soft_lutpair121";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_18\ : label is "soft_lutpair137";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_19\ : label is "soft_lutpair124";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_20\ : label is "soft_lutpair142";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_21\ : label is "soft_lutpair125";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_22\ : label is "soft_lutpair125";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_8\ : label is "soft_lutpair124";
+  attribute SOFT_HLUTNM of \gcerr.code_err_i_9\ : label is "soft_lutpair139";
+  attribute SOFT_HLUTNM of \gdeni.disp_err_i_4\ : label is "soft_lutpair128";
+  attribute SOFT_HLUTNM of \gdeni.disp_err_i_5\ : label is "soft_lutpair123";
+  attribute SOFT_HLUTNM of \grdni.run_disp_i_i_2\ : label is "soft_lutpair129";
+  attribute SOFT_HLUTNM of \grdni.run_disp_i_i_3\ : label is "soft_lutpair129";
+  attribute SOFT_HLUTNM of kout_i_i_2 : label is "soft_lutpair137";
+  attribute SOFT_HLUTNM of kout_i_i_3 : label is "soft_lutpair128";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[0]_i_1\ : label is "soft_lutpair135";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[1]_i_1\ : label is "soft_lutpair132";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[2]_i_1\ : label is "soft_lutpair133";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[3]_i_1\ : label is "soft_lutpair134";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[4]_i_1\ : label is "soft_lutpair131";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[5]_i_1\ : label is "soft_lutpair135";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[6]_i_1\ : label is "soft_lutpair134";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[7]_i_1\ : label is "soft_lutpair133";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[8]_i_1\ : label is "soft_lutpair132";
+  attribute SOFT_HLUTNM of \o_rxdata_10b[9]_i_1\ : label is "soft_lutpair131";
+  attribute SOFT_HLUTNM of \rd_ptr[1]_i_1__0\ : label is "soft_lutpair140";
+  attribute SOFT_HLUTNM of \rd_ptr[2]_i_1__0\ : label is "soft_lutpair140";
+  attribute SOFT_HLUTNM of \wr_ptr[0]_i_1__0\ : label is "soft_lutpair138";
+  attribute SOFT_HLUTNM of \wr_ptr[1]_i_1\ : label is "soft_lutpair130";
+  attribute SOFT_HLUTNM of \wr_ptr[2]_i_1\ : label is "soft_lutpair138";
+  attribute SOFT_HLUTNM of \wr_ptr[3]_i_1\ : label is "soft_lutpair130";
 begin
+  Q(9 downto 0) <= \^q\(9 downto 0);
   comma_det_reg <= \^comma_det_reg\;
   \gcerr.code_err_reg\ <= \^gcerr.code_err_reg\;
-  o_rxdata_10b(9 downto 0) <= \^o_rxdata_10b\(9 downto 0);
 \accumulator_60b[11]_i_1\: unisim.vcomponents.LUT4
     generic map(
       INIT => X"0004"
@@ -18644,7 +18819,7 @@ begin
     );
 \accumulator_60b_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[5]_i_1_n_0\,
       D => rxdata_6b_r(0),
       Q => \accumulator_60b_reg_n_0_[0]\,
@@ -18652,7 +18827,7 @@ begin
     );
 \accumulator_60b_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[11]_i_1_n_0\,
       D => rxdata_6b_r(4),
       Q => data1(0),
@@ -18660,7 +18835,7 @@ begin
     );
 \accumulator_60b_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[11]_i_1_n_0\,
       D => rxdata_6b_r(5),
       Q => data1(1),
@@ -18668,7 +18843,7 @@ begin
     );
 \accumulator_60b_reg[12]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[17]_i_1_n_0\,
       D => rxdata_6b_r(0),
       Q => data1(2),
@@ -18676,7 +18851,7 @@ begin
     );
 \accumulator_60b_reg[13]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[17]_i_1_n_0\,
       D => rxdata_6b_r(1),
       Q => data1(3),
@@ -18684,7 +18859,7 @@ begin
     );
 \accumulator_60b_reg[14]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[17]_i_1_n_0\,
       D => rxdata_6b_r(2),
       Q => data1(4),
@@ -18692,7 +18867,7 @@ begin
     );
 \accumulator_60b_reg[15]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[17]_i_1_n_0\,
       D => rxdata_6b_r(3),
       Q => data1(5),
@@ -18700,7 +18875,7 @@ begin
     );
 \accumulator_60b_reg[16]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[17]_i_1_n_0\,
       D => rxdata_6b_r(4),
       Q => data1(6),
@@ -18708,7 +18883,7 @@ begin
     );
 \accumulator_60b_reg[17]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[17]_i_1_n_0\,
       D => rxdata_6b_r(5),
       Q => data1(7),
@@ -18716,7 +18891,7 @@ begin
     );
 \accumulator_60b_reg[18]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[23]_i_1_n_0\,
       D => rxdata_6b_r(0),
       Q => data1(8),
@@ -18724,7 +18899,7 @@ begin
     );
 \accumulator_60b_reg[19]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[23]_i_1_n_0\,
       D => rxdata_6b_r(1),
       Q => data1(9),
@@ -18732,7 +18907,7 @@ begin
     );
 \accumulator_60b_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[5]_i_1_n_0\,
       D => rxdata_6b_r(1),
       Q => \accumulator_60b_reg_n_0_[1]\,
@@ -18740,7 +18915,7 @@ begin
     );
 \accumulator_60b_reg[20]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[23]_i_1_n_0\,
       D => rxdata_6b_r(2),
       Q => data2(0),
@@ -18748,7 +18923,7 @@ begin
     );
 \accumulator_60b_reg[21]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[23]_i_1_n_0\,
       D => rxdata_6b_r(3),
       Q => data2(1),
@@ -18756,7 +18931,7 @@ begin
     );
 \accumulator_60b_reg[22]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[23]_i_1_n_0\,
       D => rxdata_6b_r(4),
       Q => data2(2),
@@ -18764,7 +18939,7 @@ begin
     );
 \accumulator_60b_reg[23]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[23]_i_1_n_0\,
       D => rxdata_6b_r(5),
       Q => data2(3),
@@ -18772,7 +18947,7 @@ begin
     );
 \accumulator_60b_reg[24]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[29]_i_1_n_0\,
       D => rxdata_6b_r(0),
       Q => data2(4),
@@ -18780,7 +18955,7 @@ begin
     );
 \accumulator_60b_reg[25]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[29]_i_1_n_0\,
       D => rxdata_6b_r(1),
       Q => data2(5),
@@ -18788,7 +18963,7 @@ begin
     );
 \accumulator_60b_reg[26]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[29]_i_1_n_0\,
       D => rxdata_6b_r(2),
       Q => data2(6),
@@ -18796,7 +18971,7 @@ begin
     );
 \accumulator_60b_reg[27]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[29]_i_1_n_0\,
       D => rxdata_6b_r(3),
       Q => data2(7),
@@ -18804,7 +18979,7 @@ begin
     );
 \accumulator_60b_reg[28]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[29]_i_1_n_0\,
       D => rxdata_6b_r(4),
       Q => data2(8),
@@ -18812,7 +18987,7 @@ begin
     );
 \accumulator_60b_reg[29]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[29]_i_1_n_0\,
       D => rxdata_6b_r(5),
       Q => data2(9),
@@ -18820,7 +18995,7 @@ begin
     );
 \accumulator_60b_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[5]_i_1_n_0\,
       D => rxdata_6b_r(2),
       Q => \accumulator_60b_reg_n_0_[2]\,
@@ -18828,7 +19003,7 @@ begin
     );
 \accumulator_60b_reg[30]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[35]_i_1_n_0\,
       D => rxdata_6b_r(0),
       Q => data3(0),
@@ -18836,7 +19011,7 @@ begin
     );
 \accumulator_60b_reg[31]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[35]_i_1_n_0\,
       D => rxdata_6b_r(1),
       Q => data3(1),
@@ -18844,7 +19019,7 @@ begin
     );
 \accumulator_60b_reg[32]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[35]_i_1_n_0\,
       D => rxdata_6b_r(2),
       Q => data3(2),
@@ -18852,7 +19027,7 @@ begin
     );
 \accumulator_60b_reg[33]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[35]_i_1_n_0\,
       D => rxdata_6b_r(3),
       Q => data3(3),
@@ -18860,7 +19035,7 @@ begin
     );
 \accumulator_60b_reg[34]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[35]_i_1_n_0\,
       D => rxdata_6b_r(4),
       Q => data3(4),
@@ -18868,7 +19043,7 @@ begin
     );
 \accumulator_60b_reg[35]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[35]_i_1_n_0\,
       D => rxdata_6b_r(5),
       Q => data3(5),
@@ -18876,7 +19051,7 @@ begin
     );
 \accumulator_60b_reg[36]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[41]_i_1_n_0\,
       D => rxdata_6b_r(0),
       Q => data3(6),
@@ -18884,7 +19059,7 @@ begin
     );
 \accumulator_60b_reg[37]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[41]_i_1_n_0\,
       D => rxdata_6b_r(1),
       Q => data3(7),
@@ -18892,7 +19067,7 @@ begin
     );
 \accumulator_60b_reg[38]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[41]_i_1_n_0\,
       D => rxdata_6b_r(2),
       Q => data3(8),
@@ -18900,7 +19075,7 @@ begin
     );
 \accumulator_60b_reg[39]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[41]_i_1_n_0\,
       D => rxdata_6b_r(3),
       Q => data3(9),
@@ -18908,7 +19083,7 @@ begin
     );
 \accumulator_60b_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[5]_i_1_n_0\,
       D => rxdata_6b_r(3),
       Q => \accumulator_60b_reg_n_0_[3]\,
@@ -18916,7 +19091,7 @@ begin
     );
 \accumulator_60b_reg[40]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[41]_i_1_n_0\,
       D => rxdata_6b_r(4),
       Q => data4(0),
@@ -18924,7 +19099,7 @@ begin
     );
 \accumulator_60b_reg[41]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[41]_i_1_n_0\,
       D => rxdata_6b_r(5),
       Q => data4(1),
@@ -18932,7 +19107,7 @@ begin
     );
 \accumulator_60b_reg[42]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[47]_i_1_n_0\,
       D => rxdata_6b_r(0),
       Q => data4(2),
@@ -18940,7 +19115,7 @@ begin
     );
 \accumulator_60b_reg[43]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[47]_i_1_n_0\,
       D => rxdata_6b_r(1),
       Q => data4(3),
@@ -18948,7 +19123,7 @@ begin
     );
 \accumulator_60b_reg[44]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[47]_i_1_n_0\,
       D => rxdata_6b_r(2),
       Q => data4(4),
@@ -18956,7 +19131,7 @@ begin
     );
 \accumulator_60b_reg[45]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[47]_i_1_n_0\,
       D => rxdata_6b_r(3),
       Q => data4(5),
@@ -18964,7 +19139,7 @@ begin
     );
 \accumulator_60b_reg[46]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[47]_i_1_n_0\,
       D => rxdata_6b_r(4),
       Q => data4(6),
@@ -18972,7 +19147,7 @@ begin
     );
 \accumulator_60b_reg[47]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[47]_i_1_n_0\,
       D => rxdata_6b_r(5),
       Q => data4(7),
@@ -18980,7 +19155,7 @@ begin
     );
 \accumulator_60b_reg[48]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(50),
       D => rxdata_6b_r(0),
       Q => data4(8),
@@ -18988,7 +19163,7 @@ begin
     );
 \accumulator_60b_reg[49]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(50),
       D => rxdata_6b_r(1),
       Q => data4(9),
@@ -18996,7 +19171,7 @@ begin
     );
 \accumulator_60b_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[5]_i_1_n_0\,
       D => rxdata_6b_r(4),
       Q => \accumulator_60b_reg_n_0_[4]\,
@@ -19004,7 +19179,7 @@ begin
     );
 \accumulator_60b_reg[50]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(50),
       D => rxdata_6b_r(2),
       Q => data5(0),
@@ -19012,7 +19187,7 @@ begin
     );
 \accumulator_60b_reg[51]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(50),
       D => rxdata_6b_r(3),
       Q => data5(1),
@@ -19020,7 +19195,7 @@ begin
     );
 \accumulator_60b_reg[52]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(50),
       D => rxdata_6b_r(4),
       Q => data5(2),
@@ -19028,7 +19203,7 @@ begin
     );
 \accumulator_60b_reg[53]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(50),
       D => rxdata_6b_r(5),
       Q => data5(3),
@@ -19036,7 +19211,7 @@ begin
     );
 \accumulator_60b_reg[54]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(54),
       D => rxdata_6b_r(0),
       Q => data5(4),
@@ -19044,7 +19219,7 @@ begin
     );
 \accumulator_60b_reg[55]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(54),
       D => rxdata_6b_r(1),
       Q => data5(5),
@@ -19052,7 +19227,7 @@ begin
     );
 \accumulator_60b_reg[56]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(54),
       D => rxdata_6b_r(2),
       Q => data5(6),
@@ -19060,7 +19235,7 @@ begin
     );
 \accumulator_60b_reg[57]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(54),
       D => rxdata_6b_r(3),
       Q => data5(7),
@@ -19068,7 +19243,7 @@ begin
     );
 \accumulator_60b_reg[58]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(54),
       D => rxdata_6b_r(4),
       Q => data5(8),
@@ -19076,7 +19251,7 @@ begin
     );
 \accumulator_60b_reg[59]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => p_0_out(54),
       D => rxdata_6b_r(5),
       Q => data5(9),
@@ -19084,7 +19259,7 @@ begin
     );
 \accumulator_60b_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[5]_i_1_n_0\,
       D => rxdata_6b_r(5),
       Q => \accumulator_60b_reg_n_0_[5]\,
@@ -19092,7 +19267,7 @@ begin
     );
 \accumulator_60b_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[11]_i_1_n_0\,
       D => rxdata_6b_r(0),
       Q => \accumulator_60b_reg_n_0_[6]\,
@@ -19100,7 +19275,7 @@ begin
     );
 \accumulator_60b_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[11]_i_1_n_0\,
       D => rxdata_6b_r(1),
       Q => \accumulator_60b_reg_n_0_[7]\,
@@ -19108,7 +19283,7 @@ begin
     );
 \accumulator_60b_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[11]_i_1_n_0\,
       D => rxdata_6b_r(2),
       Q => \accumulator_60b_reg_n_0_[8]\,
@@ -19116,7 +19291,7 @@ begin
     );
 \accumulator_60b_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \accumulator_60b[11]_i_1_n_0\,
       D => rxdata_6b_r(3),
       Q => \accumulator_60b_reg_n_0_[9]\,
@@ -19127,9 +19302,9 @@ bitslip_i_11: unisim.vcomponents.LUT3
       INIT => X"FE"
     )
         port map (
-      I0 => \^o_rxdata_10b\(3),
-      I1 => \^o_rxdata_10b\(4),
-      I2 => \^o_rxdata_10b\(2),
+      I0 => \^q\(3),
+      I1 => \^q\(4),
+      I2 => \^q\(2),
       O => bitslip_i_11_n_0
     );
 bitslip_i_12: unisim.vcomponents.LUT3
@@ -19137,9 +19312,9 @@ bitslip_i_12: unisim.vcomponents.LUT3
       INIT => X"7F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
       O => \^gcerr.code_err_reg\
     );
 bitslip_i_14: unisim.vcomponents.LUT5
@@ -19147,11 +19322,11 @@ bitslip_i_14: unisim.vcomponents.LUT5
       INIT => X"80000000"
     )
         port map (
-      I0 => \^o_rxdata_10b\(2),
-      I1 => \^o_rxdata_10b\(4),
-      I2 => \^o_rxdata_10b\(3),
-      I3 => \^o_rxdata_10b\(0),
-      I4 => \^o_rxdata_10b\(1),
+      I0 => \^q\(2),
+      I1 => \^q\(4),
+      I2 => \^q\(3),
+      I3 => \^q\(0),
+      I4 => \^q\(1),
       O => bitslip_reg_1
     );
 bitslip_i_15: unisim.vcomponents.LUT6
@@ -19159,12 +19334,12 @@ bitslip_i_15: unisim.vcomponents.LUT6
       INIT => X"0400440000004000"
     )
         port map (
-      I0 => \^o_rxdata_10b\(2),
-      I1 => \^o_rxdata_10b\(7),
-      I2 => \^o_rxdata_10b\(3),
-      I3 => \^o_rxdata_10b\(4),
-      I4 => \^o_rxdata_10b\(1),
-      I5 => \^o_rxdata_10b\(8),
+      I0 => \^q\(2),
+      I1 => \^q\(7),
+      I2 => \^q\(3),
+      I3 => \^q\(4),
+      I4 => \^q\(1),
+      I5 => \^q\(8),
       O => bitslip_i_15_n_0
     );
 bitslip_i_16: unisim.vcomponents.LUT6
@@ -19172,12 +19347,12 @@ bitslip_i_16: unisim.vcomponents.LUT6
       INIT => X"0000004000004440"
     )
         port map (
-      I0 => \^o_rxdata_10b\(7),
-      I1 => \^o_rxdata_10b\(2),
-      I2 => \^o_rxdata_10b\(1),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(8),
+      I0 => \^q\(7),
+      I1 => \^q\(2),
+      I2 => \^q\(1),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(8),
       O => bitslip_i_16_n_0
     );
 bitslip_i_3: unisim.vcomponents.LUT6
@@ -19185,11 +19360,11 @@ bitslip_i_3: unisim.vcomponents.LUT6
       INIT => X"C0C0C0C0C0D5C0CC"
     )
         port map (
-      I0 => \^o_rxdata_10b\(5),
+      I0 => \^q\(5),
       I1 => \data_reg_reg[1]\,
       I2 => \data_reg_reg[4]\,
-      I3 => \^o_rxdata_10b\(1),
-      I4 => \^o_rxdata_10b\(0),
+      I3 => \^q\(1),
+      I4 => \^q\(0),
       I5 => bitslip_i_11_n_0,
       O => bitslip_reg_2
     );
@@ -19198,11 +19373,11 @@ bitslip_i_8: unisim.vcomponents.LUT6
       INIT => X"8888888800000080"
     )
         port map (
-      I0 => \^o_rxdata_10b\(5),
-      I1 => \^o_rxdata_10b\(6),
+      I0 => \^q\(5),
+      I1 => \^q\(6),
       I2 => kout_i_i_2_n_0,
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
       I5 => bitslip_i_15_n_0,
       O => bitslip_reg_0
     );
@@ -19212,11 +19387,11 @@ bitslip_i_9: unisim.vcomponents.LUT6
     )
         port map (
       I0 => kout_i_i_3_n_0,
-      I1 => \^o_rxdata_10b\(3),
-      I2 => \^o_rxdata_10b\(4),
+      I1 => \^q\(3),
+      I2 => \^q\(4),
       I3 => bitslip_i_16_n_0,
-      I4 => \^o_rxdata_10b\(5),
-      I5 => \^o_rxdata_10b\(6),
+      I4 => \^q\(5),
+      I5 => \^q\(6),
       O => bitslip_reg
     );
 \bitslip_position[0]_i_1\: unisim.vcomponents.LUT1
@@ -19275,7 +19450,7 @@ bitslip_i_9: unisim.vcomponents.LUT6
     );
 \bitslip_position_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => \bitslip_position[0]_i_1_n_0\,
       Q => bitslip_position(0),
@@ -19283,7 +19458,7 @@ bitslip_i_9: unisim.vcomponents.LUT6
     );
 \bitslip_position_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => \bitslip_position[1]_i_1_n_0\,
       Q => bitslip_position(1),
@@ -19291,7 +19466,7 @@ bitslip_i_9: unisim.vcomponents.LUT6
     );
 \bitslip_position_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => \bitslip_position[2]_i_1_n_0\,
       Q => bitslip_position(2),
@@ -19299,7 +19474,7 @@ bitslip_i_9: unisim.vcomponents.LUT6
     );
 \bitslip_position_reg[3]\: unisim.vcomponents.FDSE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => \bitslip_position[3]_i_1_n_0\,
       Q => bitslip_position(3),
@@ -19307,7 +19482,7 @@ bitslip_i_9: unisim.vcomponents.LUT6
     );
 \bitslip_position_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => E(0),
       D => \bitslip_position[4]_i_1_n_0\,
       Q => bitslip_position(4),
@@ -19320,9 +19495,9 @@ comma_det_i_1: unisim.vcomponents.LUT5
         port map (
       I0 => comma_det_i_2_n_0,
       I1 => \^comma_det_reg\,
-      I2 => \^o_rxdata_10b\(6),
-      I3 => \^o_rxdata_10b\(0),
-      I4 => \^o_rxdata_10b\(1),
+      I2 => \^q\(6),
+      I3 => \^q\(0),
+      I4 => \^q\(1),
       O => comma_position0
     );
 comma_det_i_2: unisim.vcomponents.LUT4
@@ -19330,10 +19505,10 @@ comma_det_i_2: unisim.vcomponents.LUT4
       INIT => X"FFFE"
     )
         port map (
-      I0 => \^o_rxdata_10b\(2),
-      I1 => \^o_rxdata_10b\(4),
-      I2 => \^o_rxdata_10b\(3),
-      I3 => \^o_rxdata_10b\(5),
+      I0 => \^q\(2),
+      I1 => \^q\(4),
+      I2 => \^q\(3),
+      I3 => \^q\(5),
       O => comma_det_i_2_n_0
     );
 comma_det_i_3: unisim.vcomponents.LUT4
@@ -19341,10 +19516,10 @@ comma_det_i_3: unisim.vcomponents.LUT4
       INIT => X"8000"
     )
         port map (
-      I0 => \^o_rxdata_10b\(5),
-      I1 => \^o_rxdata_10b\(2),
-      I2 => \^o_rxdata_10b\(4),
-      I3 => \^o_rxdata_10b\(3),
+      I0 => \^q\(5),
+      I1 => \^q\(2),
+      I2 => \^q\(4),
+      I3 => \^q\(3),
       O => \^comma_det_reg\
     );
 \dout_i[5]_i_1\: unisim.vcomponents.LUT5
@@ -19352,11 +19527,11 @@ comma_det_i_3: unisim.vcomponents.LUT4
       INIT => X"CADE7B53"
     )
         port map (
-      I0 => \^o_rxdata_10b\(6),
-      I1 => \^o_rxdata_10b\(8),
-      I2 => \^o_rxdata_10b\(9),
+      I0 => \^q\(6),
+      I1 => \^q\(8),
+      I2 => \^q\(9),
       I3 => \dout_i[7]_i_2_n_0\,
-      I4 => \^o_rxdata_10b\(7),
+      I4 => \^q\(7),
       O => b3(5)
     );
 \dout_i[6]_i_1\: unisim.vcomponents.LUT5
@@ -19365,10 +19540,10 @@ comma_det_i_3: unisim.vcomponents.LUT4
     )
         port map (
       I0 => \dout_i[7]_i_2_n_0\,
-      I1 => \^o_rxdata_10b\(7),
-      I2 => \^o_rxdata_10b\(9),
-      I3 => \^o_rxdata_10b\(8),
-      I4 => \^o_rxdata_10b\(6),
+      I1 => \^q\(7),
+      I2 => \^q\(9),
+      I3 => \^q\(8),
+      I4 => \^q\(6),
       O => b3(6)
     );
 \dout_i[7]_i_1\: unisim.vcomponents.LUT5
@@ -19376,11 +19551,11 @@ comma_det_i_3: unisim.vcomponents.LUT4
       INIT => X"CBD99BD3"
     )
         port map (
-      I0 => \^o_rxdata_10b\(8),
-      I1 => \^o_rxdata_10b\(7),
-      I2 => \^o_rxdata_10b\(9),
+      I0 => \^q\(8),
+      I1 => \^q\(7),
+      I2 => \^q\(9),
       I3 => \dout_i[7]_i_2_n_0\,
-      I4 => \^o_rxdata_10b\(6),
+      I4 => \^q\(6),
       O => b3(7)
     );
 \dout_i[7]_i_2\: unisim.vcomponents.LUT6
@@ -19388,12 +19563,12 @@ comma_det_i_3: unisim.vcomponents.LUT4
       INIT => X"FFFFFFFEFFFEFFFF"
     )
         port map (
-      I0 => \^o_rxdata_10b\(5),
-      I1 => \^o_rxdata_10b\(3),
-      I2 => \^o_rxdata_10b\(4),
-      I3 => \^o_rxdata_10b\(2),
-      I4 => \^o_rxdata_10b\(9),
-      I5 => \^o_rxdata_10b\(8),
+      I0 => \^q\(5),
+      I1 => \^q\(3),
+      I2 => \^q\(4),
+      I3 => \^q\(2),
+      I4 => \^q\(9),
+      I5 => \^q\(8),
       O => \dout_i[7]_i_2_n_0\
     );
 g0_b0: unisim.vcomponents.LUT6
@@ -19401,12 +19576,12 @@ g0_b0: unisim.vcomponents.LUT6
       INIT => X"EDA3C33DAAABADB7"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(5),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(5),
       O => \out\(0)
     );
 \g0_b0__0\: unisim.vcomponents.LUT6
@@ -19414,12 +19589,12 @@ g0_b0: unisim.vcomponents.LUT6
       INIT => X"010101170117177F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(5),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(5),
       O => \g0_b0__0_n_0\
     );
 g0_b1: unisim.vcomponents.LUT6
@@ -19427,12 +19602,12 @@ g0_b1: unisim.vcomponents.LUT6
       INIT => X"EDA5A55BCCCDCDB7"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(5),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(5),
       O => \out\(1)
     );
 \g0_b1__0\: unisim.vcomponents.LUT6
@@ -19440,12 +19615,12 @@ g0_b1: unisim.vcomponents.LUT6
       INIT => X"FEE8E880E8808080"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(5),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(5),
       O => \g0_b1__0_n_0\
     );
 g0_b2: unisim.vcomponents.LUT6
@@ -19453,12 +19628,12 @@ g0_b2: unisim.vcomponents.LUT6
       INIT => X"FDB19967F0F1E5BF"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(5),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(5),
       O => \out\(2)
     );
 \g0_b2__0\: unisim.vcomponents.LUT6
@@ -19466,12 +19641,12 @@ g0_b2: unisim.vcomponents.LUT6
       INIT => X"0100000000000080"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(5),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(5),
       O => \g0_b2__0_n_0\
     );
 g0_b3: unisim.vcomponents.LUT6
@@ -19479,12 +19654,12 @@ g0_b3: unisim.vcomponents.LUT6
       INIT => X"FCA99697FF01FD3F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(5),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(5),
       O => \out\(3)
     );
 g0_b4: unisim.vcomponents.LUT6
@@ -19492,12 +19667,12 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"F8FF8117FEE9971F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(1),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(4),
-      I5 => \^o_rxdata_10b\(5),
+      I0 => \^q\(0),
+      I1 => \^q\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(4),
+      I5 => \^q\(5),
       O => \out\(4)
     );
 \gcerr.code_err_i_1\: unisim.vcomponents.LUT6
@@ -19518,9 +19693,9 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"7F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(3),
-      I1 => \^o_rxdata_10b\(4),
-      I2 => \^o_rxdata_10b\(2),
+      I0 => \^q\(3),
+      I1 => \^q\(4),
+      I2 => \^q\(2),
       O => \gcerr.code_err_i_10_n_0\
     );
 \gcerr.code_err_i_11\: unisim.vcomponents.LUT6
@@ -19528,10 +19703,10 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"FFFFFFFF56690000"
     )
         port map (
-      I0 => \^o_rxdata_10b\(0),
-      I1 => \^o_rxdata_10b\(2),
-      I2 => \^o_rxdata_10b\(3),
-      I3 => \^o_rxdata_10b\(1),
+      I0 => \^q\(0),
+      I1 => \^q\(2),
+      I2 => \^q\(3),
+      I3 => \^q\(1),
       I4 => kout_i_i_2_n_0,
       I5 => kout_i_i_3_n_0,
       O => \gcerr.code_err_i_11_n_0\
@@ -19541,7 +19716,7 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"3F3F737303005350"
     )
         port map (
-      I0 => \^o_rxdata_10b\(5),
+      I0 => \^q\(5),
       I1 => \gcerr.code_err_i_20_n_0\,
       I2 => \gcerr.code_err_i_13_n_0\,
       I3 => \gcerr.code_err_i_8_n_0\,
@@ -19554,8 +19729,8 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"7"
     )
         port map (
-      I0 => \^o_rxdata_10b\(1),
-      I1 => \^o_rxdata_10b\(0),
+      I0 => \^q\(1),
+      I1 => \^q\(0),
       O => \gcerr.code_err_i_13_n_0\
     );
 \gcerr.code_err_i_14\: unisim.vcomponents.LUT2
@@ -19563,8 +19738,8 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"E"
     )
         port map (
-      I0 => \^o_rxdata_10b\(4),
-      I1 => \^o_rxdata_10b\(3),
+      I0 => \^q\(4),
+      I1 => \^q\(3),
       O => \gcerr.code_err_i_14_n_0\
     );
 \gcerr.code_err_i_15\: unisim.vcomponents.LUT6
@@ -19573,10 +19748,10 @@ g0_b4: unisim.vcomponents.LUT6
     )
         port map (
       I0 => \gcerr.code_err_i_9_n_0\,
-      I1 => \^o_rxdata_10b\(2),
-      I2 => \^o_rxdata_10b\(3),
-      I3 => \^o_rxdata_10b\(4),
-      I4 => \^o_rxdata_10b\(5),
+      I1 => \^q\(2),
+      I2 => \^q\(3),
+      I3 => \^q\(4),
+      I4 => \^q\(5),
       I5 => \gdeni.disp_err_i_5_n_0\,
       O => \gcerr.code_err_i_15_n_0\
     );
@@ -19585,12 +19760,12 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"888800000000FF05"
     )
         port map (
-      I0 => \^o_rxdata_10b\(6),
+      I0 => \^q\(6),
       I1 => \gcerr.code_err_i_21_n_0\,
-      I2 => \^o_rxdata_10b\(9),
+      I2 => \^q\(9),
       I3 => \gcerr.code_err_i_22_n_0\,
-      I4 => \^o_rxdata_10b\(7),
-      I5 => \^o_rxdata_10b\(8),
+      I4 => \^q\(7),
+      I5 => \^q\(8),
       O => \gcerr.code_err_i_16_n_0\
     );
 \gcerr.code_err_i_17\: unisim.vcomponents.LUT5
@@ -19598,11 +19773,11 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"1117177F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(4),
-      I1 => \^o_rxdata_10b\(3),
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(1),
-      I4 => \^o_rxdata_10b\(0),
+      I0 => \^q\(4),
+      I1 => \^q\(3),
+      I2 => \^q\(2),
+      I3 => \^q\(1),
+      I4 => \^q\(0),
       O => \gcerr.code_err_i_17_n_0\
     );
 \gcerr.code_err_i_18\: unisim.vcomponents.LUT3
@@ -19610,9 +19785,9 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"1F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(9),
-      I1 => \^o_rxdata_10b\(8),
-      I2 => \^o_rxdata_10b\(7),
+      I0 => \^q\(9),
+      I1 => \^q\(8),
+      I2 => \^q\(7),
       O => \gcerr.code_err_i_18_n_0\
     );
 \gcerr.code_err_i_19\: unisim.vcomponents.LUT5
@@ -19620,11 +19795,11 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"F8808080"
     )
         port map (
-      I0 => \^o_rxdata_10b\(6),
-      I1 => \^o_rxdata_10b\(5),
-      I2 => \^o_rxdata_10b\(7),
-      I3 => \^o_rxdata_10b\(9),
-      I4 => \^o_rxdata_10b\(8),
+      I0 => \^q\(6),
+      I1 => \^q\(5),
+      I2 => \^q\(7),
+      I3 => \^q\(9),
+      I4 => \^q\(8),
       O => \gcerr.code_err_i_19_n_0\
     );
 \gcerr.code_err_i_2\: unisim.vcomponents.LUT6
@@ -19634,7 +19809,7 @@ g0_b4: unisim.vcomponents.LUT6
         port map (
       I0 => \^gcerr.code_err_reg\,
       I1 => kout_i_i_3_n_0,
-      I2 => \^o_rxdata_10b\(3),
+      I2 => \^q\(3),
       I3 => \gcerr.code_err_i_8_n_0\,
       I4 => \gcerr.code_err_i_9_n_0\,
       I5 => \gcerr.code_err_i_10_n_0\,
@@ -19645,8 +19820,8 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"7"
     )
         port map (
-      I0 => \^o_rxdata_10b\(4),
-      I1 => \^o_rxdata_10b\(3),
+      I0 => \^q\(4),
+      I1 => \^q\(3),
       O => \gcerr.code_err_i_20_n_0\
     );
 \gcerr.code_err_i_21\: unisim.vcomponents.LUT4
@@ -19654,10 +19829,10 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"A0A1"
     )
         port map (
-      I0 => \^o_rxdata_10b\(5),
-      I1 => \^o_rxdata_10b\(3),
-      I2 => \^o_rxdata_10b\(4),
-      I3 => \^o_rxdata_10b\(2),
+      I0 => \^q\(5),
+      I1 => \^q\(3),
+      I2 => \^q\(4),
+      I3 => \^q\(2),
       O => \gcerr.code_err_i_21_n_0\
     );
 \gcerr.code_err_i_22\: unisim.vcomponents.LUT5
@@ -19665,11 +19840,11 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"0080000F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(2),
-      I1 => \^o_rxdata_10b\(3),
-      I2 => \^o_rxdata_10b\(4),
-      I3 => \^o_rxdata_10b\(6),
-      I4 => \^o_rxdata_10b\(5),
+      I0 => \^q\(2),
+      I1 => \^q\(3),
+      I2 => \^q\(4),
+      I3 => \^q\(6),
+      I4 => \^q\(5),
       O => \gcerr.code_err_i_22_n_0\
     );
 \gcerr.code_err_i_3\: unisim.vcomponents.LUT6
@@ -19679,10 +19854,10 @@ g0_b4: unisim.vcomponents.LUT6
         port map (
       I0 => bitslip_i_11_n_0,
       I1 => kout_i_i_2_n_0,
-      I2 => \^o_rxdata_10b\(6),
+      I2 => \^q\(6),
       I3 => \gcerr.code_err_i_11_n_0\,
-      I4 => \^o_rxdata_10b\(5),
-      I5 => \^o_rxdata_10b\(4),
+      I4 => \^q\(5),
+      I5 => \^q\(4),
       O => \gcerr.code_err_i_3_n_0\
     );
 \gcerr.code_err_i_4\: unisim.vcomponents.LUT6
@@ -19691,10 +19866,10 @@ g0_b4: unisim.vcomponents.LUT6
     )
         port map (
       I0 => \gcerr.code_err_i_12_n_0\,
-      I1 => \^o_rxdata_10b\(2),
+      I1 => \^q\(2),
       I2 => \gcerr.code_err_i_13_n_0\,
       I3 => kout_i_i_3_n_0,
-      I4 => \^o_rxdata_10b\(4),
+      I4 => \^q\(4),
       I5 => \gcerr.code_err_i_8_n_0\,
       O => \gcerr.code_err_i_4_n_0\
     );
@@ -19706,7 +19881,7 @@ g0_b4: unisim.vcomponents.LUT6
       I0 => kout_i_i_3_n_0,
       I1 => \gcerr.code_err_i_14_n_0\,
       I2 => \gcerr.code_err_i_9_n_0\,
-      I3 => \^o_rxdata_10b\(5),
+      I3 => \^q\(5),
       I4 => \gcerr.code_err_i_15_n_0\,
       I5 => \gcerr.code_err_i_16_n_0\,
       O => \gcerr.code_err_i_5_n_0\
@@ -19717,9 +19892,9 @@ g0_b4: unisim.vcomponents.LUT6
     )
         port map (
       I0 => \gcerr.code_err_i_17_n_0\,
-      I1 => \^o_rxdata_10b\(5),
+      I1 => \^q\(5),
       I2 => \gcerr.code_err_i_18_n_0\,
-      I3 => \^o_rxdata_10b\(6),
+      I3 => \^q\(6),
       I4 => \gcerr.code_err_i_13_n_0\,
       I5 => bitslip_i_11_n_0,
       O => \gcerr.code_err_i_6_n_0\
@@ -19729,12 +19904,12 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"F080C080C080000F"
     )
         port map (
-      I0 => \^o_rxdata_10b\(4),
+      I0 => \^q\(4),
       I1 => \gcerr.code_err_i_19_n_0\,
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(3),
-      I4 => \^o_rxdata_10b\(0),
-      I5 => \^o_rxdata_10b\(1),
+      I2 => \^q\(2),
+      I3 => \^q\(3),
+      I4 => \^q\(0),
+      I5 => \^q\(1),
       O => \gcerr.code_err_i_7_n_0\
     );
 \gcerr.code_err_i_8\: unisim.vcomponents.LUT5
@@ -19742,11 +19917,11 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"FFFFAA80"
     )
         port map (
-      I0 => \^o_rxdata_10b\(6),
-      I1 => \^o_rxdata_10b\(9),
-      I2 => \^o_rxdata_10b\(8),
-      I3 => \^o_rxdata_10b\(7),
-      I4 => \^o_rxdata_10b\(5),
+      I0 => \^q\(6),
+      I1 => \^q\(9),
+      I2 => \^q\(8),
+      I3 => \^q\(7),
+      I4 => \^q\(5),
       O => \gcerr.code_err_i_8_n_0\
     );
 \gcerr.code_err_i_9\: unisim.vcomponents.LUT2
@@ -19754,8 +19929,8 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"E"
     )
         port map (
-      I0 => \^o_rxdata_10b\(1),
-      I1 => \^o_rxdata_10b\(0),
+      I0 => \^q\(1),
+      I1 => \^q\(0),
       O => \gcerr.code_err_i_9_n_0\
     );
 \gdeni.disp_err_i_1\: unisim.vcomponents.LUT6
@@ -19765,9 +19940,9 @@ g0_b4: unisim.vcomponents.LUT6
         port map (
       I0 => \gdeni.disp_err_i_2_n_0\,
       I1 => \grdni.run_disp_i_i_3_n_0\,
-      I2 => \^o_rxdata_10b\(7),
-      I3 => \^o_rxdata_10b\(9),
-      I4 => \^o_rxdata_10b\(8),
+      I2 => \^q\(7),
+      I3 => \^q\(9),
+      I4 => \^q\(8),
       I5 => \gdeni.disp_err_i_3_n_0\,
       O => \gdeni.disp_err_reg\
     );
@@ -19802,10 +19977,10 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"EA00"
     )
         port map (
-      I0 => \^o_rxdata_10b\(7),
-      I1 => \^o_rxdata_10b\(8),
-      I2 => \^o_rxdata_10b\(9),
-      I3 => \^o_rxdata_10b\(6),
+      I0 => \^q\(7),
+      I1 => \^q\(8),
+      I2 => \^q\(9),
+      I3 => \^q\(6),
       O => \gdeni.disp_err_i_4_n_0\
     );
 \gdeni.disp_err_i_5\: unisim.vcomponents.LUT4
@@ -19813,10 +19988,10 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"0057"
     )
         port map (
-      I0 => \^o_rxdata_10b\(7),
-      I1 => \^o_rxdata_10b\(8),
-      I2 => \^o_rxdata_10b\(9),
-      I3 => \^o_rxdata_10b\(6),
+      I0 => \^q\(7),
+      I1 => \^q\(8),
+      I2 => \^q\(9),
+      I3 => \^q\(6),
       O => \gdeni.disp_err_i_5_n_0\
     );
 \gdeni.disp_err_i_6\: unisim.vcomponents.LUT6
@@ -19824,11 +19999,11 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"00000017FFFFFFFF"
     )
         port map (
-      I0 => \^o_rxdata_10b\(8),
-      I1 => \^o_rxdata_10b\(7),
-      I2 => \^o_rxdata_10b\(9),
+      I0 => \^q\(8),
+      I1 => \^q\(7),
+      I2 => \^q\(9),
       I3 => \g0_b2__0_n_0\,
-      I4 => \^o_rxdata_10b\(6),
+      I4 => \^q\(6),
       I5 => \grdni.run_disp_i_reg_0\,
       O => \gdeni.disp_err_i_6_n_0\
     );
@@ -19837,10 +20012,10 @@ g0_b4: unisim.vcomponents.LUT6
       INIT => X"FFFFFFFF0000E800"
     )
         port map (
-      I0 => \^o_rxdata_10b\(8),
-      I1 => \^o_rxdata_10b\(7),
-      I2 => \^o_rxdata_10b\(9),
-      I3 => \^o_rxdata_10b\(6),
+      I0 => \^q\(8),
+      I1 => \^q\(7),
+      I2 => \^q\(9),
+      I3 => \^q\(6),
       I4 => \g0_b2__0_n_0\,
       I5 => \grdni.run_disp_i_reg_0\,
       O => \gdeni.disp_err_i_7_n_0\
@@ -19851,10 +20026,10 @@ g0_b4: unisim.vcomponents.LUT6
     )
         port map (
       I0 => \grdni.run_disp_i_i_2_n_0\,
-      I1 => \^o_rxdata_10b\(9),
-      I2 => \^o_rxdata_10b\(7),
-      I3 => \^o_rxdata_10b\(8),
-      I4 => \^o_rxdata_10b\(6),
+      I1 => \^q\(9),
+      I2 => \^q\(7),
+      I3 => \^q\(8),
+      I4 => \^q\(6),
       I5 => \grdni.run_disp_i_i_3_n_0\,
       O => \grdni.run_disp_i_reg\
     );
@@ -19887,10 +20062,10 @@ kout_i_i_1: unisim.vcomponents.LUT6
         port map (
       I0 => kout_i_i_2_n_0,
       I1 => kout_i_i_3_n_0,
-      I2 => \^o_rxdata_10b\(2),
-      I3 => \^o_rxdata_10b\(4),
-      I4 => \^o_rxdata_10b\(3),
-      I5 => \^o_rxdata_10b\(5),
+      I2 => \^q\(2),
+      I3 => \^q\(4),
+      I4 => \^q\(3),
+      I5 => \^q\(5),
       O => k
     );
 kout_i_i_2: unisim.vcomponents.LUT3
@@ -19898,9 +20073,9 @@ kout_i_i_2: unisim.vcomponents.LUT3
       INIT => X"80"
     )
         port map (
-      I0 => \^o_rxdata_10b\(8),
-      I1 => \^o_rxdata_10b\(9),
-      I2 => \^o_rxdata_10b\(7),
+      I0 => \^q\(8),
+      I1 => \^q\(9),
+      I2 => \^q\(7),
       O => kout_i_i_2_n_0
     );
 kout_i_i_3: unisim.vcomponents.LUT3
@@ -19908,9 +20083,9 @@ kout_i_i_3: unisim.vcomponents.LUT3
       INIT => X"01"
     )
         port map (
-      I0 => \^o_rxdata_10b\(9),
-      I1 => \^o_rxdata_10b\(7),
-      I2 => \^o_rxdata_10b\(8),
+      I0 => \^q\(9),
+      I1 => \^q\(7),
+      I2 => \^q\(8),
       O => kout_i_i_3_n_0
     );
 \o_rxdata_10b[0]_i_1\: unisim.vcomponents.LUT3
@@ -20457,82 +20632,82 @@ kout_i_i_3: unisim.vcomponents.LUT3
     );
 \o_rxdata_10b_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(0),
-      Q => \^o_rxdata_10b\(0),
+      Q => \^q\(0),
       R => SR(0)
     );
 \o_rxdata_10b_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(1),
-      Q => \^o_rxdata_10b\(1),
+      Q => \^q\(1),
       R => SR(0)
     );
 \o_rxdata_10b_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(2),
-      Q => \^o_rxdata_10b\(2),
+      Q => \^q\(2),
       R => SR(0)
     );
 \o_rxdata_10b_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(3),
-      Q => \^o_rxdata_10b\(3),
+      Q => \^q\(3),
       R => SR(0)
     );
 \o_rxdata_10b_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(4),
-      Q => \^o_rxdata_10b\(4),
+      Q => \^q\(4),
       R => SR(0)
     );
 \o_rxdata_10b_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(5),
-      Q => \^o_rxdata_10b\(5),
+      Q => \^q\(5),
       R => SR(0)
     );
 \o_rxdata_10b_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(6),
-      Q => \^o_rxdata_10b\(6),
+      Q => \^q\(6),
       R => SR(0)
     );
 \o_rxdata_10b_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(7),
-      Q => \^o_rxdata_10b\(7),
+      Q => \^q\(7),
       R => SR(0)
     );
 \o_rxdata_10b_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(8),
-      Q => \^o_rxdata_10b\(8),
+      Q => \^q\(8),
       R => SR(0)
     );
 \o_rxdata_10b_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => p_0_in(9),
-      Q => \^o_rxdata_10b\(9),
+      Q => \^q\(9),
       R => SR(0)
     );
 \rd_ptr[0]_i_1__0\: unisim.vcomponents.LUT1
@@ -20565,7 +20740,7 @@ kout_i_i_3: unisim.vcomponents.LUT3
     );
 \rd_ptr_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \rd_ptr[0]_i_1__0_n_0\,
       Q => rd_ptr(0),
@@ -20573,7 +20748,7 @@ kout_i_i_3: unisim.vcomponents.LUT3
     );
 \rd_ptr_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \rd_ptr[1]_i_1__0_n_0\,
       Q => rd_ptr(1),
@@ -20581,7 +20756,7 @@ kout_i_i_3: unisim.vcomponents.LUT3
     );
 \rd_ptr_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \rd_ptr[2]_i_1__0_n_0\,
       Q => rd_ptr(2),
@@ -20589,8 +20764,8 @@ kout_i_i_3: unisim.vcomponents.LUT3
     );
 reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_8
      port map (
+      CLK => CLK,
       SR(0) => SR(0),
-      clk208 => clk208,
       reset_out => reset_208
     );
 \rxdata_10b_r[10]_i_1\: unisim.vcomponents.LUT6
@@ -20864,7 +21039,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data6(4),
       Q => \rxdata_10b_r_reg__1\(0),
@@ -20872,7 +21047,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[10]_i_1_n_0\,
       Q => data6(4),
@@ -20880,7 +21055,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[11]_i_1_n_0\,
       Q => data6(5),
@@ -20888,7 +21063,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[12]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[12]_i_1_n_0\,
       Q => data6(6),
@@ -20896,7 +21071,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[13]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[13]_i_1_n_0\,
       Q => data6(7),
@@ -20904,7 +21079,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[14]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[14]_i_1_n_0\,
       Q => data6(8),
@@ -20912,7 +21087,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[15]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[15]_i_1_n_0\,
       Q => data6(9),
@@ -20920,7 +21095,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[16]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[16]_i_1_n_0\,
       Q => data7(9),
@@ -20928,7 +21103,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[17]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[17]_i_1_n_0\,
       Q => data8(9),
@@ -20936,7 +21111,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[18]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[18]_i_1_n_0\,
       Q => data9(9),
@@ -20944,7 +21119,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[19]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => \rxdata_10b_r[19]_i_1_n_0\,
       D => \rxdata_10b_r[19]_i_2_n_0\,
       Q => \rxdata_10b_r_reg_n_0_[19]\,
@@ -20952,7 +21127,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data6(5),
       Q => \rxdata_10b_r_reg__1\(1),
@@ -20960,7 +21135,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data6(6),
       Q => \rxdata_10b_r_reg__1\(2),
@@ -20968,7 +21143,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data6(7),
       Q => \rxdata_10b_r_reg__1\(3),
@@ -20976,7 +21151,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data6(8),
       Q => \rxdata_10b_r_reg__1\(4),
@@ -20984,7 +21159,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data6(9),
       Q => \rxdata_10b_r_reg__1\(5),
@@ -20992,7 +21167,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data7(9),
       Q => \rxdata_10b_r_reg__1\(6),
@@ -21000,7 +21175,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data8(9),
       Q => \rxdata_10b_r_reg__1\(7),
@@ -21008,7 +21183,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => data9(9),
       Q => \rxdata_10b_r_reg__1\(8),
@@ -21016,7 +21191,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_10b_r_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \rxdata_10b_r_reg_n_0_[19]\,
       Q => \rxdata_10b_r_reg__1\(9),
@@ -21024,49 +21199,49 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \rxdata_6b_r_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
-      D => rxdata_6b(0),
+      D => D(0),
       Q => rxdata_6b_r(0),
       R => '0'
     );
 \rxdata_6b_r_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
-      D => rxdata_6b(1),
+      D => D(1),
       Q => rxdata_6b_r(1),
       R => '0'
     );
 \rxdata_6b_r_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
-      D => rxdata_6b(2),
+      D => D(2),
       Q => rxdata_6b_r(2),
       R => '0'
     );
 \rxdata_6b_r_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
-      D => rxdata_6b(3),
+      D => D(3),
       Q => rxdata_6b_r(3),
       R => '0'
     );
 \rxdata_6b_r_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
-      D => rxdata_6b(4),
+      D => D(4),
       Q => rxdata_6b_r(4),
       R => '0'
     );
 \rxdata_6b_r_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
-      D => rxdata_6b(5),
+      D => D(5),
       Q => rxdata_6b_r(5),
       R => '0'
     );
@@ -21112,7 +21287,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \wr_ptr_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \wr_ptr[0]_i_1__0_n_0\,
       Q => wr_ptr(0),
@@ -21120,7 +21295,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \wr_ptr_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \wr_ptr[1]_i_1_n_0\,
       Q => wr_ptr(1),
@@ -21128,7 +21303,7 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \wr_ptr_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \wr_ptr[2]_i_1_n_0\,
       Q => wr_ptr(2),
@@ -21136,11 +21311,180 @@ reset_sync_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_
     );
 \wr_ptr_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \wr_ptr[3]_i_1_n_0\,
       Q => wr_ptr(3),
       R => reset_208
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen is
+  port (
+    clk625_out : out STD_LOGIC;
+    CLK : out STD_LOGIC;
+    clk104_out : out STD_LOGIC;
+    clk125_out : out STD_LOGIC;
+    mmcm_locked_out : out STD_LOGIC;
+    refclk125_p : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
+    reset : in STD_LOGIC
+  );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen : entity is "gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen";
+end gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen;
+
+architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen is
+  signal \^clk\ : STD_LOGIC;
+  signal clk104_i : STD_LOGIC;
+  signal clk125_i : STD_LOGIC;
+  signal clk125_in : STD_LOGIC;
+  signal clk208_i : STD_LOGIC;
+  signal clk625_i : STD_LOGIC;
+  signal clk_fb : STD_LOGIC;
+  signal clk_fb_i : STD_LOGIC;
+  signal o_mmcm_locked_i : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKFBOUTB_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKFBSTOPPED_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKINSTOPPED_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKOUT0B_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKOUT1B_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKOUT2B_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKOUT3B_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKOUT4_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKOUT5_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_CLKOUT6_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_DRDY_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_PSDONE_UNCONNECTED : STD_LOGIC;
+  signal NLW_sgmii_phy_mmcm_i_DO_UNCONNECTED : STD_LOGIC_VECTOR ( 15 downto 0 );
+  attribute BOX_TYPE : string;
+  attribute BOX_TYPE of clk104_buf : label is "PRIMITIVE";
+  attribute BOX_TYPE of clk125_buf : label is "PRIMITIVE";
+  attribute BOX_TYPE of clk125_ibufg : label is "PRIMITIVE";
+  attribute CAPACITANCE : string;
+  attribute CAPACITANCE of clk125_ibufg : label is "DONT_CARE";
+  attribute IBUF_DELAY_VALUE : string;
+  attribute IBUF_DELAY_VALUE of clk125_ibufg : label is "0";
+  attribute XILINX_LEGACY_PRIM : string;
+  attribute XILINX_LEGACY_PRIM of clk125_ibufg : label is "IBUFGDS";
+  attribute BOX_TYPE of clk208_buf : label is "PRIMITIVE";
+  attribute BOX_TYPE of clk625_buf : label is "PRIMITIVE";
+  attribute BOX_TYPE of clkf_buf : label is "PRIMITIVE";
+  attribute BOX_TYPE of sgmii_phy_mmcm_i : label is "PRIMITIVE";
+  attribute XILINX_LEGACY_PRIM of sgmii_phy_mmcm_i : label is "MMCME2_BASE";
+begin
+  CLK <= \^clk\;
+clk104_buf: unisim.vcomponents.BUFG
+     port map (
+      I => clk104_i,
+      O => clk104_out
+    );
+clk125_buf: unisim.vcomponents.BUFG
+     port map (
+      I => clk125_i,
+      O => clk125_out
+    );
+clk125_ibufg: unisim.vcomponents.IBUFDS
+    generic map(
+      IOSTANDARD => "DEFAULT"
+    )
+        port map (
+      I => refclk125_p,
+      IB => refclk125_n,
+      O => clk125_in
+    );
+clk208_buf: unisim.vcomponents.BUFG
+     port map (
+      I => clk208_i,
+      O => \^clk\
+    );
+clk625_buf: unisim.vcomponents.BUFG
+     port map (
+      I => clk625_i,
+      O => clk625_out
+    );
+clkf_buf: unisim.vcomponents.BUFG
+     port map (
+      I => clk_fb_i,
+      O => clk_fb
+    );
+core_idelayctrl_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_idelayctrl
+     port map (
+      CLK => \^clk\,
+      mmcm_locked_out => mmcm_locked_out,
+      o_mmcm_locked_i => o_mmcm_locked_i
+    );
+sgmii_phy_mmcm_i: unisim.vcomponents.MMCME2_ADV
+    generic map(
+      BANDWIDTH => "HIGH",
+      CLKFBOUT_MULT_F => 5.000000,
+      CLKFBOUT_PHASE => 0.000000,
+      CLKIN1_PERIOD => 8.000000,
+      CLKIN2_PERIOD => 10.000000,
+      CLKOUT0_DIVIDE_F => 1.000000,
+      CLKOUT0_DUTY_CYCLE => 0.500000,
+      CLKOUT0_PHASE => 0.000000,
+      CLKOUT1_DIVIDE => 3,
+      CLKOUT1_DUTY_CYCLE => 0.500000,
+      CLKOUT1_PHASE => 0.000000,
+      CLKOUT2_DIVIDE => 6,
+      CLKOUT2_DUTY_CYCLE => 0.500000,
+      CLKOUT2_PHASE => 0.000000,
+      CLKOUT3_DIVIDE => 5,
+      CLKOUT3_DUTY_CYCLE => 0.500000,
+      CLKOUT3_PHASE => 0.000000,
+      CLKOUT4_CASCADE => false,
+      CLKOUT4_DIVIDE => 1,
+      CLKOUT4_DUTY_CYCLE => 0.500000,
+      CLKOUT4_PHASE => 0.000000,
+      CLKOUT5_DIVIDE => 1,
+      CLKOUT5_DUTY_CYCLE => 0.500000,
+      CLKOUT5_PHASE => 0.000000,
+      CLKOUT6_DIVIDE => 1,
+      CLKOUT6_DUTY_CYCLE => 0.500000,
+      CLKOUT6_PHASE => 0.000000,
+      COMPENSATION => "ZHOLD",
+      DIVCLK_DIVIDE => 1,
+      REF_JITTER1 => 0.000000,
+      STARTUP_WAIT => false
+    )
+        port map (
+      CLKFBIN => clk_fb,
+      CLKFBOUT => clk_fb_i,
+      CLKFBOUTB => NLW_sgmii_phy_mmcm_i_CLKFBOUTB_UNCONNECTED,
+      CLKFBSTOPPED => NLW_sgmii_phy_mmcm_i_CLKFBSTOPPED_UNCONNECTED,
+      CLKIN1 => clk125_in,
+      CLKIN2 => '0',
+      CLKINSEL => '1',
+      CLKINSTOPPED => NLW_sgmii_phy_mmcm_i_CLKINSTOPPED_UNCONNECTED,
+      CLKOUT0 => clk625_i,
+      CLKOUT0B => NLW_sgmii_phy_mmcm_i_CLKOUT0B_UNCONNECTED,
+      CLKOUT1 => clk208_i,
+      CLKOUT1B => NLW_sgmii_phy_mmcm_i_CLKOUT1B_UNCONNECTED,
+      CLKOUT2 => clk104_i,
+      CLKOUT2B => NLW_sgmii_phy_mmcm_i_CLKOUT2B_UNCONNECTED,
+      CLKOUT3 => clk125_i,
+      CLKOUT3B => NLW_sgmii_phy_mmcm_i_CLKOUT3B_UNCONNECTED,
+      CLKOUT4 => NLW_sgmii_phy_mmcm_i_CLKOUT4_UNCONNECTED,
+      CLKOUT5 => NLW_sgmii_phy_mmcm_i_CLKOUT5_UNCONNECTED,
+      CLKOUT6 => NLW_sgmii_phy_mmcm_i_CLKOUT6_UNCONNECTED,
+      DADDR(6 downto 0) => B"0000000",
+      DCLK => '0',
+      DEN => '0',
+      DI(15 downto 0) => B"0000000000000000",
+      DO(15 downto 0) => NLW_sgmii_phy_mmcm_i_DO_UNCONNECTED(15 downto 0),
+      DRDY => NLW_sgmii_phy_mmcm_i_DRDY_UNCONNECTED,
+      DWE => '0',
+      LOCKED => o_mmcm_locked_i,
+      PSCLK => '0',
+      PSDONE => NLW_sgmii_phy_mmcm_i_PSDONE_UNCONNECTED,
+      PSEN => '0',
+      PSINCDEC => '0',
+      PWRDWN => '0',
+      RST => reset
     );
 end STRUCTURE;
 library IEEE;
@@ -21159,10 +21503,10 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob is
     cid_error0 : out STD_LOGIC;
     rxp : in STD_LOGIC;
     rxn : in STD_LOGIC;
-    clk208 : in STD_LOGIC;
-    clk625 : in STD_LOGIC;
+    CLK : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     CLKB0 : in STD_LOGIC;
-    Q : in STD_LOGIC_VECTOR ( 5 downto 0 );
+    o_txdata_6b : in STD_LOGIC_VECTOR ( 5 downto 0 );
     \rst_dly_reg[3]\ : in STD_LOGIC_VECTOR ( 0 to 0 );
     D : in STD_LOGIC_VECTOR ( 4 downto 0 );
     reset_out : in STD_LOGIC;
@@ -21170,7 +21514,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob is
     E : in STD_LOGIC_VECTOR ( 0 to 0 );
     \current_tap_reg[4]\ : in STD_LOGIC_VECTOR ( 4 downto 0 );
     mon_idly_update_reg : in STD_LOGIC_VECTOR ( 0 to 0 );
-    clk104 : in STD_LOGIC
+    refclk125_n_0 : in STD_LOGIC
   );
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob : entity is "gig_ethernet_pcs_pma_0_sgmii_phy_iob";
@@ -21269,16 +21613,16 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_ph
   signal NLW_sgmii_tx_oserdes_i_TFB_UNCONNECTED : STD_LOGIC;
   signal NLW_sgmii_tx_oserdes_i_TQ_UNCONNECTED : STD_LOGIC;
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \data_idly_actual_value[1]_i_1\ : label is "soft_lutpair116";
-  attribute SOFT_HLUTNM of \data_idly_actual_value[2]_i_1\ : label is "soft_lutpair116";
-  attribute SOFT_HLUTNM of \data_idly_actual_value[3]_i_1\ : label is "soft_lutpair114";
-  attribute SOFT_HLUTNM of \data_idly_actual_value[5]_i_3\ : label is "soft_lutpair114";
-  attribute SOFT_HLUTNM of \left_margin[3]_i_1\ : label is "soft_lutpair115";
-  attribute SOFT_HLUTNM of \left_margin[4]_i_2\ : label is "soft_lutpair115";
-  attribute SOFT_HLUTNM of \mon_idly_actual_value[1]_i_1\ : label is "soft_lutpair117";
-  attribute SOFT_HLUTNM of \mon_idly_actual_value[2]_i_1\ : label is "soft_lutpair117";
-  attribute SOFT_HLUTNM of \mon_idly_actual_value[3]_i_1\ : label is "soft_lutpair113";
-  attribute SOFT_HLUTNM of \mon_idly_actual_value[5]_i_3\ : label is "soft_lutpair113";
+  attribute SOFT_HLUTNM of \data_idly_actual_value[1]_i_1\ : label is "soft_lutpair117";
+  attribute SOFT_HLUTNM of \data_idly_actual_value[2]_i_1\ : label is "soft_lutpair117";
+  attribute SOFT_HLUTNM of \data_idly_actual_value[3]_i_1\ : label is "soft_lutpair115";
+  attribute SOFT_HLUTNM of \data_idly_actual_value[5]_i_3\ : label is "soft_lutpair115";
+  attribute SOFT_HLUTNM of \left_margin[3]_i_1\ : label is "soft_lutpair116";
+  attribute SOFT_HLUTNM of \left_margin[4]_i_2\ : label is "soft_lutpair116";
+  attribute SOFT_HLUTNM of \mon_idly_actual_value[1]_i_1\ : label is "soft_lutpair118";
+  attribute SOFT_HLUTNM of \mon_idly_actual_value[2]_i_1\ : label is "soft_lutpair118";
+  attribute SOFT_HLUTNM of \mon_idly_actual_value[3]_i_1\ : label is "soft_lutpair114";
+  attribute SOFT_HLUTNM of \mon_idly_actual_value[5]_i_3\ : label is "soft_lutpair114";
   attribute BOX_TYPE : string;
   attribute BOX_TYPE of rx_data_idly_i : label is "PRIMITIVE";
   attribute SIM_DELAY_D : integer;
@@ -21397,7 +21741,7 @@ data_dly_ce_i_5: unisim.vcomponents.LUT6
     );
 data_dly_ce_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => data_dly_ce_i_1_n_0,
       Q => data_dly_ce,
@@ -21405,7 +21749,7 @@ data_dly_ce_reg: unisim.vcomponents.FDRE
     );
 data_dly_inc_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => data_dly_inc_reg0,
       Q => data_dly_inc,
@@ -21499,7 +21843,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_actual_value_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \data_idly_actual_value[5]_i_1_n_0\,
       D => \data_idly_actual_value[0]_i_1_n_0\,
       Q => \data_idly_actual_value_reg__0\(0),
@@ -21507,7 +21851,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_actual_value_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \data_idly_actual_value[5]_i_1_n_0\,
       D => \data_idly_actual_value[1]_i_1_n_0\,
       Q => \data_idly_actual_value_reg__0\(1),
@@ -21515,7 +21859,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_actual_value_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \data_idly_actual_value[5]_i_1_n_0\,
       D => \data_idly_actual_value[2]_i_1_n_0\,
       Q => \data_idly_actual_value_reg__0\(2),
@@ -21523,7 +21867,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_actual_value_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \data_idly_actual_value[5]_i_1_n_0\,
       D => \data_idly_actual_value[3]_i_1_n_0\,
       Q => \data_idly_actual_value_reg__0\(3),
@@ -21531,7 +21875,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_actual_value_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \data_idly_actual_value[5]_i_1_n_0\,
       D => \data_idly_actual_value[4]_i_1_n_0\,
       Q => \data_idly_actual_value_reg__0\(4),
@@ -21539,7 +21883,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_actual_value_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \data_idly_actual_value[5]_i_1_n_0\,
       D => \data_idly_actual_value[5]_i_2_n_0\,
       Q => \data_idly_actual_value_reg__0\(5),
@@ -21547,7 +21891,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_requested_value_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => E(0),
       D => \current_tap_reg[4]\(0),
       Q => \data_idly_requested_value_reg_n_0_[0]\,
@@ -21555,7 +21899,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_requested_value_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => E(0),
       D => \current_tap_reg[4]\(1),
       Q => \data_idly_requested_value_reg_n_0_[1]\,
@@ -21563,7 +21907,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_requested_value_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => E(0),
       D => \current_tap_reg[4]\(2),
       Q => \data_idly_requested_value_reg_n_0_[2]\,
@@ -21571,7 +21915,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_requested_value_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => E(0),
       D => \current_tap_reg[4]\(3),
       Q => \data_idly_requested_value_reg_n_0_[3]\,
@@ -21579,7 +21923,7 @@ data_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \data_idly_requested_value_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => E(0),
       D => \current_tap_reg[4]\(4),
       Q => \data_idly_requested_value_reg_n_0_[4]\,
@@ -21735,7 +22079,7 @@ mon_dly_ce_i_5: unisim.vcomponents.LUT6
     );
 mon_dly_ce_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => mon_dly_ce_i_1_n_0,
       Q => mon_dly_ce,
@@ -21743,7 +22087,7 @@ mon_dly_ce_reg: unisim.vcomponents.FDRE
     );
 mon_dly_inc_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => mon_dly_inc_reg0,
       Q => mon_dly_inc,
@@ -21837,7 +22181,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_actual_value_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \mon_idly_actual_value[5]_i_1_n_0\,
       D => \mon_idly_actual_value[0]_i_1_n_0\,
       Q => \mon_idly_actual_value_reg__0\(0),
@@ -21845,7 +22189,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_actual_value_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \mon_idly_actual_value[5]_i_1_n_0\,
       D => \mon_idly_actual_value[1]_i_1_n_0\,
       Q => \mon_idly_actual_value_reg__0\(1),
@@ -21853,7 +22197,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_actual_value_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \mon_idly_actual_value[5]_i_1_n_0\,
       D => \mon_idly_actual_value[2]_i_1_n_0\,
       Q => \mon_idly_actual_value_reg__0\(2),
@@ -21861,7 +22205,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_actual_value_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \mon_idly_actual_value[5]_i_1_n_0\,
       D => \mon_idly_actual_value[3]_i_1_n_0\,
       Q => \mon_idly_actual_value_reg__0\(3),
@@ -21869,7 +22213,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_actual_value_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \mon_idly_actual_value[5]_i_1_n_0\,
       D => \mon_idly_actual_value[4]_i_1_n_0\,
       Q => \mon_idly_actual_value_reg__0\(4),
@@ -21877,7 +22221,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_actual_value_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => \mon_idly_actual_value[5]_i_1_n_0\,
       D => \mon_idly_actual_value[5]_i_2_n_0\,
       Q => \mon_idly_actual_value_reg__0\(5),
@@ -21885,7 +22229,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_requested_value_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => mon_idly_update_reg(0),
       D => D(0),
       Q => \mon_idly_requested_value_reg_n_0_[0]\,
@@ -21893,7 +22237,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_requested_value_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => mon_idly_update_reg(0),
       D => D(1),
       Q => \mon_idly_requested_value_reg_n_0_[1]\,
@@ -21901,7 +22245,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_requested_value_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => mon_idly_update_reg(0),
       D => D(2),
       Q => \mon_idly_requested_value_reg_n_0_[2]\,
@@ -21909,7 +22253,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_requested_value_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => mon_idly_update_reg(0),
       D => D(3),
       Q => \mon_idly_requested_value_reg_n_0_[3]\,
@@ -21917,7 +22261,7 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 \mon_idly_requested_value_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => mon_idly_update_reg(0),
       D => D(4),
       Q => \mon_idly_requested_value_reg_n_0_[4]\,
@@ -21925,8 +22269,8 @@ mon_dly_inc_reg: unisim.vcomponents.FDRE
     );
 reset_sync_rst_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
      port map (
+      CLK => CLK,
       SR(0) => rx_rst_208,
-      clk208 => clk208,
       data_dly_inc_reg0 => data_dly_inc_reg0,
       \data_idly_requested_value_reg[3]\ => data_dly_ce_i_3_n_0,
       \data_idly_requested_value_reg[4]\ => data_dly_ce_i_2_n_0,
@@ -21941,13 +22285,13 @@ reset_sync_rst_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_re
     );
 reset_sync_soft_rx_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_11
      port map (
-      clk208 => clk208,
+      CLK => CLK,
       reset_out => soft_rx_reset_208,
       reset_sync6_0 => reset_sync6
     );
 reset_sync_soft_tx_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_12
      port map (
-      clk208 => clk208,
+      CLK => CLK,
       reset_out => reset_out,
       txn => soft_tx_reset_208
     );
@@ -21977,7 +22321,7 @@ reset_sync_soft_tx_reset_208: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pc
     );
 rst208_r_d1_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rst208_r,
       Q => rst208_r_d1,
@@ -21985,7 +22329,7 @@ rst208_r_d1_reg: unisim.vcomponents.FDRE
     );
 rst208_r_d2_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rst208_r_d1,
       Q => rst208_r_d2,
@@ -22006,7 +22350,7 @@ rx_data_idly_i: unisim.vcomponents.IDELAYE2
       SIGNAL_PATTERN => "DATA"
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => data_dly_ce,
       CINVCTRL => '0',
       CNTVALUEIN(4 downto 0) => B"00000",
@@ -22050,9 +22394,9 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
       BITSLIP => '0',
       CE1 => '1',
       CE2 => '1',
-      CLK => clk625,
+      CLK => refclk125_n,
       CLKB => CLKB0,
-      CLKDIV => clk208,
+      CLKDIV => CLK,
       CLKDIVP => '0',
       D => '0',
       DDLY => rx_ser_data_delayed,
@@ -22087,7 +22431,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(0),
       Q => rx_data_stg1(0),
@@ -22095,7 +22439,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_data_stg1_i(4),
       Q => \^rx_data_stg2_reg[11]_0\(4),
@@ -22103,7 +22447,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_data_stg1_i(5),
       Q => \^rx_data_stg2_reg[11]_0\(5),
@@ -22111,7 +22455,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(1),
       Q => rx_data_stg1(1),
@@ -22119,7 +22463,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(2),
       Q => rx_data_stg1(2),
@@ -22127,7 +22471,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(3),
       Q => rx_data_stg1(3),
@@ -22135,7 +22479,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(4),
       Q => rx_data_stg1(4),
@@ -22143,7 +22487,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(5),
       Q => rx_data_stg1(5),
@@ -22151,7 +22495,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_data_stg1_i(0),
       Q => \^rx_data_stg2_reg[11]_0\(0),
@@ -22159,7 +22503,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_data_stg1_i(1),
       Q => \^rx_data_stg2_reg[11]_0\(1),
@@ -22167,7 +22511,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_data_stg1_i(2),
       Q => \^rx_data_stg2_reg[11]_0\(2),
@@ -22175,7 +22519,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg1_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_data_stg1_i(3),
       Q => \^rx_data_stg2_reg[11]_0\(3),
@@ -22183,7 +22527,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_data_stg1(0),
       Q => rx_data(0),
@@ -22191,7 +22535,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(4),
       Q => rx_data(10),
@@ -22199,7 +22543,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(5),
       Q => rx_data(11),
@@ -22207,7 +22551,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_data_stg1(1),
       Q => rx_data(1),
@@ -22215,7 +22559,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_data_stg1(2),
       Q => rx_data(2),
@@ -22223,7 +22567,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_data_stg1(3),
       Q => rx_data(3),
@@ -22231,7 +22575,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_data_stg1(4),
       Q => rx_data(4),
@@ -22239,7 +22583,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_data_stg1(5),
       Q => rx_data(5),
@@ -22247,7 +22591,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(0),
       Q => rx_data(6),
@@ -22255,7 +22599,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(1),
       Q => rx_data(7),
@@ -22263,7 +22607,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(2),
       Q => rx_data(8),
@@ -22271,7 +22615,7 @@ rx_data_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_data_stg2_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \^rx_data_stg2_reg[11]_0\(3),
       Q => rx_data(9),
@@ -22292,7 +22636,7 @@ rx_mon_idly_i: unisim.vcomponents.IDELAYE2
       SIGNAL_PATTERN => "DATA"
     )
         port map (
-      C => clk208,
+      C => CLK,
       CE => mon_dly_ce,
       CINVCTRL => '0',
       CNTVALUEIN(4 downto 0) => B"00000",
@@ -22340,9 +22684,9 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
       BITSLIP => '0',
       CE1 => '1',
       CE2 => '1',
-      CLK => clk625,
+      CLK => refclk125_n,
       CLKB => CLKB0,
-      CLKDIV => clk208,
+      CLKDIV => CLK,
       CLKDIVP => '0',
       D => '0',
       DDLY => rx_ser_mon_delayed,
@@ -22368,7 +22712,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1(6),
       Q => rx_mon_stg1(0),
@@ -22376,7 +22720,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1_i(4),
       Q => rx_mon_stg1(10),
@@ -22384,7 +22728,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1_i(5),
       Q => rx_mon_stg1(11),
@@ -22392,7 +22736,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1(7),
       Q => rx_mon_stg1(1),
@@ -22400,7 +22744,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1(8),
       Q => rx_mon_stg1(2),
@@ -22408,7 +22752,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1(9),
       Q => rx_mon_stg1(3),
@@ -22416,7 +22760,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1(10),
       Q => rx_mon_stg1(4),
@@ -22424,7 +22768,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1(11),
       Q => rx_mon_stg1(5),
@@ -22432,7 +22776,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1_i(0),
       Q => rx_mon_stg1(6),
@@ -22440,7 +22784,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1_i(1),
       Q => rx_mon_stg1(7),
@@ -22448,7 +22792,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1_i(2),
       Q => rx_mon_stg1(8),
@@ -22456,7 +22800,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg1_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => rx_mon_stg1_i(3),
       Q => rx_mon_stg1(9),
@@ -22464,7 +22808,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(0),
       Q => rx_mon(0),
@@ -22472,7 +22816,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(10),
       Q => rx_mon(10),
@@ -22480,7 +22824,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(11),
       Q => rx_mon(11),
@@ -22488,7 +22832,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(1),
       Q => rx_mon(1),
@@ -22496,7 +22840,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(2),
       Q => rx_mon(2),
@@ -22504,7 +22848,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(3),
       Q => rx_mon(3),
@@ -22512,7 +22856,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(4),
       Q => rx_mon(4),
@@ -22520,7 +22864,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(5),
       Q => rx_mon(5),
@@ -22528,7 +22872,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(6),
       Q => rx_mon(6),
@@ -22536,7 +22880,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(7),
       Q => rx_mon(7),
@@ -22544,7 +22888,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(8),
       Q => rx_mon(8),
@@ -22552,7 +22896,7 @@ rx_mon_iserdes_i: unisim.vcomponents.ISERDESE2
     );
 \rx_mon_stg2_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => rx_mon_stg1(9),
       Q => rx_mon(9),
@@ -22607,14 +22951,14 @@ sgmii_tx_oserdes_i: unisim.vcomponents.OSERDESE2
       TRISTATE_WIDTH => 1
     )
         port map (
-      CLK => clk625,
-      CLKDIV => clk208,
-      D1 => Q(0),
-      D2 => Q(1),
-      D3 => Q(2),
-      D4 => Q(3),
-      D5 => Q(4),
-      D6 => Q(5),
+      CLK => refclk125_n,
+      CLKDIV => CLK,
+      D1 => o_txdata_6b(0),
+      D2 => o_txdata_6b(1),
+      D3 => o_txdata_6b(2),
+      D4 => o_txdata_6b(3),
+      D5 => o_txdata_6b(4),
+      D6 => o_txdata_6b(5),
       D7 => '0',
       D8 => '0',
       OCE => '1',
@@ -22637,7 +22981,7 @@ sgmii_tx_oserdes_i: unisim.vcomponents.OSERDESE2
     );
 soft_rx_reset_208_d1_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => soft_rx_reset_208,
       Q => soft_rx_reset_208_d1,
@@ -22645,11 +22989,123 @@ soft_rx_reset_208_d1_reg: unisim.vcomponents.FDRE
     );
 soft_rx_reset_208_d2_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk208,
+      C => CLK,
       CE => '1',
       D => soft_rx_reset_208_d1,
       Q => soft_rx_reset_208_d2,
       R => '0'
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen is
+  port (
+    rst_125_out : out STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
+    mmcm_locked_out : in STD_LOGIC;
+    reset : in STD_LOGIC
+  );
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen : entity is "gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen";
+end gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen;
+
+architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen is
+  signal p_1_out : STD_LOGIC_VECTOR ( 0 to 0 );
+  signal rst_1250_n_0 : STD_LOGIC;
+  signal rst_dly : STD_LOGIC_VECTOR ( 5 downto 0 );
+  attribute async_reg : string;
+  attribute async_reg of rst_dly : signal is "true";
+  attribute ASYNC_REG_boolean : boolean;
+  attribute ASYNC_REG_boolean of \rst_dly_reg[0]\ : label is std.standard.true;
+  attribute KEEP : string;
+  attribute KEEP of \rst_dly_reg[0]\ : label is "yes";
+  attribute ASYNC_REG_boolean of \rst_dly_reg[1]\ : label is std.standard.true;
+  attribute KEEP of \rst_dly_reg[1]\ : label is "yes";
+  attribute ASYNC_REG_boolean of \rst_dly_reg[2]\ : label is std.standard.true;
+  attribute KEEP of \rst_dly_reg[2]\ : label is "yes";
+  attribute ASYNC_REG_boolean of \rst_dly_reg[3]\ : label is std.standard.true;
+  attribute KEEP of \rst_dly_reg[3]\ : label is "yes";
+  attribute ASYNC_REG_boolean of \rst_dly_reg[4]\ : label is std.standard.true;
+  attribute KEEP of \rst_dly_reg[4]\ : label is "yes";
+  attribute ASYNC_REG_boolean of \rst_dly_reg[5]\ : label is std.standard.true;
+  attribute KEEP of \rst_dly_reg[5]\ : label is "yes";
+begin
+rst_1250: unisim.vcomponents.LUT6
+    generic map(
+      INIT => X"FFFFFFFFFFFFFFFE"
+    )
+        port map (
+      I0 => rst_dly(2),
+      I1 => rst_dly(0),
+      I2 => rst_dly(1),
+      I3 => rst_dly(4),
+      I4 => rst_dly(3),
+      I5 => rst_dly(5),
+      O => rst_1250_n_0
+    );
+rst_125_reg: unisim.vcomponents.FDRE
+     port map (
+      C => refclk125_n,
+      CE => '1',
+      D => rst_1250_n_0,
+      Q => rst_125_out,
+      R => '0'
+    );
+\rst_dly_reg[0]\: unisim.vcomponents.FDPE
+     port map (
+      C => refclk125_n,
+      CE => '1',
+      D => p_1_out(0),
+      PRE => reset,
+      Q => rst_dly(0)
+    );
+\rst_dly_reg[1]\: unisim.vcomponents.FDPE
+     port map (
+      C => refclk125_n,
+      CE => '1',
+      D => rst_dly(0),
+      PRE => reset,
+      Q => rst_dly(1)
+    );
+\rst_dly_reg[2]\: unisim.vcomponents.FDPE
+     port map (
+      C => refclk125_n,
+      CE => '1',
+      D => rst_dly(1),
+      PRE => reset,
+      Q => rst_dly(2)
+    );
+\rst_dly_reg[3]\: unisim.vcomponents.FDPE
+     port map (
+      C => refclk125_n,
+      CE => '1',
+      D => rst_dly(2),
+      PRE => reset,
+      Q => rst_dly(3)
+    );
+\rst_dly_reg[4]\: unisim.vcomponents.FDPE
+     port map (
+      C => refclk125_n,
+      CE => '1',
+      D => rst_dly(3),
+      PRE => reset,
+      Q => rst_dly(4)
+    );
+\rst_dly_reg[5]\: unisim.vcomponents.FDPE
+     port map (
+      C => refclk125_n,
+      CE => '1',
+      D => rst_dly(4),
+      PRE => reset,
+      Q => rst_dly(5)
+    );
+sync_block_mmcm_locked: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_17
+     port map (
+      D(0) => p_1_out(0),
+      mmcm_locked_out => mmcm_locked_out,
+      refclk125_n => refclk125_n
     );
 end STRUCTURE;
 library IEEE;
@@ -22764,14 +23220,14 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_MANAGEMENT is
   signal p_5_in : STD_LOGIC_VECTOR ( 0 to 0 );
   signal p_9_in : STD_LOGIC_VECTOR ( 5 to 5 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \CODE_GRP[6]_i_1\ : label is "soft_lutpair27";
-  attribute SOFT_HLUTNM of RX_DV_i_2 : label is "soft_lutpair27";
-  attribute SOFT_HLUTNM of STATUS_VECTOR_0_PRE_i_1 : label is "soft_lutpair26";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDISPERR_INT_i_1\ : label is "soft_lutpair29";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXNOTINTABLE_INT_i_1\ : label is "soft_lutpair29";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXRUNDISP_INT_i_1\ : label is "soft_lutpair28";
-  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[7]_i_1\ : label is "soft_lutpair28";
-  attribute SOFT_HLUTNM of XMIT_DATA_INT_i_1 : label is "soft_lutpair26";
+  attribute SOFT_HLUTNM of \CODE_GRP[6]_i_1\ : label is "soft_lutpair28";
+  attribute SOFT_HLUTNM of RX_DV_i_2 : label is "soft_lutpair28";
+  attribute SOFT_HLUTNM of STATUS_VECTOR_0_PRE_i_1 : label is "soft_lutpair27";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXDISPERR_INT_i_1\ : label is "soft_lutpair30";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXNOTINTABLE_INT_i_1\ : label is "soft_lutpair30";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXRUNDISP_INT_i_1\ : label is "soft_lutpair29";
+  attribute SOFT_HLUTNM of \USE_ROCKET_IO.TXDATA[7]_i_1\ : label is "soft_lutpair29";
+  attribute SOFT_HLUTNM of XMIT_DATA_INT_i_1 : label is "soft_lutpair27";
 begin
   AN_ENABLE_INT <= \^an_enable_int\;
   \AN_NP_TX_REG_WITH_AN.AN_NP_TX_REG_reg[0]_0\ <= \^an_np_tx_reg_with_an.an_np_tx_reg_reg[0]_0\;
@@ -23268,13 +23724,13 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top is
     \rx_data_stg2_reg[11]\ : out STD_LOGIC_VECTOR ( 5 downto 0 );
     rxp : in STD_LOGIC;
     rxn : in STD_LOGIC;
-    clk208 : in STD_LOGIC;
-    clk625 : in STD_LOGIC;
+    CLK : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     CLKB0 : in STD_LOGIC;
-    Q : in STD_LOGIC_VECTOR ( 5 downto 0 );
-    clk104 : in STD_LOGIC;
+    o_txdata_6b : in STD_LOGIC_VECTOR ( 5 downto 0 );
+    refclk125_n_0 : in STD_LOGIC;
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
-    \code_error_stretch_reg[3]\ : in STD_LOGIC_VECTOR ( 3 downto 0 );
+    Q : in STD_LOGIC_VECTOR ( 3 downto 0 );
     \rst_dly_reg[3]\ : in STD_LOGIC_VECTOR ( 3 downto 0 );
     reset_out : in STD_LOGIC;
     reset_sync6 : in STD_LOGIC
@@ -23406,7 +23862,7 @@ begin
   phy_init_cal_done_104 <= \^phy_init_cal_done_104\;
 bad_mon_trig_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => bad_mon_trig0,
       Q => bad_mon_trig,
@@ -23677,7 +24133,7 @@ eye_mon_timeout_r_i_6: unisim.vcomponents.LUT4
     );
 eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => eye_mon_timeout_r_i_1_n_0,
       Q => eye_mon_timeout_r,
@@ -23685,7 +24141,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[0]_i_2_n_7\,
       Q => eye_mon_timeout_reg(0),
@@ -23711,7 +24167,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[10]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[8]_i_1_n_5\,
       Q => eye_mon_timeout_reg(10),
@@ -23719,7 +24175,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[11]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[8]_i_1_n_4\,
       Q => eye_mon_timeout_reg(11),
@@ -23727,7 +24183,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[12]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[12]_i_1_n_7\,
       Q => eye_mon_timeout_reg(12),
@@ -23753,7 +24209,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[13]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[12]_i_1_n_6\,
       Q => eye_mon_timeout_reg(13),
@@ -23761,7 +24217,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[14]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[12]_i_1_n_5\,
       Q => eye_mon_timeout_reg(14),
@@ -23769,7 +24225,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[15]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[12]_i_1_n_4\,
       Q => eye_mon_timeout_reg(15),
@@ -23777,7 +24233,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[16]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[16]_i_1_n_7\,
       Q => eye_mon_timeout_reg(16),
@@ -23803,7 +24259,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[17]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[16]_i_1_n_6\,
       Q => eye_mon_timeout_reg(17),
@@ -23811,7 +24267,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[18]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[16]_i_1_n_5\,
       Q => eye_mon_timeout_reg(18),
@@ -23819,7 +24275,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[19]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[16]_i_1_n_4\,
       Q => eye_mon_timeout_reg(19),
@@ -23827,7 +24283,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[0]_i_2_n_6\,
       Q => eye_mon_timeout_reg(1),
@@ -23835,7 +24291,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[20]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[20]_i_1_n_7\,
       Q => eye_mon_timeout_reg(20),
@@ -23861,7 +24317,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[21]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[20]_i_1_n_6\,
       Q => eye_mon_timeout_reg(21),
@@ -23869,7 +24325,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[22]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[20]_i_1_n_5\,
       Q => eye_mon_timeout_reg(22),
@@ -23877,7 +24333,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[23]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[20]_i_1_n_4\,
       Q => eye_mon_timeout_reg(23),
@@ -23885,7 +24341,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[0]_i_2_n_5\,
       Q => eye_mon_timeout_reg(2),
@@ -23893,7 +24349,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[0]_i_2_n_4\,
       Q => eye_mon_timeout_reg(3),
@@ -23901,7 +24357,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[4]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[4]_i_1_n_7\,
       Q => eye_mon_timeout_reg(4),
@@ -23927,7 +24383,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[5]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[4]_i_1_n_6\,
       Q => eye_mon_timeout_reg(5),
@@ -23935,7 +24391,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[6]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[4]_i_1_n_5\,
       Q => eye_mon_timeout_reg(6),
@@ -23943,7 +24399,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[7]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[4]_i_1_n_4\,
       Q => eye_mon_timeout_reg(7),
@@ -23951,7 +24407,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[8]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[8]_i_1_n_7\,
       Q => eye_mon_timeout_reg(8),
@@ -23977,7 +24433,7 @@ eye_mon_timeout_r_reg: unisim.vcomponents.FDRE
     );
 \eye_mon_timeout_reg[9]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => \eye_mon_timeout_reg[8]_i_1_n_6\,
       Q => eye_mon_timeout_reg(9),
@@ -23996,7 +24452,7 @@ o_loss_of_sync_i_1: unisim.vcomponents.LUT4
     );
 o_loss_of_sync_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => '1',
       D => o_loss_of_sync_i_1_n_0,
       Q => phy_loss_of_sync_104,
@@ -24012,7 +24468,7 @@ o_loss_of_sync_reg: unisim.vcomponents.FDRE
     );
 \panic_bucket_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => sync_block_code_error_n_0,
       D => \panic_bucket[0]_i_1_n_0\,
       Q => \panic_bucket_reg__0\(0),
@@ -24020,7 +24476,7 @@ o_loss_of_sync_reg: unisim.vcomponents.FDRE
     );
 \panic_bucket_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => sync_block_code_error_n_0,
       D => sync_block_code_error_n_3,
       Q => \panic_bucket_reg__0\(1),
@@ -24028,7 +24484,7 @@ o_loss_of_sync_reg: unisim.vcomponents.FDRE
     );
 \panic_bucket_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => sync_block_code_error_n_0,
       D => sync_block_code_error_n_2,
       Q => \panic_bucket_reg__0\(2),
@@ -24036,7 +24492,7 @@ o_loss_of_sync_reg: unisim.vcomponents.FDRE
     );
 \panic_bucket_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_0,
       CE => sync_block_code_error_n_0,
       D => sync_block_code_error_n_1,
       Q => \panic_bucket_reg__0\(3),
@@ -24058,7 +24514,6 @@ sgmii_eye_mon: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_e
       \cal_state_reg[6]\ => sgmii_phy_cal_n_7,
       \cal_state_reg[9]\(1 downto 0) => cal_state(9 downto 8),
       cid_error0 => cid_error0,
-      clk104 => clk104,
       \current_tap_window_reg[0]\ => sgmii_eye_mon_n_16,
       \current_tap_window_reg[4]\(4) => sgmii_eye_mon_n_11,
       \current_tap_window_reg[4]\(3) => sgmii_eye_mon_n_12,
@@ -24072,7 +24527,8 @@ sgmii_eye_mon: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_e
       \mon_idly_val_reg[3]_0\(1 downto 0) => left_margin01_out(4 downto 3),
       \o_eye_mon_done_fe_reg[0]\ => sgmii_phy_cal_n_11,
       o_initial_cal_done => o_initial_cal_done,
-      phy_init_cal_done_104 => \^phy_init_cal_done_104\
+      phy_init_cal_done_104 => \^phy_init_cal_done_104\,
+      refclk125_n => refclk125_n_0
     );
 sgmii_phy_cal: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
      port map (
@@ -24082,7 +24538,6 @@ sgmii_phy_cal: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_p
       SR(0) => SR(0),
       \cal_state_reg[8]_0\ => sgmii_phy_cal_n_7,
       \cal_state_reg[9]_0\ => sgmii_phy_cal_n_11,
-      clk104 => clk104,
       data_out => code_error_r,
       enable_eye_mon => enable_eye_mon,
       eye_mon_timeout_r => eye_mon_timeout_r,
@@ -24091,6 +24546,7 @@ sgmii_phy_cal: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_p
       o_initial_cal_done => o_initial_cal_done,
       \panic_bucket_reg[0]\ => sgmii_phy_cal_n_12,
       phy_init_cal_done_104 => \^phy_init_cal_done_104\,
+      refclk125_n => refclk125_n_0,
       \right_margin_reg[4]\ => sgmii_eye_mon_n_16,
       \right_margin_reg[4]_0\(4) => sgmii_eye_mon_n_11,
       \right_margin_reg[4]_0\(3) => sgmii_eye_mon_n_12,
@@ -24101,22 +24557,22 @@ sgmii_phy_cal: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_p
     );
 sgmii_phy_iob: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
      port map (
+      CLK => CLK,
       CLKB0 => CLKB0,
       CNTVALUEOUT(4 downto 0) => data_dly_val_out0(4 downto 0),
       D(4 downto 0) => mon_dly_val_in0(4 downto 0),
       E(0) => data_idly_update0,
-      Q(5 downto 0) => Q(5 downto 0),
       S(3) => sgmii_phy_iob_n_17,
       S(2) => sgmii_phy_iob_n_18,
       S(1) => sgmii_phy_iob_n_19,
       S(0) => sgmii_phy_iob_n_20,
       cid_error0 => cid_error0,
-      clk104 => clk104,
-      clk208 => clk208,
-      clk625 => clk625,
       \current_tap_reg[4]\(4 downto 0) => data_dly_val_in0(4 downto 0),
       \left_margin_reg[4]\(1 downto 0) => left_margin01_out(4 downto 3),
       mon_idly_update_reg(0) => mon_idly_update0,
+      o_txdata_6b(5 downto 0) => o_txdata_6b(5 downto 0),
+      refclk125_n => refclk125_n,
+      refclk125_n_0 => refclk125_n_0,
       reset_out => reset_out,
       reset_sync6 => reset_sync6,
       \right_margin_reg[2]\(1 downto 0) => right_margin00_out(2 downto 1),
@@ -24133,12 +24589,12 @@ sync_block_code_error: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0
       D(1) => sync_block_code_error_n_2,
       D(0) => sync_block_code_error_n_3,
       E(0) => sync_block_code_error_n_0,
-      Q(3 downto 0) => \panic_bucket_reg__0\(3 downto 0),
+      Q(3 downto 0) => Q(3 downto 0),
       bad_mon_trig => bad_mon_trig,
-      clk104 => clk104,
-      \code_error_stretch_reg[3]\(3 downto 0) => \code_error_stretch_reg[3]\(3 downto 0),
       data_out => code_error_r,
-      \o_eye_mon_done_fe_reg[0]\ => sgmii_phy_cal_n_12
+      \o_eye_mon_done_fe_reg[0]\ => sgmii_phy_cal_n_12,
+      \panic_bucket_reg[3]\(3 downto 0) => \panic_bucket_reg__0\(3 downto 0),
+      refclk125_n => refclk125_n_0
     );
 end STRUCTURE;
 library IEEE;
@@ -24156,7 +24612,7 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_adapt is
     sgmii_clk_f : out STD_LOGIC;
     gmii_rxd : out STD_LOGIC_VECTOR ( 7 downto 0 );
     Q : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     gmii_rx_dv : in STD_LOGIC;
     gmii_rx_er : in STD_LOGIC;
     gmii_tx_en_0 : in STD_LOGIC;
@@ -24180,9 +24636,9 @@ begin
   sgmii_clk_en <= \^sgmii_clk_en\;
 clock_generation: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_clk_gen
      port map (
-      clk125m => clk125m,
       data_out => speed_is_100_resync,
       data_sync_reg6 => speed_is_10_100_resync,
+      refclk125_n => refclk125_n,
       reset_out => sync_reset,
       sgmii_clk_en => \^sgmii_clk_en\,
       sgmii_clk_f => sgmii_clk_f,
@@ -24190,44 +24646,44 @@ clock_generation: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_clk_
     );
 gen_sync_reset: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync
      port map (
-      clk125m => clk125m,
       mgt_tx_reset => mgt_tx_reset,
+      refclk125_n => refclk125_n,
       reset_out => sync_reset
     );
 receiver: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
      port map (
       D(7 downto 0) => D(7 downto 0),
-      clk125m => clk125m,
       gmii_rx_dv => gmii_rx_dv,
       gmii_rx_dv_0 => gmii_rx_dv_0,
       gmii_rx_er => gmii_rx_er,
       gmii_rx_er_0 => gmii_rx_er_0,
       gmii_rxd(7 downto 0) => gmii_rxd(7 downto 0),
+      refclk125_n => refclk125_n,
       reset_out => sync_reset,
       sgmii_clk_en_reg => \^sgmii_clk_en\
     );
 resync_speed_100: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_0
      port map (
-      clk125m => clk125m,
       data_out => speed_is_100_resync,
+      refclk125_n => refclk125_n,
       speed_is_100 => speed_is_100
     );
 resync_speed_10_100: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_1
      port map (
-      clk125m => clk125m,
       data_out => speed_is_10_100_resync,
+      refclk125_n => refclk125_n,
       speed_is_10_100 => speed_is_10_100
     );
 transmitter: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_tx_rate_adapt
      port map (
       E(0) => \^sgmii_clk_en\,
       Q(7 downto 0) => Q(7 downto 0),
-      clk125m => clk125m,
       gmii_tx_en => gmii_tx_en,
       gmii_tx_en_0 => gmii_tx_en_0,
       gmii_tx_er => gmii_tx_er,
       gmii_tx_er_0 => gmii_tx_er_0,
       gmii_txd(7 downto 0) => gmii_txd(7 downto 0),
+      refclk125_n => refclk125_n,
       reset_out => sync_reset
     );
 end STRUCTURE;
@@ -24505,10 +24961,10 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_GPCS_PMA_GEN is
   attribute XILINX_LEGACY_PRIM : string;
   attribute XILINX_LEGACY_PRIM of \DELAY_ERROR_TXOUTCLK.DELAY_RXDISPERR\ : label is "SRL16";
   attribute srl_name : string;
-  attribute srl_name of \DELAY_ERROR_TXOUTCLK.DELAY_RXDISPERR\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/DELAY_ERROR_TXOUTCLK.DELAY_RXDISPERR ";
+  attribute srl_name of \DELAY_ERROR_TXOUTCLK.DELAY_RXDISPERR\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/DELAY_ERROR_TXOUTCLK.DELAY_RXDISPERR ";
   attribute BOX_TYPE of \DELAY_ERROR_TXOUTCLK.DELAY_RXNOTINTABLE\ : label is "PRIMITIVE";
   attribute XILINX_LEGACY_PRIM of \DELAY_ERROR_TXOUTCLK.DELAY_RXNOTINTABLE\ : label is "SRL16";
-  attribute srl_name of \DELAY_ERROR_TXOUTCLK.DELAY_RXNOTINTABLE\ : label is "inst/gig_ethernet_pcs_pma_0_core/\gpcs_pma_inst/DELAY_ERROR_TXOUTCLK.DELAY_RXNOTINTABLE ";
+  attribute srl_name of \DELAY_ERROR_TXOUTCLK.DELAY_RXNOTINTABLE\ : label is "inst/\pcs_pma_block_i/gig_ethernet_pcs_pma_0_core /\gpcs_pma_inst/DELAY_ERROR_TXOUTCLK.DELAY_RXNOTINTABLE ";
   attribute KEEP : string;
   attribute KEEP of \FSM_onehot_USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.RX_RST_SM_reg[0]\ : label is "yes";
   attribute KEEP of \FSM_onehot_USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.RX_RST_SM_reg[10]\ : label is "yes";
@@ -25779,20 +26235,20 @@ entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7 is
     rxdata : out STD_LOGIC_VECTOR ( 7 downto 0 );
     signal_detect : out STD_LOGIC;
     SR : in STD_LOGIC_VECTOR ( 0 to 0 );
-    clk125m : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
     rxp : in STD_LOGIC;
     rxn : in STD_LOGIC;
-    clk208 : in STD_LOGIC;
-    clk625 : in STD_LOGIC;
+    CLK : in STD_LOGIC;
+    refclk125_n_0 : in STD_LOGIC;
     CLKB0 : in STD_LOGIC;
-    clk104 : in STD_LOGIC;
-    reset : in STD_LOGIC;
-    wtd_reset : in STD_LOGIC;
-    mgt_rx_reset : in STD_LOGIC;
-    mgt_tx_reset : in STD_LOGIC;
+    refclk125_n_1 : in STD_LOGIC;
     txcharisk : in STD_LOGIC;
     txchardispval : in STD_LOGIC;
     txchardispmode : in STD_LOGIC;
+    rst_125_reg : in STD_LOGIC;
+    wtd_reset : in STD_LOGIC;
+    mgt_rx_reset : in STD_LOGIC;
+    mgt_tx_reset : in STD_LOGIC;
     \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\ : in STD_LOGIC;
     enablealign : in STD_LOGIC;
     signal_detect_0 : in STD_LOGIC;
@@ -25815,7 +26271,7 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_tra
   signal comma_alignment_inst_n_3 : STD_LOGIC;
   signal comma_position0 : STD_LOGIC;
   signal k : STD_LOGIC;
-  signal p_0_in_0 : STD_LOGIC;
+  signal p_0_in : STD_LOGIC;
   signal p_0_out : STD_LOGIC_VECTOR ( 4 downto 0 );
   signal phy_init_cal_done_104 : STD_LOGIC;
   signal phy_init_cal_done_r : STD_LOGIC;
@@ -25848,10 +26304,10 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_tra
   signal tx_data_10b : STD_LOGIC_VECTOR ( 9 downto 0 );
   signal tx_data_6b : STD_LOGIC_VECTOR ( 5 downto 0 );
   attribute SOFT_HLUTNM : string;
-  attribute SOFT_HLUTNM of \rst_dly[0]_i_1\ : label is "soft_lutpair147";
-  attribute SOFT_HLUTNM of \rst_dly[1]_i_1\ : label is "soft_lutpair147";
-  attribute SOFT_HLUTNM of \rst_dly[2]_i_1\ : label is "soft_lutpair146";
-  attribute SOFT_HLUTNM of \rst_dly[3]_i_2\ : label is "soft_lutpair146";
+  attribute SOFT_HLUTNM of \rst_dly[0]_i_1\ : label is "soft_lutpair148";
+  attribute SOFT_HLUTNM of \rst_dly[1]_i_1\ : label is "soft_lutpair148";
+  attribute SOFT_HLUTNM of \rst_dly[2]_i_1\ : label is "soft_lutpair147";
+  attribute SOFT_HLUTNM of \rst_dly[3]_i_2\ : label is "soft_lutpair147";
 begin
   rxdisperr <= \^rxdisperr\;
   rxnotintable <= \^rxnotintable\;
@@ -25910,7 +26366,7 @@ begin
     );
 \code_error_stretch_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \code_error_stretch[0]_i_1_n_0\,
       Q => code_error_stretch(0),
@@ -25918,7 +26374,7 @@ begin
     );
 \code_error_stretch_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \code_error_stretch[1]_i_1_n_0\,
       Q => code_error_stretch(1),
@@ -25926,7 +26382,7 @@ begin
     );
 \code_error_stretch_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \code_error_stretch[2]_i_1_n_0\,
       Q => code_error_stretch(2),
@@ -25934,7 +26390,7 @@ begin
     );
 \code_error_stretch_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk125m,
+      C => refclk125_n,
       CE => '1',
       D => \code_error_stretch[3]_i_1_n_0\,
       Q => code_error_stretch(3),
@@ -25943,21 +26399,21 @@ begin
 comma_alignment_inst: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_comma_alignment
      port map (
       E(0) => bitslip,
-      Q(9 downto 0) => rx_data_10b(9 downto 0),
       SR(0) => SR(0),
       bitslip_reg_0 => comma_alignment_inst_n_2,
       bitslip_reg_1 => comma_alignment_inst_n_3,
-      clk125m => clk125m,
       comma_position0 => comma_position0,
       data_sync_reg6 => sync_block_phy_init_cal_done_n_0,
       mgt_rx_reset => mgt_rx_reset,
+      o_rxdata_10b(9 downto 0) => rx_data_10b(9 downto 0),
       \o_rxdata_10b_reg[0]\ => rx_gearbox_i_n_12,
       \o_rxdata_10b_reg[2]\ => rx_gearbox_i_n_22,
       \o_rxdata_10b_reg[3]\ => rx_gearbox_i_n_14,
       \o_rxdata_10b_reg[5]\ => rx_gearbox_i_n_23,
       \o_rxdata_10b_reg[5]_0\ => rx_gearbox_i_n_19,
       \o_rxdata_10b_reg[5]_1\ => rx_gearbox_i_n_21,
-      reset => reset,
+      refclk125_n => refclk125_n,
+      rst_125_reg => rst_125_reg,
       rxchariscomma(0) => rxchariscomma(0),
       wtd_reset => wtd_reset
     );
@@ -25965,7 +26421,6 @@ decode_8b10b: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_decode_8
      port map (
       \USE_ROCKET_IO.NO_1588.RECLOCK_MGT_SIGNALS_TXOUTCLK.RXRUNDISP_INT_reg\ => \^rxrundisp\,
       b3(7 downto 5) => b3(7 downto 5),
-      clk125m => clk125m,
       code_err_i => code_err_i,
       \code_error_stretch_reg[0]\ => \^rxnotintable\,
       \code_error_stretch_reg[0]_0\ => \^rxdisperr\,
@@ -25973,32 +26428,33 @@ decode_8b10b: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_decode_8
       \o_rxdata_10b_reg[7]\ => rx_gearbox_i_n_0,
       \o_rxdata_10b_reg[9]\ => rx_gearbox_i_n_15,
       \out\(4 downto 0) => p_0_out(4 downto 0),
+      refclk125_n => refclk125_n,
       rxcharisk(0) => rxcharisk(0),
       rxdata(7 downto 0) => rxdata(7 downto 0)
     );
 encode_8b10b: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base
      port map (
-      D(9 downto 0) => tx_data_10b(9 downto 0),
-      clk125m => clk125m,
+      refclk125_n => refclk125_n,
       txchardispmode => txchardispmode,
       txchardispval => txchardispval,
       txcharisk => txcharisk,
-      txdata(7 downto 0) => txdata(7 downto 0)
+      txdata(7 downto 0) => txdata(7 downto 0),
+      txdata_10b(9 downto 0) => tx_data_10b(9 downto 0)
     );
 gpio_sgmii_top_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
      port map (
+      CLK => CLK,
       CLKB0 => CLKB0,
-      Q(5 downto 0) => tx_data_6b(5 downto 0),
+      Q(3 downto 0) => code_error_stretch(3 downto 0),
       SR(0) => rx_rst,
-      clk104 => clk104,
-      clk208 => clk208,
-      clk625 => clk625,
-      \code_error_stretch_reg[3]\(3 downto 0) => code_error_stretch(3 downto 0),
+      o_txdata_6b(5 downto 0) => tx_data_6b(5 downto 0),
       phy_init_cal_done_104 => phy_init_cal_done_104,
       phy_loss_of_sync_104 => phy_loss_of_sync_104,
+      refclk125_n => refclk125_n_0,
+      refclk125_n_0 => refclk125_n_1,
       reset_out => soft_tx_reset_104,
       reset_sync6 => soft_rx_reset_104,
-      \rst_dly_reg[3]\(3) => p_0_in_0,
+      \rst_dly_reg[3]\(3) => p_0_in,
       \rst_dly_reg[3]\(2) => \rst_dly_reg_n_0_[2]\,
       \rst_dly_reg[3]\(1) => \rst_dly_reg_n_0_[1]\,
       \rst_dly_reg[3]\(0) => \rst_dly_reg_n_0_[0]\,
@@ -26010,7 +26466,7 @@ gpio_sgmii_top_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio
     );
 phy_init_cal_done_r_reg: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_1,
       CE => '1',
       D => phy_init_cal_done_104,
       Q => phy_init_cal_done_r,
@@ -26019,22 +26475,22 @@ phy_init_cal_done_r_reg: unisim.vcomponents.FDRE
 reset_sync_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_3
      port map (
       SR(0) => rst_dly0,
-      clk104 => clk104,
       phy_loss_of_sync_104 => phy_loss_of_sync_104,
-      reset => reset
+      refclk125_n => refclk125_n_1,
+      rst_125_reg => rst_125_reg
     );
 reset_sync_soft_rx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_4
      port map (
-      Q(0) => p_0_in_0,
+      Q(0) => p_0_in,
       SR(0) => rx_rst,
       \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\ => \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\,
-      clk104 => clk104,
+      refclk125_n => refclk125_n_1,
       reset_out => soft_rx_reset_104
     );
 reset_sync_soft_tx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_5
      port map (
-      clk104 => clk104,
       mgt_tx_reset => mgt_tx_reset,
+      refclk125_n => refclk125_n_1,
       reset_out => soft_tx_reset_104
     );
 \rst_dly[0]_i_1\: unisim.vcomponents.LUT4
@@ -26044,7 +26500,7 @@ reset_sync_soft_tx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pc
         port map (
       I0 => \rst_dly_reg_n_0_[1]\,
       I1 => \rst_dly_reg_n_0_[2]\,
-      I2 => p_0_in_0,
+      I2 => p_0_in,
       I3 => \rst_dly_reg_n_0_[0]\,
       O => \rst_dly[0]_i_1_n_0\
     );
@@ -26054,7 +26510,7 @@ reset_sync_soft_tx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pc
     )
         port map (
       I0 => \rst_dly_reg_n_0_[2]\,
-      I1 => p_0_in_0,
+      I1 => p_0_in,
       I2 => \rst_dly_reg_n_0_[1]\,
       I3 => \rst_dly_reg_n_0_[0]\,
       O => \rst_dly[1]_i_1_n_0\
@@ -26066,7 +26522,7 @@ reset_sync_soft_tx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pc
         port map (
       I0 => \rst_dly_reg_n_0_[0]\,
       I1 => \rst_dly_reg_n_0_[1]\,
-      I2 => p_0_in_0,
+      I2 => p_0_in,
       I3 => \rst_dly_reg_n_0_[2]\,
       O => \rst_dly[2]_i_1_n_0\
     );
@@ -26078,12 +26534,12 @@ reset_sync_soft_tx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pc
       I0 => \rst_dly_reg_n_0_[0]\,
       I1 => \rst_dly_reg_n_0_[1]\,
       I2 => \rst_dly_reg_n_0_[2]\,
-      I3 => p_0_in_0,
+      I3 => p_0_in,
       O => \rst_dly[3]_i_2_n_0\
     );
 \rst_dly_reg[0]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_1,
       CE => '1',
       D => \rst_dly[0]_i_1_n_0\,
       Q => \rst_dly_reg_n_0_[0]\,
@@ -26091,7 +26547,7 @@ reset_sync_soft_tx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pc
     );
 \rst_dly_reg[1]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_1,
       CE => '1',
       D => \rst_dly[1]_i_1_n_0\,
       Q => \rst_dly_reg_n_0_[1]\,
@@ -26099,7 +26555,7 @@ reset_sync_soft_tx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pc
     );
 \rst_dly_reg[2]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_1,
       CE => '1',
       D => \rst_dly[2]_i_1_n_0\,
       Q => \rst_dly_reg_n_0_[2]\,
@@ -26107,23 +26563,24 @@ reset_sync_soft_tx_reset_104: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pc
     );
 \rst_dly_reg[3]\: unisim.vcomponents.FDRE
      port map (
-      C => clk104,
+      C => refclk125_n_1,
       CE => '1',
       D => \rst_dly[3]_i_2_n_0\,
-      Q => p_0_in_0,
+      Q => p_0_in,
       R => rst_dly0
     );
 rx_gearbox_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
      port map (
+      CLK => CLK,
+      D(5 downto 0) => rx_data_6b(5 downto 0),
       E(0) => bitslip,
+      Q(9 downto 0) => rx_data_10b(9 downto 0),
       SR(0) => SR(0),
       b3(7 downto 5) => b3(7 downto 5),
       bitslip_reg => rx_gearbox_i_n_14,
       bitslip_reg_0 => rx_gearbox_i_n_19,
       bitslip_reg_1 => rx_gearbox_i_n_22,
       bitslip_reg_2 => rx_gearbox_i_n_23,
-      clk125m => clk125m,
-      clk208 => clk208,
       code_err_i => code_err_i,
       comma_det_reg => rx_gearbox_i_n_21,
       comma_position0 => comma_position0,
@@ -26134,27 +26591,26 @@ rx_gearbox_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_
       \grdni.run_disp_i_reg\ => rx_gearbox_i_n_15,
       \grdni.run_disp_i_reg_0\ => \^rxrundisp\,
       k => k,
-      o_rxdata_10b(9 downto 0) => rx_data_10b(9 downto 0),
       \out\(4 downto 0) => p_0_out(4 downto 0),
-      rxdata_6b(5 downto 0) => rx_data_6b(5 downto 0)
+      refclk125_n => refclk125_n
     );
 sync_block_phy_init_cal_done: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_6
      port map (
-      clk125m => clk125m,
       data_in => phy_init_cal_done_r,
       enablealign => enablealign,
       enablealign_r_reg => sync_block_phy_init_cal_done_n_0,
+      refclk125_n => refclk125_n,
       signal_detect => signal_detect,
       signal_detect_0 => signal_detect_0
     );
 tx_gearbox_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b
      port map (
-      clk125m => clk125m,
-      clk208 => clk208,
+      CLK => CLK,
+      D(9 downto 0) => tx_data_10b(9 downto 0),
+      Q(5 downto 0) => tx_data_6b(5 downto 0),
       mgt_tx_reset => mgt_tx_reset,
-      o_txdata_6b(5 downto 0) => tx_data_6b(5 downto 0),
-      reset => reset,
-      txdata_10b(9 downto 0) => tx_data_10b(9 downto 0)
+      refclk125_n => refclk125_n,
+      rst_125_reg => rst_125_reg
     );
 end STRUCTURE;
 library IEEE;
@@ -26530,57 +26986,47 @@ library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
 entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block is
   port (
+    gmii_isolate : out STD_LOGIC;
+    an_interrupt : out STD_LOGIC;
+    mdio_t : out STD_LOGIC;
+    status_vector : out STD_LOGIC_VECTOR ( 12 downto 0 );
     txp : out STD_LOGIC;
     txn : out STD_LOGIC;
+    sgmii_clk_r : out STD_LOGIC;
+    sgmii_clk_en : out STD_LOGIC;
+    gmii_rx_dv : out STD_LOGIC;
+    gmii_rx_er : out STD_LOGIC;
+    sgmii_clk_f : out STD_LOGIC;
+    mdio_o : out STD_LOGIC;
+    gmii_rxd : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    refclk125_n : in STD_LOGIC;
+    rst_125_reg : in STD_LOGIC;
+    phyaddr : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    mdc : in STD_LOGIC;
+    mdio_i : in STD_LOGIC;
+    an_restart_config : in STD_LOGIC;
+    configuration_vector : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    configuration_valid : in STD_LOGIC;
     rxp : in STD_LOGIC;
     rxn : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
-    mmcm_locked : in STD_LOGIC;
-    sgmii_clk_r : out STD_LOGIC;
-    sgmii_clk_f : out STD_LOGIC;
-    sgmii_clk_en : out STD_LOGIC;
-    clk625 : in STD_LOGIC;
-    clk208 : in STD_LOGIC;
-    clk104 : in STD_LOGIC;
+    CLK : in STD_LOGIC;
+    refclk125_n_0 : in STD_LOGIC;
+    CLKB0 : in STD_LOGIC;
+    refclk125_n_1 : in STD_LOGIC;
+    gmii_tx_en : in STD_LOGIC;
+    gmii_tx_er : in STD_LOGIC;
+    ext_mdio_i : in STD_LOGIC;
+    mmcm_locked_out : in STD_LOGIC;
     speed_is_10_100 : in STD_LOGIC;
     speed_is_100 : in STD_LOGIC;
     gmii_txd : in STD_LOGIC_VECTOR ( 7 downto 0 );
-    gmii_tx_en : in STD_LOGIC;
-    gmii_tx_er : in STD_LOGIC;
-    gmii_rxd : out STD_LOGIC_VECTOR ( 7 downto 0 );
-    gmii_rx_dv : out STD_LOGIC;
-    gmii_rx_er : out STD_LOGIC;
-    gmii_isolate : out STD_LOGIC;
-    ext_mdc : out STD_LOGIC;
-    ext_mdio_i : in STD_LOGIC;
-    ext_mdio_o : out STD_LOGIC;
-    ext_mdio_t : out STD_LOGIC;
-    mdio_t_in : in STD_LOGIC;
-    mdc : in STD_LOGIC;
-    mdio_i : in STD_LOGIC;
-    mdio_o : out STD_LOGIC;
-    mdio_t : out STD_LOGIC;
-    phyaddr : in STD_LOGIC_VECTOR ( 4 downto 0 );
-    configuration_vector : in STD_LOGIC_VECTOR ( 4 downto 0 );
-    configuration_valid : in STD_LOGIC;
-    an_interrupt : out STD_LOGIC;
-    an_adv_config_vector : in STD_LOGIC_VECTOR ( 15 downto 0 );
-    an_adv_config_val : in STD_LOGIC;
-    an_restart_config : in STD_LOGIC;
-    status_vector : out STD_LOGIC_VECTOR ( 15 downto 0 );
-    reset : in STD_LOGIC;
     signal_detect : in STD_LOGIC
   );
-  attribute DowngradeIPIdentifiedWarnings : string;
-  attribute DowngradeIPIdentifiedWarnings of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block : entity is "yes";
-  attribute EXAMPLE_SIMULATION : integer;
-  attribute EXAMPLE_SIMULATION of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block : entity is 0;
   attribute ORIG_REF_NAME : string;
   attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block : entity is "gig_ethernet_pcs_pma_0_block";
 end gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block;
 
 architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block is
-  signal \<const0>\ : STD_LOGIC;
   signal enablealign : STD_LOGIC;
   signal gmii_rx_dv_int : STD_LOGIC;
   signal gmii_rx_er_int : STD_LOGIC;
@@ -26589,11 +27035,8 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block is
   signal gmii_tx_er_int : STD_LOGIC;
   signal gmii_txd_int : STD_LOGIC_VECTOR ( 7 downto 0 );
   signal lvds_phy_rdy_sig_det : STD_LOGIC;
-  signal \^mdc\ : STD_LOGIC;
-  signal \^mdio_i\ : STD_LOGIC;
   signal mdio_o_int : STD_LOGIC;
   signal \^mdio_t\ : STD_LOGIC;
-  signal \^mdio_t_in\ : STD_LOGIC;
   signal mgt_rx_reset : STD_LOGIC;
   signal mgt_tx_reset : STD_LOGIC;
   signal mmcm_locked_sync_125 : STD_LOGIC;
@@ -26605,7 +27048,7 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block is
   signal rxdisperr : STD_LOGIC;
   signal rxnotintable : STD_LOGIC;
   signal rxrundisp : STD_LOGIC;
-  signal \^status_vector\ : STD_LOGIC_VECTOR ( 13 downto 0 );
+  signal \^status_vector\ : STD_LOGIC_VECTOR ( 12 downto 0 );
   signal txchardispmode : STD_LOGIC;
   signal txchardispval : STD_LOGIC;
   signal txcharisk : STD_LOGIC;
@@ -26661,26 +27104,13 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block is
   attribute C_USE_TBI of gig_ethernet_pcs_pma_0_core : label is "FALSE";
   attribute C_USE_TRANSCEIVER : string;
   attribute C_USE_TRANSCEIVER of gig_ethernet_pcs_pma_0_core : label is "FALSE";
+  attribute DowngradeIPIdentifiedWarnings : string;
   attribute DowngradeIPIdentifiedWarnings of gig_ethernet_pcs_pma_0_core : label is "yes";
   attribute GT_RX_BYTE_WIDTH : integer;
   attribute GT_RX_BYTE_WIDTH of gig_ethernet_pcs_pma_0_core : label is 1;
 begin
-  \^mdc\ <= mdc;
-  \^mdio_i\ <= mdio_i;
-  \^mdio_t_in\ <= mdio_t_in;
-  ext_mdc <= \^mdc\;
-  ext_mdio_o <= \^mdio_i\;
-  ext_mdio_t <= \^mdio_t_in\;
   mdio_t <= \^mdio_t\;
-  status_vector(15) <= \<const0>\;
-  status_vector(14) <= \<const0>\;
-  status_vector(13 downto 9) <= \^status_vector\(13 downto 9);
-  status_vector(8) <= \<const0>\;
-  status_vector(7 downto 0) <= \^status_vector\(7 downto 0);
-GND: unisim.vcomponents.GND
-     port map (
-      G => \<const0>\
-    );
+  status_vector(12 downto 0) <= \^status_vector\(12 downto 0);
 gig_ethernet_pcs_pma_0_core: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_v16_0_0
      port map (
       an_adv_config_val => '0',
@@ -26717,8 +27147,8 @@ gig_ethernet_pcs_pma_0_core: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs
       link_timer_sgmii(9 downto 0) => B"0000000000",
       link_timer_value(9 downto 0) => B"0000000000",
       loc_ref => NLW_gig_ethernet_pcs_pma_0_core_loc_ref_UNCONNECTED,
-      mdc => \^mdc\,
-      mdio_in => \^mdio_i\,
+      mdc => mdc,
+      mdio_in => mdio_i,
       mdio_out => mdio_o_int,
       mdio_tri => \^mdio_t\,
       mgt_rx_reset => mgt_rx_reset,
@@ -26727,7 +27157,7 @@ gig_ethernet_pcs_pma_0_core: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs
       pma_rx_clk0 => '0',
       pma_rx_clk1 => '0',
       powerdown => NLW_gig_ethernet_pcs_pma_0_core_powerdown_UNCONNECTED,
-      reset => reset,
+      reset => rst_125_reg,
       reset_done => '0',
       rx_code_group0(9 downto 0) => B"0000000000",
       rx_code_group1(9 downto 0) => B"0000000000",
@@ -26749,7 +27179,7 @@ gig_ethernet_pcs_pma_0_core: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs
       speed_is_10_100 => '0',
       speed_selection(1 downto 0) => NLW_gig_ethernet_pcs_pma_0_core_speed_selection_UNCONNECTED(1 downto 0),
       status_vector(15 downto 14) => NLW_gig_ethernet_pcs_pma_0_core_status_vector_UNCONNECTED(15 downto 14),
-      status_vector(13 downto 9) => \^status_vector\(13 downto 9),
+      status_vector(13 downto 9) => \^status_vector\(12 downto 8),
       status_vector(8) => NLW_gig_ethernet_pcs_pma_0_core_status_vector_UNCONNECTED(8),
       status_vector(7 downto 0) => \^status_vector\(7 downto 0),
       systemtimer_ns_field(31 downto 0) => B"00000000000000000000000000000000",
@@ -26761,21 +27191,21 @@ gig_ethernet_pcs_pma_0_core: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs
       txcharisk => txcharisk,
       txdata(7 downto 0) => txdata(7 downto 0),
       userclk => '0',
-      userclk2 => clk125m
+      userclk2 => refclk125_n
     );
 lvds_transceiver_mw: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
      port map (
-      CLKB0 => clk625,
+      CLK => CLK,
+      CLKB0 => CLKB0,
       SR(0) => rx_rst,
       \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg\ => reset_wtd_timer_n_2,
-      clk104 => clk104,
-      clk125m => clk125m,
-      clk208 => clk208,
-      clk625 => clk625,
       enablealign => enablealign,
       mgt_rx_reset => mgt_rx_reset,
       mgt_tx_reset => mgt_tx_reset,
-      reset => reset,
+      refclk125_n => refclk125_n,
+      refclk125_n_0 => refclk125_n_0,
+      refclk125_n_1 => refclk125_n_1,
+      rst_125_reg => rst_125_reg,
       rxchariscomma(0) => rxchariscomma,
       rxcharisk(0) => rxcharisk,
       rxdata(7 downto 0) => rxdata(7 downto 0),
@@ -26807,10 +27237,10 @@ mdio_o_INST_0: unisim.vcomponents.LUT3
 reset_wtd_timer: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer
      port map (
       SR(0) => rx_rst,
-      clk125m => clk125m,
       mgt_rx_reset => mgt_rx_reset,
-      reset => reset,
+      refclk125_n => refclk125_n,
       reset_sync5 => reset_wtd_timer_n_2,
+      rst_125_reg => rst_125_reg,
       status_vector(0) => \^status_vector\(1),
       wtd_reset => wtd_reset
     );
@@ -26818,7 +27248,6 @@ sgmii_logic: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_ada
      port map (
       D(7 downto 0) => gmii_rxd_int(7 downto 0),
       Q(7 downto 0) => gmii_txd_int(7 downto 0),
-      clk125m => clk125m,
       gmii_rx_dv => gmii_rx_dv_int,
       gmii_rx_dv_0 => gmii_rx_dv,
       gmii_rx_er => gmii_rx_er_int,
@@ -26830,6 +27259,7 @@ sgmii_logic: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_ada
       gmii_tx_er_0 => gmii_tx_er,
       gmii_txd(7 downto 0) => gmii_txd(7 downto 0),
       mgt_tx_reset => mgt_tx_reset,
+      refclk125_n => refclk125_n,
       sgmii_clk_en => sgmii_clk_en,
       sgmii_clk_f => sgmii_clk_f,
       sgmii_clk_r => sgmii_clk_r,
@@ -26838,9 +27268,159 @@ sgmii_logic: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_ada
     );
 sync_block_mmcm_locked: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block
      port map (
-      clk125m => clk125m,
       data_out => mmcm_locked_sync_125,
-      mmcm_locked => mmcm_locked
+      mmcm_locked_out => mmcm_locked_out,
+      refclk125_n => refclk125_n
+    );
+end STRUCTURE;
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+library UNISIM;
+use UNISIM.VCOMPONENTS.ALL;
+entity gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_support is
+  port (
+    txp : out STD_LOGIC;
+    txn : out STD_LOGIC;
+    rxp : in STD_LOGIC;
+    rxn : in STD_LOGIC;
+    refclk125_p : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
+    mmcm_locked_out : out STD_LOGIC;
+    sgmii_clk_r : out STD_LOGIC;
+    sgmii_clk_f : out STD_LOGIC;
+    sgmii_clk_en : out STD_LOGIC;
+    speed_is_10_100 : in STD_LOGIC;
+    speed_is_100 : in STD_LOGIC;
+    clk125_out : out STD_LOGIC;
+    clk625_out : out STD_LOGIC;
+    clk208_out : out STD_LOGIC;
+    clk104_out : out STD_LOGIC;
+    rst_125_out : out STD_LOGIC;
+    gmii_txd : in STD_LOGIC_VECTOR ( 7 downto 0 );
+    gmii_tx_en : in STD_LOGIC;
+    gmii_tx_er : in STD_LOGIC;
+    gmii_rxd : out STD_LOGIC_VECTOR ( 7 downto 0 );
+    gmii_rx_dv : out STD_LOGIC;
+    gmii_rx_er : out STD_LOGIC;
+    gmii_isolate : out STD_LOGIC;
+    ext_mdc : out STD_LOGIC;
+    ext_mdio_i : in STD_LOGIC;
+    ext_mdio_o : out STD_LOGIC;
+    ext_mdio_t : out STD_LOGIC;
+    mdio_t_in : in STD_LOGIC;
+    mdc : in STD_LOGIC;
+    mdio_i : in STD_LOGIC;
+    mdio_o : out STD_LOGIC;
+    mdio_t : out STD_LOGIC;
+    phyaddr : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    configuration_vector : in STD_LOGIC_VECTOR ( 4 downto 0 );
+    configuration_valid : in STD_LOGIC;
+    an_interrupt : out STD_LOGIC;
+    an_adv_config_vector : in STD_LOGIC_VECTOR ( 15 downto 0 );
+    an_adv_config_val : in STD_LOGIC;
+    an_restart_config : in STD_LOGIC;
+    status_vector : out STD_LOGIC_VECTOR ( 15 downto 0 );
+    reset : in STD_LOGIC;
+    signal_detect : in STD_LOGIC
+  );
+  attribute DowngradeIPIdentifiedWarnings : string;
+  attribute DowngradeIPIdentifiedWarnings of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_support : entity is "yes";
+  attribute EXAMPLE_SIMULATION : integer;
+  attribute EXAMPLE_SIMULATION of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_support : entity is 0;
+  attribute ORIG_REF_NAME : string;
+  attribute ORIG_REF_NAME of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_support : entity is "gig_ethernet_pcs_pma_0_support";
+end gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_support;
+
+architecture STRUCTURE of gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_support is
+  signal \<const0>\ : STD_LOGIC;
+  signal \^clk104_out\ : STD_LOGIC;
+  signal \^clk125_out\ : STD_LOGIC;
+  signal \^clk208_out\ : STD_LOGIC;
+  signal \^clk625_out\ : STD_LOGIC;
+  signal \^mdc\ : STD_LOGIC;
+  signal \^mdio_i\ : STD_LOGIC;
+  signal \^mdio_t_in\ : STD_LOGIC;
+  signal \^mmcm_locked_out\ : STD_LOGIC;
+  signal \^rst_125_out\ : STD_LOGIC;
+  signal \^status_vector\ : STD_LOGIC_VECTOR ( 13 downto 0 );
+begin
+  \^mdc\ <= mdc;
+  \^mdio_i\ <= mdio_i;
+  \^mdio_t_in\ <= mdio_t_in;
+  clk104_out <= \^clk104_out\;
+  clk125_out <= \^clk125_out\;
+  clk208_out <= \^clk208_out\;
+  clk625_out <= \^clk625_out\;
+  ext_mdc <= \^mdc\;
+  ext_mdio_o <= \^mdio_i\;
+  ext_mdio_t <= \^mdio_t_in\;
+  mmcm_locked_out <= \^mmcm_locked_out\;
+  rst_125_out <= \^rst_125_out\;
+  status_vector(15) <= \<const0>\;
+  status_vector(14) <= \<const0>\;
+  status_vector(13 downto 9) <= \^status_vector\(13 downto 9);
+  status_vector(8) <= \<const0>\;
+  status_vector(7 downto 0) <= \^status_vector\(7 downto 0);
+GND: unisim.vcomponents.GND
+     port map (
+      G => \<const0>\
+    );
+core_clocking_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen
+     port map (
+      CLK => \^clk208_out\,
+      clk104_out => \^clk104_out\,
+      clk125_out => \^clk125_out\,
+      clk625_out => \^clk625_out\,
+      mmcm_locked_out => \^mmcm_locked_out\,
+      refclk125_n => refclk125_n,
+      refclk125_p => refclk125_p,
+      reset => reset
+    );
+core_resets_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen
+     port map (
+      mmcm_locked_out => \^mmcm_locked_out\,
+      refclk125_n => \^clk125_out\,
+      reset => reset,
+      rst_125_out => \^rst_125_out\
+    );
+pcs_pma_block_i: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block
+     port map (
+      CLK => \^clk208_out\,
+      CLKB0 => \^clk625_out\,
+      an_interrupt => an_interrupt,
+      an_restart_config => an_restart_config,
+      configuration_valid => configuration_valid,
+      configuration_vector(4 downto 0) => configuration_vector(4 downto 0),
+      ext_mdio_i => ext_mdio_i,
+      gmii_isolate => gmii_isolate,
+      gmii_rx_dv => gmii_rx_dv,
+      gmii_rx_er => gmii_rx_er,
+      gmii_rxd(7 downto 0) => gmii_rxd(7 downto 0),
+      gmii_tx_en => gmii_tx_en,
+      gmii_tx_er => gmii_tx_er,
+      gmii_txd(7 downto 0) => gmii_txd(7 downto 0),
+      mdc => \^mdc\,
+      mdio_i => \^mdio_i\,
+      mdio_o => mdio_o,
+      mdio_t => mdio_t,
+      mmcm_locked_out => \^mmcm_locked_out\,
+      phyaddr(4 downto 0) => phyaddr(4 downto 0),
+      refclk125_n => \^clk125_out\,
+      refclk125_n_0 => \^clk625_out\,
+      refclk125_n_1 => \^clk104_out\,
+      rst_125_reg => \^rst_125_out\,
+      rxn => rxn,
+      rxp => rxp,
+      sgmii_clk_en => sgmii_clk_en,
+      sgmii_clk_f => sgmii_clk_f,
+      sgmii_clk_r => sgmii_clk_r,
+      signal_detect => signal_detect,
+      speed_is_100 => speed_is_100,
+      speed_is_10_100 => speed_is_10_100,
+      status_vector(12 downto 8) => \^status_vector\(13 downto 9),
+      status_vector(7 downto 0) => \^status_vector\(7 downto 0),
+      txn => txn,
+      txp => txp
     );
 end STRUCTURE;
 library IEEE;
@@ -26853,11 +27433,14 @@ entity gig_ethernet_pcs_pma_0 is
     txn : out STD_LOGIC;
     rxp : in STD_LOGIC;
     rxn : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
-    clk625 : in STD_LOGIC;
-    clk208 : in STD_LOGIC;
-    clk104 : in STD_LOGIC;
-    mmcm_locked : in STD_LOGIC;
+    refclk125_p : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
+    clk125_out : out STD_LOGIC;
+    clk625_out : out STD_LOGIC;
+    clk208_out : out STD_LOGIC;
+    clk104_out : out STD_LOGIC;
+    rst_125_out : out STD_LOGIC;
+    mmcm_locked_out : out STD_LOGIC;
     sgmii_clk_r : out STD_LOGIC;
     sgmii_clk_f : out STD_LOGIC;
     sgmii_clk_en : out STD_LOGIC;
@@ -26904,16 +27487,16 @@ architecture STRUCTURE of gig_ethernet_pcs_pma_0 is
   attribute X_CORE_INFO : string;
   attribute X_CORE_INFO of inst : label is "gig_ethernet_pcs_pma_v16_0_0,Vivado 2016.3";
 begin
-inst: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block
+inst: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_support
      port map (
       an_adv_config_val => an_adv_config_val,
       an_adv_config_vector(15 downto 0) => an_adv_config_vector(15 downto 0),
       an_interrupt => an_interrupt,
       an_restart_config => an_restart_config,
-      clk104 => clk104,
-      clk125m => clk125m,
-      clk208 => clk208,
-      clk625 => clk625,
+      clk104_out => clk104_out,
+      clk125_out => clk125_out,
+      clk208_out => clk208_out,
+      clk625_out => clk625_out,
       configuration_valid => configuration_valid,
       configuration_vector(4 downto 0) => configuration_vector(4 downto 0),
       ext_mdc => ext_mdc,
@@ -26932,9 +27515,12 @@ inst: entity work.gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block
       mdio_o => mdio_o,
       mdio_t => mdio_t,
       mdio_t_in => mdio_t_in,
-      mmcm_locked => mmcm_locked,
+      mmcm_locked_out => mmcm_locked_out,
       phyaddr(4 downto 0) => phyaddr(4 downto 0),
+      refclk125_n => refclk125_n,
+      refclk125_p => refclk125_p,
       reset => reset,
+      rst_125_out => rst_125_out,
       rxn => rxn,
       rxp => rxp,
       sgmii_clk_en => sgmii_clk_en,

@@ -1,8 +1,17 @@
-//------------------------------------------------------------------------------
-// File       : gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v
-// Author     : Xilinx
-//------------------------------------------------------------------------------
-// (c) Copyright 2006 Xilinx, Inc. All rights reserved.
+///////////////////////////////////////////////////////////////////////////////
+//   ____  ____
+//  /   /\/   /
+// /___/  \  /    Vendor: Xilinx
+// \   \   \/     Version : 1
+//  \   \         Filename : gig_ethernet_pcs_pma_0_idelayctrl.v
+//  /   /         
+// /___/   /\
+// \   \  /  \
+//  \___\/\___\
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+// (c) Copyright 2011 Xilinx, Inc. All rights reserved.
 //
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -47,41 +56,38 @@
 //
 // THIS COPYRIGHT NOTICE AND DISCLAIMER MUST BE RETAINED AS
 // PART OF THIS FILE AT ALL TIMES. 
-
-//
-//
-//------------------------------------------------------------------------------
-// Description:   This module takes in an asynchronous reset and gives out its 
-// synchronous counterpart synced to 125Mhz Clock
-//------------------------------------------------------------------------------
-
+// 
+// 
 
 `timescale 1ns / 1ps
-module gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen(
-    input  wire clk125,
-    input  wire reset,
-    input  wire mmcm_locked,
-    output reg rst_125
-    );
 
-(* ASYNC_REG = "TRUE" *)
-reg [5:0] rst_dly;
-wire mmcm_locked_sync_125;    
+//***************************** Entity Declaration ****************************
+module gig_ethernet_pcs_pma_0_idelayctrl 
+(
+    input           refclk,
+    output          rdy,
+    input           rst
+);
 
-always @(posedge clk125) begin
-   rst_125 <= |rst_dly;
-end
+   //---------------------------------------------------------------------------
+   // An IDELAYCTRL primitive needs to be instantiated for the Fixed Tap Delay
+   // mode of the IDELAY.
+   // All IDELAYs in Fixed Tap Delay mode and the IDELAYCTRL primitives have
+   // to be LOC'ed in the XDC file.
+   //---------------------------------------------------------------------------
 
-always @(posedge clk125 or posedge reset) begin
-   if (reset) rst_dly <= 6'b111111;
-   else       rst_dly <= { rst_dly[4:0], (~ mmcm_locked_sync_125 ) };
-end
-
-gig_ethernet_pcs_pma_0_sync_block_ex sync_block_mmcm_locked
-        (
-           .clk             (clk125),
-           .data_in         (mmcm_locked),
-           .data_out        (mmcm_locked_sync_125)
-        );
-
+   IDELAYCTRL 
+#(.SIM_DEVICE ("7SERIES"))
+   dlyctrl
+   (
+      .RDY       (rdy),
+      .REFCLK    (refclk),
+      .RST       (rst)
+   );
 endmodule
+
+
+
+
+
+

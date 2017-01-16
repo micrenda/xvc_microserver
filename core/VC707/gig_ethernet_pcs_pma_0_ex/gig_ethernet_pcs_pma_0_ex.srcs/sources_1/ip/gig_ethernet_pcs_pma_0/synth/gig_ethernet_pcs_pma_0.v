@@ -109,11 +109,14 @@ module gig_ethernet_pcs_pma_0  #
       input        rxp,                   // Differential +ve for serial reception from PMD to PMA.
       input        rxn,                   // Differential -ve for serial reception from PMD to PMA.
 
-      input wire  clk125m,
-      input wire  clk625,
-      input wire  clk208,
-      input wire  clk104,
-      input        mmcm_locked, 
+      input  refclk125_p,
+      input  refclk125_n,
+      output clk125_out,
+      output clk625_out,
+      output clk208_out,
+      output clk104_out,
+      output rst_125_out,
+      output        mmcm_locked_out, 
 
       output       sgmii_clk_r,             // Clock for client MAC (125Mhz, 12.5MHz or 1.25MHz).
       output       sgmii_clk_f,             // Clock for client MAC (125Mhz, 12.5MHz or 1.25MHz).
@@ -159,10 +162,10 @@ module gig_ethernet_pcs_pma_0  #
 
 
 
-(* CORE_GENERATION_INFO = "gig_ethernet_pcs_pma_0,gig_ethernet_pcs_pma_v16_0_0,{x_ipProduct=Vivado 2016.3,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=gig_ethernet_pcs_pma,x_ipVersion=16.0,x_ipCoreRevision=0,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,c_elaboration_transient_dir=.,c_component_name=gig_ethernet_pcs_pma_0,c_family=virtex7,c_architecture=virtex7,c_is_sgmii=true,c_enable_async_sgmii=false,c_enable_async_lvds=false,c_enable_async_lvds_rx_only=false,c_use_transceiver=false,c_use_tbi=false,c_is_2_5g=false,c_use_lvds=true,c_has_an=true,characterization=false,c_has_mdio=true,c_has_ext_mdio=true,c_sgmii_phy_mode=false,c_dynamic_switching=false,c_sgmii_fabric_buffer=true,c_1588=0,gt_rx_byte_width=1,C_EMAC_IF_TEMAC=true,EXAMPLE_SIMULATION=0,c_support_level=false,c_RxNibbleBitslice0Used=false,c_tx_in_upper_nibble=1,c_TxLane0_Placement=DIFF_PAIR_0,c_TxLane1_Placement=DIFF_PAIR_1,c_RxLane0_Placement=DIFF_PAIR_0,c_RxLane1_Placement=DIFF_PAIR_1,c_sub_core_name=gig_ethernet_pcs_pma_0_gt,c_transceiver_type=GTXE2,c_gt_type=GTH,c_rx_gmii_clk_src=TXOUTCLK,c_transceivercontrol=false,c_gtinex=false,c_xdevicefamily=xc7vx485t,c_gt_dmonitorout_width=8,c_gt_drpaddr_width=9,c_gt_txdiffctrl_width=4,c_gt_rxmonitorout_width=7,c_num_of_lanes=1,c_refclkrate=125,c_drpclkrate=50.0,c_gt_loc=X0Y0,c_refclk_src=clk0,c_enable_tx_userclk_reset_port=false}" *)
+(* CORE_GENERATION_INFO = "gig_ethernet_pcs_pma_0,gig_ethernet_pcs_pma_v16_0_0,{x_ipProduct=Vivado 2016.3,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=gig_ethernet_pcs_pma,x_ipVersion=16.0,x_ipCoreRevision=0,x_ipLanguage=VERILOG,x_ipSimLanguage=VERILOG,c_elaboration_transient_dir=.,c_component_name=gig_ethernet_pcs_pma_0,c_family=virtex7,c_architecture=virtex7,c_is_sgmii=true,c_enable_async_sgmii=false,c_enable_async_lvds=false,c_enable_async_lvds_rx_only=false,c_use_transceiver=false,c_use_tbi=false,c_is_2_5g=false,c_use_lvds=true,c_has_an=true,characterization=false,c_has_mdio=true,c_has_ext_mdio=true,c_sgmii_phy_mode=false,c_dynamic_switching=false,c_sgmii_fabric_buffer=true,c_1588=0,gt_rx_byte_width=1,C_EMAC_IF_TEMAC=true,EXAMPLE_SIMULATION=0,c_support_level=true,c_RxNibbleBitslice0Used=false,c_tx_in_upper_nibble=1,c_TxLane0_Placement=DIFF_PAIR_0,c_TxLane1_Placement=DIFF_PAIR_1,c_RxLane0_Placement=DIFF_PAIR_0,c_RxLane1_Placement=DIFF_PAIR_1,c_sub_core_name=gig_ethernet_pcs_pma_0_gt,c_transceiver_type=GTXE2,c_gt_type=GTH,c_rx_gmii_clk_src=TXOUTCLK,c_transceivercontrol=false,c_gtinex=false,c_xdevicefamily=xc7vx485t,c_gt_dmonitorout_width=8,c_gt_drpaddr_width=9,c_gt_txdiffctrl_width=4,c_gt_rxmonitorout_width=7,c_num_of_lanes=1,c_refclkrate=125,c_drpclkrate=50.0,c_gt_loc=X0Y0,c_refclk_src=clk0,c_enable_tx_userclk_reset_port=false}" *)
 (* X_CORE_INFO = "gig_ethernet_pcs_pma_v16_0_0,Vivado 2016.3" *)
 
-gig_ethernet_pcs_pma_0_block # ( .EXAMPLE_SIMULATION             (EXAMPLE_SIMULATION) ) 
+gig_ethernet_pcs_pma_0_support # ( .EXAMPLE_SIMULATION             (EXAMPLE_SIMULATION) )  
  inst
    (
       // LVDS transceiver Interface
@@ -174,11 +177,14 @@ gig_ethernet_pcs_pma_0_block # ( .EXAMPLE_SIMULATION             (EXAMPLE_SIMULA
       .rxp                   (rxp),
       .rxn                   (rxn),
 
-      .clk125m               (clk125m),
-      .clk625                (clk625),
-      .clk208                (clk208),
-      .clk104                (clk104),
-      .mmcm_locked           (mmcm_locked),
+      .refclk125_p           (refclk125_p),
+      .refclk125_n           (refclk125_n),
+      .clk125_out            (clk125_out),
+      .clk625_out            (clk625_out),
+      .clk208_out            (clk208_out),
+      .clk104_out            (clk104_out),
+      .rst_125_out           (rst_125_out),
+      .mmcm_locked_out       (mmcm_locked_out),
       .sgmii_clk_f             (sgmii_clk_f),
       .sgmii_clk_r             (sgmii_clk_r),
       .sgmii_clk_en          (sgmii_clk_en),

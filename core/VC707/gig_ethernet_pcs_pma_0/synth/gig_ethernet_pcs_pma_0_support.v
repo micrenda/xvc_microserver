@@ -64,6 +64,7 @@
 //------------------------------------------------------------------------------
 
 module gig_ethernet_pcs_pma_0_support 
+  #( parameter EXAMPLE_SIMULATION                     =  0 )
    (
       // LVDS transceiver Interface
       //---------------------------
@@ -138,8 +139,8 @@ module gig_ethernet_pcs_pma_0_support
   wire rst_125_i     ;
   wire mmcm_locked_i ;
   
-gig_ethernet_pcs_pma_0 
-pcs_pma_i
+gig_ethernet_pcs_pma_0_block  # ( .EXAMPLE_SIMULATION             (EXAMPLE_SIMULATION) )  
+pcs_pma_block_i
    (
       // LVDS transceiver Interface
       //---------------------------

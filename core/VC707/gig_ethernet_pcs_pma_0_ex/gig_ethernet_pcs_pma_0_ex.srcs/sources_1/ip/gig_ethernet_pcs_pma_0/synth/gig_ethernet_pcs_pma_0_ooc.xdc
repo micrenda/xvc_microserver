@@ -13,11 +13,7 @@
 
 
 
-create_clock -name clk125m -period 8.000 [get_ports clk125m]
-# constraints for Native mode of LVDS solution
-  # constraints for Component mode of LVDS solution
-  create_generated_clock -name clk208 -multiply_by 10  -divide_by 6 -source [get_ports clk125m] [get_ports clk208]
-  create_generated_clock -name clk104 -multiply_by 5 -divide_by 6 -source [get_ports clk125m] [get_ports clk104]
-  create_generated_clock -name clk625 -multiply_by 5 -source [get_ports clk125m] [get_ports clk625]
+
+create_clock -name refclk125 -period 8.000 [get_ports refclk125_p]
 
 

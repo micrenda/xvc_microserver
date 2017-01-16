@@ -51,7 +51,7 @@
 				<spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.c_sgmii_fabric_buffer">true</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.c_sgmii_phy_mode">false</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.c_sub_core_name">gig_ethernet_pcs_pma_0_gt</spirit:configurableElementValue>
-				<spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.c_support_level">false</spirit:configurableElementValue>
+				<spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.c_support_level">true</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.c_transceiver_type">GTXE2</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.c_transceivercontrol">false</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.c_tx_in_upper_nibble">1</spirit:configurableElementValue>
@@ -90,7 +90,7 @@
 				<spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.SGMII_Mode">10_100_1000</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.SGMII_PHY_Mode">false</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.Standard">SGMII</spirit:configurableElementValue>
-				<spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.SupportLevel">Include_Shared_Logic_in_Example_Design</spirit:configurableElementValue>
+				<spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.SupportLevel">Include_Shared_Logic_in_Core</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.Timer_Format">Time_of_day</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TransceiverControl">false</spirit:configurableElementValue>
 				<spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TxLane0_Placement">DIFF_PAIR_0</spirit:configurableElementValue>
@@ -120,17 +120,25 @@
 			<spirit:vendorExtensions>
 				<xilinx:componentInstanceExtensions>
 					<xilinx:configElementInfos>
+						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.DIFFCLK_BOARD_INTERFACE"
+								xilinx:valueSource="user"/>
 						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.ETHERNET_BOARD_INTERFACE"
 								xilinx:valueSource="user"/>
 						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Ext_Management_Interface"
 								xilinx:valueSource="user"/>
 						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MDIO_BOARD_INTERFACE"
 								xilinx:valueSource="user"/>
+						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MaxDataRate"
+								xilinx:valueSource="user"/>
 						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Physical_Interface"
 								xilinx:valueSource="user"/>
 						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.RxGmiiClkSrc"
 								xilinx:valueSource="user"/>
 						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Standard"
+								xilinx:valueSource="user"/>
+						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.SupportLevel"
+								xilinx:valueSource="user"/>
+						<xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.TransceiverControl"
 								xilinx:valueSource="user"/>
 					</xilinx:configElementInfos>
 				</xilinx:componentInstanceExtensions>

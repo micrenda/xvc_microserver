@@ -2,16 +2,17 @@
 # Vivado v2016.3 (64-bit)
 # SW Build 1682563 on Mon Oct 10 19:07:26 MDT 2016
 # IP Build 1681267 on Mon Oct 10 21:28:31 MDT 2016
-# Start of session at: Thu Dec 15 15:46:41 2016
-# Process ID: 6897
+# Start of session at: Wed Jan 11 13:07:49 2017
+# Process ID: 11890
 # Current directory: /home/mrenda/research/xvc_microserver/core/VC707/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1
 # Command line: vivado -log gig_ethernet_pcs_pma_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source gig_ethernet_pcs_pma_0.tcl
 # Log file: /home/mrenda/research/xvc_microserver/core/VC707/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0.vds
 # Journal file: /home/mrenda/research/xvc_microserver/core/VC707/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/vivado.jou
 #-----------------------------------------------------------
 source gig_ethernet_pcs_pma_0.tcl -notrace
-Starting RTL Elaboration : Time (s): cpu = 00:00:22 ; elapsed = 00:00:27 . Memory (MB): peak = 1132.996 ; gain = 223.633 ; free physical = 88 ; free virtual = 47965
+Starting RTL Elaboration : Time (s): cpu = 00:00:20 ; elapsed = 00:02:10 . Memory (MB): peak = 1132.996 ; gain = 223.633 ; free physical = 77 ; free virtual = 45576
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0' [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.v:98]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_support' [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_support.v:66]
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_block' [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_block.v:95]
 INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_reset_wtd_timer' [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_reset_wtd_timer.v:66]
 INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_reset_wtd_timer' (1#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_reset_wtd_timer.v:66]
@@ -64,16 +65,31 @@ INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_c
 INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_gpio_sgmii_top' (34#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_gpio_sgmii_top.v:61]
 INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_lvds_transceiver_k7' (35#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/lvds_transceiver/gig_ethernet_pcs_pma_0_lvds_transceiver.v:61]
 INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_block' (36#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_block.v:95]
-INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0' (37#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.v:98]
-Finished RTL Elaboration : Time (s): cpu = 00:00:27 ; elapsed = 00:00:34 . Memory (MB): peak = 1184.250 ; gain = 274.887 ; free physical = 91 ; free virtual = 47915
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:28 ; elapsed = 00:00:35 . Memory (MB): peak = 1184.250 ; gain = 274.887 ; free physical = 89 ; free virtual = 47913
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen' [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen.v:60]
+INFO: [Synth 8-638] synthesizing module 'IBUFGDS' [/opt/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:14584]
+INFO: [Synth 8-256] done synthesizing module 'IBUFGDS' (37#1) [/opt/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:14584]
+INFO: [Synth 8-638] synthesizing module 'MMCME2_BASE' [/opt/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:20534]
+INFO: [Synth 8-256] done synthesizing module 'MMCME2_BASE' (38#1) [/opt/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:20534]
+INFO: [Synth 8-638] synthesizing module 'BUFG' [/opt/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:607]
+INFO: [Synth 8-256] done synthesizing module 'BUFG' (39#1) [/opt/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:607]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_idelayctrl' [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_idelayctrl.v:65]
+INFO: [Synth 8-638] synthesizing module 'IDELAYCTRL' [/opt/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:16182]
+INFO: [Synth 8-256] done synthesizing module 'IDELAYCTRL' (40#1) [/opt/Xilinx/Vivado/2016.3/scripts/rt/data/unisim_comp.v:16182]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_idelayctrl' (41#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_idelayctrl.v:65]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen' (42#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen.v:60]
+INFO: [Synth 8-638] synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen' [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v:60]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen' (43#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v:60]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0_support' (44#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0_support.v:66]
+INFO: [Synth 8-256] done synthesizing module 'gig_ethernet_pcs_pma_0' (45#1) [/home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/synth/gig_ethernet_pcs_pma_0.v:98]
+Finished RTL Elaboration : Time (s): cpu = 00:00:24 ; elapsed = 00:02:17 . Memory (MB): peak = 1185.250 ; gain = 275.887 ; free physical = 77 ; free virtual = 45550
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:25 ; elapsed = 00:02:20 . Memory (MB): peak = 1185.250 ; gain = 275.887 ; free physical = 70 ; free virtual = 45549
 INFO: [Device 21-403] Loading part xc7vx485tffg1761-2
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.14 . Memory (MB): peak = 1592.160 ; gain = 0.004 ; free physical = 72 ; free virtual = 47611
-Finished Constraint Validation : Time (s): cpu = 00:01:24 ; elapsed = 00:01:42 . Memory (MB): peak = 1592.160 ; gain = 682.797 ; free physical = 79 ; free virtual = 47609
-Finished Loading Part and Timing Information : Time (s): cpu = 00:01:24 ; elapsed = 00:01:42 . Memory (MB): peak = 1592.160 ; gain = 682.797 ; free physical = 78 ; free virtual = 47609
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:24 ; elapsed = 00:01:43 . Memory (MB): peak = 1592.160 ; gain = 682.797 ; free physical = 78 ; free virtual = 47609
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:31 ; elapsed = 00:01:50 . Memory (MB): peak = 1592.160 ; gain = 682.797 ; free physical = 74 ; free virtual = 47584
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:47 ; elapsed = 00:02:08 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 79 ; free virtual = 47584
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.58 . Memory (MB): peak = 1593.184 ; gain = 0.000 ; free physical = 104 ; free virtual = 45196
+Finished Constraint Validation : Time (s): cpu = 00:01:17 ; elapsed = 00:04:04 . Memory (MB): peak = 1593.184 ; gain = 683.820 ; free physical = 116 ; free virtual = 45255
+Finished Loading Part and Timing Information : Time (s): cpu = 00:01:17 ; elapsed = 00:04:04 . Memory (MB): peak = 1593.184 ; gain = 683.820 ; free physical = 116 ; free virtual = 45255
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:01:17 ; elapsed = 00:04:05 . Memory (MB): peak = 1593.184 ; gain = 683.820 ; free physical = 107 ; free virtual = 45249
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:01:23 ; elapsed = 00:04:11 . Memory (MB): peak = 1593.184 ; gain = 683.820 ; free physical = 76 ; free virtual = 45227
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:38 ; elapsed = 00:04:27 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 108 ; free virtual = 45276
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
 ---------------------------------------------------------------------------------
@@ -91,40 +107,45 @@ ROM:
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP and Shift Register Reporting
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:10 ; elapsed = 00:02:33 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 72 ; free virtual = 47534
-Finished Timing Optimization : Time (s): cpu = 00:02:11 ; elapsed = 00:02:34 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 80 ; free virtual = 47523
-Finished Technology Mapping : Time (s): cpu = 00:02:13 ; elapsed = 00:02:37 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 81 ; free virtual = 47508
-Finished IO Insertion : Time (s): cpu = 00:02:15 ; elapsed = 00:02:39 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 80 ; free virtual = 47507
-Finished Renaming Generated Instances : Time (s): cpu = 00:02:15 ; elapsed = 00:02:39 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 80 ; free virtual = 47507
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:15 ; elapsed = 00:02:39 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 80 ; free virtual = 47507
-Finished Renaming Generated Ports : Time (s): cpu = 00:02:15 ; elapsed = 00:02:39 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 80 ; free virtual = 47507
-Finished Handling Custom Attributes : Time (s): cpu = 00:02:15 ; elapsed = 00:02:39 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 81 ; free virtual = 47508
-Finished Renaming Generated Nets : Time (s): cpu = 00:02:15 ; elapsed = 00:02:39 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 81 ; free virtual = 47508
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:00 ; elapsed = 00:04:52 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 96 ; free virtual = 45190
+Finished Timing Optimization : Time (s): cpu = 00:02:01 ; elapsed = 00:04:54 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 152 ; free virtual = 45249
+Finished Technology Mapping : Time (s): cpu = 00:02:04 ; elapsed = 00:04:57 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 123 ; free virtual = 45220
+Finished IO Insertion : Time (s): cpu = 00:02:05 ; elapsed = 00:04:59 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 120 ; free virtual = 45219
+Finished Renaming Generated Instances : Time (s): cpu = 00:02:05 ; elapsed = 00:04:59 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 120 ; free virtual = 45219
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:06 ; elapsed = 00:04:59 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 118 ; free virtual = 45216
+Finished Renaming Generated Ports : Time (s): cpu = 00:02:06 ; elapsed = 00:04:59 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 118 ; free virtual = 45216
+Finished Handling Custom Attributes : Time (s): cpu = 00:02:06 ; elapsed = 00:04:59 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 116 ; free virtual = 45215
+Finished Renaming Generated Nets : Time (s): cpu = 00:02:06 ; elapsed = 00:04:59 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 116 ; free virtual = 45215
 
 Report Cell Usage: 
 +------+----------------+------+
 |      |Cell            |Count |
 +------+----------------+------+
-|1     |CARRY4          |    25|
-|2     |IDELAYE2        |     2|
-|3     |ISERDESE2       |     2|
-|4     |LUT1            |    98|
-|5     |LUT2            |    82|
-|6     |LUT3            |   156|
-|7     |LUT4            |   152|
-|8     |LUT5            |   141|
-|9     |LUT6            |   323|
-|10    |MUXF7           |     9|
-|11    |OSERDESE2       |     1|
-|12    |SRL16           |     2|
-|13    |SRL16E          |     8|
-|14    |FD              |    48|
-|15    |FDP             |    72|
-|16    |FDPE            |     4|
-|17    |FDRE            |   921|
-|18    |FDSE            |    36|
-|19    |IBUFDS_DIFF_OUT |     1|
-|20    |OBUFDS          |     1|
+|1     |BUFG            |     5|
+|2     |CARRY4          |    25|
+|3     |IDELAYCTRL      |     1|
+|4     |IDELAYE2        |     2|
+|5     |ISERDESE2       |     2|
+|6     |LUT1            |   100|
+|7     |LUT2            |    83|
+|8     |LUT3            |   156|
+|9     |LUT4            |   152|
+|10    |LUT5            |   141|
+|11    |LUT6            |   324|
+|12    |MMCME2_BASE     |     1|
+|13    |MUXF7           |     9|
+|14    |OSERDESE2       |     1|
+|15    |SRL16           |     2|
+|16    |SRL16E          |     8|
+|17    |FD              |    54|
+|18    |FDP             |    72|
+|19    |FDPE            |    10|
+|20    |FDRE            |   922|
+|21    |FDSE            |    36|
+|22    |IBUFDS_DIFF_OUT |     1|
+|23    |IBUFGDS         |     1|
+|24    |OBUFDS          |     1|
 +------+----------------+------+
-Finished Writing Synthesis Report : Time (s): cpu = 00:02:15 ; elapsed = 00:02:39 . Memory (MB): peak = 1592.164 ; gain = 682.801 ; free physical = 81 ; free virtual = 47508
-synth_design: Time (s): cpu = 00:02:13 ; elapsed = 00:02:37 . Memory (MB): peak = 1592.164 ; gain = 592.082 ; free physical = 130 ; free virtual = 47571
+Finished Writing Synthesis Report : Time (s): cpu = 00:02:06 ; elapsed = 00:04:59 . Memory (MB): peak = 1593.188 ; gain = 683.824 ; free physical = 116 ; free virtual = 45215
+synth_design: Time (s): cpu = 00:02:05 ; elapsed = 00:03:27 . Memory (MB): peak = 1593.188 ; gain = 592.105 ; free physical = 99 ; free virtual = 45216
+write_verilog: Time (s): cpu = 00:00:00.10 ; elapsed = 00:00:05 . Memory (MB): peak = 1617.195 ; gain = 0.000 ; free physical = 141 ; free virtual = 45236

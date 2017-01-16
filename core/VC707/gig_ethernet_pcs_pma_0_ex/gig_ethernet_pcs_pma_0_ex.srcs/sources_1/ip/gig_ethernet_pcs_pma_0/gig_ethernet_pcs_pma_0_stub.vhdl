@@ -1,7 +1,7 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
--- Date        : Thu Dec 15 15:50:02 2016
+-- Date        : Wed Jan 11 13:14:19 2017
 -- Host        : ELLAPC3 running 64-bit Debian GNU/Linux 8.6 (jessie)
 -- Command     : write_vhdl -force -mode synth_stub
 --               /home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_stub.vhdl
@@ -18,11 +18,14 @@ entity gig_ethernet_pcs_pma_0 is
     txn : out STD_LOGIC;
     rxp : in STD_LOGIC;
     rxn : in STD_LOGIC;
-    clk125m : in STD_LOGIC;
-    clk625 : in STD_LOGIC;
-    clk208 : in STD_LOGIC;
-    clk104 : in STD_LOGIC;
-    mmcm_locked : in STD_LOGIC;
+    refclk125_p : in STD_LOGIC;
+    refclk125_n : in STD_LOGIC;
+    clk125_out : out STD_LOGIC;
+    clk625_out : out STD_LOGIC;
+    clk208_out : out STD_LOGIC;
+    clk104_out : out STD_LOGIC;
+    rst_125_out : out STD_LOGIC;
+    mmcm_locked_out : out STD_LOGIC;
     sgmii_clk_r : out STD_LOGIC;
     sgmii_clk_f : out STD_LOGIC;
     sgmii_clk_en : out STD_LOGIC;
@@ -62,6 +65,6 @@ architecture stub of gig_ethernet_pcs_pma_0 is
 attribute syn_black_box : boolean;
 attribute black_box_pad_pin : string;
 attribute syn_black_box of stub : architecture is true;
-attribute black_box_pad_pin of stub : architecture is "txp,txn,rxp,rxn,clk125m,clk625,clk208,clk104,mmcm_locked,sgmii_clk_r,sgmii_clk_f,sgmii_clk_en,speed_is_10_100,speed_is_100,gmii_txd[7:0],gmii_tx_en,gmii_tx_er,gmii_rxd[7:0],gmii_rx_dv,gmii_rx_er,gmii_isolate,ext_mdc,ext_mdio_i,ext_mdio_o,ext_mdio_t,mdio_t_in,mdc,mdio_i,mdio_o,mdio_t,phyaddr[4:0],configuration_vector[4:0],configuration_valid,an_interrupt,an_adv_config_vector[15:0],an_adv_config_val,an_restart_config,status_vector[15:0],reset,signal_detect";
+attribute black_box_pad_pin of stub : architecture is "txp,txn,rxp,rxn,refclk125_p,refclk125_n,clk125_out,clk625_out,clk208_out,clk104_out,rst_125_out,mmcm_locked_out,sgmii_clk_r,sgmii_clk_f,sgmii_clk_en,speed_is_10_100,speed_is_100,gmii_txd[7:0],gmii_tx_en,gmii_tx_er,gmii_rxd[7:0],gmii_rx_dv,gmii_rx_er,gmii_isolate,ext_mdc,ext_mdio_i,ext_mdio_o,ext_mdio_t,mdio_t_in,mdc,mdio_i,mdio_o,mdio_t,phyaddr[4:0],configuration_vector[4:0],configuration_valid,an_interrupt,an_adv_config_vector[15:0],an_adv_config_val,an_restart_config,status_vector[15:0],reset,signal_detect";
 begin
 end;

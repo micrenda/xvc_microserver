@@ -31,6 +31,7 @@ set_false_path -to [get_pins -hier -filter { name =~ */*reset_sync_rst_208/*sync
 set_false_path -to [get_pins -hier -filter { name =~ */*reset_sync_soft_tx_reset_208/*sync*/PRE } ]
 set_false_path -to [get_pins -hier -filter { name =~ */*reset_sync_soft_rx_reset_208/*sync*/PRE } ]
 
+set_false_path -to [get_pins -hier -filter {name =~  *core_resets_i/rst_dly_reg*/PRE}]
 # false path constraints to async inputs coming directly to synchronizer
 set_false_path -to [get_pins -hier -filter {name =~ *SYNC_*/data_sync*/D }]
 set_false_path -to [get_pins -hier -filter {name =~ *SYNC_*/reset_sync*/PRE }]

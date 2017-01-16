@@ -1,4 +1,4 @@
-// (c) Copyright 1995-2016 Xilinx, Inc. All rights reserved.
+// (c) Copyright 1995-2017 Xilinx, Inc. All rights reserved.
 // 
 // This file contains confidential and proprietary information
 // of Xilinx, Inc. and is protected under U.S. and
@@ -59,14 +59,17 @@ gig_ethernet_pcs_pma_0 your_instance_name (
   .txp(txp),                                    // output wire txp
   .rxn(rxn),                                    // input wire rxn
   .rxp(rxp),                                    // input wire rxp
-  .clk125m(clk125m),                            // input wire clk125m
-  .mmcm_locked(mmcm_locked),                    // input wire mmcm_locked
+  .mmcm_locked_out(mmcm_locked_out),            // output wire mmcm_locked_out
   .sgmii_clk_r(sgmii_clk_r),                    // output wire sgmii_clk_r
   .sgmii_clk_f(sgmii_clk_f),                    // output wire sgmii_clk_f
   .sgmii_clk_en(sgmii_clk_en),                  // output wire sgmii_clk_en
-  .clk625(clk625),                              // input wire clk625
-  .clk208(clk208),                              // input wire clk208
-  .clk104(clk104),                              // input wire clk104
+  .clk125_out(clk125_out),                      // output wire clk125_out
+  .clk625_out(clk625_out),                      // output wire clk625_out
+  .clk104_out(clk104_out),                      // output wire clk104_out
+  .clk208_out(clk208_out),                      // output wire clk208_out
+  .rst_125_out(rst_125_out),                    // output wire rst_125_out
+  .refclk125_n(refclk125_n),                    // input wire refclk125_n
+  .refclk125_p(refclk125_p),                    // input wire refclk125_p
   .gmii_txd(gmii_txd),                          // input wire [7 : 0] gmii_txd
   .gmii_tx_en(gmii_tx_en),                      // input wire gmii_tx_en
   .gmii_tx_er(gmii_tx_er),                      // input wire gmii_tx_er

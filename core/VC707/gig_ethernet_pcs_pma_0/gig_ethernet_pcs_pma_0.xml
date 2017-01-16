@@ -1636,7 +1636,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk125m_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()))">true</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk125m_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()))">false</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -1671,7 +1671,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk625_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and (not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">true</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk625_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and (not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">false</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -1706,7 +1706,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk208_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;) and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;) and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;) and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;) and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;) ) )">true</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk208_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;) and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;) and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;) and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;) and ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;) ) )">false</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -1776,7 +1776,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk104_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and ((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;)) ))">true</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk104_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and ((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;)) ))">false</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -1811,7 +1811,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk104_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and ((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))))">false</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk104_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and ((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))))">true</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -1846,7 +1846,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk208_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))) ))">false</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk208_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))) ))">true</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -1920,7 +1920,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk125_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()))">false</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk125_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()))">true</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -1955,7 +1955,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk625_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true())  and (not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">false</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.clk625_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true())  and (not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">true</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -1986,7 +1986,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.rst_125_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()))">false</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.rst_125_out_port" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()))">true</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -2260,7 +2260,7 @@
       <spirit:vendorExtensions>
         <xilinx:busInterfaceInfo>
           <xilinx:enablement>
-            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.refclk125_in" xilinx:dependency="(((spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;))) = true()) and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;)) = true()) and (spirit:decode(id(&apos;PARAM_VALUE.LvdsRefClk&apos;)) = &quot;125&quot;))">false</xilinx:isEnabled>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.refclk125_in" xilinx:dependency="(((spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;))) = true()) and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;)) = true()) and (spirit:decode(id(&apos;PARAM_VALUE.LvdsRefClk&apos;)) = &quot;125&quot;))">true</xilinx:isEnabled>
           </xilinx:enablement>
         </xilinx:busInterfaceInfo>
       </spirit:vendorExtensions>
@@ -3984,11 +3984,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:46:11 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:07:02 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -3996,7 +3996,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f80f0673</spirit:value>
+            <spirit:value>88088ee3</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4015,11 +4015,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:46:21 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:07:12 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -4027,7 +4027,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f80f0673</spirit:value>
+            <spirit:value>88088ee3</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4045,11 +4045,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:46:31 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:07:21 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -4057,7 +4057,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f80f0673</spirit:value>
+            <spirit:value>88088ee3</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4076,11 +4076,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:46:32 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:07:21 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -4088,7 +4088,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f80f0673</spirit:value>
+            <spirit:value>88088ee3</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4106,11 +4106,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:46:31 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:07:21 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -4118,7 +4118,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>0b0bdc0a</spirit:value>
+            <spirit:value>d75f4985</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4137,11 +4137,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:46:32 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:07:21 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -4149,7 +4149,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>0b0bdc0a</spirit:value>
+            <spirit:value>d75f4985</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4167,11 +4167,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:46:36 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:07:25 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -4179,7 +4179,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f80f0673</spirit:value>
+            <spirit:value>88088ee3</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4197,11 +4197,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:46:36 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:07:25 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -4209,7 +4209,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f80f0673</spirit:value>
+            <spirit:value>88088ee3</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4227,11 +4227,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Thu Dec 15 13:50:03 UTC 2016</spirit:value>
+            <spirit:value>Wed Jan 11 11:14:20 UTC 2017</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRC</spirit:name>
-            <spirit:value>3cd78312</spirit:value>
+            <spirit:value>0aa0ce96</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>boundaryCRCversion</spirit:name>
@@ -4239,7 +4239,7 @@
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRC</spirit:name>
-            <spirit:value>f80f0673</spirit:value>
+            <spirit:value>88088ee3</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>customizationCRCversion</spirit:name>
@@ -4505,7 +4505,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk125m" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()))">true</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk125m" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()))">false</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -4857,7 +4857,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.mmcm_locked_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;))) = true() and  not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_TBI&apos;))) or ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.mmcm_locked_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;))) = true() and  not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_TBI&apos;))) or ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -4903,7 +4903,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.mmcm_locked" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;))) = false() and not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_TBI&apos;))) or ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">true</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.mmcm_locked" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;))) = false() and not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_TBI&apos;))) or ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">false</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5312,7 +5312,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk625" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and (not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">true</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk625" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and (not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">false</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5335,7 +5335,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk208" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and (((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))) ))">true</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk208" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and (((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;))  and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))) ))">false</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5358,7 +5358,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk104" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and ((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))))">true</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk104" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = false()) and ((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))))">false</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5401,7 +5401,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk125_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk125_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5421,7 +5421,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk625_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk625_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (not ((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ENABLE_ASYNC_LVDS&apos;))))))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5441,7 +5441,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk104_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and ((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk104_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and ((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5461,7 +5461,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk208_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))) ))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.clk208_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (((((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexu&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;zynquplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;kintexuplus&quot;)) and (((spirit:decode(id(&apos;MODELPARAM_VALUE.C_ARCHITECTURE&apos;))) != &quot;virtexuplus&quot;))) ))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5501,7 +5501,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.rst_125_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.rst_125_out" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5524,7 +5524,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.refclk125_n" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (spirit:decode(id(&apos;PARAM_VALUE.LvdsRefClk&apos;)) = &quot;125&quot;))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.refclk125_n" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (spirit:decode(id(&apos;PARAM_VALUE.LvdsRefClk&apos;)) = &quot;125&quot;))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -5547,7 +5547,7 @@
         <spirit:vendorExtensions>
           <xilinx:portInfo>
             <xilinx:enablement>
-              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.refclk125_p" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (spirit:decode(id(&apos;PARAM_VALUE.LvdsRefClk&apos;)) = &quot;125&quot;))">false</xilinx:isEnabled>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.refclk125_p" xilinx:dependency="((spirit:decode(id(&apos;MODELPARAM_VALUE.C_USE_LVDS&apos;))) =true() and (spirit:decode(id(&apos;MODELPARAM_VALUE.C_SUPPORT_LEVEL&apos;)) = true()) and (spirit:decode(id(&apos;PARAM_VALUE.LvdsRefClk&apos;)) = &quot;125&quot;))">true</xilinx:isEnabled>
             </xilinx:enablement>
           </xilinx:portInfo>
         </spirit:vendorExtensions>
@@ -14468,7 +14468,7 @@
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="boolean">
         <spirit:name>c_support_level</spirit:name>
-        <spirit:value spirit:format="bool" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.c_support_level">false</spirit:value>
+        <spirit:value spirit:format="bool" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.c_support_level">true</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="boolean">
         <spirit:name>c_RxNibbleBitslice0Used</spirit:name>
@@ -14728,6 +14728,22 @@
         <spirit:logicalName>gig_ethernet_pcs_pma_v16_0_0</spirit:logicalName>
       </spirit:file>
       <spirit:file>
+        <spirit:name>synth/gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>synth/gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>synth/gig_ethernet_pcs_pma_0_idelayctrl.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>synth/gig_ethernet_pcs_pma_0_support.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>synth/gig_ethernet_pcs_pma_0_reset_wtd_timer.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
@@ -14818,6 +14834,22 @@
         <spirit:fileType>vhdlSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
         <spirit:logicalName>gig_ethernet_pcs_pma_v16_0_0</spirit:logicalName>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>synth/gig_ethernet_pcs_pma_0_sgmii_phy_clk_gen.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>synth/gig_ethernet_pcs_pma_0_sgmii_phy_reset_gen.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>synth/gig_ethernet_pcs_pma_0_idelayctrl.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>synth/gig_ethernet_pcs_pma_0_support.v</spirit:name>
+        <spirit:fileType>verilogSource</spirit:fileType>
       </spirit:file>
       <spirit:file>
         <spirit:name>synth/gig_ethernet_pcs_pma_0_reset_wtd_timer.v</spirit:name>
@@ -15051,7 +15083,7 @@
     <spirit:parameter>
       <spirit:name>SupportLevel</spirit:name>
       <spirit:displayName>Shared Logic</spirit:displayName>
-      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.SupportLevel" spirit:choiceRef="choice_list_4b10e47b" spirit:order="8000" spirit:configGroups="1 UnGrouped">Include_Shared_Logic_in_Example_Design</spirit:value>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.SupportLevel" spirit:choiceRef="choice_list_4b10e47b" spirit:order="8000" spirit:configGroups="1 UnGrouped">Include_Shared_Logic_in_Core</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>TransceiverControl</spirit:name>
@@ -15182,12 +15214,16 @@
       <xilinx:displayName>1G/2.5G Ethernet PCS/PMA or SGMII</xilinx:displayName>
       <xilinx:coreRevision>0</xilinx:coreRevision>
       <xilinx:configElementInfos>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.DIFFCLK_BOARD_INTERFACE" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.ETHERNET_BOARD_INTERFACE" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Ext_Management_Interface" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MDIO_BOARD_INTERFACE" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.MaxDataRate" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Physical_Interface" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.RxGmiiClkSrc" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.Standard" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.SupportLevel" xilinx:valueSource="user"/>
+        <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.TransceiverControl" xilinx:valueSource="user"/>
       </xilinx:configElementInfos>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
