@@ -13,6 +13,8 @@ module driver (
     input   sgmii_clk_p,
     input   sgmii_clk_n,
     
+    output[15:0] eth_status,
+    
     input   eth_mdio_i,
     output  eth_mdio_o,
     output  eth_mdio_t,
@@ -34,6 +36,8 @@ module driver (
     wire      		gmii_rx_er;
     
     wire      		gmii_clock;
+    
+    assign eth_status = gmii_status;
    
     
     

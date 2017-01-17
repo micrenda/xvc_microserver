@@ -11,6 +11,8 @@ module entry_point (
     input   	sgmii_clk_p,
     input   	sgmii_clk_n,
     
+    output[15:0] eth_status,
+    
     input		an_restart_config,
     inout      	eth_mdio,
     
@@ -53,6 +55,7 @@ module entry_point (
 		.sgmii_clk_p,
 		.sgmii_clk_n,
     
+		.eth_status,
 		.eth_mdio_i,
 		.eth_mdio_o,
 		.eth_mdio_t,

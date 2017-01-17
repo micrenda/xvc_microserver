@@ -22,6 +22,7 @@ module tb0();
 	wire an_sgmii_lb_p;
 	wire an_sgmii_lb_n;
 
+	wire[15:0] eth_status;
 	
 
         
@@ -69,7 +70,7 @@ module tb0();
     
     // Printing current time every 100ns
     always begin
-       #100  $display("Time: %d ns",  $time);
+       #1000  $display("Time: %d ns (status: %x)",  $time, eth_status);
     end
 
 	entry_point entry_point_inst (
@@ -81,6 +82,8 @@ module tb0();
 	   .sgmii_tx_n(an_sgmii_lb_n),
 	   .sgmii_rx_p(an_sgmii_lb_p),
 	   .sgmii_rx_n(an_sgmii_lb_n),
+	   
+	   .eth_status,
 	   
 	   .sgmii_clk_p(sgmii_clk_in),
 	   .sgmii_clk_n(~sgmii_clk_in),
