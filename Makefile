@@ -70,6 +70,7 @@ endif
 	cp $(CORE)/    $(BUILD)/core -r
 
 	cp    ${BASE}/test/test_common.sv	$(BUILD)
+	cp -r ${BASE}/test/tb0				$(BUILD)
 	cp -r ${BASE}/test/tb1				$(BUILD)
 	cp -r ${BASE}/test/tb2				$(BUILD)
 
@@ -81,6 +82,18 @@ endif
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xvhdl -work xvc_microserver `find . -iname '*.vhd'`
 	
 xsim-build: $(BUILD)/xsim.dir
+
+$(BUILD)/xsim.dir/snapshot-tb0/: xsim-build
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xelab --debug typical --relax --mt 8 \
+		-L unisims_ver  \
+		-L unimacro_ver  \
+		-L secureip       \
+		-L xvc_microserver \
+		xvc_microserver.tb0 \
+		xvc_microserver.glbl \
+		-s snapshot-tb0       \
+		-log xelab.log 
+xelab-tb0: $(BUILD)/xsim.dir/snapshot-tb0/
 
 $(BUILD)/xsim.dir/snapshot-tb1/: xsim-build
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xelab --debug typical --relax --mt 8 \
@@ -106,6 +119,9 @@ $(BUILD)/xsim.dir/snapshot-tb2/: xsim-build
 		-log xelab.log 
 xelab-tb2: $(BUILD)/xsim.dir/snapshot-tb2/
 
+xsim-tb0-run: xelab-tb0
+	cd $(BUILD); $(XILINX_VIVADO)/bin/xsim --onfinish quit -t tb0/tb0.tcl  snapshot-tb0 | tee tb0/tb0.log
+	
 xsim-tb1-run: xelab-tb1
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xsim --onfinish quit -t tb1/tb1.tcl  snapshot-tb1 | tee tb1/tb1.log
 	
