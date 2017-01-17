@@ -25,8 +25,8 @@ module tb2();
 	reg an_done  = 0;
 
 
-	//wire sgmii_rx_p;
-	//wire sgmii_rx_n;
+	wire sgmii_rx_p;
+	wire sgmii_rx_n;
 	wire data_sgmii_rx_p;
 	wire data_sgmii_rx_n;
 	wire an_sgmii_rx_p;
