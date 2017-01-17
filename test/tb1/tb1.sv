@@ -8,6 +8,10 @@ module tb1();
     reg sgmii_clk_in;
     reg sgmii_clk_out;
     reg sgmii_tx_p, sgmii_tx_n;
+    
+    wire an_sgmii_clk_out;
+    wire data_sgmii_clk_out;
+    
     wire eth_mdio;
     reg  eth_mdc, eth_reset_n;
     reg ser_sgmii_clk;
@@ -24,8 +28,6 @@ module tb1();
 	reg an_start = 0;
 	reg an_done  = 0;
 
-
-	wire sgmii_clk_out;
 	wire sgmii_rx_p;
 	wire sgmii_rx_n;
 	wire data_sgmii_rx_p;
