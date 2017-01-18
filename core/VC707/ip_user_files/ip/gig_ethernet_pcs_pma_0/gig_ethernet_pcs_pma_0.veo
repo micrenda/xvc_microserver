@@ -47,7 +47,7 @@
 // DO NOT MODIFY THIS FILE.
 
 // IP VLNV: xilinx.com:ip:gig_ethernet_pcs_pma:16.0
-// IP Revision: 0
+// IP Revision: 1
 
 // The following must be inserted into your Verilog file for this
 // core to be instantiated. Change the instance name and port connections

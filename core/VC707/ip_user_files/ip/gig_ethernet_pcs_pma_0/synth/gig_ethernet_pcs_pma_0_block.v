@@ -253,7 +253,7 @@ gig_ethernet_pcs_pma_0_sync_block sync_block_mmcm_locked
    //---------------------------------------------------------------------------
    // Instantiate the core
    //---------------------------------------------------------------------------
-   gig_ethernet_pcs_pma_v16_0_0 #(
+   gig_ethernet_pcs_pma_v16_0_1 #(
        .C_ELABORATION_TRANSIENT_DIR ("BlankString"),
        .C_COMPONENT_NAME            ("gig_ethernet_pcs_pma_0"),
        .C_FAMILY                    ("virtex7"),
@@ -276,7 +276,7 @@ gig_ethernet_pcs_pma_0_sync_block sync_block_mmcm_locked
       //in other modes it can be tied to zero
       .speed_is_10_100       (1'b0),
       .speed_is_100          (1'b0),
-      .rx_gt_nominal_latency (16'h0000000011001000),
+      .rx_gt_nominal_latency (16'b0000000011001000),
       .rxchariscomma         (rxchariscomma),
       .rxcharisk             (rxcharisk),
       .rxclkcorcnt           (rxclkcorcnt),

@@ -279,7 +279,7 @@ end
 //----------------------------------------------------------------------------
 reg [3:0] rst_dly;
 always @(posedge clk104) begin
-   if (reset_104 || phy_loss_of_sync_104) rst_dly <= 4'b0;
+   if (reset_104) rst_dly <= 4'b0;
    else if (rst_dly == 4'hF)              rst_dly <= rst_dly;
    else                                   rst_dly <= rst_dly + 1'b1;
 end
@@ -288,7 +288,7 @@ gig_ethernet_pcs_pma_0_gpio_sgmii_top gpio_sgmii_top_i (
 
    .reset              (~rst_dly[3]), // CLK104 
    .soft_tx_reset      (soft_tx_reset_104),
-   .soft_rx_reset      (soft_rx_reset_104),
+   .soft_rx_reset      (soft_rx_reset_104 || phy_loss_of_sync_104),
    .clk625             (clk625), 
    .clk208             (clk208), 
    .clk104             (clk104), 

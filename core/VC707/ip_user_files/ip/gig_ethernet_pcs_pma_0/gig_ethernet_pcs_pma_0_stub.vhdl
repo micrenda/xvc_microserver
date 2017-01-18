@@ -1,10 +1,10 @@
 -- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
--- Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
--- Date        : Wed Jan 11 13:14:19 2017
+-- Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
+-- Date        : Wed Jan 18 12:47:18 2017
 -- Host        : ELLAPC3 running 64-bit Debian GNU/Linux 8.6 (jessie)
 -- Command     : write_vhdl -force -mode synth_stub
---               /home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_stub.vhdl
+--               /home/mrenda/research/xvc_microserver/core/VC707/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_stub.vhdl
 -- Design      : gig_ethernet_pcs_pma_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7vx485tffg1761-2

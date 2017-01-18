@@ -1,10 +1,10 @@
 // Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
-// Tool Version: Vivado v.2016.3 (lin64) Build 1682563 Mon Oct 10 19:07:26 MDT 2016
-// Date        : Wed Jan 11 13:14:19 2017
+// Tool Version: Vivado v.2016.4 (lin64) Build 1733598 Wed Dec 14 22:35:42 MST 2016
+// Date        : Wed Jan 18 12:47:18 2017
 // Host        : ELLAPC3 running 64-bit Debian GNU/Linux 8.6 (jessie)
 // Command     : write_verilog -force -mode funcsim
-//               /home/mrenda/research/xvc_microserver/core/VC707/gig_ethernet_pcs_pma_0/gig_ethernet_pcs_pma_0_sim_netlist.v
+//               /home/mrenda/research/xvc_microserver/core/VC707/managed_ip_project/managed_ip_project.runs/gig_ethernet_pcs_pma_0_synth_1/gig_ethernet_pcs_pma_0_sim_netlist.v
 // Design      : gig_ethernet_pcs_pma_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -148,7 +148,7 @@ module gig_ethernet_pcs_pma_0
 
   (* DowngradeIPIdentifiedWarnings = "yes" *) 
   (* EXAMPLE_SIMULATION = "0" *) 
-  (* X_CORE_INFO = "gig_ethernet_pcs_pma_v16_0_0,Vivado 2016.3" *) 
+  (* X_CORE_INFO = "gig_ethernet_pcs_pma_v16_0_1,Vivado 2016.4" *) 
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_support inst
        (.an_adv_config_val(an_adv_config_val),
         .an_adv_config_vector(an_adv_config_vector),
@@ -364,7 +364,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block
   (* C_USE_TRANSCEIVER = "FALSE" *) 
   (* DowngradeIPIdentifiedWarnings = "yes" *) 
   (* GT_RX_BYTE_WIDTH = "1" *) 
-  gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_v16_0_0 gig_ethernet_pcs_pma_0_core
+  gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_v16_0_1 gig_ethernet_pcs_pma_0_core
        (.an_adv_config_val(1'b0),
         .an_adv_config_vector({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .an_enable(NLW_gig_ethernet_pcs_pma_0_core_an_enable_UNCONNECTED),
@@ -413,7 +413,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_block
         .reset_done(1'b0),
         .rx_code_group0({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .rx_code_group1({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
-        .rx_gt_nominal_latency({1'b0,1'b0,1'b0,1'b1,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
+        .rx_gt_nominal_latency({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b1,1'b1,1'b0,1'b0,1'b1,1'b0,1'b0,1'b0}),
         .rxbufstatus({1'b0,1'b0}),
         .rxchariscomma(rxchariscomma),
         .rxcharisk(rxcharisk),
@@ -821,6 +821,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base
   wire \dout[5]_i_1_n_0 ;
   wire \dout[5]_i_2_n_0 ;
   wire \dout[9]_i_2_n_0 ;
+  wire \dout[9]_i_3_n_0 ;
   wire \dout[9]_i_5_n_0 ;
   wire \dout[9]_i_7_n_0 ;
   wire k28__4;
@@ -873,7 +874,17 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base
         .I4(disp_in_i__0),
         .I5(txdata[0]),
         .O(b6__0[1]));
-  (* SOFT_HLUTNM = "soft_lutpair78" *) 
+  LUT6 #(
+    .INIT(64'h1000000000000000)) 
+    \dout[1]_i_3 
+       (.I0(txdata[0]),
+        .I1(txdata[1]),
+        .I2(txdata[4]),
+        .I3(txcharisk),
+        .I4(txdata[3]),
+        .I5(txdata[2]),
+        .O(k28__4));
+  (* SOFT_HLUTNM = "soft_lutpair79" *) 
   LUT2 #(
     .INIT(4'h2)) 
     \dout[2]_i_1 
@@ -890,7 +901,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base
         .I4(disp_in_i__0),
         .I5(txdata[0]),
         .O(b6__0[2]));
-  (* SOFT_HLUTNM = "soft_lutpair78" *) 
+  (* SOFT_HLUTNM = "soft_lutpair79" *) 
   LUT2 #(
     .INIT(4'h2)) 
     \dout[3]_i_1 
@@ -907,7 +918,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base
         .I4(txdata[1]),
         .I5(disp_in_i__0),
         .O(b6__0[3]));
-  (* SOFT_HLUTNM = "soft_lutpair79" *) 
+  (* SOFT_HLUTNM = "soft_lutpair80" *) 
   LUT2 #(
     .INIT(4'h2)) 
     \dout[4]_i_1 
@@ -932,7 +943,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base
         .I2(txchardispmode),
         .I3(txchardispval),
         .O(\dout[5]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair79" *) 
+  (* SOFT_HLUTNM = "soft_lutpair80" *) 
   LUT2 #(
     .INIT(4'h2)) 
     \dout[5]_i_2 
@@ -950,42 +961,42 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base
         .I5(disp_in_i__0),
         .O(b6__0[5]));
   LUT6 #(
-    .INIT(64'h8F8F0000B0BFFF0F)) 
+    .INIT(64'h8F8000F0BFB00FFF)) 
     \dout[6]_i_1 
        (.I0(\dout[9]_i_2_n_0 ),
         .I1(txdata[7]),
         .I2(txdata[6]),
-        .I3(k28__4),
+        .I3(\dout[9]_i_3_n_0 ),
         .I4(txdata[5]),
         .I5(pdes6__13),
         .O(b4[0]));
-  (* SOFT_HLUTNM = "soft_lutpair76" *) 
+  (* SOFT_HLUTNM = "soft_lutpair78" *) 
   LUT5 #(
-    .INIT(32'h00DDFC2E)) 
+    .INIT(32'h03D1CFE2)) 
     \dout[7]_i_1 
        (.I0(txdata[7]),
         .I1(txdata[6]),
-        .I2(k28__4),
+        .I2(\dout[9]_i_3_n_0 ),
         .I3(txdata[5]),
         .I4(pdes6__13),
         .O(b4[1]));
-  (* SOFT_HLUTNM = "soft_lutpair76" *) 
+  (* SOFT_HLUTNM = "soft_lutpair78" *) 
   LUT5 #(
-    .INIT(32'h66AA9A59)) 
+    .INIT(32'h65A6A995)) 
     \dout[8]_i_1 
        (.I0(txdata[7]),
         .I1(txdata[6]),
-        .I2(k28__4),
+        .I2(\dout[9]_i_3_n_0 ),
         .I3(txdata[5]),
         .I4(pdes6__13),
         .O(b4[2]));
   LUT6 #(
-    .INIT(64'h737330304C43CF3F)) 
+    .INIT(64'h737C30C0434C3FCF)) 
     \dout[9]_i_1 
        (.I0(\dout[9]_i_2_n_0 ),
         .I1(txdata[7]),
         .I2(txdata[6]),
-        .I3(k28__4),
+        .I3(\dout[9]_i_3_n_0 ),
         .I4(txdata[5]),
         .I5(pdes6__13),
         .O(b4[3]));
@@ -998,16 +1009,16 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_encode_8b10b_lut_base
         .I3(\dout[9]_i_7_n_0 ),
         .I4(txcharisk),
         .O(\dout[9]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'h1000000000000000)) 
+  (* SOFT_HLUTNM = "soft_lutpair76" *) 
+  LUT4 #(
+    .INIT(16'h1DFF)) 
     \dout[9]_i_3 
-       (.I0(txdata[0]),
-        .I1(txdata[1]),
-        .I2(txdata[4]),
-        .I3(txcharisk),
-        .I4(txdata[3]),
-        .I5(txdata[2]),
-        .O(k28__4));
+       (.I0(\ngdb.disp_run_reg_n_0 ),
+        .I1(txchardispmode),
+        .I2(txchardispval),
+        .I3(k28__4),
+        .O(\dout[9]_i_3_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair76" *) 
   LUT5 #(
     .INIT(32'h1DFF1D00)) 
     \dout[9]_i_4 
@@ -1790,7 +1801,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b
        (.I0(rd_ptr[1]),
         .I1(rd_ptr[2]),
         .O(\o_txdata_6b[5]_i_3_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair146" *) 
+  (* SOFT_HLUTNM = "soft_lutpair149" *) 
   LUT3 #(
     .INIT(8'hBA)) 
     \o_txdata_6b[5]_i_4 
@@ -1889,7 +1900,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b
     \rd_ptr[0]_i_1 
        (.I0(rd_ptr[0]),
         .O(\rd_ptr[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair145" *) 
+  (* SOFT_HLUTNM = "soft_lutpair148" *) 
   LUT4 #(
     .INIT(16'h2C3C)) 
     \rd_ptr[1]_i_1 
@@ -1898,7 +1909,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b
         .I2(rd_ptr[0]),
         .I3(rd_ptr[3]),
         .O(\rd_ptr[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair146" *) 
+  (* SOFT_HLUTNM = "soft_lutpair149" *) 
   LUT3 #(
     .INIT(8'h6A)) 
     \rd_ptr[2]_i_1 
@@ -1906,7 +1917,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b
         .I1(rd_ptr[1]),
         .I2(rd_ptr[0]),
         .O(\rd_ptr[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair145" *) 
+  (* SOFT_HLUTNM = "soft_lutpair148" *) 
   LUT4 #(
     .INIT(16'h6F80)) 
     \rd_ptr[3]_i_1 
@@ -2012,7 +2023,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b
         .I1(rst_125_reg),
         .I2(mgt_tx_reset),
         .O(\wr_ptr[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair144" *) 
+  (* SOFT_HLUTNM = "soft_lutpair147" *) 
   LUT5 #(
     .INIT(32'h00000034)) 
     \wr_ptr[1]_i_1 
@@ -2022,7 +2033,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_10b_6b
         .I3(rst_125_reg),
         .I4(mgt_tx_reset),
         .O(\wr_ptr[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair144" *) 
+  (* SOFT_HLUTNM = "soft_lutpair147" *) 
   LUT5 #(
     .INIT(32'h00000062)) 
     \wr_ptr[2]_i_1 
@@ -2704,7 +2715,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .D(rxdata_6b_r[3]),
         .Q(\accumulator_60b_reg_n_0_[9] ),
         .R(reset_208));
-  (* SOFT_HLUTNM = "soft_lutpair136" *) 
+  (* SOFT_HLUTNM = "soft_lutpair139" *) 
   LUT3 #(
     .INIT(8'hFE)) 
     bitslip_i_11
@@ -2712,7 +2723,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I1(Q[4]),
         .I2(Q[2]),
         .O(bitslip_i_11_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair139" *) 
+  (* SOFT_HLUTNM = "soft_lutpair142" *) 
   LUT3 #(
     .INIT(8'h7F)) 
     bitslip_i_12
@@ -2720,7 +2731,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I1(Q[1]),
         .I2(Q[2]),
         .O(\gcerr.code_err_reg ));
-  (* SOFT_HLUTNM = "soft_lutpair121" *) 
+  (* SOFT_HLUTNM = "soft_lutpair124" *) 
   LUT5 #(
     .INIT(32'h80000000)) 
     bitslip_i_14
@@ -2780,13 +2791,13 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(Q[5]),
         .I5(Q[6]),
         .O(bitslip_reg));
-  (* SOFT_HLUTNM = "soft_lutpair141" *) 
+  (* SOFT_HLUTNM = "soft_lutpair144" *) 
   LUT1 #(
     .INIT(2'h1)) 
     \bitslip_position[0]_i_1 
        (.I0(bitslip_position[0]),
         .O(\bitslip_position[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair126" *) 
+  (* SOFT_HLUTNM = "soft_lutpair129" *) 
   LUT5 #(
     .INIT(32'h55A855AA)) 
     \bitslip_position[1]_i_1 
@@ -2796,7 +2807,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I3(bitslip_position[1]),
         .I4(bitslip_position[3]),
         .O(\bitslip_position[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair141" *) 
+  (* SOFT_HLUTNM = "soft_lutpair144" *) 
   LUT3 #(
     .INIT(8'h6C)) 
     \bitslip_position[2]_i_1 
@@ -2813,7 +2824,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I3(bitslip_position[1]),
         .I4(bitslip_position[3]),
         .O(\bitslip_position[3]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair126" *) 
+  (* SOFT_HLUTNM = "soft_lutpair129" *) 
   LUT5 #(
     .INIT(32'h6CCCCCCC)) 
     \bitslip_position[4]_i_1 
@@ -2853,7 +2864,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .D(\bitslip_position[4]_i_1_n_0 ),
         .Q(bitslip_position[4]),
         .R(SR));
-  (* SOFT_HLUTNM = "soft_lutpair120" *) 
+  (* SOFT_HLUTNM = "soft_lutpair123" *) 
   LUT5 #(
     .INIT(32'h050000C0)) 
     comma_det_i_1
@@ -2863,7 +2874,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I3(Q[0]),
         .I4(Q[1]),
         .O(comma_position0));
-  (* SOFT_HLUTNM = "soft_lutpair127" *) 
+  (* SOFT_HLUTNM = "soft_lutpair130" *) 
   LUT4 #(
     .INIT(16'hFFFE)) 
     comma_det_i_2
@@ -2872,7 +2883,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I2(Q[3]),
         .I3(Q[5]),
         .O(comma_det_i_2_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair127" *) 
+  (* SOFT_HLUTNM = "soft_lutpair130" *) 
   LUT4 #(
     .INIT(16'h8000)) 
     comma_det_i_3
@@ -2881,7 +2892,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I2(Q[4]),
         .I3(Q[3]),
         .O(comma_det_reg));
-  (* SOFT_HLUTNM = "soft_lutpair122" *) 
+  (* SOFT_HLUTNM = "soft_lutpair125" *) 
   LUT5 #(
     .INIT(32'hCADE7B53)) 
     \dout_i[5]_i_1 
@@ -2891,7 +2902,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I3(\dout_i[7]_i_2_n_0 ),
         .I4(Q[7]),
         .O(b3[5]));
-  (* SOFT_HLUTNM = "soft_lutpair122" *) 
+  (* SOFT_HLUTNM = "soft_lutpair125" *) 
   LUT5 #(
     .INIT(32'hCD1FF8B3)) 
     \dout_i[6]_i_1 
@@ -2901,7 +2912,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I3(Q[8]),
         .I4(Q[6]),
         .O(b3[6]));
-  (* SOFT_HLUTNM = "soft_lutpair123" *) 
+  (* SOFT_HLUTNM = "soft_lutpair126" *) 
   LUT5 #(
     .INIT(32'hCBD99BD3)) 
     \dout_i[7]_i_1 
@@ -3011,7 +3022,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(\gcerr.code_err_i_6_n_0 ),
         .I5(\gcerr.code_err_i_7_n_0 ),
         .O(code_err_i));
-  (* SOFT_HLUTNM = "soft_lutpair136" *) 
+  (* SOFT_HLUTNM = "soft_lutpair139" *) 
   LUT3 #(
     .INIT(8'h7F)) 
     \gcerr.code_err_i_10 
@@ -3039,14 +3050,14 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_i_11_n_0),
         .I5(\gcerr.code_err_i_19_n_0 ),
         .O(\gcerr.code_err_i_12_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair120" *) 
+  (* SOFT_HLUTNM = "soft_lutpair123" *) 
   LUT2 #(
     .INIT(4'h7)) 
     \gcerr.code_err_i_13 
        (.I0(Q[1]),
         .I1(Q[0]),
         .O(\gcerr.code_err_i_13_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair142" *) 
+  (* SOFT_HLUTNM = "soft_lutpair145" *) 
   LUT2 #(
     .INIT(4'hE)) 
     \gcerr.code_err_i_14 
@@ -3073,7 +3084,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(Q[7]),
         .I5(Q[8]),
         .O(\gcerr.code_err_i_16_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair121" *) 
+  (* SOFT_HLUTNM = "soft_lutpair124" *) 
   LUT5 #(
     .INIT(32'h1117177F)) 
     \gcerr.code_err_i_17 
@@ -3083,7 +3094,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I3(Q[1]),
         .I4(Q[0]),
         .O(\gcerr.code_err_i_17_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair137" *) 
+  (* SOFT_HLUTNM = "soft_lutpair140" *) 
   LUT3 #(
     .INIT(8'h1F)) 
     \gcerr.code_err_i_18 
@@ -3091,7 +3102,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I1(Q[8]),
         .I2(Q[7]),
         .O(\gcerr.code_err_i_18_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair124" *) 
+  (* SOFT_HLUTNM = "soft_lutpair127" *) 
   LUT5 #(
     .INIT(32'hF8808080)) 
     \gcerr.code_err_i_19 
@@ -3111,14 +3122,14 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(\gcerr.code_err_i_9_n_0 ),
         .I5(\gcerr.code_err_i_10_n_0 ),
         .O(\gcerr.code_err_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair142" *) 
+  (* SOFT_HLUTNM = "soft_lutpair145" *) 
   LUT2 #(
     .INIT(4'h7)) 
     \gcerr.code_err_i_20 
        (.I0(Q[4]),
         .I1(Q[3]),
         .O(\gcerr.code_err_i_20_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair125" *) 
+  (* SOFT_HLUTNM = "soft_lutpair128" *) 
   LUT4 #(
     .INIT(16'hA0A1)) 
     \gcerr.code_err_i_21 
@@ -3127,7 +3138,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I2(Q[4]),
         .I3(Q[2]),
         .O(\gcerr.code_err_i_21_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair125" *) 
+  (* SOFT_HLUTNM = "soft_lutpair128" *) 
   LUT5 #(
     .INIT(32'h0080000F)) 
     \gcerr.code_err_i_22 
@@ -3187,7 +3198,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(Q[0]),
         .I5(Q[1]),
         .O(\gcerr.code_err_i_7_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair124" *) 
+  (* SOFT_HLUTNM = "soft_lutpair127" *) 
   LUT5 #(
     .INIT(32'hFFFFAA80)) 
     \gcerr.code_err_i_8 
@@ -3197,7 +3208,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I3(Q[7]),
         .I4(Q[5]),
         .O(\gcerr.code_err_i_8_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair139" *) 
+  (* SOFT_HLUTNM = "soft_lutpair142" *) 
   LUT2 #(
     .INIT(4'hE)) 
     \gcerr.code_err_i_9 
@@ -3234,7 +3245,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(kout_i_i_3_n_0),
         .I5(\grdni.run_disp_i_i_2_n_0 ),
         .O(\gdeni.disp_err_i_3_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair128" *) 
+  (* SOFT_HLUTNM = "soft_lutpair131" *) 
   LUT4 #(
     .INIT(16'hEA00)) 
     \gdeni.disp_err_i_4 
@@ -3243,7 +3254,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I2(Q[9]),
         .I3(Q[6]),
         .O(\gdeni.disp_err_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair123" *) 
+  (* SOFT_HLUTNM = "soft_lutpair126" *) 
   LUT4 #(
     .INIT(16'h0057)) 
     \gdeni.disp_err_i_5 
@@ -3282,7 +3293,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(Q[6]),
         .I5(\grdni.run_disp_i_i_3_n_0 ),
         .O(\grdni.run_disp_i_reg ));
-  (* SOFT_HLUTNM = "soft_lutpair129" *) 
+  (* SOFT_HLUTNM = "soft_lutpair132" *) 
   LUT4 #(
     .INIT(16'h03C1)) 
     \grdni.run_disp_i_i_2 
@@ -3291,7 +3302,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I2(g0_b1__0_n_0),
         .I3(g0_b0__0_n_0),
         .O(\grdni.run_disp_i_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair129" *) 
+  (* SOFT_HLUTNM = "soft_lutpair132" *) 
   LUT4 #(
     .INIT(16'h05A4)) 
     \grdni.run_disp_i_i_3 
@@ -3310,7 +3321,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(Q[3]),
         .I5(Q[5]),
         .O(k));
-  (* SOFT_HLUTNM = "soft_lutpair137" *) 
+  (* SOFT_HLUTNM = "soft_lutpair140" *) 
   LUT3 #(
     .INIT(8'h80)) 
     kout_i_i_2
@@ -3318,7 +3329,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I1(Q[9]),
         .I2(Q[7]),
         .O(kout_i_i_2_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair128" *) 
+  (* SOFT_HLUTNM = "soft_lutpair131" *) 
   LUT3 #(
     .INIT(8'h01)) 
     kout_i_i_3
@@ -3326,7 +3337,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I1(Q[7]),
         .I2(Q[8]),
         .O(kout_i_i_3_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair135" *) 
+  (* SOFT_HLUTNM = "soft_lutpair138" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[0]_i_1 
@@ -3364,7 +3375,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(rxdata_10b_r_reg__1[8]),
         .O(\o_rxdata_10b[0]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair132" *) 
+  (* SOFT_HLUTNM = "soft_lutpair135" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[1]_i_1 
@@ -3402,7 +3413,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(rxdata_10b_r_reg__1[9]),
         .O(\o_rxdata_10b[1]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair133" *) 
+  (* SOFT_HLUTNM = "soft_lutpair136" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[2]_i_1 
@@ -3440,7 +3451,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(data6[4]),
         .O(\o_rxdata_10b[2]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair134" *) 
+  (* SOFT_HLUTNM = "soft_lutpair137" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[3]_i_1 
@@ -3478,7 +3489,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(data6[5]),
         .O(\o_rxdata_10b[3]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair131" *) 
+  (* SOFT_HLUTNM = "soft_lutpair134" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[4]_i_1 
@@ -3516,7 +3527,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(data6[6]),
         .O(\o_rxdata_10b[4]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair135" *) 
+  (* SOFT_HLUTNM = "soft_lutpair138" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[5]_i_1 
@@ -3554,7 +3565,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(data6[7]),
         .O(\o_rxdata_10b[5]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair134" *) 
+  (* SOFT_HLUTNM = "soft_lutpair137" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[6]_i_1 
@@ -3602,7 +3613,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(data6[8]),
         .O(\o_rxdata_10b[6]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair133" *) 
+  (* SOFT_HLUTNM = "soft_lutpair136" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[7]_i_1 
@@ -3650,7 +3661,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(data6[9]),
         .O(\o_rxdata_10b[7]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair132" *) 
+  (* SOFT_HLUTNM = "soft_lutpair135" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[8]_i_1 
@@ -3698,7 +3709,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I4(bitslip_position[0]),
         .I5(data7),
         .O(\o_rxdata_10b[8]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair131" *) 
+  (* SOFT_HLUTNM = "soft_lutpair134" *) 
   LUT3 #(
     .INIT(8'h8F)) 
     \o_rxdata_10b[9]_i_1 
@@ -3811,7 +3822,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
     \rd_ptr[0]_i_1__0 
        (.I0(rd_ptr[0]),
         .O(\rd_ptr[0]_i_1__0_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair140" *) 
+  (* SOFT_HLUTNM = "soft_lutpair143" *) 
   LUT3 #(
     .INIT(8'h52)) 
     \rd_ptr[1]_i_1__0 
@@ -3819,7 +3830,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I1(rd_ptr[2]),
         .I2(rd_ptr[1]),
         .O(\rd_ptr[1]_i_1__0_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair140" *) 
+  (* SOFT_HLUTNM = "soft_lutpair143" *) 
   LUT3 #(
     .INIT(8'h64)) 
     \rd_ptr[2]_i_1__0 
@@ -4211,13 +4222,13 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .D(D[5]),
         .Q(rxdata_6b_r[5]),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair138" *) 
+  (* SOFT_HLUTNM = "soft_lutpair141" *) 
   LUT1 #(
     .INIT(2'h1)) 
     \wr_ptr[0]_i_1__0 
        (.I0(wr_ptr[0]),
         .O(\wr_ptr[0]_i_1__0_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair130" *) 
+  (* SOFT_HLUTNM = "soft_lutpair133" *) 
   LUT4 #(
     .INIT(16'h2C3C)) 
     \wr_ptr[1]_i_1 
@@ -4226,7 +4237,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I2(wr_ptr[0]),
         .I3(wr_ptr[3]),
         .O(\wr_ptr[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair138" *) 
+  (* SOFT_HLUTNM = "soft_lutpair141" *) 
   LUT3 #(
     .INIT(8'h6A)) 
     \wr_ptr[2]_i_1 
@@ -4234,7 +4245,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b
         .I1(wr_ptr[1]),
         .I2(wr_ptr[0]),
         .O(\wr_ptr[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair130" *) 
+  (* SOFT_HLUTNM = "soft_lutpair133" *) 
   LUT4 #(
     .INIT(16'h6F80)) 
     \wr_ptr[3]_i_1 
@@ -4283,11 +4294,11 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
     CLKB0,
     o_txdata_6b,
     refclk125_n_0,
-    SR,
     Q,
-    \rst_dly_reg[3] ,
     reset_out,
-    reset_sync6);
+    \rst_dly_reg[3] ,
+    reset_sync6,
+    soft_rx_reset0);
   output txp;
   output txn;
   output phy_loss_of_sync_104;
@@ -4300,26 +4311,24 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
   input CLKB0;
   input [5:0]o_txdata_6b;
   input refclk125_n_0;
-  input [0:0]SR;
   input [3:0]Q;
-  input [3:0]\rst_dly_reg[3] ;
   input reset_out;
+  input [3:0]\rst_dly_reg[3] ;
   input reset_sync6;
+  input soft_rx_reset0;
 
   wire CLK;
   wire CLKB0;
   wire [3:0]Q;
-  wire [0:0]SR;
   wire bad_mon_trig;
   wire bad_mon_trig0;
-  wire [9:8]cal_state;
   wire cid_error0;
   wire code_error_r;
   wire [4:0]data_dly_val_in0;
   wire [4:0]data_dly_val_out0;
   wire data_idly_update0;
-  wire enable_eye_mon;
   wire eye_mon_done;
+  wire [1:0]eye_mon_done_fe;
   wire \eye_mon_timeout[0]_i_3_n_0 ;
   wire \eye_mon_timeout[0]_i_4_n_0 ;
   wire \eye_mon_timeout[0]_i_5_n_0 ;
@@ -4402,7 +4411,6 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
   wire [4:3]left_margin01_out;
   wire [4:0]mon_dly_val_in0;
   wire mon_idly_update0;
-  wire o_initial_cal_done;
   wire o_loss_of_sync_i_1_n_0;
   wire [5:0]o_txdata_6b;
   wire \panic_bucket[0]_i_1_n_0 ;
@@ -4416,23 +4424,25 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
   wire [2:1]right_margin00_out;
   wire [3:0]\rst_dly_reg[3] ;
   wire [5:0]\rx_data_stg2_reg[11] ;
+  wire rx_rst;
   wire rxn;
   wire rxp;
+  wire sgmii_eye_mon_n_10;
   wire sgmii_eye_mon_n_11;
   wire sgmii_eye_mon_n_12;
   wire sgmii_eye_mon_n_13;
   wire sgmii_eye_mon_n_14;
-  wire sgmii_eye_mon_n_15;
-  wire sgmii_eye_mon_n_16;
+  wire sgmii_eye_mon_n_7;
+  wire sgmii_eye_mon_n_8;
   wire sgmii_eye_mon_n_9;
+  wire sgmii_phy_cal_n_10;
   wire sgmii_phy_cal_n_11;
   wire sgmii_phy_cal_n_12;
-  wire sgmii_phy_cal_n_7;
-  wire sgmii_phy_cal_n_9;
   wire sgmii_phy_iob_n_17;
   wire sgmii_phy_iob_n_18;
   wire sgmii_phy_iob_n_19;
   wire sgmii_phy_iob_n_20;
+  wire soft_rx_reset0;
   wire sync_block_code_error_n_0;
   wire sync_block_code_error_n_1;
   wire sync_block_code_error_n_2;
@@ -4631,7 +4641,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[0]_i_2_n_7 ),
         .Q(eye_mon_timeout_reg[0]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   CARRY4 \eye_mon_timeout_reg[0]_i_2 
        (.CI(1'b0),
         .CO({\eye_mon_timeout_reg[0]_i_2_n_0 ,\eye_mon_timeout_reg[0]_i_2_n_1 ,\eye_mon_timeout_reg[0]_i_2_n_2 ,\eye_mon_timeout_reg[0]_i_2_n_3 }),
@@ -4644,19 +4654,19 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[8]_i_1_n_5 ),
         .Q(eye_mon_timeout_reg[10]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[11] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[8]_i_1_n_4 ),
         .Q(eye_mon_timeout_reg[11]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[12] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[12]_i_1_n_7 ),
         .Q(eye_mon_timeout_reg[12]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   CARRY4 \eye_mon_timeout_reg[12]_i_1 
        (.CI(\eye_mon_timeout_reg[8]_i_1_n_0 ),
         .CO({\eye_mon_timeout_reg[12]_i_1_n_0 ,\eye_mon_timeout_reg[12]_i_1_n_1 ,\eye_mon_timeout_reg[12]_i_1_n_2 ,\eye_mon_timeout_reg[12]_i_1_n_3 }),
@@ -4669,25 +4679,25 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[12]_i_1_n_6 ),
         .Q(eye_mon_timeout_reg[13]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[14] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[12]_i_1_n_5 ),
         .Q(eye_mon_timeout_reg[14]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[15] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[12]_i_1_n_4 ),
         .Q(eye_mon_timeout_reg[15]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[16] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[16]_i_1_n_7 ),
         .Q(eye_mon_timeout_reg[16]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   CARRY4 \eye_mon_timeout_reg[16]_i_1 
        (.CI(\eye_mon_timeout_reg[12]_i_1_n_0 ),
         .CO({\eye_mon_timeout_reg[16]_i_1_n_0 ,\eye_mon_timeout_reg[16]_i_1_n_1 ,\eye_mon_timeout_reg[16]_i_1_n_2 ,\eye_mon_timeout_reg[16]_i_1_n_3 }),
@@ -4700,31 +4710,31 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[16]_i_1_n_6 ),
         .Q(eye_mon_timeout_reg[17]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[18] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[16]_i_1_n_5 ),
         .Q(eye_mon_timeout_reg[18]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[19] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[16]_i_1_n_4 ),
         .Q(eye_mon_timeout_reg[19]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[1] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[0]_i_2_n_6 ),
         .Q(eye_mon_timeout_reg[1]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[20] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[20]_i_1_n_7 ),
         .Q(eye_mon_timeout_reg[20]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   CARRY4 \eye_mon_timeout_reg[20]_i_1 
        (.CI(\eye_mon_timeout_reg[16]_i_1_n_0 ),
         .CO({\NLW_eye_mon_timeout_reg[20]_i_1_CO_UNCONNECTED [3],\eye_mon_timeout_reg[20]_i_1_n_1 ,\eye_mon_timeout_reg[20]_i_1_n_2 ,\eye_mon_timeout_reg[20]_i_1_n_3 }),
@@ -4737,37 +4747,37 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[20]_i_1_n_6 ),
         .Q(eye_mon_timeout_reg[21]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[22] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[20]_i_1_n_5 ),
         .Q(eye_mon_timeout_reg[22]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[23] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[20]_i_1_n_4 ),
         .Q(eye_mon_timeout_reg[23]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[2] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[0]_i_2_n_5 ),
         .Q(eye_mon_timeout_reg[2]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[3] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[0]_i_2_n_4 ),
         .Q(eye_mon_timeout_reg[3]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[4] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[4]_i_1_n_7 ),
         .Q(eye_mon_timeout_reg[4]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   CARRY4 \eye_mon_timeout_reg[4]_i_1 
        (.CI(\eye_mon_timeout_reg[0]_i_2_n_0 ),
         .CO({\eye_mon_timeout_reg[4]_i_1_n_0 ,\eye_mon_timeout_reg[4]_i_1_n_1 ,\eye_mon_timeout_reg[4]_i_1_n_2 ,\eye_mon_timeout_reg[4]_i_1_n_3 }),
@@ -4780,25 +4790,25 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[4]_i_1_n_6 ),
         .Q(eye_mon_timeout_reg[5]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[6] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[4]_i_1_n_5 ),
         .Q(eye_mon_timeout_reg[6]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[7] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[4]_i_1_n_4 ),
         .Q(eye_mon_timeout_reg[7]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   FDRE \eye_mon_timeout_reg[8] 
        (.C(refclk125_n_0),
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[8]_i_1_n_7 ),
         .Q(eye_mon_timeout_reg[8]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   CARRY4 \eye_mon_timeout_reg[8]_i_1 
        (.CI(\eye_mon_timeout_reg[4]_i_1_n_0 ),
         .CO({\eye_mon_timeout_reg[8]_i_1_n_0 ,\eye_mon_timeout_reg[8]_i_1_n_1 ,\eye_mon_timeout_reg[8]_i_1_n_2 ,\eye_mon_timeout_reg[8]_i_1_n_3 }),
@@ -4811,7 +4821,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .CE(1'b1),
         .D(\eye_mon_timeout_reg[8]_i_1_n_6 ),
         .Q(eye_mon_timeout_reg[9]),
-        .R(sgmii_eye_mon_n_9));
+        .R(sgmii_eye_mon_n_7));
   LUT4 #(
     .INIT(16'h8000)) 
     o_loss_of_sync_i_1
@@ -4836,66 +4846,63 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .CE(sync_block_code_error_n_0),
         .D(\panic_bucket[0]_i_1_n_0 ),
         .Q(panic_bucket_reg__0[0]),
-        .R(SR));
+        .R(rx_rst));
   FDRE \panic_bucket_reg[1] 
        (.C(refclk125_n_0),
         .CE(sync_block_code_error_n_0),
         .D(sync_block_code_error_n_3),
         .Q(panic_bucket_reg__0[1]),
-        .R(SR));
+        .R(rx_rst));
   FDRE \panic_bucket_reg[2] 
        (.C(refclk125_n_0),
         .CE(sync_block_code_error_n_0),
         .D(sync_block_code_error_n_2),
         .Q(panic_bucket_reg__0[2]),
-        .R(SR));
+        .R(rx_rst));
   FDRE \panic_bucket_reg[3] 
        (.C(refclk125_n_0),
         .CE(sync_block_code_error_n_0),
         .D(sync_block_code_error_n_1),
         .Q(panic_bucket_reg__0[3]),
-        .R(SR));
+        .R(rx_rst));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor sgmii_eye_mon
        (.CNTVALUEOUT(data_dly_val_out0),
         .D(eye_mon_done),
         .E(mon_idly_update0),
         .Q(mon_dly_val_in0),
         .S({sgmii_phy_iob_n_17,sgmii_phy_iob_n_18,sgmii_phy_iob_n_19,sgmii_phy_iob_n_20}),
-        .SR(SR),
+        .SR(rx_rst),
         .bad_mon_trig0(bad_mon_trig0),
-        .\cal_state_reg[0] (sgmii_phy_cal_n_9),
-        .\cal_state_reg[6] (sgmii_phy_cal_n_7),
-        .\cal_state_reg[9] (cal_state),
+        .\cal_state_reg[0] (sgmii_phy_cal_n_10),
+        .\cal_state_reg[8] (sgmii_eye_mon_n_14),
         .cid_error0(cid_error0),
-        .\current_tap_window_reg[0] (sgmii_eye_mon_n_16),
-        .\current_tap_window_reg[4] ({sgmii_eye_mon_n_11,sgmii_eye_mon_n_12,sgmii_eye_mon_n_13,sgmii_eye_mon_n_14,sgmii_eye_mon_n_15}),
-        .enable_eye_mon(enable_eye_mon),
-        .eye_mon_timeout_r(eye_mon_timeout_r),
-        .\eye_mon_timeout_reg[0] (sgmii_eye_mon_n_9),
+        .\current_tap_window_reg[0] (sgmii_eye_mon_n_13),
+        .\current_tap_window_reg[4] ({sgmii_eye_mon_n_8,sgmii_eye_mon_n_9,sgmii_eye_mon_n_10,sgmii_eye_mon_n_11,sgmii_eye_mon_n_12}),
+        .\eye_mon_timeout_reg[0] (sgmii_eye_mon_n_7),
         .\mon_idly_val_reg[1]_0 (right_margin00_out),
         .\mon_idly_val_reg[3]_0 (left_margin01_out),
         .\o_eye_mon_done_fe_reg[0] (sgmii_phy_cal_n_11),
-        .o_initial_cal_done(o_initial_cal_done),
+        .\o_eye_mon_done_fe_reg[1] (eye_mon_done_fe),
         .phy_init_cal_done_104(phy_init_cal_done_104),
         .refclk125_n(refclk125_n_0));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration sgmii_phy_cal
-       (.D(cal_state),
+       (.D({sgmii_eye_mon_n_8,sgmii_eye_mon_n_9,sgmii_eye_mon_n_10,sgmii_eye_mon_n_11,sgmii_eye_mon_n_12}),
         .E(data_idly_update0),
         .Q(data_dly_val_in0),
-        .SR(SR),
-        .\cal_state_reg[8]_0 (sgmii_phy_cal_n_7),
-        .\cal_state_reg[9]_0 (sgmii_phy_cal_n_11),
+        .SR(rx_rst),
+        .bad_mon_trig_reg(sgmii_phy_cal_n_11),
+        .\cal_state_reg[4]_0 (eye_mon_done_fe),
         .data_out(code_error_r),
-        .enable_eye_mon(enable_eye_mon),
         .eye_mon_timeout_r(eye_mon_timeout_r),
-        .o_eye_mon_done_reg(sgmii_phy_cal_n_9),
+        .\left_margin_reg[4] (sgmii_eye_mon_n_13),
+        .\o_eye_mon_done_fe_reg[0]_0 (sgmii_eye_mon_n_14),
+        .o_eye_mon_done_reg(sgmii_phy_cal_n_10),
         .o_eye_mon_done_reg_0(eye_mon_done),
-        .o_initial_cal_done(o_initial_cal_done),
         .\panic_bucket_reg[0] (sgmii_phy_cal_n_12),
         .phy_init_cal_done_104(phy_init_cal_done_104),
+        .phy_loss_of_sync_104(phy_loss_of_sync_104),
         .refclk125_n(refclk125_n_0),
-        .\right_margin_reg[4] (sgmii_eye_mon_n_16),
-        .\right_margin_reg[4]_0 ({sgmii_eye_mon_n_11,sgmii_eye_mon_n_12,sgmii_eye_mon_n_13,sgmii_eye_mon_n_14,sgmii_eye_mon_n_15}),
+        .reset_out(reset_out),
         .\rst_dly_reg[3] (\rst_dly_reg[3] ));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob sgmii_phy_iob
        (.CLK(CLK),
@@ -4911,13 +4918,13 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gpio_sgmii_top
         .o_txdata_6b(o_txdata_6b),
         .refclk125_n(refclk125_n),
         .refclk125_n_0(refclk125_n_0),
-        .reset_out(reset_out),
         .reset_sync6(reset_sync6),
         .\right_margin_reg[2] (right_margin00_out),
         .\rst_dly_reg[3] (\rst_dly_reg[3] [3]),
         .\rx_data_stg2_reg[11]_0 (\rx_data_stg2_reg[11] ),
         .rxn(rxn),
         .rxp(rxp),
+        .soft_rx_reset0(soft_rx_reset0),
         .txn(txn),
         .txp(txp));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_9 sync_block_code_error
@@ -5011,14 +5018,14 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr
   wire speed_is_100_fall;
   wire speed_is_10_100_fall;
 
-  (* SOFT_HLUTNM = "soft_lutpair153" *) 
+  (* SOFT_HLUTNM = "soft_lutpair156" *) 
   LUT2 #(
     .INIT(4'h2)) 
     clk_en_12_5_fall_i_1
        (.I0(clk12_5_reg),
         .I1(clk12_5),
         .O(clk_en_12_5_fall_reg));
-  (* SOFT_HLUTNM = "soft_lutpair153" *) 
+  (* SOFT_HLUTNM = "soft_lutpair156" *) 
   LUT2 #(
     .INIT(4'h2)) 
     clk_en_12_5_rise_i_1
@@ -5118,7 +5125,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr_2
   wire reset_out;
   wire sgmii_clk_r0_out;
 
-  (* SOFT_HLUTNM = "soft_lutpair154" *) 
+  (* SOFT_HLUTNM = "soft_lutpair157" *) 
   LUT2 #(
     .INIT(4'h2)) 
     clk_en_1_25_fall_i_1
@@ -5168,7 +5175,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_johnson_cntr_2
         .D(reg4),
         .Q(reg5_reg_n_0),
         .R(reg5));
-  (* SOFT_HLUTNM = "soft_lutpair154" *) 
+  (* SOFT_HLUTNM = "soft_lutpair157" *) 
   LUT4 #(
     .INIT(16'hA808)) 
     sgmii_clk_r_i_1
@@ -5265,12 +5272,12 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
   wire refclk125_n;
   wire refclk125_n_0;
   wire refclk125_n_1;
+  wire reset_104;
   wire rst_125_reg;
-  wire rst_dly0;
   wire \rst_dly[0]_i_1_n_0 ;
   wire \rst_dly[1]_i_1_n_0 ;
   wire \rst_dly[2]_i_1_n_0 ;
-  wire \rst_dly[3]_i_2_n_0 ;
+  wire \rst_dly[3]_i_1_n_0 ;
   wire \rst_dly_reg_n_0_[0] ;
   wire \rst_dly_reg_n_0_[1] ;
   wire \rst_dly_reg_n_0_[2] ;
@@ -5284,7 +5291,6 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
   wire rx_gearbox_i_n_21;
   wire rx_gearbox_i_n_22;
   wire rx_gearbox_i_n_23;
-  wire rx_rst;
   wire [0:0]rxchariscomma;
   wire [0:0]rxcharisk;
   wire [7:0]rxdata;
@@ -5295,6 +5301,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
   wire rxrundisp;
   wire signal_detect;
   wire signal_detect_0;
+  wire soft_rx_reset0;
   wire soft_rx_reset_104;
   wire soft_tx_reset_104;
   wire sync_block_phy_init_cal_done_n_0;
@@ -5415,18 +5422,18 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
        (.CLK(CLK),
         .CLKB0(CLKB0),
         .Q(code_error_stretch),
-        .SR(rx_rst),
         .o_txdata_6b(tx_data_6b),
         .phy_init_cal_done_104(phy_init_cal_done_104),
         .phy_loss_of_sync_104(phy_loss_of_sync_104),
         .refclk125_n(refclk125_n_0),
         .refclk125_n_0(refclk125_n_1),
-        .reset_out(soft_tx_reset_104),
-        .reset_sync6(soft_rx_reset_104),
+        .reset_out(soft_rx_reset_104),
+        .reset_sync6(soft_tx_reset_104),
         .\rst_dly_reg[3] ({p_0_in,\rst_dly_reg_n_0_[2] ,\rst_dly_reg_n_0_[1] ,\rst_dly_reg_n_0_[0] }),
         .\rx_data_stg2_reg[11] (rx_data_6b),
         .rxn(rxn),
         .rxp(rxp),
+        .soft_rx_reset0(soft_rx_reset0),
         .txn(txn),
         .txp(txp));
   FDRE phy_init_cal_done_r_reg
@@ -5436,21 +5443,20 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
         .Q(phy_init_cal_done_r),
         .R(1'b0));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_3 reset_sync_reset_104
-       (.SR(rst_dly0),
-        .phy_loss_of_sync_104(phy_loss_of_sync_104),
-        .refclk125_n(refclk125_n_1),
+       (.refclk125_n(refclk125_n_1),
+        .reset_out(reset_104),
         .rst_125_reg(rst_125_reg));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_4 reset_sync_soft_rx_reset_104
-       (.Q(p_0_in),
-        .SR(rx_rst),
-        .\USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg (\USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg ),
+       (.\USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg (\USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg ),
+        .phy_loss_of_sync_104(phy_loss_of_sync_104),
         .refclk125_n(refclk125_n_1),
-        .reset_out(soft_rx_reset_104));
+        .reset_out(soft_rx_reset_104),
+        .soft_rx_reset0(soft_rx_reset0));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_5 reset_sync_soft_tx_reset_104
        (.mgt_tx_reset(mgt_tx_reset),
         .refclk125_n(refclk125_n_1),
         .reset_out(soft_tx_reset_104));
-  (* SOFT_HLUTNM = "soft_lutpair148" *) 
+  (* SOFT_HLUTNM = "soft_lutpair151" *) 
   LUT4 #(
     .INIT(16'h80FF)) 
     \rst_dly[0]_i_1 
@@ -5459,7 +5465,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
         .I2(p_0_in),
         .I3(\rst_dly_reg_n_0_[0] ),
         .O(\rst_dly[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair148" *) 
+  (* SOFT_HLUTNM = "soft_lutpair151" *) 
   LUT4 #(
     .INIT(16'h8FF0)) 
     \rst_dly[1]_i_1 
@@ -5468,7 +5474,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
         .I2(\rst_dly_reg_n_0_[1] ),
         .I3(\rst_dly_reg_n_0_[0] ),
         .O(\rst_dly[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair147" *) 
+  (* SOFT_HLUTNM = "soft_lutpair150" *) 
   LUT4 #(
     .INIT(16'hF788)) 
     \rst_dly[2]_i_1 
@@ -5477,39 +5483,39 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_lvds_transceiver_k7
         .I2(p_0_in),
         .I3(\rst_dly_reg_n_0_[2] ),
         .O(\rst_dly[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair147" *) 
+  (* SOFT_HLUTNM = "soft_lutpair150" *) 
   LUT4 #(
     .INIT(16'hFF80)) 
-    \rst_dly[3]_i_2 
+    \rst_dly[3]_i_1 
        (.I0(\rst_dly_reg_n_0_[0] ),
         .I1(\rst_dly_reg_n_0_[1] ),
         .I2(\rst_dly_reg_n_0_[2] ),
         .I3(p_0_in),
-        .O(\rst_dly[3]_i_2_n_0 ));
+        .O(\rst_dly[3]_i_1_n_0 ));
   FDRE \rst_dly_reg[0] 
        (.C(refclk125_n_1),
         .CE(1'b1),
         .D(\rst_dly[0]_i_1_n_0 ),
         .Q(\rst_dly_reg_n_0_[0] ),
-        .R(rst_dly0));
+        .R(reset_104));
   FDRE \rst_dly_reg[1] 
        (.C(refclk125_n_1),
         .CE(1'b1),
         .D(\rst_dly[1]_i_1_n_0 ),
         .Q(\rst_dly_reg_n_0_[1] ),
-        .R(rst_dly0));
+        .R(reset_104));
   FDRE \rst_dly_reg[2] 
        (.C(refclk125_n_1),
         .CE(1'b1),
         .D(\rst_dly[2]_i_1_n_0 ),
         .Q(\rst_dly_reg_n_0_[2] ),
-        .R(rst_dly0));
+        .R(reset_104));
   FDRE \rst_dly_reg[3] 
        (.C(refclk125_n_1),
         .CE(1'b1),
-        .D(\rst_dly[3]_i_2_n_0 ),
+        .D(\rst_dly[3]_i_1_n_0 ),
         .Q(p_0_in),
-        .R(rst_dly0));
+        .R(reset_104));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_gearbox_6b_10b rx_gearbox_i
        (.CLK(CLK),
         .D(rx_data_6b),
@@ -5684,13 +5690,13 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
   wire reset_stage3;
   wire reset_stage4;
   wire reset_stage5;
-  wire reset_sync1_i_1__2_n_0;
+  wire reset_sync1_i_1__3_n_0;
   wire reset_sync6_0;
   wire reset_sync6_1;
   wire [0:0]\rst_dly_reg[3] ;
   wire tx_rst_208;
 
-  (* SOFT_HLUTNM = "soft_lutpair112" *) 
+  (* SOFT_HLUTNM = "soft_lutpair115" *) 
   LUT4 #(
     .INIT(16'h0004)) 
     data_dly_inc_i_1
@@ -5699,7 +5705,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
         .I2(reset_out),
         .I3(reset_sync6_0),
         .O(data_dly_inc_reg0));
-  (* SOFT_HLUTNM = "soft_lutpair113" *) 
+  (* SOFT_HLUTNM = "soft_lutpair116" *) 
   LUT4 #(
     .INIT(16'h0004)) 
     mon_dly_inc_i_1
@@ -5718,13 +5724,13 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
        (.C(CLK),
         .CE(1'b1),
         .D(1'b0),
-        .PRE(reset_sync1_i_1__2_n_0),
+        .PRE(reset_sync1_i_1__3_n_0),
         .Q(reset_stage1));
   LUT1 #(
     .INIT(2'h1)) 
-    reset_sync1_i_1__2
+    reset_sync1_i_1__3
        (.I0(\rst_dly_reg[3] ),
-        .O(reset_sync1_i_1__2_n_0));
+        .O(reset_sync1_i_1__3_n_0));
   (* ASYNC_REG *) 
   (* BOX_TYPE = "PRIMITIVE" *) 
   (* SHREG_EXTRACT = "no" *) 
@@ -5735,7 +5741,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
        (.C(CLK),
         .CE(1'b1),
         .D(reset_stage1),
-        .PRE(reset_sync1_i_1__2_n_0),
+        .PRE(reset_sync1_i_1__3_n_0),
         .Q(reset_stage2));
   (* ASYNC_REG *) 
   (* BOX_TYPE = "PRIMITIVE" *) 
@@ -5747,7 +5753,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
        (.C(CLK),
         .CE(1'b1),
         .D(reset_stage2),
-        .PRE(reset_sync1_i_1__2_n_0),
+        .PRE(reset_sync1_i_1__3_n_0),
         .Q(reset_stage3));
   (* ASYNC_REG *) 
   (* BOX_TYPE = "PRIMITIVE" *) 
@@ -5759,7 +5765,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
        (.C(CLK),
         .CE(1'b1),
         .D(reset_stage3),
-        .PRE(reset_sync1_i_1__2_n_0),
+        .PRE(reset_sync1_i_1__3_n_0),
         .Q(reset_stage4));
   (* ASYNC_REG *) 
   (* BOX_TYPE = "PRIMITIVE" *) 
@@ -5771,7 +5777,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
        (.C(CLK),
         .CE(1'b1),
         .D(reset_stage4),
-        .PRE(reset_sync1_i_1__2_n_0),
+        .PRE(reset_sync1_i_1__3_n_0),
         .Q(reset_stage5));
   (* ASYNC_REG *) 
   (* BOX_TYPE = "PRIMITIVE" *) 
@@ -5785,14 +5791,14 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_10
         .D(reset_stage5),
         .PRE(1'b0),
         .Q(reset_out));
-  (* SOFT_HLUTNM = "soft_lutpair112" *) 
+  (* SOFT_HLUTNM = "soft_lutpair115" *) 
   LUT2 #(
     .INIT(4'hE)) 
     rx_data_idly_i_i_1
        (.I0(reset_out),
         .I1(reset_sync6_0),
         .O(SR));
-  (* SOFT_HLUTNM = "soft_lutpair113" *) 
+  (* SOFT_HLUTNM = "soft_lutpair116" *) 
   LUT2 #(
     .INIT(4'hE)) 
     sgmii_tx_oserdes_i_i_1
@@ -5803,6 +5809,98 @@ endmodule
 
 (* ORIG_REF_NAME = "gig_ethernet_pcs_pma_0_reset_sync" *) 
 module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_11
+   (reset_out,
+    CLK,
+    soft_rx_reset0);
+  output reset_out;
+  input CLK;
+  input soft_rx_reset0;
+
+  wire CLK;
+  wire reset_out;
+  wire reset_stage1;
+  wire reset_stage2;
+  wire reset_stage3;
+  wire reset_stage4;
+  wire reset_stage5;
+  wire soft_rx_reset0;
+
+  (* ASYNC_REG *) 
+  (* BOX_TYPE = "PRIMITIVE" *) 
+  (* SHREG_EXTRACT = "no" *) 
+  (* XILINX_LEGACY_PRIM = "FDP" *) 
+  FDPE #(
+    .INIT(1'b1)) 
+    reset_sync1
+       (.C(CLK),
+        .CE(1'b1),
+        .D(1'b0),
+        .PRE(soft_rx_reset0),
+        .Q(reset_stage1));
+  (* ASYNC_REG *) 
+  (* BOX_TYPE = "PRIMITIVE" *) 
+  (* SHREG_EXTRACT = "no" *) 
+  (* XILINX_LEGACY_PRIM = "FDP" *) 
+  FDPE #(
+    .INIT(1'b1)) 
+    reset_sync2
+       (.C(CLK),
+        .CE(1'b1),
+        .D(reset_stage1),
+        .PRE(soft_rx_reset0),
+        .Q(reset_stage2));
+  (* ASYNC_REG *) 
+  (* BOX_TYPE = "PRIMITIVE" *) 
+  (* SHREG_EXTRACT = "no" *) 
+  (* XILINX_LEGACY_PRIM = "FDP" *) 
+  FDPE #(
+    .INIT(1'b1)) 
+    reset_sync3
+       (.C(CLK),
+        .CE(1'b1),
+        .D(reset_stage2),
+        .PRE(soft_rx_reset0),
+        .Q(reset_stage3));
+  (* ASYNC_REG *) 
+  (* BOX_TYPE = "PRIMITIVE" *) 
+  (* SHREG_EXTRACT = "no" *) 
+  (* XILINX_LEGACY_PRIM = "FDP" *) 
+  FDPE #(
+    .INIT(1'b1)) 
+    reset_sync4
+       (.C(CLK),
+        .CE(1'b1),
+        .D(reset_stage3),
+        .PRE(soft_rx_reset0),
+        .Q(reset_stage4));
+  (* ASYNC_REG *) 
+  (* BOX_TYPE = "PRIMITIVE" *) 
+  (* SHREG_EXTRACT = "no" *) 
+  (* XILINX_LEGACY_PRIM = "FDP" *) 
+  FDPE #(
+    .INIT(1'b1)) 
+    reset_sync5
+       (.C(CLK),
+        .CE(1'b1),
+        .D(reset_stage4),
+        .PRE(soft_rx_reset0),
+        .Q(reset_stage5));
+  (* ASYNC_REG *) 
+  (* BOX_TYPE = "PRIMITIVE" *) 
+  (* SHREG_EXTRACT = "no" *) 
+  (* XILINX_LEGACY_PRIM = "FDP" *) 
+  FDPE #(
+    .INIT(1'b1)) 
+    reset_sync6
+       (.C(CLK),
+        .CE(1'b1),
+        .D(reset_stage5),
+        .PRE(1'b0),
+        .Q(reset_out));
+endmodule
+
+(* ORIG_REF_NAME = "gig_ethernet_pcs_pma_0_reset_sync" *) 
+module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_12
    (reset_out,
     CLK,
     reset_sync6_0);
@@ -5894,112 +5992,16 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_11
 endmodule
 
 (* ORIG_REF_NAME = "gig_ethernet_pcs_pma_0_reset_sync" *) 
-module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_12
-   (txn,
-    CLK,
-    reset_out);
-  output txn;
-  input CLK;
-  input reset_out;
-
-  wire CLK;
-  wire reset_out;
-  wire reset_stage1;
-  wire reset_stage2;
-  wire reset_stage3;
-  wire reset_stage4;
-  wire reset_stage5;
-  wire txn;
-
-  (* ASYNC_REG *) 
-  (* BOX_TYPE = "PRIMITIVE" *) 
-  (* SHREG_EXTRACT = "no" *) 
-  (* XILINX_LEGACY_PRIM = "FDP" *) 
-  FDPE #(
-    .INIT(1'b1)) 
-    reset_sync1
-       (.C(CLK),
-        .CE(1'b1),
-        .D(1'b0),
-        .PRE(reset_out),
-        .Q(reset_stage1));
-  (* ASYNC_REG *) 
-  (* BOX_TYPE = "PRIMITIVE" *) 
-  (* SHREG_EXTRACT = "no" *) 
-  (* XILINX_LEGACY_PRIM = "FDP" *) 
-  FDPE #(
-    .INIT(1'b1)) 
-    reset_sync2
-       (.C(CLK),
-        .CE(1'b1),
-        .D(reset_stage1),
-        .PRE(reset_out),
-        .Q(reset_stage2));
-  (* ASYNC_REG *) 
-  (* BOX_TYPE = "PRIMITIVE" *) 
-  (* SHREG_EXTRACT = "no" *) 
-  (* XILINX_LEGACY_PRIM = "FDP" *) 
-  FDPE #(
-    .INIT(1'b1)) 
-    reset_sync3
-       (.C(CLK),
-        .CE(1'b1),
-        .D(reset_stage2),
-        .PRE(reset_out),
-        .Q(reset_stage3));
-  (* ASYNC_REG *) 
-  (* BOX_TYPE = "PRIMITIVE" *) 
-  (* SHREG_EXTRACT = "no" *) 
-  (* XILINX_LEGACY_PRIM = "FDP" *) 
-  FDPE #(
-    .INIT(1'b1)) 
-    reset_sync4
-       (.C(CLK),
-        .CE(1'b1),
-        .D(reset_stage3),
-        .PRE(reset_out),
-        .Q(reset_stage4));
-  (* ASYNC_REG *) 
-  (* BOX_TYPE = "PRIMITIVE" *) 
-  (* SHREG_EXTRACT = "no" *) 
-  (* XILINX_LEGACY_PRIM = "FDP" *) 
-  FDPE #(
-    .INIT(1'b1)) 
-    reset_sync5
-       (.C(CLK),
-        .CE(1'b1),
-        .D(reset_stage4),
-        .PRE(reset_out),
-        .Q(reset_stage5));
-  (* ASYNC_REG *) 
-  (* BOX_TYPE = "PRIMITIVE" *) 
-  (* SHREG_EXTRACT = "no" *) 
-  (* XILINX_LEGACY_PRIM = "FDP" *) 
-  FDPE #(
-    .INIT(1'b1)) 
-    reset_sync6
-       (.C(CLK),
-        .CE(1'b1),
-        .D(reset_stage5),
-        .PRE(1'b0),
-        .Q(txn));
-endmodule
-
-(* ORIG_REF_NAME = "gig_ethernet_pcs_pma_0_reset_sync" *) 
 module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_3
-   (SR,
-    phy_loss_of_sync_104,
+   (reset_out,
     refclk125_n,
     rst_125_reg);
-  output [0:0]SR;
-  input phy_loss_of_sync_104;
+  output reset_out;
   input refclk125_n;
   input rst_125_reg;
 
-  wire [0:0]SR;
-  wire phy_loss_of_sync_104;
   wire refclk125_n;
-  wire reset_104;
+  wire reset_out;
   wire reset_stage1;
   wire reset_stage2;
   wire reset_stage3;
@@ -6078,31 +6080,24 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_3
         .CE(1'b1),
         .D(reset_stage5),
         .PRE(1'b0),
-        .Q(reset_104));
-  LUT2 #(
-    .INIT(4'hE)) 
-    \rst_dly[3]_i_1 
-       (.I0(reset_104),
-        .I1(phy_loss_of_sync_104),
-        .O(SR));
+        .Q(reset_out));
 endmodule
 
 (* ORIG_REF_NAME = "gig_ethernet_pcs_pma_0_reset_sync" *) 
 module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_4
-   (SR,
+   (soft_rx_reset0,
     reset_out,
-    Q,
+    phy_loss_of_sync_104,
     refclk125_n,
     \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg );
-  output [0:0]SR;
+  output soft_rx_reset0;
   output reset_out;
-  input [0:0]Q;
+  input phy_loss_of_sync_104;
   input refclk125_n;
   input \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg ;
 
-  wire [0:0]Q;
-  wire [0:0]SR;
   wire \USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg ;
+  wire phy_loss_of_sync_104;
   wire refclk125_n;
   wire reset_out;
   wire reset_stage1;
@@ -6110,13 +6105,8 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_4
   wire reset_stage3;
   wire reset_stage4;
   wire reset_stage5;
+  wire soft_rx_reset0;
 
-  LUT2 #(
-    .INIT(4'hB)) 
-    \em_state[9]_i_1 
-       (.I0(reset_out),
-        .I1(Q),
-        .O(SR));
   (* ASYNC_REG *) 
   (* BOX_TYPE = "PRIMITIVE" *) 
   (* SHREG_EXTRACT = "no" *) 
@@ -6129,6 +6119,12 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_4
         .D(1'b0),
         .PRE(\USE_ROCKET_IO.RX_RST_SM_TXOUTCLK.MGT_RX_RESET_INT_reg ),
         .Q(reset_stage1));
+  LUT2 #(
+    .INIT(4'hE)) 
+    reset_sync1_i_1__2
+       (.I0(reset_out),
+        .I1(phy_loss_of_sync_104),
+        .O(soft_rx_reset0));
   (* ASYNC_REG *) 
   (* BOX_TYPE = "PRIMITIVE" *) 
   (* SHREG_EXTRACT = "no" *) 
@@ -6593,20 +6589,20 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer
   wire [3:3]\NLW_counter_stg2_reg[8]_i_1_CO_UNCONNECTED ;
   wire [3:3]\NLW_counter_stg3_reg[8]_i_1_CO_UNCONNECTED ;
 
-  (* SOFT_HLUTNM = "soft_lutpair152" *) 
+  (* SOFT_HLUTNM = "soft_lutpair155" *) 
   LUT1 #(
     .INIT(2'h1)) 
     \counter_stg1[0]_i_1 
        (.I0(counter_stg1_reg__1[0]),
         .O(p_0_in__2[0]));
-  (* SOFT_HLUTNM = "soft_lutpair152" *) 
+  (* SOFT_HLUTNM = "soft_lutpair155" *) 
   LUT2 #(
     .INIT(4'h6)) 
     \counter_stg1[1]_i_1 
        (.I0(counter_stg1_reg__1[0]),
         .I1(counter_stg1_reg__1[1]),
         .O(p_0_in__2[1]));
-  (* SOFT_HLUTNM = "soft_lutpair150" *) 
+  (* SOFT_HLUTNM = "soft_lutpair153" *) 
   LUT3 #(
     .INIT(8'h78)) 
     \counter_stg1[2]_i_1 
@@ -6614,7 +6610,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer
         .I1(counter_stg1_reg__1[0]),
         .I2(counter_stg1_reg__1[2]),
         .O(p_0_in__2[2]));
-  (* SOFT_HLUTNM = "soft_lutpair150" *) 
+  (* SOFT_HLUTNM = "soft_lutpair153" *) 
   LUT4 #(
     .INIT(16'h7F80)) 
     \counter_stg1[3]_i_1 
@@ -6623,7 +6619,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer
         .I2(counter_stg1_reg__1[1]),
         .I3(counter_stg1_reg__1[3]),
         .O(p_0_in__2[3]));
-  (* SOFT_HLUTNM = "soft_lutpair149" *) 
+  (* SOFT_HLUTNM = "soft_lutpair152" *) 
   LUT5 #(
     .INIT(32'h7FFF8000)) 
     \counter_stg1[4]_i_1 
@@ -6652,7 +6648,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer
         .I4(counter_stg1_reg__1[3]),
         .I5(counter_stg1_reg__0),
         .O(p_0_in__2[5]));
-  (* SOFT_HLUTNM = "soft_lutpair149" *) 
+  (* SOFT_HLUTNM = "soft_lutpair152" *) 
   LUT5 #(
     .INIT(32'h80000000)) 
     \counter_stg1[5]_i_3 
@@ -7162,7 +7158,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer
         .D(reset0),
         .Q(wtd_reset),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair151" *) 
+  (* SOFT_HLUTNM = "soft_lutpair154" *) 
   LUT3 #(
     .INIT(8'hFE)) 
     reset_sync1_i_1
@@ -7170,7 +7166,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_wtd_timer
         .I1(mgt_rx_reset),
         .I2(rst_125_reg),
         .O(SR));
-  (* SOFT_HLUTNM = "soft_lutpair151" *) 
+  (* SOFT_HLUTNM = "soft_lutpair154" *) 
   LUT2 #(
     .INIT(4'hE)) 
     reset_sync1_i_1__0
@@ -7334,7 +7330,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I4(muxsel_i_3_n_0),
         .I5(muxsel_i_4_n_0),
         .O(muxsel_i_1_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair155" *) 
+  (* SOFT_HLUTNM = "soft_lutpair158" *) 
   LUT2 #(
     .INIT(4'h8)) 
     muxsel_i_2
@@ -7377,7 +7373,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .D(muxsel_i_1_n_0),
         .Q(muxsel),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair156" *) 
+  (* SOFT_HLUTNM = "soft_lutpair159" *) 
   LUT3 #(
     .INIT(8'hD0)) 
     rx_dv_aligned_i_1
@@ -7403,7 +7399,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .D(rx_dv_reg1),
         .Q(rx_dv_reg2),
         .R(reset_out));
-  (* SOFT_HLUTNM = "soft_lutpair156" *) 
+  (* SOFT_HLUTNM = "soft_lutpair159" *) 
   LUT3 #(
     .INIT(8'hF8)) 
     rx_er_aligned_i_1
@@ -7429,7 +7425,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .D(rx_er_reg1),
         .Q(rx_er_reg2),
         .R(reset_out));
-  (* SOFT_HLUTNM = "soft_lutpair157" *) 
+  (* SOFT_HLUTNM = "soft_lutpair160" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rxd_aligned[0]_i_1 
@@ -7437,7 +7433,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I1(muxsel),
         .I2(rxd_reg2[0]),
         .O(\rxd_aligned[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair160" *) 
+  (* SOFT_HLUTNM = "soft_lutpair163" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rxd_aligned[1]_i_1 
@@ -7445,7 +7441,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I1(muxsel),
         .I2(rxd_reg2[1]),
         .O(\rxd_aligned[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair159" *) 
+  (* SOFT_HLUTNM = "soft_lutpair162" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rxd_aligned[2]_i_1 
@@ -7453,7 +7449,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I1(muxsel),
         .I2(rxd_reg2[2]),
         .O(\rxd_aligned[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair158" *) 
+  (* SOFT_HLUTNM = "soft_lutpair161" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rxd_aligned[3]_i_1 
@@ -7461,7 +7457,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I1(muxsel),
         .I2(rxd_reg2[3]),
         .O(\rxd_aligned[3]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair157" *) 
+  (* SOFT_HLUTNM = "soft_lutpair160" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rxd_aligned[4]_i_1 
@@ -7469,7 +7465,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I1(muxsel),
         .I2(rxd_reg2[4]),
         .O(\rxd_aligned[4]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair160" *) 
+  (* SOFT_HLUTNM = "soft_lutpair163" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rxd_aligned[5]_i_1 
@@ -7477,7 +7473,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I1(muxsel),
         .I2(rxd_reg2[5]),
         .O(\rxd_aligned[5]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair159" *) 
+  (* SOFT_HLUTNM = "soft_lutpair162" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rxd_aligned[6]_i_1 
@@ -7485,7 +7481,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I1(muxsel),
         .I2(rxd_reg2[6]),
         .O(\rxd_aligned[6]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair158" *) 
+  (* SOFT_HLUTNM = "soft_lutpair161" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rxd_aligned[7]_i_1 
@@ -7656,7 +7652,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_rx_rate_adapt
         .I4(sfd_enable_i_3_n_0),
         .I5(sfd_enable_i_4_n_0),
         .O(sfd_enable_i_2_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair155" *) 
+  (* SOFT_HLUTNM = "soft_lutpair158" *) 
   LUT5 #(
     .INIT(32'h04000000)) 
     sfd_enable_i_3
@@ -8094,45 +8090,39 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
    (E,
     D,
     Q,
-    \cal_state_reg[9] ,
     \eye_mon_timeout_reg[0] ,
-    bad_mon_trig0,
     \current_tap_window_reg[4] ,
     \current_tap_window_reg[0] ,
+    \cal_state_reg[8] ,
+    bad_mon_trig0,
     refclk125_n,
     cid_error0,
     S,
     SR,
     \cal_state_reg[0] ,
     CNTVALUEOUT,
-    \cal_state_reg[6] ,
-    o_initial_cal_done,
-    \o_eye_mon_done_fe_reg[0] ,
-    enable_eye_mon,
-    eye_mon_timeout_r,
+    \o_eye_mon_done_fe_reg[1] ,
     phy_init_cal_done_104,
+    \o_eye_mon_done_fe_reg[0] ,
     \mon_idly_val_reg[1]_0 ,
     \mon_idly_val_reg[3]_0 );
   output [0:0]E;
   output [0:0]D;
   output [4:0]Q;
-  output [1:0]\cal_state_reg[9] ;
   output \eye_mon_timeout_reg[0] ;
-  output bad_mon_trig0;
   output [4:0]\current_tap_window_reg[4] ;
   output \current_tap_window_reg[0] ;
+  output \cal_state_reg[8] ;
+  output bad_mon_trig0;
   input refclk125_n;
   input cid_error0;
   input [3:0]S;
   input [0:0]SR;
   input \cal_state_reg[0] ;
   input [4:0]CNTVALUEOUT;
-  input \cal_state_reg[6] ;
-  input o_initial_cal_done;
-  input \o_eye_mon_done_fe_reg[0] ;
-  input enable_eye_mon;
-  input eye_mon_timeout_r;
+  input [1:0]\o_eye_mon_done_fe_reg[1] ;
   input phy_init_cal_done_104;
+  input \o_eye_mon_done_fe_reg[0] ;
   input [1:0]\mon_idly_val_reg[1]_0 ;
   input [1:0]\mon_idly_val_reg[3]_0 ;
 
@@ -8143,26 +8133,18 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
   wire [3:0]S;
   wire [0:0]SR;
   wire bad_mon_trig0;
-  wire bad_mon_trig_i_2_n_0;
   wire bad_mon_trig_i_3_n_0;
-  wire \cal_state[8]_i_10_n_0 ;
-  wire \cal_state[8]_i_3_n_0 ;
-  wire \cal_state[8]_i_4_n_0 ;
-  wire \cal_state[8]_i_5_n_0 ;
-  wire \cal_state[8]_i_7_n_0 ;
-  wire \cal_state[8]_i_8_n_0 ;
-  wire \cal_state[8]_i_9_n_0 ;
+  wire bad_mon_trig_i_4_n_0;
   wire \cal_state[9]_i_10_n_0 ;
   wire \cal_state[9]_i_11_n_0 ;
-  wire \cal_state[9]_i_3_n_0 ;
-  wire \cal_state[9]_i_4_n_0 ;
-  wire \cal_state[9]_i_5_n_0 ;
-  wire \cal_state[9]_i_7_n_0 ;
+  wire \cal_state[9]_i_12_n_0 ;
+  wire \cal_state[9]_i_13_n_0 ;
+  wire \cal_state[9]_i_14_n_0 ;
+  wire \cal_state[9]_i_15_n_0 ;
   wire \cal_state[9]_i_8_n_0 ;
   wire \cal_state[9]_i_9_n_0 ;
   wire \cal_state_reg[0] ;
-  wire \cal_state_reg[6] ;
-  wire [1:0]\cal_state_reg[9] ;
+  wire \cal_state_reg[8] ;
   wire cid_error;
   wire cid_error0;
   wire clear;
@@ -8198,11 +8180,9 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
   wire \em_state_reg_n_0_[7] ;
   wire \em_state_reg_n_0_[8] ;
   wire \em_state_reg_n_0_[9] ;
-  wire enable_eye_mon;
-  wire eye_mon_timeout_r;
   wire \eye_mon_timeout_reg[0] ;
   wire left_margin0;
-  wire [2:1]left_margin01_out;
+  wire [2:0]left_margin01_out;
   wire \left_margin[4]_i_3_n_0 ;
   wire \left_margin_reg_n_0_[0] ;
   wire \left_margin_reg_n_0_[1] ;
@@ -8233,17 +8213,17 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
   wire [1:0]\mon_idly_val_reg[1]_0 ;
   wire [1:0]\mon_idly_val_reg[3]_0 ;
   wire \o_eye_mon_done_fe_reg[0] ;
+  wire [1:0]\o_eye_mon_done_fe_reg[1] ;
   wire o_eye_mon_done_i_1_n_0;
   wire o_eye_mon_done_i_2_n_0;
-  wire o_eye_mon_done_i_4_n_0;
-  wire o_initial_cal_done;
+  wire o_eye_mon_done_i_3_n_0;
   wire [9:0]old_em_state;
   wire p_0_in1_in;
   wire [4:0]p_0_in__0;
   wire phy_init_cal_done_104;
   wire refclk125_n;
   wire right_margin0;
-  wire [4:0]right_margin00_out;
+  wire [4:3]right_margin00_out;
   wire \right_margin[4]_i_4_n_0 ;
   wire \right_margin[4]_i_5_n_0 ;
   wire \right_margin[4]_i_6_n_0 ;
@@ -8301,183 +8281,114 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I1(\left_margin_reg_n_0_[1] ),
         .I2(phy_init_cal_done_104),
         .I3(\o_eye_mon_done_fe_reg[0] ),
-        .I4(bad_mon_trig_i_2_n_0),
-        .I5(bad_mon_trig_i_3_n_0),
+        .I4(bad_mon_trig_i_3_n_0),
+        .I5(bad_mon_trig_i_4_n_0),
         .O(bad_mon_trig0));
   (* SOFT_HLUTNM = "soft_lutpair97" *) 
   LUT3 #(
     .INIT(8'h01)) 
-    bad_mon_trig_i_2
+    bad_mon_trig_i_3
        (.I0(\left_margin_reg_n_0_[4] ),
         .I1(\left_margin_reg_n_0_[3] ),
         .I2(\left_margin_reg_n_0_[2] ),
-        .O(bad_mon_trig_i_2_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair88" *) 
+        .O(bad_mon_trig_i_3_n_0));
   LUT5 #(
     .INIT(32'h00010101)) 
-    bad_mon_trig_i_3
+    bad_mon_trig_i_4
        (.I0(\right_margin_reg_n_0_[2] ),
         .I1(\right_margin_reg_n_0_[3] ),
         .I2(\right_margin_reg_n_0_[4] ),
         .I3(\right_margin_reg_n_0_[1] ),
         .I4(\right_margin_reg_n_0_[0] ),
-        .O(bad_mon_trig_i_3_n_0));
-  LUT5 #(
-    .INIT(32'hFFFEAAAA)) 
-    \cal_state[8]_i_1 
-       (.I0(\cal_state_reg[6] ),
-        .I1(\cal_state[8]_i_3_n_0 ),
-        .I2(\cal_state[8]_i_4_n_0 ),
-        .I3(\cal_state[8]_i_5_n_0 ),
-        .I4(o_initial_cal_done),
-        .O(\cal_state_reg[9] [0]));
-  LUT6 #(
-    .INIT(64'h7FFF800080007FFF)) 
-    \cal_state[8]_i_10 
-       (.I0(\right_margin_reg_n_0_[3] ),
-        .I1(\right_margin_reg_n_0_[2] ),
-        .I2(\right_margin_reg_n_0_[1] ),
-        .I3(\right_margin_reg_n_0_[0] ),
-        .I4(\right_margin_reg_n_0_[4] ),
-        .I5(\left_margin_reg_n_0_[4] ),
-        .O(\cal_state[8]_i_10_n_0 ));
-  LUT6 #(
-    .INIT(64'h0960000000000000)) 
-    \cal_state[8]_i_3 
-       (.I0(\right_margin_reg_n_0_[1] ),
-        .I1(\left_margin_reg_n_0_[1] ),
-        .I2(\left_margin_reg_n_0_[0] ),
-        .I3(\right_margin_reg_n_0_[0] ),
-        .I4(\cal_state[8]_i_7_n_0 ),
-        .I5(\cal_state[8]_i_8_n_0 ),
-        .O(\cal_state[8]_i_3_n_0 ));
-  LUT6 #(
-    .INIT(64'h0690000000000000)) 
-    \cal_state[8]_i_4 
-       (.I0(\right_margin_reg_n_0_[1] ),
-        .I1(\left_margin_reg_n_0_[1] ),
-        .I2(\left_margin_reg_n_0_[0] ),
-        .I3(\right_margin_reg_n_0_[0] ),
-        .I4(\cal_state[8]_i_9_n_0 ),
-        .I5(\cal_state[8]_i_10_n_0 ),
-        .O(\cal_state[8]_i_4_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFFFFFF82000082)) 
-    \cal_state[8]_i_5 
-       (.I0(\cal_state[9]_i_3_n_0 ),
-        .I1(\right_margin_reg_n_0_[3] ),
-        .I2(\left_margin_reg_n_0_[3] ),
-        .I3(\right_margin_reg_n_0_[4] ),
-        .I4(\left_margin_reg_n_0_[4] ),
-        .I5(\o_eye_mon_done_fe_reg[0] ),
-        .O(\cal_state[8]_i_5_n_0 ));
-  LUT6 #(
-    .INIT(64'h8282824141414128)) 
-    \cal_state[8]_i_7 
-       (.I0(\left_margin_reg_n_0_[2] ),
-        .I1(\left_margin_reg_n_0_[3] ),
-        .I2(\right_margin_reg_n_0_[3] ),
-        .I3(\right_margin_reg_n_0_[1] ),
-        .I4(\right_margin_reg_n_0_[0] ),
-        .I5(\right_margin_reg_n_0_[2] ),
-        .O(\cal_state[8]_i_7_n_0 ));
-  LUT6 #(
-    .INIT(64'hFFFE00010001FFFE)) 
-    \cal_state[8]_i_8 
-       (.I0(\right_margin_reg_n_0_[3] ),
-        .I1(\right_margin_reg_n_0_[1] ),
-        .I2(\right_margin_reg_n_0_[0] ),
-        .I3(\right_margin_reg_n_0_[2] ),
-        .I4(\right_margin_reg_n_0_[4] ),
-        .I5(\left_margin_reg_n_0_[4] ),
-        .O(\cal_state[8]_i_8_n_0 ));
-  LUT6 #(
-    .INIT(64'h1482824182418241)) 
-    \cal_state[8]_i_9 
-       (.I0(\left_margin_reg_n_0_[2] ),
-        .I1(\left_margin_reg_n_0_[3] ),
-        .I2(\right_margin_reg_n_0_[3] ),
-        .I3(\right_margin_reg_n_0_[2] ),
-        .I4(\right_margin_reg_n_0_[1] ),
-        .I5(\right_margin_reg_n_0_[0] ),
-        .O(\cal_state[8]_i_9_n_0 ));
-  LUT6 #(
-    .INIT(64'h0000000000002AAA)) 
-    \cal_state[9]_i_1 
-       (.I0(o_initial_cal_done),
-        .I1(\cal_state[9]_i_3_n_0 ),
-        .I2(\cal_state[9]_i_4_n_0 ),
-        .I3(\cal_state[9]_i_5_n_0 ),
-        .I4(\o_eye_mon_done_fe_reg[0] ),
-        .I5(\cal_state[9]_i_7_n_0 ),
-        .O(\cal_state_reg[9] [1]));
+        .O(bad_mon_trig_i_4_n_0));
   (* SOFT_HLUTNM = "soft_lutpair88" *) 
-  LUT3 #(
-    .INIT(8'hFE)) 
+  LUT4 #(
+    .INIT(16'h9009)) 
     \cal_state[9]_i_10 
-       (.I0(\right_margin_reg_n_0_[1] ),
-        .I1(\right_margin_reg_n_0_[0] ),
-        .I2(\right_margin_reg_n_0_[2] ),
+       (.I0(\left_margin_reg_n_0_[4] ),
+        .I1(\right_margin_reg_n_0_[4] ),
+        .I2(\left_margin_reg_n_0_[3] ),
+        .I3(\right_margin_reg_n_0_[3] ),
         .O(\cal_state[9]_i_10_n_0 ));
-  LUT5 #(
-    .INIT(32'h08202008)) 
-    \cal_state[9]_i_11 
-       (.I0(\cal_state[8]_i_7_n_0 ),
-        .I1(\right_margin_reg_n_0_[0] ),
-        .I2(\left_margin_reg_n_0_[0] ),
-        .I3(\left_margin_reg_n_0_[1] ),
-        .I4(\right_margin_reg_n_0_[1] ),
-        .O(\cal_state[9]_i_11_n_0 ));
   LUT6 #(
     .INIT(64'h9009000000009009)) 
-    \cal_state[9]_i_3 
+    \cal_state[9]_i_11 
        (.I0(\right_margin_reg_n_0_[2] ),
         .I1(\left_margin_reg_n_0_[2] ),
         .I2(\right_margin_reg_n_0_[1] ),
         .I3(\left_margin_reg_n_0_[1] ),
-        .I4(\right_margin_reg_n_0_[0] ),
-        .I5(\left_margin_reg_n_0_[0] ),
-        .O(\cal_state[9]_i_3_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair96" *) 
-  LUT2 #(
-    .INIT(4'h9)) 
-    \cal_state[9]_i_4 
-       (.I0(\left_margin_reg_n_0_[3] ),
-        .I1(\right_margin_reg_n_0_[3] ),
-        .O(\cal_state[9]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair85" *) 
-  LUT2 #(
-    .INIT(4'h9)) 
-    \cal_state[9]_i_5 
-       (.I0(\left_margin_reg_n_0_[4] ),
-        .I1(\right_margin_reg_n_0_[4] ),
-        .O(\cal_state[9]_i_5_n_0 ));
+        .I4(\left_margin_reg_n_0_[0] ),
+        .I5(\right_margin_reg_n_0_[0] ),
+        .O(\cal_state[9]_i_11_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFC808F4C4C8080)) 
+    .INIT(64'h8282824141414128)) 
+    \cal_state[9]_i_12 
+       (.I0(\left_margin_reg_n_0_[2] ),
+        .I1(\right_margin_reg_n_0_[3] ),
+        .I2(\left_margin_reg_n_0_[3] ),
+        .I3(\right_margin_reg_n_0_[1] ),
+        .I4(\right_margin_reg_n_0_[0] ),
+        .I5(\right_margin_reg_n_0_[2] ),
+        .O(\cal_state[9]_i_12_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFE00010001FFFE)) 
+    \cal_state[9]_i_13 
+       (.I0(\right_margin_reg_n_0_[3] ),
+        .I1(\right_margin_reg_n_0_[1] ),
+        .I2(\right_margin_reg_n_0_[0] ),
+        .I3(\right_margin_reg_n_0_[2] ),
+        .I4(\left_margin_reg_n_0_[4] ),
+        .I5(\right_margin_reg_n_0_[4] ),
+        .O(\cal_state[9]_i_13_n_0 ));
+  LUT6 #(
+    .INIT(64'h1482824182418241)) 
+    \cal_state[9]_i_14 
+       (.I0(\left_margin_reg_n_0_[2] ),
+        .I1(\right_margin_reg_n_0_[3] ),
+        .I2(\left_margin_reg_n_0_[3] ),
+        .I3(\right_margin_reg_n_0_[2] ),
+        .I4(\right_margin_reg_n_0_[1] ),
+        .I5(\right_margin_reg_n_0_[0] ),
+        .O(\cal_state[9]_i_14_n_0 ));
+  LUT6 #(
+    .INIT(64'h7FFF800080007FFF)) 
+    \cal_state[9]_i_15 
+       (.I0(\right_margin_reg_n_0_[3] ),
+        .I1(\right_margin_reg_n_0_[2] ),
+        .I2(\right_margin_reg_n_0_[1] ),
+        .I3(\right_margin_reg_n_0_[0] ),
+        .I4(\left_margin_reg_n_0_[4] ),
+        .I5(\right_margin_reg_n_0_[4] ),
+        .O(\cal_state[9]_i_15_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFFEFFFEFFFEFF)) 
     \cal_state[9]_i_7 
        (.I0(\cal_state[9]_i_8_n_0 ),
         .I1(\cal_state[9]_i_9_n_0 ),
-        .I2(\right_margin_reg_n_0_[3] ),
-        .I3(\cal_state[9]_i_10_n_0 ),
-        .I4(\cal_state[9]_i_5_n_0 ),
+        .I2(\o_eye_mon_done_fe_reg[1] [0]),
+        .I3(\o_eye_mon_done_fe_reg[1] [1]),
+        .I4(\cal_state[9]_i_10_n_0 ),
         .I5(\cal_state[9]_i_11_n_0 ),
-        .O(\cal_state[9]_i_7_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair94" *) 
-  LUT3 #(
-    .INIT(8'h80)) 
+        .O(\cal_state_reg[8] ));
+  LUT6 #(
+    .INIT(64'h0960000000000000)) 
     \cal_state[9]_i_8 
-       (.I0(\right_margin_reg_n_0_[2] ),
-        .I1(\right_margin_reg_n_0_[1] ),
-        .I2(\right_margin_reg_n_0_[0] ),
-        .O(\cal_state[9]_i_8_n_0 ));
-  LUT5 #(
-    .INIT(32'h20080820)) 
-    \cal_state[9]_i_9 
-       (.I0(\cal_state[8]_i_9_n_0 ),
-        .I1(\right_margin_reg_n_0_[0] ),
+       (.I0(\right_margin_reg_n_0_[1] ),
+        .I1(\left_margin_reg_n_0_[1] ),
         .I2(\left_margin_reg_n_0_[0] ),
-        .I3(\left_margin_reg_n_0_[1] ),
-        .I4(\right_margin_reg_n_0_[1] ),
+        .I3(\right_margin_reg_n_0_[0] ),
+        .I4(\cal_state[9]_i_12_n_0 ),
+        .I5(\cal_state[9]_i_13_n_0 ),
+        .O(\cal_state[9]_i_8_n_0 ));
+  LUT6 #(
+    .INIT(64'h0690000000000000)) 
+    \cal_state[9]_i_9 
+       (.I0(\right_margin_reg_n_0_[1] ),
+        .I1(\left_margin_reg_n_0_[1] ),
+        .I2(\left_margin_reg_n_0_[0] ),
+        .I3(\right_margin_reg_n_0_[0] ),
+        .I4(\cal_state[9]_i_14_n_0 ),
+        .I5(\cal_state[9]_i_15_n_0 ),
         .O(\cal_state[9]_i_9_n_0 ));
   FDRE cid_error_reg
        (.C(refclk125_n),
@@ -8485,7 +8396,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .D(cid_error0),
         .Q(cid_error),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair94" *) 
+  (* SOFT_HLUTNM = "soft_lutpair95" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \current_tap_window[0]_i_1 
@@ -8501,7 +8412,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I1(\current_tap_window_reg[0] ),
         .I2(\left_margin_reg_n_0_[1] ),
         .O(\current_tap_window_reg[4] [1]));
-  (* SOFT_HLUTNM = "soft_lutpair95" *) 
+  (* SOFT_HLUTNM = "soft_lutpair96" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \current_tap_window[2]_i_1 
@@ -8535,6 +8446,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I4(data_bad_i_3_n_0),
         .I5(SR),
         .O(data_bad_i_1_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair84" *) 
   LUT5 #(
     .INIT(32'h80000001)) 
     data_bad_i_2
@@ -8616,27 +8528,26 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
     \em_state[0]_i_1 
        (.I0(\em_state_inferred__3/i___3_n_0 ),
         .O(em_state[0]));
-  LUT6 #(
-    .INIT(64'hEEEF0000EEEE0000)) 
+  LUT5 #(
+    .INIT(32'hEF00EE00)) 
     \em_state[1]_i_1 
        (.I0(\em_state_reg_n_0_[0] ),
         .I1(\em_state_reg_n_0_[9] ),
-        .I2(enable_eye_mon),
-        .I3(eye_mon_timeout_r),
-        .I4(\em_state_inferred__3/i___3_n_0 ),
-        .I5(\em_state_reg_n_0_[1] ),
+        .I2(\cal_state_reg[0] ),
+        .I3(\em_state_inferred__3/i___3_n_0 ),
+        .I4(\em_state_reg_n_0_[1] ),
         .O(em_state[1]));
-  LUT6 #(
-    .INIT(64'hFFF2000022220000)) 
+  (* SOFT_HLUTNM = "soft_lutpair83" *) 
+  LUT5 #(
+    .INIT(32'hF2002200)) 
     \em_state[2]_i_1 
        (.I0(\em_state_reg_n_0_[4] ),
         .I1(data_bad),
-        .I2(enable_eye_mon),
-        .I3(eye_mon_timeout_r),
-        .I4(\em_state_inferred__3/i___3_n_0 ),
-        .I5(\em_state_reg_n_0_[1] ),
+        .I2(\cal_state_reg[0] ),
+        .I3(\em_state_inferred__3/i___3_n_0 ),
+        .I4(\em_state_reg_n_0_[1] ),
         .O(em_state[2]));
-  (* SOFT_HLUTNM = "soft_lutpair92" *) 
+  (* SOFT_HLUTNM = "soft_lutpair90" *) 
   LUT4 #(
     .INIT(16'hF200)) 
     \em_state[3]_i_1 
@@ -8645,7 +8556,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I2(\em_state_reg_n_0_[2] ),
         .I3(\em_state_inferred__3/i___3_n_0 ),
         .O(em_state[3]));
-  (* SOFT_HLUTNM = "soft_lutpair92" *) 
+  (* SOFT_HLUTNM = "soft_lutpair90" *) 
   LUT3 #(
     .INIT(8'h80)) 
     \em_state[4]_i_1 
@@ -8653,6 +8564,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I1(\em_state_reg_n_0_[3] ),
         .I2(\em_state_inferred__3/i___3_n_0 ),
         .O(em_state[4]));
+  (* SOFT_HLUTNM = "soft_lutpair83" *) 
   LUT3 #(
     .INIT(8'h80)) 
     \em_state[5]_i_1 
@@ -8660,7 +8572,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I1(\em_state_reg_n_0_[4] ),
         .I2(\em_state_inferred__3/i___3_n_0 ),
         .O(em_state[5]));
-  (* SOFT_HLUTNM = "soft_lutpair91" *) 
+  (* SOFT_HLUTNM = "soft_lutpair92" *) 
   LUT4 #(
     .INIT(16'hF200)) 
     \em_state[6]_i_1 
@@ -8669,7 +8581,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I2(\em_state_reg_n_0_[5] ),
         .I3(\em_state_inferred__3/i___3_n_0 ),
         .O(em_state[6]));
-  (* SOFT_HLUTNM = "soft_lutpair93" *) 
+  (* SOFT_HLUTNM = "soft_lutpair94" *) 
   LUT4 #(
     .INIT(16'hF200)) 
     \em_state[7]_i_1 
@@ -8678,7 +8590,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I2(\em_state_reg_n_0_[6] ),
         .I3(\em_state_inferred__3/i___3_n_0 ),
         .O(em_state[7]));
-  (* SOFT_HLUTNM = "soft_lutpair93" *) 
+  (* SOFT_HLUTNM = "soft_lutpair94" *) 
   LUT3 #(
     .INIT(8'h80)) 
     \em_state[8]_i_1 
@@ -8686,15 +8598,15 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I1(\em_state_reg_n_0_[7] ),
         .I2(\em_state_inferred__3/i___3_n_0 ),
         .O(em_state[8]));
-  (* SOFT_HLUTNM = "soft_lutpair91" *) 
+  (* SOFT_HLUTNM = "soft_lutpair92" *) 
   LUT3 #(
     .INIT(8'h80)) 
-    \em_state[9]_i_2 
+    \em_state[9]_i_1 
        (.I0(data_bad),
         .I1(\em_state_reg_n_0_[8] ),
         .I2(\em_state_inferred__3/i___3_n_0 ),
         .O(em_state[9]));
-  (* SOFT_HLUTNM = "soft_lutpair82" *) 
+  (* SOFT_HLUTNM = "soft_lutpair81" *) 
   LUT5 #(
     .INIT(32'h00010116)) 
     \em_state_inferred__3/i_ 
@@ -8704,7 +8616,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I3(\em_state_reg_n_0_[3] ),
         .I4(\em_state_reg_n_0_[4] ),
         .O(\em_state_inferred__3/i__n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair82" *) 
+  (* SOFT_HLUTNM = "soft_lutpair81" *) 
   LUT5 #(
     .INIT(32'hFFFEFEE8)) 
     \em_state_inferred__3/i___0 
@@ -8714,7 +8626,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I3(\em_state_reg_n_0_[3] ),
         .I4(\em_state_reg_n_0_[4] ),
         .O(\em_state_inferred__3/i___0_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair81" *) 
+  (* SOFT_HLUTNM = "soft_lutpair82" *) 
   LUT5 #(
     .INIT(32'h00010116)) 
     \em_state_inferred__3/i___1 
@@ -8724,7 +8636,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I3(\em_state_reg_n_0_[8] ),
         .I4(\em_state_reg_n_0_[9] ),
         .O(\em_state_inferred__3/i___1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair81" *) 
+  (* SOFT_HLUTNM = "soft_lutpair82" *) 
   LUT5 #(
     .INIT(32'hFFFEFEE8)) 
     \em_state_inferred__3/i___2 
@@ -8848,7 +8760,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
   FDRE \left_margin_reg[0] 
        (.C(refclk125_n),
         .CE(left_margin0),
-        .D(right_margin00_out[0]),
+        .D(left_margin01_out[0]),
         .Q(\left_margin_reg_n_0_[0] ),
         .R(mon_idly_val));
   FDRE \left_margin_reg[1] 
@@ -8875,15 +8787,15 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .D(\mon_idly_val_reg[3]_0 [1]),
         .Q(\left_margin_reg_n_0_[4] ),
         .R(mon_idly_val));
-  (* SOFT_HLUTNM = "soft_lutpair85" *) 
+  (* SOFT_HLUTNM = "soft_lutpair88" *) 
   LUT5 #(
-    .INIT(32'hB2F330B2)) 
+    .INIT(32'h8E0CCF8E)) 
     \maint_best_tap[4]_i_2 
        (.I0(\maint_best_tap[4]_i_3_n_0 ),
-        .I1(\right_margin_reg_n_0_[4] ),
-        .I2(\left_margin_reg_n_0_[4] ),
-        .I3(\right_margin_reg_n_0_[3] ),
-        .I4(\left_margin_reg_n_0_[3] ),
+        .I1(\left_margin_reg_n_0_[4] ),
+        .I2(\right_margin_reg_n_0_[4] ),
+        .I3(\left_margin_reg_n_0_[3] ),
+        .I4(\right_margin_reg_n_0_[3] ),
         .O(\current_tap_window_reg[0] ));
   LUT6 #(
     .INIT(64'hBF0BFFFF0000BF0B)) 
@@ -8908,7 +8820,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .D(mismatch_error0_carry_n_0),
         .Q(mismatch_error),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair87" *) 
+  (* SOFT_HLUTNM = "soft_lutpair89" *) 
   LUT5 #(
     .INIT(32'h00FF0031)) 
     mon_idly_update_i_1
@@ -8918,7 +8830,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I3(mon_idly_update_i_3_n_0),
         .I4(mon_idly_update_i_4_n_0),
         .O(mon_idly_update0));
-  (* SOFT_HLUTNM = "soft_lutpair83" *) 
+  (* SOFT_HLUTNM = "soft_lutpair85" *) 
   LUT5 #(
     .INIT(32'h00100000)) 
     mon_idly_update_i_2
@@ -8938,7 +8850,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I4(mon_idly_update_i_7_n_0),
         .I5(old_em_state[2]),
         .O(mon_idly_update_i_3_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair86" *) 
+  (* SOFT_HLUTNM = "soft_lutpair87" *) 
   LUT5 #(
     .INIT(32'h00000010)) 
     mon_idly_update_i_4
@@ -8956,7 +8868,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I2(old_em_state[8]),
         .I3(old_em_state[5]),
         .O(mon_idly_update_i_5_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair87" *) 
+  (* SOFT_HLUTNM = "soft_lutpair89" *) 
   LUT2 #(
     .INIT(4'hE)) 
     mon_idly_update_i_6
@@ -9068,7 +8980,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I4(\em_state_reg_n_0_[9] ),
         .I5(\mon_idly_val[4]_i_8_n_0 ),
         .O(\mon_idly_val[4]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair90" *) 
+  (* SOFT_HLUTNM = "soft_lutpair93" *) 
   LUT4 #(
     .INIT(16'h5D45)) 
     \mon_idly_val[4]_i_6 
@@ -9077,7 +8989,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I2(mon_idly_val18_out),
         .I3(Q[0]),
         .O(\mon_idly_val[4]_i_6_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair80" *) 
+  (* SOFT_HLUTNM = "soft_lutpair84" *) 
   LUT5 #(
     .INIT(32'hFFFFFFFE)) 
     \mon_idly_val[4]_i_7 
@@ -9087,7 +8999,6 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I3(Q[0]),
         .I4(Q[1]),
         .O(\mon_idly_val[4]_i_7_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair80" *) 
   LUT5 #(
     .INIT(32'h7FFFFFFF)) 
     \mon_idly_val[4]_i_8 
@@ -9132,7 +9043,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
     o_eye_mon_done_i_1
        (.I0(o_eye_mon_done_i_2_n_0),
         .I1(\cal_state_reg[0] ),
-        .I2(o_eye_mon_done_i_4_n_0),
+        .I2(o_eye_mon_done_i_3_n_0),
         .I3(\em_state_reg_n_0_[0] ),
         .I4(\em_state_reg_n_0_[2] ),
         .I5(\left_margin[4]_i_3_n_0 ),
@@ -9147,13 +9058,13 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I4(\em_state_reg_n_0_[6] ),
         .I5(D),
         .O(o_eye_mon_done_i_2_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair89" *) 
+  (* SOFT_HLUTNM = "soft_lutpair91" *) 
   LUT2 #(
     .INIT(4'hE)) 
-    o_eye_mon_done_i_4
+    o_eye_mon_done_i_3
        (.I0(\em_state_reg_n_0_[4] ),
         .I1(\em_state_reg_n_0_[5] ),
-        .O(o_eye_mon_done_i_4_n_0));
+        .O(o_eye_mon_done_i_3_n_0));
   FDRE o_eye_mon_done_reg
        (.C(refclk125_n),
         .CE(1'b1),
@@ -9220,14 +9131,14 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .D(\em_state_reg_n_0_[9] ),
         .Q(old_em_state[9]),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair90" *) 
+  (* SOFT_HLUTNM = "soft_lutpair93" *) 
   LUT2 #(
     .INIT(4'h6)) 
     \right_margin[0]_i_1 
        (.I0(Q[0]),
         .I1(CNTVALUEOUT[0]),
-        .O(right_margin00_out[0]));
-  (* SOFT_HLUTNM = "soft_lutpair84" *) 
+        .O(left_margin01_out[0]));
+  (* SOFT_HLUTNM = "soft_lutpair86" *) 
   LUT3 #(
     .INIT(8'h69)) 
     \right_margin[3]_i_1 
@@ -9255,7 +9166,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I4(\em_state_reg_n_0_[6] ),
         .I5(\right_margin[4]_i_6_n_0 ),
         .O(right_margin0));
-  (* SOFT_HLUTNM = "soft_lutpair84" *) 
+  (* SOFT_HLUTNM = "soft_lutpair86" *) 
   LUT5 #(
     .INIT(32'h2BD4D42B)) 
     \right_margin[4]_i_3 
@@ -9265,14 +9176,14 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I3(Q[4]),
         .I4(CNTVALUEOUT[4]),
         .O(right_margin00_out[4]));
-  (* SOFT_HLUTNM = "soft_lutpair86" *) 
+  (* SOFT_HLUTNM = "soft_lutpair87" *) 
   LUT2 #(
     .INIT(4'h1)) 
     \right_margin[4]_i_4 
        (.I0(\em_state_reg_n_0_[3] ),
         .I1(\em_state_reg_n_0_[7] ),
         .O(\right_margin[4]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair83" *) 
+  (* SOFT_HLUTNM = "soft_lutpair85" *) 
   LUT4 #(
     .INIT(16'hFFFE)) 
     \right_margin[4]_i_5 
@@ -9304,7 +9215,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
   FDRE \right_margin_reg[0] 
        (.C(refclk125_n),
         .CE(right_margin0),
-        .D(right_margin00_out[0]),
+        .D(left_margin01_out[0]),
         .Q(\right_margin_reg_n_0_[0] ),
         .R(mon_idly_val));
   FDRE \right_margin_reg[1] 
@@ -9339,7 +9250,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_eye_monitor
         .I2(\em_state_reg_n_0_[3] ),
         .I3(\em_state_reg_n_0_[7] ),
         .O(clear));
-  (* SOFT_HLUTNM = "soft_lutpair89" *) 
+  (* SOFT_HLUTNM = "soft_lutpair91" *) 
   LUT4 #(
     .INIT(16'hFFFE)) 
     \wait_cntr[0]_i_3 
@@ -9507,47 +9418,47 @@ endmodule
 module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
    (E,
     phy_init_cal_done_104,
+    SR,
     Q,
-    \cal_state_reg[8]_0 ,
-    o_initial_cal_done,
+    \cal_state_reg[4]_0 ,
     o_eye_mon_done_reg,
-    enable_eye_mon,
-    \cal_state_reg[9]_0 ,
+    bad_mon_trig_reg,
     \panic_bucket_reg[0] ,
     refclk125_n,
-    SR,
-    D,
+    \o_eye_mon_done_fe_reg[0]_0 ,
     eye_mon_timeout_r,
-    \right_margin_reg[4] ,
+    phy_loss_of_sync_104,
+    reset_out,
     \rst_dly_reg[3] ,
+    \left_margin_reg[4] ,
     data_out,
-    o_eye_mon_done_reg_0,
-    \right_margin_reg[4]_0 );
+    D,
+    o_eye_mon_done_reg_0);
   output [0:0]E;
   output phy_init_cal_done_104;
+  output [0:0]SR;
   output [4:0]Q;
-  output \cal_state_reg[8]_0 ;
-  output o_initial_cal_done;
+  output [1:0]\cal_state_reg[4]_0 ;
   output o_eye_mon_done_reg;
-  output enable_eye_mon;
-  output \cal_state_reg[9]_0 ;
+  output bad_mon_trig_reg;
   output \panic_bucket_reg[0] ;
   input refclk125_n;
-  input [0:0]SR;
-  input [1:0]D;
+  input \o_eye_mon_done_fe_reg[0]_0 ;
   input eye_mon_timeout_r;
-  input \right_margin_reg[4] ;
+  input phy_loss_of_sync_104;
+  input reset_out;
   input [3:0]\rst_dly_reg[3] ;
+  input \left_margin_reg[4] ;
   input data_out;
+  input [4:0]D;
   input [0:0]o_eye_mon_done_reg_0;
-  input [4:0]\right_margin_reg[4]_0 ;
 
-  wire [1:0]D;
+  wire [4:0]D;
   wire [0:0]E;
   wire [4:0]Q;
   wire [0:0]SR;
+  wire bad_mon_trig_reg;
   wire [4:0]best_tap;
-  wire \best_tap[4]_i_2_n_0 ;
   wire \best_tap[4]_i_3_n_0 ;
   wire \best_tap[4]_i_4_n_0 ;
   wire \best_tap[4]_i_5_n_0 ;
@@ -9556,8 +9467,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
   wire best_tap_window0;
   wire [11:0]cal_state;
   wire cal_state1;
-  wire \cal_state[0]_i_10_n_0 ;
-  wire \cal_state[0]_i_11_n_0 ;
+  wire cal_state1__1;
   wire \cal_state[0]_i_2_n_0 ;
   wire \cal_state[0]_i_3_n_0 ;
   wire \cal_state[0]_i_4_n_0 ;
@@ -9566,18 +9476,25 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
   wire \cal_state[0]_i_7_n_0 ;
   wire \cal_state[0]_i_8_n_0 ;
   wire \cal_state[0]_i_9_n_0 ;
-  wire \cal_state[11]_i_2_n_0 ;
+  wire \cal_state[11]_i_3_n_0 ;
+  wire \cal_state[11]_i_4_n_0 ;
   wire \cal_state[1]_i_2_n_0 ;
   wire \cal_state[1]_i_3_n_0 ;
+  wire \cal_state[1]_i_4_n_0 ;
   wire \cal_state[1]_i_5_n_0 ;
-  wire \cal_state[1]_i_6_n_0 ;
-  wire \cal_state[1]_i_7_n_0 ;
   wire \cal_state[3]_i_2_n_0 ;
-  wire \cal_state[5]_i_2_n_0 ;
-  wire \cal_state[7]_i_2_n_0 ;
+  wire \cal_state[4]_i_2_n_0 ;
+  wire \cal_state[7]_i_3_n_0 ;
+  wire \cal_state[8]_i_2_n_0 ;
+  wire \cal_state[8]_i_4_n_0 ;
+  wire \cal_state[8]_i_5_n_0 ;
   wire \cal_state[8]_i_6_n_0 ;
-  wire \cal_state_reg[8]_0 ;
-  wire \cal_state_reg[9]_0 ;
+  wire \cal_state[9]_i_2_n_0 ;
+  wire \cal_state[9]_i_3_n_0 ;
+  wire \cal_state[9]_i_4_n_0 ;
+  wire \cal_state[9]_i_5_n_0 ;
+  wire \cal_state[9]_i_6_n_0 ;
+  wire [1:0]\cal_state_reg[4]_0 ;
   wire \cal_state_reg_n_0_[0] ;
   wire \cal_state_reg_n_0_[10] ;
   wire \cal_state_reg_n_0_[11] ;
@@ -9600,11 +9517,12 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
   wire \current_tap[3]_i_2_n_0 ;
   wire \current_tap[4]_i_1_n_0 ;
   wire \current_tap[4]_i_2_n_0 ;
-  wire \current_tap[4]_i_3_n_0 ;
   wire \current_tap[4]_i_4_n_0 ;
   wire \current_tap[4]_i_5_n_0 ;
   wire \current_tap[4]_i_6_n_0 ;
   wire \current_tap[4]_i_7_n_0 ;
+  wire \current_tap[4]_i_8_n_0 ;
+  wire \current_tap[4]_i_9_n_0 ;
   wire current_tap_window0;
   wire \current_tap_window_reg_n_0_[0] ;
   wire \current_tap_window_reg_n_0_[1] ;
@@ -9612,12 +9530,11 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
   wire \current_tap_window_reg_n_0_[3] ;
   wire \current_tap_window_reg_n_0_[4] ;
   wire data_out;
-  wire enable_eye_mon;
-  wire [1:0]eye_mon_done_fe;
   wire eye_mon_timeout_r;
   wire initial_cal_complete;
   wire initial_cal_complete_i_1_n_0;
   wire initial_cal_complete_i_2_n_0;
+  wire \left_margin_reg[4] ;
   wire \maint_best_tap[0]_i_1_n_0 ;
   wire \maint_best_tap[1]_i_1_n_0 ;
   wire \maint_best_tap[2]_i_1_n_0 ;
@@ -9630,55 +9547,66 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
   wire \maint_best_tap_reg_n_0_[4] ;
   wire o_data_idelay_update0;
   wire o_data_idelay_update_i_2_n_0;
-  wire o_data_idelay_update_i_3_n_0;
-  wire \o_eye_mon_done_fe[1]_i_2_n_0 ;
-  wire \o_eye_mon_done_fe[1]_i_3_n_0 ;
+  wire \o_eye_mon_done_fe_reg[0]_0 ;
   wire o_eye_mon_done_reg;
   wire [0:0]o_eye_mon_done_reg_0;
-  wire o_initial_cal_done;
   wire o_initial_cal_done_i_1_n_0;
+  wire o_initial_cal_done_i_2_n_0;
   wire \panic_bucket_reg[0] ;
   wire phy_init_cal_done_104;
+  wire phy_loss_of_sync_104;
   wire refclk125_n;
-  wire \right_margin_reg[4] ;
-  wire [4:0]\right_margin_reg[4]_0 ;
+  wire reset_out;
   wire [3:0]\rst_dly_reg[3] ;
+  wire viable_tap_found;
   wire viable_tap_found_i_1_n_0;
   wire viable_tap_found_i_2_n_0;
   wire viable_tap_found_reg_n_0;
 
+  (* SOFT_HLUTNM = "soft_lutpair110" *) 
+  LUT2 #(
+    .INIT(4'hB)) 
+    bad_mon_trig_i_2
+       (.I0(\cal_state_reg[4]_0 [0]),
+        .I1(\cal_state_reg[4]_0 [1]),
+        .O(bad_mon_trig_reg));
   LUT6 #(
-    .INIT(64'h0800080800000800)) 
+    .INIT(64'h0000000000000010)) 
     \best_tap[4]_i_1 
-       (.I0(\best_tap[4]_i_2_n_0 ),
-        .I1(\best_tap[4]_i_3_n_0 ),
-        .I2(\best_tap[4]_i_4_n_0 ),
-        .I3(\current_tap_window_reg_n_0_[4] ),
-        .I4(best_tap_window[4]),
-        .I5(\best_tap[4]_i_5_n_0 ),
+       (.I0(\cal_state_reg_n_0_[2] ),
+        .I1(\cal_state_reg_n_0_[1] ),
+        .I2(\cal_state_reg_n_0_[0] ),
+        .I3(\cal_state_reg_n_0_[4] ),
+        .I4(\cal_state_reg_n_0_[3] ),
+        .I5(\best_tap[4]_i_3_n_0 ),
+        .O(current_tap));
+  LUT5 #(
+    .INIT(32'h80880080)) 
+    \best_tap[4]_i_2 
+       (.I0(o_data_idelay_update_i_2_n_0),
+        .I1(\best_tap[4]_i_4_n_0 ),
+        .I2(\current_tap_window_reg_n_0_[4] ),
+        .I3(best_tap_window[4]),
+        .I4(\best_tap[4]_i_5_n_0 ),
         .O(best_tap_window0));
   LUT6 #(
-    .INIT(64'h0000000000000001)) 
-    \best_tap[4]_i_2 
-       (.I0(\cal_state_reg_n_0_[3] ),
-        .I1(\cal_state_reg_n_0_[4] ),
-        .I2(o_data_idelay_update_i_3_n_0),
-        .I3(\cal_state_reg_n_0_[7] ),
-        .I4(\cal_state_reg_n_0_[6] ),
-        .I5(\cal_state_reg_n_0_[1] ),
-        .O(\best_tap[4]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair98" *) 
-  LUT2 #(
-    .INIT(4'h2)) 
+    .INIT(64'hFFFFFFFFFFFFFFFE)) 
     \best_tap[4]_i_3 
-       (.I0(\cal_state_reg_n_0_[5] ),
-        .I1(\cal_state_reg_n_0_[11] ),
+       (.I0(\cal_state_reg_n_0_[11] ),
+        .I1(\cal_state_reg_n_0_[8] ),
+        .I2(\cal_state[9]_i_5_n_0 ),
+        .I3(\cal_state_reg_n_0_[7] ),
+        .I4(\cal_state_reg_n_0_[9] ),
+        .I5(\cal_state_reg_n_0_[10] ),
         .O(\best_tap[4]_i_3_n_0 ));
-  LUT2 #(
-    .INIT(4'hE)) 
+  (* SOFT_HLUTNM = "soft_lutpair103" *) 
+  LUT4 #(
+    .INIT(16'h0100)) 
     \best_tap[4]_i_4 
        (.I0(\cal_state_reg_n_0_[2] ),
         .I1(\cal_state_reg_n_0_[0] ),
+        .I2(\cal_state_reg_n_0_[11] ),
+        .I3(\cal_state_reg_n_0_[5] ),
         .O(\best_tap[4]_i_4_n_0 ));
   LUT5 #(
     .INIT(32'hB2F330B2)) 
@@ -9757,319 +9685,385 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
         .D(\current_tap_window_reg_n_0_[4] ),
         .Q(best_tap_window[4]),
         .R(current_tap));
-  LUT5 #(
-    .INIT(32'hFFFEFEFE)) 
+  LUT6 #(
+    .INIT(64'hFFFFFFAEAEAEAEAE)) 
     \cal_state[0]_i_1 
        (.I0(\cal_state[0]_i_2_n_0 ),
         .I1(\cal_state[0]_i_3_n_0 ),
         .I2(\cal_state[0]_i_4_n_0 ),
-        .I3(\cal_state[0]_i_5_n_0 ),
+        .I3(\cal_state_reg_n_0_[1] ),
         .I4(\cal_state_reg_n_0_[2] ),
+        .I5(\cal_state_reg_n_0_[3] ),
         .O(cal_state[0]));
-  LUT5 #(
-    .INIT(32'hFFFFFFFE)) 
-    \cal_state[0]_i_10 
-       (.I0(\cal_state_reg_n_0_[8] ),
-        .I1(\cal_state_reg_n_0_[10] ),
-        .I2(\cal_state_reg_n_0_[9] ),
-        .I3(\cal_state_reg_n_0_[7] ),
-        .I4(\cal_state_reg_n_0_[6] ),
-        .O(\cal_state[0]_i_10_n_0 ));
-  LUT2 #(
-    .INIT(4'hE)) 
-    \cal_state[0]_i_11 
-       (.I0(\cal_state_reg_n_0_[5] ),
-        .I1(\cal_state_reg_n_0_[11] ),
-        .O(\cal_state[0]_i_11_n_0 ));
   LUT6 #(
-    .INIT(64'hF0F0F0F2F0F0F02F)) 
+    .INIT(64'hFFFFFFFFFFFEE8E9)) 
     \cal_state[0]_i_2 
-       (.I0(\o_eye_mon_done_fe[1]_i_2_n_0 ),
-        .I1(\cal_state[0]_i_6_n_0 ),
-        .I2(\cal_state_reg_n_0_[0] ),
-        .I3(\cal_state_reg_n_0_[1] ),
-        .I4(\cal_state_reg_n_0_[2] ),
-        .I5(\cal_state[0]_i_5_n_0 ),
+       (.I0(\cal_state[0]_i_5_n_0 ),
+        .I1(\cal_state_reg_n_0_[1] ),
+        .I2(\cal_state_reg_n_0_[2] ),
+        .I3(\cal_state_reg_n_0_[3] ),
+        .I4(\cal_state_reg_n_0_[0] ),
+        .I5(\cal_state[0]_i_6_n_0 ),
         .O(\cal_state[0]_i_2_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair98" *) 
   LUT5 #(
-    .INIT(32'hFF00FE00)) 
+    .INIT(32'hFFF0F0E0)) 
     \cal_state[0]_i_3 
-       (.I0(\cal_state_reg_n_0_[2] ),
-        .I1(\cal_state_reg_n_0_[4] ),
-        .I2(\cal_state_reg_n_0_[3] ),
-        .I3(\cal_state_reg_n_0_[1] ),
-        .I4(\cal_state[5]_i_2_n_0 ),
-        .O(\cal_state[0]_i_3_n_0 ));
-  LUT5 #(
-    .INIT(32'h00002220)) 
-    \cal_state[0]_i_4 
-       (.I0(\cal_state[0]_i_7_n_0 ),
-        .I1(\cal_state[0]_i_8_n_0 ),
-        .I2(\cal_state_reg_n_0_[5] ),
-        .I3(o_data_idelay_update_i_2_n_0),
-        .I4(\cal_state[0]_i_9_n_0 ),
-        .O(\cal_state[0]_i_4_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair102" *) 
-  LUT5 #(
-    .INIT(32'hFFFFFFFE)) 
-    \cal_state[0]_i_5 
-       (.I0(\cal_state[0]_i_10_n_0 ),
-        .I1(\cal_state_reg_n_0_[11] ),
-        .I2(\cal_state_reg_n_0_[5] ),
+       (.I0(\cal_state_reg_n_0_[6] ),
+        .I1(\cal_state[7]_i_3_n_0 ),
+        .I2(\best_tap[4]_i_3_n_0 ),
         .I3(\cal_state_reg_n_0_[4] ),
         .I4(\cal_state_reg_n_0_[3] ),
-        .O(\cal_state[0]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair110" *) 
-  LUT4 #(
-    .INIT(16'h8000)) 
-    \cal_state[0]_i_6 
-       (.I0(\rst_dly_reg[3] [3]),
-        .I1(\rst_dly_reg[3] [2]),
-        .I2(\rst_dly_reg[3] [1]),
-        .I3(\rst_dly_reg[3] [0]),
-        .O(\cal_state[0]_i_6_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair102" *) 
-  LUT5 #(
-    .INIT(32'hFFFEFFF8)) 
-    \cal_state[0]_i_7 
-       (.I0(\cal_state_reg_n_0_[4] ),
-        .I1(\cal_state_reg_n_0_[5] ),
-        .I2(\cal_state_reg_n_0_[11] ),
-        .I3(\cal_state[0]_i_10_n_0 ),
-        .I4(\cal_state_reg_n_0_[3] ),
-        .O(\cal_state[0]_i_7_n_0 ));
+        .O(\cal_state[0]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'h0000000100010001)) 
+    .INIT(64'hFFFFFFFFFFFF1500)) 
+    \cal_state[0]_i_4 
+       (.I0(\cal_state[9]_i_6_n_0 ),
+        .I1(\cal_state_reg_n_0_[11] ),
+        .I2(\cal_state_reg_n_0_[8] ),
+        .I3(o_initial_cal_done_i_2_n_0),
+        .I4(\cal_state[0]_i_7_n_0 ),
+        .I5(\cal_state[0]_i_8_n_0 ),
+        .O(\cal_state[0]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFFFFFFFFFFFFE)) 
+    \cal_state[0]_i_5 
+       (.I0(\cal_state[9]_i_3_n_0 ),
+        .I1(\cal_state_reg_n_0_[6] ),
+        .I2(\cal_state_reg_n_0_[5] ),
+        .I3(\cal_state_reg_n_0_[8] ),
+        .I4(\cal_state_reg_n_0_[11] ),
+        .I5(\cal_state_reg_n_0_[4] ),
+        .O(\cal_state[0]_i_5_n_0 ));
+  LUT6 #(
+    .INIT(64'h0000000000000001)) 
+    \cal_state[0]_i_6 
+       (.I0(\cal_state[1]_i_5_n_0 ),
+        .I1(\cal_state_reg_n_0_[6] ),
+        .I2(\cal_state_reg_n_0_[5] ),
+        .I3(\cal_state[0]_i_9_n_0 ),
+        .I4(\cal_state[9]_i_6_n_0 ),
+        .I5(\cal_state[7]_i_3_n_0 ),
+        .O(\cal_state[0]_i_6_n_0 ));
+  LUT6 #(
+    .INIT(64'h000000002A2A2AFF)) 
+    \cal_state[0]_i_7 
+       (.I0(\cal_state[11]_i_4_n_0 ),
+        .I1(\cal_state_reg_n_0_[10] ),
+        .I2(\cal_state_reg_n_0_[9] ),
+        .I3(\cal_state_reg_n_0_[5] ),
+        .I4(\cal_state[7]_i_3_n_0 ),
+        .I5(\cal_state[9]_i_6_n_0 ),
+        .O(\cal_state[0]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair109" *) 
+  LUT5 #(
+    .INIT(32'h00000001)) 
     \cal_state[0]_i_8 
        (.I0(\cal_state_reg_n_0_[3] ),
-        .I1(\cal_state_reg_n_0_[4] ),
-        .I2(\cal_state[0]_i_11_n_0 ),
-        .I3(o_data_idelay_update_i_3_n_0),
-        .I4(\cal_state_reg_n_0_[7] ),
-        .I5(\cal_state_reg_n_0_[6] ),
+        .I1(\cal_state_reg_n_0_[10] ),
+        .I2(\cal_state_reg_n_0_[9] ),
+        .I3(\current_tap[4]_i_4_n_0 ),
+        .I4(\cal_state_reg_n_0_[4] ),
         .O(\cal_state[0]_i_8_n_0 ));
-  LUT6 #(
-    .INIT(64'h0000001000101010)) 
+  LUT2 #(
+    .INIT(4'hE)) 
     \cal_state[0]_i_9 
-       (.I0(\cal_state_reg_n_0_[6] ),
-        .I1(\cal_state_reg_n_0_[7] ),
-        .I2(\o_eye_mon_done_fe[1]_i_3_n_0 ),
-        .I3(\cal_state_reg_n_0_[10] ),
-        .I4(\cal_state_reg_n_0_[9] ),
-        .I5(\cal_state_reg_n_0_[8] ),
+       (.I0(\cal_state_reg_n_0_[2] ),
+        .I1(\cal_state_reg_n_0_[1] ),
         .O(\cal_state[0]_i_9_n_0 ));
   LUT4 #(
     .INIT(16'h0400)) 
     \cal_state[10]_i_1 
-       (.I0(\cal_state_reg_n_0_[8] ),
+       (.I0(\cal_state[11]_i_3_n_0 ),
         .I1(\cal_state_reg_n_0_[9] ),
         .I2(\cal_state_reg_n_0_[10] ),
-        .I3(\cal_state[11]_i_2_n_0 ),
+        .I3(\cal_state[11]_i_4_n_0 ),
         .O(cal_state[10]));
+  LUT3 #(
+    .INIT(8'hEF)) 
+    \cal_state[11]_i_1 
+       (.I0(phy_loss_of_sync_104),
+        .I1(reset_out),
+        .I2(\rst_dly_reg[3] [3]),
+        .O(SR));
   LUT4 #(
     .INIT(16'h0400)) 
-    \cal_state[11]_i_1 
-       (.I0(\cal_state_reg_n_0_[8] ),
+    \cal_state[11]_i_2 
+       (.I0(\cal_state[11]_i_3_n_0 ),
         .I1(\cal_state_reg_n_0_[10] ),
         .I2(\cal_state_reg_n_0_[9] ),
-        .I3(\cal_state[11]_i_2_n_0 ),
+        .I3(\cal_state[11]_i_4_n_0 ),
         .O(cal_state[11]));
-  LUT6 #(
-    .INIT(64'h0000000000000100)) 
-    \cal_state[11]_i_2 
-       (.I0(\cal_state_reg_n_0_[0] ),
-        .I1(\cal_state_reg_n_0_[2] ),
-        .I2(\cal_state_reg_n_0_[1] ),
-        .I3(\o_eye_mon_done_fe[1]_i_3_n_0 ),
-        .I4(\cal_state_reg_n_0_[7] ),
-        .I5(\cal_state_reg_n_0_[6] ),
-        .O(\cal_state[11]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'h88F8F8888888F888)) 
-    \cal_state[1]_i_1 
-       (.I0(\cal_state[1]_i_2_n_0 ),
-        .I1(\o_eye_mon_done_fe[1]_i_2_n_0 ),
-        .I2(\cal_state[1]_i_3_n_0 ),
-        .I3(\cal_state_reg_n_0_[6] ),
-        .I4(\cal_state_reg_n_0_[7] ),
-        .I5(cal_state1),
-        .O(cal_state[1]));
-  LUT6 #(
-    .INIT(64'h0200000000000000)) 
-    \cal_state[1]_i_2 
-       (.I0(\cal_state_reg_n_0_[0] ),
-        .I1(\cal_state_reg_n_0_[2] ),
-        .I2(\cal_state_reg_n_0_[1] ),
-        .I3(\rst_dly_reg[3] [0]),
-        .I4(\rst_dly_reg[3] [1]),
-        .I5(\cal_state[1]_i_5_n_0 ),
-        .O(\cal_state[1]_i_2_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair99" *) 
   LUT5 #(
-    .INIT(32'h00000004)) 
-    \cal_state[1]_i_3 
-       (.I0(\cal_state[1]_i_6_n_0 ),
-        .I1(\o_eye_mon_done_fe[1]_i_3_n_0 ),
-        .I2(\cal_state_reg_n_0_[8] ),
-        .I3(\cal_state_reg_n_0_[10] ),
-        .I4(\cal_state_reg_n_0_[9] ),
-        .O(\cal_state[1]_i_3_n_0 ));
+    .INIT(32'hFFFFFFFE)) 
+    \cal_state[11]_i_3 
+       (.I0(\cal_state_reg_n_0_[4] ),
+        .I1(\cal_state_reg_n_0_[3] ),
+        .I2(\cal_state_reg_n_0_[0] ),
+        .I3(\cal_state_reg_n_0_[2] ),
+        .I4(\cal_state_reg_n_0_[1] ),
+        .O(\cal_state[11]_i_3_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair105" *) 
   LUT5 #(
-    .INIT(32'hBEFFFFBE)) 
+    .INIT(32'h00000001)) 
+    \cal_state[11]_i_4 
+       (.I0(\cal_state_reg_n_0_[11] ),
+        .I1(\cal_state_reg_n_0_[8] ),
+        .I2(\cal_state_reg_n_0_[5] ),
+        .I3(\cal_state_reg_n_0_[6] ),
+        .I4(\cal_state_reg_n_0_[7] ),
+        .O(\cal_state[11]_i_4_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFFFFFAAAAAABA)) 
+    \cal_state[1]_i_1 
+       (.I0(\cal_state[1]_i_2_n_0 ),
+        .I1(\cal_state[9]_i_4_n_0 ),
+        .I2(\cal_state_reg_n_0_[6] ),
+        .I3(\cal_state_reg_n_0_[5] ),
+        .I4(\cal_state[1]_i_3_n_0 ),
+        .I5(\cal_state[1]_i_4_n_0 ),
+        .O(cal_state[1]));
+  LUT6 #(
+    .INIT(64'h0000000001000000)) 
+    \cal_state[1]_i_2 
+       (.I0(\cal_state[9]_i_6_n_0 ),
+        .I1(\cal_state_reg_n_0_[2] ),
+        .I2(\cal_state_reg_n_0_[1] ),
+        .I3(\cal_state_reg_n_0_[0] ),
+        .I4(\cal_state[1]_i_5_n_0 ),
+        .I5(\best_tap[4]_i_3_n_0 ),
+        .O(\cal_state[1]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'hFFFFFFFFFFFFFFFE)) 
+    \cal_state[1]_i_3 
+       (.I0(\cal_state_reg_n_0_[11] ),
+        .I1(\cal_state_reg_n_0_[8] ),
+        .I2(\cal_state_reg_n_0_[10] ),
+        .I3(\cal_state_reg_n_0_[9] ),
+        .I4(\cal_state_reg_n_0_[7] ),
+        .I5(\cal_state[9]_i_6_n_0 ),
+        .O(\cal_state[1]_i_3_n_0 ));
+  LUT6 #(
+    .INIT(64'h0000002000000000)) 
     \cal_state[1]_i_4 
-       (.I0(\cal_state[1]_i_7_n_0 ),
+       (.I0(\cal_state[8]_i_6_n_0 ),
+        .I1(\cal_state[9]_i_4_n_0 ),
+        .I2(\cal_state_reg_n_0_[7] ),
+        .I3(\cal_state_reg_n_0_[4] ),
+        .I4(\cal_state_reg_n_0_[3] ),
+        .I5(cal_state1),
+        .O(\cal_state[1]_i_4_n_0 ));
+  LUT4 #(
+    .INIT(16'h8000)) 
+    \cal_state[1]_i_5 
+       (.I0(\rst_dly_reg[3] [3]),
+        .I1(\rst_dly_reg[3] [2]),
+        .I2(\rst_dly_reg[3] [1]),
+        .I3(\rst_dly_reg[3] [0]),
+        .O(\cal_state[1]_i_5_n_0 ));
+  LUT6 #(
+    .INIT(64'h0000000000000100)) 
+    \cal_state[2]_i_1 
+       (.I0(\cal_state_reg_n_0_[3] ),
+        .I1(\cal_state_reg_n_0_[4] ),
+        .I2(\cal_state_reg_n_0_[2] ),
+        .I3(\cal_state_reg_n_0_[1] ),
+        .I4(\cal_state_reg_n_0_[0] ),
+        .I5(\best_tap[4]_i_3_n_0 ),
+        .O(cal_state[2]));
+  (* SOFT_HLUTNM = "soft_lutpair110" *) 
+  LUT5 #(
+    .INIT(32'h000B0F00)) 
+    \cal_state[3]_i_1 
+       (.I0(\cal_state_reg[4]_0 [0]),
+        .I1(\cal_state_reg[4]_0 [1]),
+        .I2(\cal_state[3]_i_2_n_0 ),
+        .I3(\cal_state_reg_n_0_[2] ),
+        .I4(\cal_state_reg_n_0_[3] ),
+        .O(cal_state[3]));
+  (* SOFT_HLUTNM = "soft_lutpair111" *) 
+  LUT4 #(
+    .INIT(16'hFFFE)) 
+    \cal_state[3]_i_2 
+       (.I0(\cal_state_reg_n_0_[0] ),
+        .I1(\cal_state_reg_n_0_[1] ),
+        .I2(\best_tap[4]_i_3_n_0 ),
+        .I3(\cal_state_reg_n_0_[4] ),
+        .O(\cal_state[3]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'h0000000000000040)) 
+    \cal_state[4]_i_1 
+       (.I0(\cal_state[7]_i_3_n_0 ),
+        .I1(\cal_state[4]_i_2_n_0 ),
+        .I2(\cal_state_reg[4]_0 [1]),
+        .I3(\cal_state_reg[4]_0 [0]),
+        .I4(initial_cal_complete),
+        .I5(\cal_state[9]_i_5_n_0 ),
+        .O(cal_state[4]));
+  (* SOFT_HLUTNM = "soft_lutpair99" *) 
+  LUT5 #(
+    .INIT(32'h00000004)) 
+    \cal_state[4]_i_2 
+       (.I0(\cal_state_reg_n_0_[4] ),
+        .I1(\cal_state_reg_n_0_[3] ),
+        .I2(\cal_state_reg_n_0_[0] ),
+        .I3(\cal_state_reg_n_0_[2] ),
+        .I4(\cal_state_reg_n_0_[1] ),
+        .O(\cal_state[4]_i_2_n_0 ));
+  LUT6 #(
+    .INIT(64'h0000000000000100)) 
+    \cal_state[5]_i_1 
+       (.I0(\cal_state_reg_n_0_[1] ),
+        .I1(\cal_state_reg_n_0_[2] ),
+        .I2(\cal_state_reg_n_0_[0] ),
+        .I3(\cal_state_reg_n_0_[4] ),
+        .I4(\cal_state_reg_n_0_[3] ),
+        .I5(\best_tap[4]_i_3_n_0 ),
+        .O(cal_state[5]));
+  (* SOFT_HLUTNM = "soft_lutpair112" *) 
+  LUT4 #(
+    .INIT(16'h0004)) 
+    \cal_state[6]_i_1 
+       (.I0(\cal_state[11]_i_3_n_0 ),
+        .I1(\cal_state_reg_n_0_[5] ),
+        .I2(\cal_state_reg_n_0_[6] ),
+        .I3(\cal_state[7]_i_3_n_0 ),
+        .O(cal_state[6]));
+  LUT6 #(
+    .INIT(64'h0000000000000400)) 
+    \cal_state[7]_i_1 
+       (.I0(\cal_state_reg_n_0_[4] ),
+        .I1(\cal_state_reg_n_0_[3] ),
+        .I2(\cal_state[9]_i_4_n_0 ),
+        .I3(cal_state1__1),
+        .I4(\cal_state[9]_i_5_n_0 ),
+        .I5(\cal_state[7]_i_3_n_0 ),
+        .O(cal_state[7]));
+  (* SOFT_HLUTNM = "soft_lutpair114" *) 
+  LUT3 #(
+    .INIT(8'h08)) 
+    \cal_state[7]_i_2 
+       (.I0(initial_cal_complete),
+        .I1(\cal_state_reg[4]_0 [1]),
+        .I2(\cal_state_reg[4]_0 [0]),
+        .O(cal_state1__1));
+  (* SOFT_HLUTNM = "soft_lutpair106" *) 
+  LUT5 #(
+    .INIT(32'hFFFFFFFE)) 
+    \cal_state[7]_i_3 
+       (.I0(\cal_state_reg_n_0_[7] ),
+        .I1(\cal_state_reg_n_0_[9] ),
+        .I2(\cal_state_reg_n_0_[10] ),
+        .I3(\cal_state_reg_n_0_[8] ),
+        .I4(\cal_state_reg_n_0_[11] ),
+        .O(\cal_state[7]_i_3_n_0 ));
+  LUT6 #(
+    .INIT(64'h3800FFFF38003800)) 
+    \cal_state[8]_i_1 
+       (.I0(\o_eye_mon_done_fe_reg[0]_0 ),
+        .I1(\cal_state_reg_n_0_[8] ),
+        .I2(\cal_state_reg_n_0_[11] ),
+        .I3(\cal_state[8]_i_2_n_0 ),
+        .I4(cal_state1),
+        .I5(\cal_state[8]_i_4_n_0 ),
+        .O(cal_state[8]));
+  LUT6 #(
+    .INIT(64'h0000000000000001)) 
+    \cal_state[8]_i_2 
+       (.I0(\cal_state_reg_n_0_[10] ),
+        .I1(\cal_state_reg_n_0_[9] ),
+        .I2(\cal_state_reg_n_0_[7] ),
+        .I3(\cal_state_reg_n_0_[5] ),
+        .I4(\cal_state_reg_n_0_[6] ),
+        .I5(\cal_state[11]_i_3_n_0 ),
+        .O(\cal_state[8]_i_2_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair108" *) 
+  LUT5 #(
+    .INIT(32'hBEFFFFBE)) 
+    \cal_state[8]_i_3 
+       (.I0(\cal_state[8]_i_5_n_0 ),
         .I1(best_tap[0]),
         .I2(Q[0]),
         .I3(best_tap[1]),
         .I4(Q[1]),
         .O(cal_state1));
-  (* SOFT_HLUTNM = "soft_lutpair110" *) 
-  LUT2 #(
-    .INIT(4'h8)) 
-    \cal_state[1]_i_5 
-       (.I0(\rst_dly_reg[3] [2]),
-        .I1(\rst_dly_reg[3] [3]),
-        .O(\cal_state[1]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair104" *) 
-  LUT3 #(
-    .INIT(8'hFE)) 
-    \cal_state[1]_i_6 
-       (.I0(\cal_state_reg_n_0_[0] ),
-        .I1(\cal_state_reg_n_0_[2] ),
+  LUT6 #(
+    .INIT(64'h0000000000000008)) 
+    \cal_state[8]_i_4 
+       (.I0(\cal_state_reg_n_0_[7] ),
+        .I1(\cal_state[8]_i_6_n_0 ),
         .I2(\cal_state_reg_n_0_[1] ),
-        .O(\cal_state[1]_i_6_n_0 ));
+        .I3(\cal_state_reg_n_0_[2] ),
+        .I4(\cal_state_reg_n_0_[0] ),
+        .I5(\cal_state[9]_i_6_n_0 ),
+        .O(\cal_state[8]_i_4_n_0 ));
   LUT6 #(
     .INIT(64'h6FF6FFFFFFFF6FF6)) 
-    \cal_state[1]_i_7 
+    \cal_state[8]_i_5 
        (.I0(best_tap[3]),
         .I1(Q[3]),
         .I2(best_tap[4]),
         .I3(Q[4]),
         .I4(Q[2]),
         .I5(best_tap[2]),
-        .O(\cal_state[1]_i_7_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair107" *) 
-  LUT4 #(
-    .INIT(16'h1000)) 
-    \cal_state[2]_i_1 
-       (.I0(\cal_state_reg_n_0_[2] ),
-        .I1(\cal_state_reg_n_0_[0] ),
-        .I2(\cal_state_reg_n_0_[1] ),
-        .I3(\o_eye_mon_done_fe[1]_i_2_n_0 ),
-        .O(cal_state[2]));
+        .O(\cal_state[8]_i_5_n_0 ));
   LUT6 #(
-    .INIT(64'h0000000000F00044)) 
-    \cal_state[3]_i_1 
-       (.I0(\cal_state[5]_i_2_n_0 ),
-        .I1(\cal_state[3]_i_2_n_0 ),
-        .I2(\o_eye_mon_done_fe[1]_i_2_n_0 ),
-        .I3(\cal_state_reg_n_0_[1] ),
-        .I4(\cal_state_reg_n_0_[2] ),
-        .I5(\cal_state_reg_n_0_[0] ),
-        .O(cal_state[3]));
-  (* SOFT_HLUTNM = "soft_lutpair108" *) 
-  LUT4 #(
-    .INIT(16'h4404)) 
-    \cal_state[3]_i_2 
-       (.I0(\cal_state_reg_n_0_[4] ),
-        .I1(\cal_state_reg_n_0_[3] ),
-        .I2(eye_mon_done_fe[1]),
-        .I3(eye_mon_done_fe[0]),
-        .O(\cal_state[3]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'h0000040000000000)) 
-    \cal_state[4]_i_1 
-       (.I0(eye_mon_done_fe[0]),
-        .I1(eye_mon_done_fe[1]),
-        .I2(\cal_state_reg_n_0_[4] ),
-        .I3(\cal_state_reg_n_0_[3] ),
-        .I4(initial_cal_complete),
-        .I5(\cal_state[7]_i_2_n_0 ),
-        .O(cal_state[4]));
-  LUT6 #(
-    .INIT(64'h0000000000000004)) 
-    \cal_state[5]_i_1 
-       (.I0(\cal_state_reg_n_0_[3] ),
-        .I1(\cal_state_reg_n_0_[4] ),
-        .I2(\cal_state_reg_n_0_[0] ),
-        .I3(\cal_state_reg_n_0_[2] ),
-        .I4(\cal_state_reg_n_0_[1] ),
-        .I5(\cal_state[5]_i_2_n_0 ),
-        .O(cal_state[5]));
-  (* SOFT_HLUTNM = "soft_lutpair98" *) 
-  LUT5 #(
-    .INIT(32'hFFFFFFFE)) 
-    \cal_state[5]_i_2 
-       (.I0(\cal_state_reg_n_0_[6] ),
-        .I1(\cal_state_reg_n_0_[7] ),
-        .I2(o_data_idelay_update_i_3_n_0),
-        .I3(\cal_state_reg_n_0_[11] ),
-        .I4(\cal_state_reg_n_0_[5] ),
-        .O(\cal_state[5]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'h0000000000000100)) 
-    \cal_state[6]_i_1 
-       (.I0(\cal_state_reg_n_0_[0] ),
-        .I1(\cal_state_reg_n_0_[2] ),
-        .I2(\cal_state_reg_n_0_[1] ),
-        .I3(\cal_state_reg_n_0_[5] ),
-        .I4(\cal_state_reg_n_0_[11] ),
-        .I5(o_data_idelay_update_i_2_n_0),
-        .O(cal_state[6]));
-  LUT6 #(
-    .INIT(64'h0400000000000000)) 
-    \cal_state[7]_i_1 
-       (.I0(eye_mon_done_fe[0]),
-        .I1(eye_mon_done_fe[1]),
-        .I2(\cal_state_reg_n_0_[4] ),
-        .I3(\cal_state_reg_n_0_[3] ),
-        .I4(initial_cal_complete),
-        .I5(\cal_state[7]_i_2_n_0 ),
-        .O(cal_state[7]));
-  (* SOFT_HLUTNM = "soft_lutpair107" *) 
-  LUT4 #(
-    .INIT(16'h0001)) 
-    \cal_state[7]_i_2 
-       (.I0(\cal_state[5]_i_2_n_0 ),
-        .I1(\cal_state_reg_n_0_[1] ),
-        .I2(\cal_state_reg_n_0_[2] ),
-        .I3(\cal_state_reg_n_0_[0] ),
-        .O(\cal_state[7]_i_2_n_0 ));
-  LUT6 #(
-    .INIT(64'h4444444444F44444)) 
-    \cal_state[8]_i_2 
-       (.I0(o_data_idelay_update_i_2_n_0),
-        .I1(\cal_state[8]_i_6_n_0 ),
-        .I2(\cal_state[1]_i_3_n_0 ),
-        .I3(\cal_state_reg_n_0_[6] ),
-        .I4(\cal_state_reg_n_0_[7] ),
-        .I5(cal_state1),
-        .O(\cal_state_reg[8]_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair104" *) 
-  LUT5 #(
-    .INIT(32'h00000004)) 
+    .INIT(64'h0000000000000001)) 
     \cal_state[8]_i_6 
-       (.I0(\cal_state_reg_n_0_[5] ),
-        .I1(\cal_state_reg_n_0_[11] ),
-        .I2(\cal_state_reg_n_0_[1] ),
-        .I3(\cal_state_reg_n_0_[2] ),
-        .I4(\cal_state_reg_n_0_[0] ),
+       (.I0(\cal_state_reg_n_0_[11] ),
+        .I1(\cal_state_reg_n_0_[8] ),
+        .I2(\cal_state_reg_n_0_[5] ),
+        .I3(\cal_state_reg_n_0_[6] ),
+        .I4(\cal_state_reg_n_0_[10] ),
+        .I5(\cal_state_reg_n_0_[9] ),
         .O(\cal_state[8]_i_6_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair106" *) 
-  LUT4 #(
-    .INIT(16'h1000)) 
+  LUT6 #(
+    .INIT(64'h0000000000000002)) 
+    \cal_state[9]_i_1 
+       (.I0(\cal_state[9]_i_2_n_0 ),
+        .I1(\cal_state[9]_i_3_n_0 ),
+        .I2(\cal_state[9]_i_4_n_0 ),
+        .I3(\cal_state[9]_i_5_n_0 ),
+        .I4(\cal_state[9]_i_6_n_0 ),
+        .I5(\o_eye_mon_done_fe_reg[0]_0 ),
+        .O(cal_state[9]));
+  LUT2 #(
+    .INIT(4'h2)) 
     \cal_state[9]_i_2 
+       (.I0(\cal_state_reg_n_0_[8] ),
+        .I1(\cal_state_reg_n_0_[11] ),
+        .O(\cal_state[9]_i_2_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair106" *) 
+  LUT3 #(
+    .INIT(8'hFE)) 
+    \cal_state[9]_i_3 
        (.I0(\cal_state_reg_n_0_[10] ),
         .I1(\cal_state_reg_n_0_[9] ),
-        .I2(\cal_state_reg_n_0_[8] ),
-        .I3(\cal_state[11]_i_2_n_0 ),
-        .O(o_initial_cal_done));
+        .I2(\cal_state_reg_n_0_[7] ),
+        .O(\cal_state[9]_i_3_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair111" *) 
+  LUT3 #(
+    .INIT(8'hFE)) 
+    \cal_state[9]_i_4 
+       (.I0(\cal_state_reg_n_0_[1] ),
+        .I1(\cal_state_reg_n_0_[2] ),
+        .I2(\cal_state_reg_n_0_[0] ),
+        .O(\cal_state[9]_i_4_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair107" *) 
   LUT2 #(
-    .INIT(4'hB)) 
+    .INIT(4'hE)) 
+    \cal_state[9]_i_5 
+       (.I0(\cal_state_reg_n_0_[5] ),
+        .I1(\cal_state_reg_n_0_[6] ),
+        .O(\cal_state[9]_i_5_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair98" *) 
+  LUT2 #(
+    .INIT(4'hE)) 
     \cal_state[9]_i_6 
-       (.I0(eye_mon_done_fe[0]),
-        .I1(eye_mon_done_fe[1]),
-        .O(\cal_state_reg[9]_0 ));
+       (.I0(\cal_state_reg_n_0_[3] ),
+        .I1(\cal_state_reg_n_0_[4] ),
+        .O(\cal_state[9]_i_6_n_0 ));
   FDSE \cal_state_reg[0] 
        (.C(refclk125_n),
         .CE(1'b1),
@@ -10133,13 +10127,13 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
   FDRE \cal_state_reg[8] 
        (.C(refclk125_n),
         .CE(1'b1),
-        .D(D[0]),
+        .D(cal_state[8]),
         .Q(\cal_state_reg_n_0_[8] ),
         .R(SR));
   FDRE \cal_state_reg[9] 
        (.C(refclk125_n),
         .CE(1'b1),
-        .D(D[1]),
+        .D(cal_state[9]),
         .Q(\cal_state_reg_n_0_[9] ),
         .R(SR));
   LUT6 #(
@@ -10148,9 +10142,9 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
        (.I0(best_tap[0]),
         .I1(\maint_best_tap_reg_n_0_[0] ),
         .I2(Q[0]),
-        .I3(\current_tap[4]_i_5_n_0 ),
+        .I3(\current_tap[4]_i_6_n_0 ),
         .I4(\cal_state_reg_n_0_[6] ),
-        .I5(\current_tap[4]_i_6_n_0 ),
+        .I5(\current_tap[4]_i_7_n_0 ),
         .O(\current_tap[0]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'hCCF0CCAACC00CCAA)) 
@@ -10158,11 +10152,11 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
        (.I0(best_tap[1]),
         .I1(\maint_best_tap_reg_n_0_[1] ),
         .I2(\current_tap[1]_i_2_n_0 ),
-        .I3(\current_tap[4]_i_5_n_0 ),
+        .I3(\current_tap[4]_i_6_n_0 ),
         .I4(\cal_state_reg_n_0_[6] ),
-        .I5(\current_tap[4]_i_6_n_0 ),
+        .I5(\current_tap[4]_i_7_n_0 ),
         .O(\current_tap[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair105" *) 
+  (* SOFT_HLUTNM = "soft_lutpair102" *) 
   LUT2 #(
     .INIT(4'h6)) 
     \current_tap[1]_i_2 
@@ -10175,11 +10169,11 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
        (.I0(best_tap[2]),
         .I1(\maint_best_tap_reg_n_0_[2] ),
         .I2(\current_tap[2]_i_2_n_0 ),
-        .I3(\current_tap[4]_i_5_n_0 ),
+        .I3(\current_tap[4]_i_6_n_0 ),
         .I4(\cal_state_reg_n_0_[6] ),
-        .I5(\current_tap[4]_i_6_n_0 ),
+        .I5(\current_tap[4]_i_7_n_0 ),
         .O(\current_tap[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair109" *) 
+  (* SOFT_HLUTNM = "soft_lutpair113" *) 
   LUT3 #(
     .INIT(8'h78)) 
     \current_tap[2]_i_2 
@@ -10193,89 +10187,101 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
        (.I0(\current_tap[3]_i_2_n_0 ),
         .I1(\maint_best_tap_reg_n_0_[3] ),
         .I2(\cal_state_reg_n_0_[6] ),
-        .I3(\current_tap[4]_i_5_n_0 ),
+        .I3(\current_tap[4]_i_6_n_0 ),
         .I4(best_tap[3]),
-        .I5(\current_tap[4]_i_6_n_0 ),
+        .I5(\current_tap[4]_i_7_n_0 ),
         .O(\current_tap[3]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair109" *) 
+  (* SOFT_HLUTNM = "soft_lutpair113" *) 
   LUT4 #(
-    .INIT(16'h7F80)) 
+    .INIT(16'h6AAA)) 
     \current_tap[3]_i_2 
-       (.I0(Q[2]),
+       (.I0(Q[3]),
         .I1(Q[1]),
         .I2(Q[0]),
-        .I3(Q[3]),
+        .I3(Q[2]),
         .O(\current_tap[3]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'h0000000000020028)) 
+    .INIT(64'hAAAAAAAAAAABABAA)) 
     \current_tap[4]_i_1 
-       (.I0(\current_tap[4]_i_3_n_0 ),
-        .I1(\cal_state_reg_n_0_[7] ),
-        .I2(\cal_state_reg_n_0_[6] ),
-        .I3(\cal_state_reg_n_0_[9] ),
-        .I4(\cal_state_reg_n_0_[10] ),
-        .I5(\cal_state_reg_n_0_[8] ),
+       (.I0(viable_tap_found),
+        .I1(\cal_state[11]_i_3_n_0 ),
+        .I2(\cal_state_reg_n_0_[9] ),
+        .I3(\cal_state_reg_n_0_[10] ),
+        .I4(\cal_state_reg_n_0_[7] ),
+        .I5(\current_tap[4]_i_4_n_0 ),
         .O(\current_tap[4]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'hCCF0CCAACC00CCAA)) 
     \current_tap[4]_i_2 
        (.I0(best_tap[4]),
         .I1(\maint_best_tap_reg_n_0_[4] ),
-        .I2(\current_tap[4]_i_4_n_0 ),
-        .I3(\current_tap[4]_i_5_n_0 ),
+        .I2(\current_tap[4]_i_5_n_0 ),
+        .I3(\current_tap[4]_i_6_n_0 ),
         .I4(\cal_state_reg_n_0_[6] ),
-        .I5(\current_tap[4]_i_6_n_0 ),
+        .I5(\current_tap[4]_i_7_n_0 ),
         .O(\current_tap[4]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair99" *) 
-  LUT5 #(
-    .INIT(32'h00000001)) 
+  (* SOFT_HLUTNM = "soft_lutpair112" *) 
+  LUT4 #(
+    .INIT(16'h0004)) 
     \current_tap[4]_i_3 
-       (.I0(\cal_state_reg_n_0_[5] ),
-        .I1(\cal_state_reg_n_0_[11] ),
-        .I2(\cal_state_reg_n_0_[3] ),
-        .I3(\cal_state_reg_n_0_[4] ),
-        .I4(\cal_state[1]_i_6_n_0 ),
-        .O(\current_tap[4]_i_3_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair103" *) 
-  LUT5 #(
-    .INIT(32'h7FFF8000)) 
+       (.I0(\cal_state[7]_i_3_n_0 ),
+        .I1(\cal_state_reg_n_0_[6] ),
+        .I2(\cal_state_reg_n_0_[5] ),
+        .I3(\cal_state[11]_i_3_n_0 ),
+        .O(viable_tap_found));
+  (* SOFT_HLUTNM = "soft_lutpair105" *) 
+  LUT4 #(
+    .INIT(16'hFFFE)) 
     \current_tap[4]_i_4 
-       (.I0(Q[3]),
-        .I1(Q[0]),
-        .I2(Q[1]),
-        .I3(Q[2]),
-        .I4(Q[4]),
+       (.I0(\cal_state_reg_n_0_[6] ),
+        .I1(\cal_state_reg_n_0_[5] ),
+        .I2(\cal_state_reg_n_0_[8] ),
+        .I3(\cal_state_reg_n_0_[11] ),
         .O(\current_tap[4]_i_4_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair100" *) 
   LUT5 #(
-    .INIT(32'hFFFFFFFE)) 
+    .INIT(32'h7FFF8000)) 
     \current_tap[4]_i_5 
-       (.I0(\cal_state_reg_n_0_[11] ),
-        .I1(\cal_state_reg_n_0_[9] ),
-        .I2(\cal_state_reg_n_0_[10] ),
-        .I3(\cal_state_reg_n_0_[8] ),
-        .I4(\current_tap[4]_i_7_n_0 ),
-        .O(\current_tap[4]_i_5_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair103" *) 
-  LUT5 #(
-    .INIT(32'hFFFF7FFF)) 
-    \current_tap[4]_i_6 
        (.I0(Q[2]),
-        .I1(Q[1]),
-        .I2(Q[0]),
-        .I3(Q[4]),
-        .I4(Q[3]),
-        .O(\current_tap[4]_i_6_n_0 ));
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(Q[3]),
+        .I4(Q[4]),
+        .O(\current_tap[4]_i_5_n_0 ));
   LUT6 #(
     .INIT(64'hFFFFFFFEFFFEFFFF)) 
-    \current_tap[4]_i_7 
-       (.I0(\cal_state[1]_i_6_n_0 ),
-        .I1(\cal_state_reg_n_0_[5] ),
-        .I2(\cal_state_reg_n_0_[4] ),
-        .I3(\cal_state_reg_n_0_[3] ),
+    \current_tap[4]_i_6 
+       (.I0(\current_tap[4]_i_8_n_0 ),
+        .I1(\current_tap[4]_i_9_n_0 ),
+        .I2(\cal_state[11]_i_3_n_0 ),
+        .I3(\cal_state_reg_n_0_[5] ),
         .I4(\cal_state_reg_n_0_[6] ),
         .I5(\cal_state_reg_n_0_[7] ),
+        .O(\current_tap[4]_i_6_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair100" *) 
+  LUT5 #(
+    .INIT(32'hDFFFFFFF)) 
+    \current_tap[4]_i_7 
+       (.I0(Q[4]),
+        .I1(Q[3]),
+        .I2(Q[2]),
+        .I3(Q[0]),
+        .I4(Q[1]),
         .O(\current_tap[4]_i_7_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair109" *) 
+  LUT2 #(
+    .INIT(4'hE)) 
+    \current_tap[4]_i_8 
+       (.I0(\cal_state_reg_n_0_[9] ),
+        .I1(\cal_state_reg_n_0_[10] ),
+        .O(\current_tap[4]_i_8_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair104" *) 
+  LUT2 #(
+    .INIT(4'hE)) 
+    \current_tap[4]_i_9 
+       (.I0(\cal_state_reg_n_0_[11] ),
+        .I1(\cal_state_reg_n_0_[8] ),
+        .O(\current_tap[4]_i_9_n_0 ));
   FDSE \current_tap_reg[0] 
        (.C(refclk125_n),
         .CE(\current_tap[4]_i_1_n_0 ),
@@ -10306,71 +10312,71 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
         .D(\current_tap[4]_i_2_n_0 ),
         .Q(Q[4]),
         .S(current_tap));
-  LUT6 #(
-    .INIT(64'h0000000000000110)) 
+  LUT5 #(
+    .INIT(32'h00000028)) 
     \current_tap_window[4]_i_1 
        (.I0(o_data_idelay_update_i_2_n_0),
-        .I1(\cal_state_reg_n_0_[1] ),
-        .I2(\cal_state_reg_n_0_[0] ),
-        .I3(\cal_state_reg_n_0_[2] ),
-        .I4(\cal_state_reg_n_0_[11] ),
-        .I5(\cal_state_reg_n_0_[5] ),
+        .I1(\cal_state_reg_n_0_[0] ),
+        .I2(\cal_state_reg_n_0_[2] ),
+        .I3(\cal_state_reg_n_0_[11] ),
+        .I4(\cal_state_reg_n_0_[5] ),
         .O(current_tap_window0));
   FDRE \current_tap_window_reg[0] 
        (.C(refclk125_n),
         .CE(cal_state[5]),
-        .D(\right_margin_reg[4]_0 [0]),
+        .D(D[0]),
         .Q(\current_tap_window_reg_n_0_[0] ),
         .R(current_tap_window0));
   FDRE \current_tap_window_reg[1] 
        (.C(refclk125_n),
         .CE(cal_state[5]),
-        .D(\right_margin_reg[4]_0 [1]),
+        .D(D[1]),
         .Q(\current_tap_window_reg_n_0_[1] ),
         .R(current_tap_window0));
   FDRE \current_tap_window_reg[2] 
        (.C(refclk125_n),
         .CE(cal_state[5]),
-        .D(\right_margin_reg[4]_0 [2]),
+        .D(D[2]),
         .Q(\current_tap_window_reg_n_0_[2] ),
         .R(current_tap_window0));
   FDRE \current_tap_window_reg[3] 
        (.C(refclk125_n),
         .CE(cal_state[5]),
-        .D(\right_margin_reg[4]_0 [3]),
+        .D(D[3]),
         .Q(\current_tap_window_reg_n_0_[3] ),
         .R(current_tap_window0));
   FDRE \current_tap_window_reg[4] 
        (.C(refclk125_n),
         .CE(cal_state[5]),
-        .D(\right_margin_reg[4]_0 [4]),
+        .D(D[4]),
         .Q(\current_tap_window_reg_n_0_[4] ),
         .R(current_tap_window0));
   LUT6 #(
-    .INIT(64'h0000000000000010)) 
+    .INIT(64'hFFFFFFFF00000020)) 
     \em_state[2]_i_2 
-       (.I0(\cal_state_reg_n_0_[5] ),
-        .I1(\cal_state_reg_n_0_[11] ),
+       (.I0(o_data_idelay_update_i_2_n_0),
+        .I1(\cal_state_reg_n_0_[0] ),
         .I2(\cal_state_reg_n_0_[2] ),
-        .I3(\cal_state_reg_n_0_[0] ),
-        .I4(\cal_state_reg_n_0_[1] ),
-        .I5(o_data_idelay_update_i_2_n_0),
-        .O(enable_eye_mon));
-  LUT6 #(
-    .INIT(64'hFFFFFFFF10000000)) 
+        .I3(\cal_state_reg_n_0_[11] ),
+        .I4(\cal_state_reg_n_0_[5] ),
+        .I5(eye_mon_timeout_r),
+        .O(o_eye_mon_done_reg));
+  (* SOFT_HLUTNM = "soft_lutpair102" *) 
+  LUT5 #(
+    .INIT(32'hFFFF1000)) 
     initial_cal_complete_i_1
        (.I0(initial_cal_complete_i_2_n_0),
         .I1(Q[0]),
-        .I2(viable_tap_found_reg_n_0),
-        .I3(Q[2]),
-        .I4(Q[1]),
-        .I5(initial_cal_complete),
+        .I2(Q[1]),
+        .I3(viable_tap_found_reg_n_0),
+        .I4(initial_cal_complete),
         .O(initial_cal_complete_i_1_n_0));
-  LUT2 #(
-    .INIT(4'hB)) 
+  LUT3 #(
+    .INIT(8'hDF)) 
     initial_cal_complete_i_2
-       (.I0(Q[3]),
-        .I1(Q[4]),
+       (.I0(Q[2]),
+        .I1(Q[3]),
+        .I2(Q[4]),
         .O(initial_cal_complete_i_2_n_0));
   FDRE initial_cal_complete_reg
        (.C(refclk125_n),
@@ -10378,25 +10384,24 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
         .D(initial_cal_complete_i_1_n_0),
         .Q(initial_cal_complete),
         .R(current_tap));
-  (* SOFT_HLUTNM = "soft_lutpair111" *) 
+  (* SOFT_HLUTNM = "soft_lutpair108" *) 
   LUT1 #(
     .INIT(2'h1)) 
     \maint_best_tap[0]_i_1 
        (.I0(Q[0]),
         .O(\maint_best_tap[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair111" *) 
   LUT3 #(
     .INIT(8'h96)) 
     \maint_best_tap[1]_i_1 
        (.I0(Q[1]),
         .I1(Q[0]),
-        .I2(\right_margin_reg[4] ),
+        .I2(\left_margin_reg[4] ),
         .O(\maint_best_tap[1]_i_1_n_0 ));
   (* SOFT_HLUTNM = "soft_lutpair101" *) 
   LUT4 #(
     .INIT(16'hBD42)) 
     \maint_best_tap[2]_i_1 
-       (.I0(\right_margin_reg[4] ),
+       (.I0(\left_margin_reg[4] ),
         .I1(Q[0]),
         .I2(Q[1]),
         .I3(Q[2]),
@@ -10405,7 +10410,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
   LUT5 #(
     .INIT(32'hBFFD4002)) 
     \maint_best_tap[3]_i_1 
-       (.I0(\right_margin_reg[4] ),
+       (.I0(\left_margin_reg[4] ),
         .I1(Q[2]),
         .I2(Q[1]),
         .I3(Q[0]),
@@ -10414,7 +10419,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
   LUT6 #(
     .INIT(64'hBFFFFFFD40000002)) 
     \maint_best_tap[4]_i_1 
-       (.I0(\right_margin_reg[4] ),
+       (.I0(\left_margin_reg[4] ),
         .I1(Q[3]),
         .I2(Q[0]),
         .I3(Q[1]),
@@ -10451,120 +10456,87 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_calibration
         .D(\maint_best_tap[4]_i_1_n_0 ),
         .Q(\maint_best_tap_reg_n_0_[4] ),
         .R(current_tap));
-  LUT6 #(
-    .INIT(64'h0000000000010100)) 
+  (* SOFT_HLUTNM = "soft_lutpair103" *) 
+  LUT5 #(
+    .INIT(32'h00000220)) 
     o_data_idelay_update_i_1
        (.I0(o_data_idelay_update_i_2_n_0),
-        .I1(\cal_state_reg_n_0_[1] ),
-        .I2(\cal_state_reg_n_0_[0] ),
-        .I3(\cal_state_reg_n_0_[2] ),
-        .I4(\cal_state_reg_n_0_[11] ),
-        .I5(\cal_state_reg_n_0_[5] ),
+        .I1(\cal_state_reg_n_0_[0] ),
+        .I2(\cal_state_reg_n_0_[2] ),
+        .I3(\cal_state_reg_n_0_[11] ),
+        .I4(\cal_state_reg_n_0_[5] ),
         .O(o_data_idelay_update0));
-  LUT5 #(
-    .INIT(32'hFFFFFFFE)) 
+  LUT6 #(
+    .INIT(64'h0000000000000001)) 
     o_data_idelay_update_i_2
-       (.I0(\cal_state_reg_n_0_[6] ),
-        .I1(\cal_state_reg_n_0_[7] ),
-        .I2(o_data_idelay_update_i_3_n_0),
-        .I3(\cal_state_reg_n_0_[4] ),
-        .I4(\cal_state_reg_n_0_[3] ),
-        .O(o_data_idelay_update_i_2_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair100" *) 
-  LUT3 #(
-    .INIT(8'hFE)) 
-    o_data_idelay_update_i_3
-       (.I0(\cal_state_reg_n_0_[9] ),
-        .I1(\cal_state_reg_n_0_[10] ),
+       (.I0(\cal_state_reg_n_0_[3] ),
+        .I1(\cal_state_reg_n_0_[4] ),
         .I2(\cal_state_reg_n_0_[8] ),
-        .O(o_data_idelay_update_i_3_n_0));
+        .I3(\cal_state_reg_n_0_[6] ),
+        .I4(\cal_state_reg_n_0_[1] ),
+        .I5(\cal_state[9]_i_3_n_0 ),
+        .O(o_data_idelay_update_i_2_n_0));
   FDRE o_data_idelay_update_reg
        (.C(refclk125_n),
         .CE(1'b1),
         .D(o_data_idelay_update0),
         .Q(E),
         .R(1'b0));
-  LUT4 #(
-    .INIT(16'h0200)) 
-    \o_eye_mon_done_fe[1]_i_1 
-       (.I0(\cal_state_reg_n_0_[0] ),
-        .I1(\cal_state_reg_n_0_[2] ),
-        .I2(\cal_state_reg_n_0_[1] ),
-        .I3(\o_eye_mon_done_fe[1]_i_2_n_0 ),
-        .O(current_tap));
-  LUT6 #(
-    .INIT(64'h0000000000000002)) 
-    \o_eye_mon_done_fe[1]_i_2 
-       (.I0(\o_eye_mon_done_fe[1]_i_3_n_0 ),
-        .I1(\cal_state_reg_n_0_[6] ),
-        .I2(\cal_state_reg_n_0_[7] ),
-        .I3(\cal_state_reg_n_0_[9] ),
-        .I4(\cal_state_reg_n_0_[10] ),
-        .I5(\cal_state_reg_n_0_[8] ),
-        .O(\o_eye_mon_done_fe[1]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair99" *) 
-  LUT4 #(
-    .INIT(16'h0001)) 
-    \o_eye_mon_done_fe[1]_i_3 
-       (.I0(\cal_state_reg_n_0_[4] ),
-        .I1(\cal_state_reg_n_0_[3] ),
-        .I2(\cal_state_reg_n_0_[11] ),
-        .I3(\cal_state_reg_n_0_[5] ),
-        .O(\o_eye_mon_done_fe[1]_i_3_n_0 ));
   FDRE \o_eye_mon_done_fe_reg[0] 
        (.C(refclk125_n),
         .CE(1'b1),
         .D(o_eye_mon_done_reg_0),
-        .Q(eye_mon_done_fe[0]),
+        .Q(\cal_state_reg[4]_0 [0]),
         .R(current_tap));
   FDRE \o_eye_mon_done_fe_reg[1] 
        (.C(refclk125_n),
         .CE(1'b1),
-        .D(eye_mon_done_fe[0]),
-        .Q(eye_mon_done_fe[1]),
+        .D(\cal_state_reg[4]_0 [0]),
+        .Q(\cal_state_reg[4]_0 [1]),
         .R(current_tap));
-  LUT6 #(
-    .INIT(64'hFFFFFFFF00000020)) 
-    o_eye_mon_done_i_3
-       (.I0(\best_tap[4]_i_2_n_0 ),
-        .I1(\cal_state_reg_n_0_[0] ),
-        .I2(\cal_state_reg_n_0_[2] ),
-        .I3(\cal_state_reg_n_0_[11] ),
-        .I4(\cal_state_reg_n_0_[5] ),
-        .I5(eye_mon_timeout_r),
-        .O(o_eye_mon_done_reg));
-  (* SOFT_HLUTNM = "soft_lutpair106" *) 
+  (* SOFT_HLUTNM = "soft_lutpair104" *) 
   LUT5 #(
-    .INIT(32'hFFFF0008)) 
+    .INIT(32'hFFFF0020)) 
     o_initial_cal_done_i_1
-       (.I0(\cal_state[11]_i_2_n_0 ),
-        .I1(\cal_state_reg_n_0_[8] ),
-        .I2(\cal_state_reg_n_0_[9] ),
-        .I3(\cal_state_reg_n_0_[10] ),
+       (.I0(o_initial_cal_done_i_2_n_0),
+        .I1(\cal_state_reg_n_0_[11] ),
+        .I2(\cal_state_reg_n_0_[8] ),
+        .I3(\cal_state[11]_i_3_n_0 ),
         .I4(phy_init_cal_done_104),
         .O(o_initial_cal_done_i_1_n_0));
+  (* SOFT_HLUTNM = "soft_lutpair107" *) 
+  LUT5 #(
+    .INIT(32'h00000001)) 
+    o_initial_cal_done_i_2
+       (.I0(\cal_state_reg_n_0_[6] ),
+        .I1(\cal_state_reg_n_0_[5] ),
+        .I2(\cal_state_reg_n_0_[7] ),
+        .I3(\cal_state_reg_n_0_[9] ),
+        .I4(\cal_state_reg_n_0_[10] ),
+        .O(o_initial_cal_done_i_2_n_0));
   FDRE o_initial_cal_done_reg
        (.C(refclk125_n),
         .CE(1'b1),
         .D(o_initial_cal_done_i_1_n_0),
         .Q(phy_init_cal_done_104),
         .R(SR));
-  (* SOFT_HLUTNM = "soft_lutpair108" *) 
+  (* SOFT_HLUTNM = "soft_lutpair114" *) 
   LUT3 #(
     .INIT(8'h04)) 
     \panic_bucket[3]_i_4 
-       (.I0(eye_mon_done_fe[0]),
-        .I1(eye_mon_done_fe[1]),
+       (.I0(\cal_state_reg[4]_0 [0]),
+        .I1(\cal_state_reg[4]_0 [1]),
         .I2(data_out),
         .O(\panic_bucket_reg[0] ));
-  LUT5 #(
-    .INIT(32'hEFFF2000)) 
+  LUT6 #(
+    .INIT(64'hFFFFFFEF00000020)) 
     viable_tap_found_i_1
        (.I0(viable_tap_found_i_2_n_0),
-        .I1(\cal_state_reg_n_0_[7] ),
+        .I1(\cal_state[7]_i_3_n_0 ),
         .I2(\cal_state_reg_n_0_[6] ),
-        .I3(\cal_state[1]_i_3_n_0 ),
-        .I4(viable_tap_found_reg_n_0),
+        .I3(\cal_state_reg_n_0_[5] ),
+        .I4(\cal_state[11]_i_3_n_0 ),
+        .I5(viable_tap_found_reg_n_0),
         .O(viable_tap_found_i_1_n_0));
   LUT5 #(
     .INIT(32'hFFFFFFEA)) 
@@ -10754,8 +10726,8 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
     o_txdata_6b,
     \rst_dly_reg[3] ,
     D,
-    reset_out,
     reset_sync6,
+    soft_rx_reset0,
     E,
     \current_tap_reg[4] ,
     mon_idly_update_reg,
@@ -10776,8 +10748,8 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
   input [5:0]o_txdata_6b;
   input [0:0]\rst_dly_reg[3] ;
   input [4:0]D;
-  input reset_out;
   input reset_sync6;
+  input soft_rx_reset0;
   input [0:0]E;
   input [4:0]\current_tap_reg[4] ;
   input [0:0]mon_idly_update_reg;
@@ -10843,7 +10815,6 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
   wire [5:0]o_txdata_6b;
   wire refclk125_n;
   wire refclk125_n_0;
-  wire reset_out;
   wire reset_sync6;
   wire [1:0]\right_margin_reg[2] ;
   wire rst208_r;
@@ -10870,6 +10841,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
   wire rx_ser_mon_delayed;
   wire rxn;
   wire rxp;
+  wire soft_rx_reset0;
   wire soft_rx_reset_208;
   wire soft_rx_reset_208_d1;
   wire soft_rx_reset_208_d2;
@@ -10986,7 +10958,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
     \data_idly_actual_value[0]_i_1 
        (.I0(data_idly_actual_value_reg__0[0]),
         .O(\data_idly_actual_value[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair117" *) 
+  (* SOFT_HLUTNM = "soft_lutpair120" *) 
   LUT3 #(
     .INIT(8'h96)) 
     \data_idly_actual_value[1]_i_1 
@@ -10994,7 +10966,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
         .I1(data_dly_ce_i_3_n_0),
         .I2(data_idly_actual_value_reg__0[1]),
         .O(\data_idly_actual_value[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair117" *) 
+  (* SOFT_HLUTNM = "soft_lutpair120" *) 
   LUT4 #(
     .INIT(16'hD2B4)) 
     \data_idly_actual_value[2]_i_1 
@@ -11003,7 +10975,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
         .I2(data_idly_actual_value_reg__0[2]),
         .I3(data_idly_actual_value_reg__0[1]),
         .O(\data_idly_actual_value[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair115" *) 
+  (* SOFT_HLUTNM = "soft_lutpair118" *) 
   LUT5 #(
     .INIT(32'hBF40FD02)) 
     \data_idly_actual_value[3]_i_1 
@@ -11037,7 +11009,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
         .I2(data_idly_actual_value_reg__0[5]),
         .I3(data_idly_actual_value_reg__0[4]),
         .O(\data_idly_actual_value[5]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair115" *) 
+  (* SOFT_HLUTNM = "soft_lutpair118" *) 
   LUT5 #(
     .INIT(32'h5D555545)) 
     \data_idly_actual_value[5]_i_3 
@@ -11113,7 +11085,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
         .D(\current_tap_reg[4] [4]),
         .Q(\data_idly_requested_value_reg_n_0_[4] ),
         .R(rx_rst_208));
-  (* SOFT_HLUTNM = "soft_lutpair116" *) 
+  (* SOFT_HLUTNM = "soft_lutpair119" *) 
   LUT3 #(
     .INIT(8'h69)) 
     \left_margin[3]_i_1 
@@ -11121,7 +11093,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
         .I1(D[3]),
         .I2(CNTVALUEOUT[3]),
         .O(\left_margin_reg[4] [0]));
-  (* SOFT_HLUTNM = "soft_lutpair116" *) 
+  (* SOFT_HLUTNM = "soft_lutpair119" *) 
   LUT5 #(
     .INIT(32'h2BD4D42B)) 
     \left_margin[4]_i_2 
@@ -11244,7 +11216,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
     \mon_idly_actual_value[0]_i_1 
        (.I0(mon_idly_actual_value_reg__0[0]),
         .O(\mon_idly_actual_value[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair118" *) 
+  (* SOFT_HLUTNM = "soft_lutpair121" *) 
   LUT3 #(
     .INIT(8'h96)) 
     \mon_idly_actual_value[1]_i_1 
@@ -11252,7 +11224,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
         .I1(mon_dly_ce_i_3_n_0),
         .I2(mon_idly_actual_value_reg__0[1]),
         .O(\mon_idly_actual_value[1]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair118" *) 
+  (* SOFT_HLUTNM = "soft_lutpair121" *) 
   LUT4 #(
     .INIT(16'hD2B4)) 
     \mon_idly_actual_value[2]_i_1 
@@ -11261,7 +11233,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
         .I2(mon_idly_actual_value_reg__0[2]),
         .I3(mon_idly_actual_value_reg__0[1]),
         .O(\mon_idly_actual_value[2]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair114" *) 
+  (* SOFT_HLUTNM = "soft_lutpair117" *) 
   LUT5 #(
     .INIT(32'hBF40FD02)) 
     \mon_idly_actual_value[3]_i_1 
@@ -11295,7 +11267,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
         .I2(mon_idly_actual_value_reg__0[5]),
         .I3(mon_idly_actual_value_reg__0[4]),
         .O(\mon_idly_actual_value[5]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair114" *) 
+  (* SOFT_HLUTNM = "soft_lutpair117" *) 
   LUT5 #(
     .INIT(32'h5D555545)) 
     \mon_idly_actual_value[5]_i_3 
@@ -11388,11 +11360,11 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sgmii_phy_iob
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_11 reset_sync_soft_rx_reset_208
        (.CLK(CLK),
         .reset_out(soft_rx_reset_208),
-        .reset_sync6_0(reset_sync6));
+        .soft_rx_reset0(soft_rx_reset0));
   gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_reset_sync_12 reset_sync_soft_tx_reset_208
        (.CLK(CLK),
-        .reset_out(reset_out),
-        .txn(soft_tx_reset_208));
+        .reset_out(soft_tx_reset_208),
+        .reset_sync6_0(reset_sync6));
   LUT4 #(
     .INIT(16'h2DD2)) 
     \right_margin[1]_i_1 
@@ -12722,14 +12694,14 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_6
         .D(data_sync5),
         .Q(lvds_phy_ready),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair143" *) 
+  (* SOFT_HLUTNM = "soft_lutpair146" *) 
   LUT2 #(
     .INIT(4'h8)) 
     enablealign_r_i_1
        (.I0(lvds_phy_ready),
         .I1(enablealign),
         .O(enablealign_r_reg));
-  (* SOFT_HLUTNM = "soft_lutpair143" *) 
+  (* SOFT_HLUTNM = "soft_lutpair146" *) 
   LUT2 #(
     .INIT(4'h8)) 
     gig_ethernet_pcs_pma_0_core_i_1
@@ -12853,7 +12825,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_9
         .D(data_sync5),
         .Q(data_out),
         .R(1'b0));
-  (* SOFT_HLUTNM = "soft_lutpair119" *) 
+  (* SOFT_HLUTNM = "soft_lutpair122" *) 
   LUT4 #(
     .INIT(16'h6999)) 
     \panic_bucket[1]_i_1 
@@ -12862,7 +12834,7 @@ module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_0_sync_block_9
         .I2(bad_mon_trig),
         .I3(data_out),
         .O(D[0]));
-  (* SOFT_HLUTNM = "soft_lutpair119" *) 
+  (* SOFT_HLUTNM = "soft_lutpair122" *) 
   LUT5 #(
     .INIT(32'h6AA9A9A9)) 
     \panic_bucket[2]_i_1 
@@ -21250,8 +21222,8 @@ endmodule
 (* C_HAS_TEMAC = "TRUE" *) (* C_IS_SGMII = "TRUE" *) (* C_RX_GMII_CLK = "TXOUTCLK" *) 
 (* C_SGMII_FABRIC_BUFFER = "TRUE" *) (* C_SGMII_PHY_MODE = "FALSE" *) (* C_USE_LVDS = "TRUE" *) 
 (* C_USE_TBI = "FALSE" *) (* C_USE_TRANSCEIVER = "FALSE" *) (* DowngradeIPIdentifiedWarnings = "yes" *) 
-(* GT_RX_BYTE_WIDTH = "1" *) (* ORIG_REF_NAME = "gig_ethernet_pcs_pma_v16_0_0" *) 
-module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_v16_0_0
+(* GT_RX_BYTE_WIDTH = "1" *) (* ORIG_REF_NAME = "gig_ethernet_pcs_pma_v16_0_1" *) 
+module gig_ethernet_pcs_pma_0_gig_ethernet_pcs_pma_v16_0_1
    (reset,
     signal_detect,
     link_timer_value,
