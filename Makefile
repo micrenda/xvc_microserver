@@ -57,10 +57,14 @@ $(BUILD)/top.v: $(wildcard src/*.c) $(wildcard src/*.h) $(wildcard src/*.v)
 synth: $(BUILD)/top.v
 
 
+	
+gen-ip-cores:
+	rm -rf $(BUILD)/core
+	cp tcl/vc707_vivado2016p4_create_cores.tcl $(BUILD)/
+	cd $(BUILD); $(XILINX_VIVADO)/bin/vivado -mode batch -source $(BUILD)/vc707_vivado2016p4_create_cores.tcl
+	
 
 $(BUILD)/xsim.dir: synth
-
-	
 	
 ifeq ($(XILINX_VIVADO),)
 	$(error XILINX_VIVADO env variable was not set) 
@@ -80,6 +84,9 @@ endif
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xvlog -work xvc_microserver `find . -iname '*.v'`
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xvlog -work xvc_microserver -sv `find . -iname '*.sv'`
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xvhdl -work xvc_microserver `find . -iname '*.vhd'`
+	
+	
+
 	
 xsim-build: $(BUILD)/xsim.dir
 
