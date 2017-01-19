@@ -4,7 +4,6 @@ DEVICE		= xc7vx485t,-2,ffg1761-VVD
 CLK_PERIOD	= 5
 BOARD	   ?= VC707
 CONFIG		= $(BASE)/config/$(BOARD)
-CORE		= $(BASE)/core/$(BOARD)
 BUILD		= $(BASE)/build
 
 clean:
@@ -39,8 +38,8 @@ $(BUILD)/top.v: $(wildcard src/*.c) $(wildcard src/*.h) $(wildcard src/*.v)
 		--backend-sdc-extensions=${CONFIG}/master.sdc                        \
 		--clock-period=${CLK_PERIOD}  										\
 		--reset-level=high													\
-		--backend-script-extensions=${BASE}/vivado_custom.tcl 				\
-		--file-input-data=${BASE}/src/microserver.v,${BASE}/src/crc32.v,${BASE}/src/driver.v,${BASE}/src/clock-arch.v,${BASE}/vivado_custom.tcl,${CORE}/import_cores.tcl \
+		--backend-script-extensions=${BASE}/tcl/vivado_custom.tcl 				\
+		--file-input-data=${BASE}/src/microserver.v,${BASE}/src/crc32.v,${BASE}/src/driver.v,${BASE}/src/clock-arch.v,${BASE}/tcl/vivado_custom.tcl \
 		-I${BASE}/src/                                                      \
 		-I${UCIP}/uip/                                                      \
 		${BASE}/src/constraints_STD.xml                                     \
@@ -58,20 +57,20 @@ synth: $(BUILD)/top.v
 
 
 	
-gen-ip-cores:
+$(BUILD)/core:
 	rm -rf $(BUILD)/core
 	cp tcl/vc707_vivado2016p4_create_cores.tcl $(BUILD)/
 	cd $(BUILD); $(XILINX_VIVADO)/bin/vivado -mode batch -source $(BUILD)/vc707_vivado2016p4_create_cores.tcl
-	
+gen-ip-cores: $(BUILD)/core
 
-$(BUILD)/xsim.dir: synth
+
+$(BUILD)/xsim.dir: synth gen-ip-cores
 	
 ifeq ($(XILINX_VIVADO),)
 	$(error XILINX_VIVADO env variable was not set) 
 else
 	@echo "XILINX_VIVADO = $(XILINX_VIVADO)"
 endif
-	cp $(CORE)/    $(BUILD)/core -r
 
 	cp    ${BASE}/test/test_common.sv	$(BUILD)
 	cp -r ${BASE}/test/tb0				$(BUILD)
