@@ -73,6 +73,14 @@ module tb0();
     always begin
        #1000  $display("Time: %d ns (status: %x)",  $time, eth_status);
     end
+    
+    always begin
+		#1 if ($time >= 10ms)
+		begin
+			$display("Auto-Negotiation was unable to complete in %d ms. Final status: %x", $time, eth_status);
+			$finish;
+		end
+    end
 
 	entry_point entry_point_inst (
 		.clk_p(clock), 
