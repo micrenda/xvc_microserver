@@ -53,7 +53,7 @@ $(BUILD)/top.v: $(wildcard src/*.c) $(wildcard src/*.h) $(wildcard src/*.v)
 		${UCIP}/uip/uiplib.c                                                \
 		${UCIP}/uip/psock.c                                                 \
 	 2>&1 | tee ../build.log
-synth: $(BUILD)/top.v
+gen-bambu: $(BUILD)/top.v
 
 
 	
@@ -64,14 +64,13 @@ $(BUILD)/core:
 gen-ip-cores: $(BUILD)/core
 
 
-$(BUILD)/xsim.dir: synth gen-ip-cores
+$(BUILD)/xsim.dir: gen-bambu gen-ip-cores
 	
 ifeq ($(XILINX_VIVADO),)
 	$(error XILINX_VIVADO env variable was not set) 
 else
 	@echo "XILINX_VIVADO = $(XILINX_VIVADO)"
 endif
-
 	cp    ${BASE}/test/test_common.sv	$(BUILD)
 	cp -r ${BASE}/test/tb0				$(BUILD)
 	cp -r ${BASE}/test/tb1				$(BUILD)
@@ -83,9 +82,6 @@ endif
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xvlog -work xvc_microserver `find . -iname '*.v'`
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xvlog -work xvc_microserver -sv `find . -iname '*.sv'`
 	cd $(BUILD); $(XILINX_VIVADO)/bin/xvhdl -work xvc_microserver `find . -iname '*.vhd'`
-	
-	
-
 	
 xsim-build: $(BUILD)/xsim.dir
 

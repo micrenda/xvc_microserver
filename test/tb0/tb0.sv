@@ -44,10 +44,11 @@ module tb0();
 	
     
     // 1000Mb auto negotation
-    //#200000
     
-	//	$display("Complete waiting");
-	//	$finish(); 
+    #10 wait(eth_status[0] == 1);
+    
+	$display("Auto-Negotiation done at %d ns. Final status: %x", $time, eth_status);
+	$finish(); 
                 
         
     end
