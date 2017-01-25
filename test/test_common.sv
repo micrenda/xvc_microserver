@@ -103,6 +103,7 @@ module send_an_ord(
 	output reg an_sgmii_rx_n, 
 	input      sgmii_clk_in,
 	output reg sgmii_clk_out,
+	input time	an_breaklink_duration,
 	input[3:0 ] an_count,
  	input[15:0] an_config);
 
@@ -110,15 +111,19 @@ module send_an_ord(
 	reg 		send_byte_run = 0;
 	reg 		send_byte_done;
 	reg[7:0]	send_byte_value;
+	
+	time 		bracklink_start;
 
 	always @(posedge start)
 	begin
 		done = 0;
 		$display("Sending /C/ ordered ethernet auto-negotiation: [%16b] (%0d bits)", an_config, $size(an_config));
 		
-		$display("Sending %d breaklinks: ", 20);
+		$display("Sending breaklinks for %0t: ", an_breaklink_duration);
 		
-		for(integer i=0;i<20;i++)
+		bracklink_start = $time;
+		
+		while($time - bracklink_start < an_breaklink_duration)
 		begin
 			// Sending Breakling
 			is_k = 1;
@@ -161,7 +166,7 @@ module send_an_ord(
 			send_byte_run = !send_byte_run;
 			#0.1 wait(send_byte_done);
 			
-			$write("%0d, ", i);
+			$display("Progress: %f%% ...", 100 * ($time - bracklink_start) / an_breaklink_duration);
 		end
 		
 		$display("Breaklink sent");

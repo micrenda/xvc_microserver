@@ -144,6 +144,7 @@ module tb1();
 		.done	(an_done),
 		.an_sgmii_rx_p(an_sgmii_rx_p),
 		.an_sgmii_rx_n(an_sgmii_rx_n),
+		.an_breaklink_duration(5ms),
 		.an_count(4'd10),
 		.an_config(16'b0_0_00_000_00_01_00000)
 	);
