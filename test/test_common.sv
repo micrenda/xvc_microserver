@@ -104,7 +104,7 @@ module send_an_ord(
 	input      sgmii_clk_in,
 	output reg sgmii_clk_out,
 	input time	an_breaklink_duration,
-	input[3:0 ] an_count,
+	input[15:0] an_count,
  	input[15:0] an_config);
 
 	reg 		is_k;
