@@ -104,7 +104,8 @@ module send_an_ord(
 	input      sgmii_clk_in,
 	output reg sgmii_clk_out,
 	input time	an_breaklink_duration,
-	input[15:0] an_count,
+	input[3:0]  an_count_cfg,
+	input[3:0]  an_count_ack,
  	input[15:0] an_config);
 
 	reg 		is_k;
@@ -113,6 +114,8 @@ module send_an_ord(
 	reg[7:0]	send_byte_value;
 	
 	time 		bracklink_start;
+	
+	reg[15:0] current_config;
 
 	always @(posedge start)
 	begin
@@ -173,8 +176,14 @@ module send_an_ord(
 		
 		$display("Auto-negotiation ordered set:");
 		
-		for(integer i=0;i<an_count;i++)
+		for(integer i=0;i<an_count_cfg + an_count_ack;i++)
 		begin
+			
+			current_config = an_config;
+			
+			if (i >= an_count_cfg)
+				current_config[14] = 1'b1; // Set ACK bit to true
+				
 		
 			$write("/K28.5");
 			is_k = 1;
@@ -188,13 +197,13 @@ module send_an_ord(
 			send_byte_run = !send_byte_run;
 			#0.1 wait(send_byte_done);
 			
-			$write("/D%0d.%0d", an_config[4:0], an_config[7:5]);
+			$write("/D%0d.%0d", an_config[4:0], current_config[7:5]);
 			is_k = 0;
 			send_byte_value =  an_config[7:0];
 			send_byte_run = !send_byte_run;
 			#0.1 wait(send_byte_done);
 			
-			$write("/D%0d.%0d", an_config[12:8], an_config[15:13]);
+			$write("/D%0d.%0d", an_config[12:8], current_config[15:13]);
 			is_k = 0;
 			send_byte_value = an_config[15:8];
 			send_byte_run = !send_byte_run;
@@ -214,13 +223,13 @@ module send_an_ord(
 			send_byte_run = !send_byte_run;
 			#0.1 wait(send_byte_done);
 			
-			$write("/D%0d.%0d", an_config[4:0], an_config[7:5]);
+			$write("/D%0d.%0d", an_config[4:0], current_config[7:5]);
 			is_k = 0;
 			send_byte_value =  an_config[7:0];
 			send_byte_run = !send_byte_run;
 			#0.1 wait(send_byte_done);
 			
-			$write("/D%0d.%0d", an_config[12:8], an_config[15:13]);
+			$write("/D%0d.%0d", an_config[12:8], current_config[15:13]);
 			is_k = 0;
 			send_byte_value = an_config[15:8];
 			send_byte_run = !send_byte_run;
