@@ -27,7 +27,7 @@ clean:
 $(BUILD)/top.v: $(wildcard src/*.c) $(wildcard src/*.h) $(wildcard src/*.v)
 	echo "#synthesis of micorserver and uIP"
 	
-	rm -rf $(BUILD) && mkdir $(BUILD)
+	mkdir -p $(BUILD)
 	
 	
 	cd $(BUILD); bambu -O3 -v1 --std=c11                                    \
@@ -58,6 +58,8 @@ gen-bambu: $(BUILD)/top.v
 
 	
 $(BUILD)/core:
+
+	mkdir -p $(BUILD)
 	rm -rf $(BUILD)/core
 	cp tcl/vc707_vivado2016p4_create_cores.tcl $(BUILD)/
 	cd $(BUILD); $(XILINX_VIVADO)/bin/vivado -mode batch -source $(BUILD)/vc707_vivado2016p4_create_cores.tcl
